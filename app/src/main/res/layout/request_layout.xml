@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:id="@+id/et_nacode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rounded_edittext_states"
+        android:hint="کد ملی"
+        android:inputType="number"
+        android:maxLines="1"
+        android:padding="8dip"
+        android:textColor="#538350" />
+
+    <EditText
+        android:layout_below="@+id/et_nacode"
+        android:id="@+id/et_postal_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/rounded_edittext_states"
+        android:hint="کد پستی"
+        android:inputType="number"
+        android:maxLines="1"
+        android:padding="8dip"
+        android:textColor="#538350" />
+
+
+    <RelativeLayout
+        android:layout_below="@+id/et_postal_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:textStyle="bold"
+            android:textSize="17sp"
+            android:id="@+id/tv_elc_pay"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_tag"
+            android:gravity="center"
+            android:maxLines="1"
+            android:padding="8dip"
+            android:text="پرداخت الکترونیکی"
+            android:textColor="#fff" />
+
+        <ImageView
+            android:id="@+id/iv_refah"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/ic_refah"
+            android:layout_alignParentLeft="true" />
+    </RelativeLayout>
+</RelativeLayout>

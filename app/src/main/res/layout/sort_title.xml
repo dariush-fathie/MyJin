@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/tv_customTitle"
+    android:text="مرتب سازی"
+    android:gravity="center_vertical"
+    android:padding="16dp"
+    android:textSize="17sp"
+    android:textColor="@color/title"
+    android:layout_height="wrap_content"
+    android:textStyle="bold"
+    android:fontFamily="@font/yekan"/>

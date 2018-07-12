@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_netErr"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="48dp"
+    android:background="@color/white"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_neterror" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_tryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تلاش مجدد" />
+
+    <android.support.v7.widget.AppCompatTextView
+        app:fontFamily="@font/yekan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="به اینترنت دسترسی ندارید !!\n\n لطفا بررسی کنید." />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_fav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_round_rect"
+        android:text="نشان شده ها" />
+
+</LinearLayout>

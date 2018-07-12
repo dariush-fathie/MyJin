@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="95dp"
+        android:paddingEnd="0dp"
+        android:paddingStart="16dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+
+            android:id="@+id/iv_itemImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/t"
+            android:padding="6dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_jin"
+            android:transitionName="transition_name"
+            app:civ_border_color="@android:color/transparent"
+            app:civ_border_width="1dp"/>
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_toLeftOf="@+id/iv_itemImage"
+            android:layout_toRightOf="@id/iv_starLike"
+            android:lines="1"
+            android:paddingBottom="8dp"
+
+            android:text="نام"
+            android:textColor="@color/title"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/yekan" />
+
+        <LinearLayout
+            android:id="@+id/ll_addr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_title"
+            android:layout_toStartOf="@+id/iv_itemImage"
+            android:orientation="vertical"
+            android:paddingEnd="16dp"
+            android:paddingStart="3dp">
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_subTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:paddingBottom="5dp"
+                android:text="متخصص"
+                android:textColor="@color/subTitle"
+                android:textSize="13sp"
+                app:fontFamily="@font/yekan" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_addr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="center"
+                android:maxLines="2"
+                android:text="آدرس"
+                android:textColor="@color/c1"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatRatingBar
+                style="@style/Base.Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:clickable="false"
+                android:numStars="5"
+                android:paddingTop="4dp"
+                android:rating="4"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/iv_starLike"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            android:padding="6dp"
+            android:src="@drawable/icons_bookmark_1"
+            android:tint="@color/colorAccent" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+

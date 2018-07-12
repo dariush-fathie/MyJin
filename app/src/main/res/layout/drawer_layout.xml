@@ -1,0 +1,592 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="end"
+    android:background="#fff"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/viewx">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_jinDrawer"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/menu_title" />
+
+            <RelativeLayout
+
+                android:id="@+id/rl_drawer1"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="4dp">
+
+
+                <View
+                    android:id="@+id/v1"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/iv1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/v1"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_jin"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_drawerTitle1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/iv1"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="خدمات ژین من"
+                    android:textSize="17sp"
+                    android:textColor="@color/green"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
+                android:background="#cafcbd" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl_drawer5"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="7dp"
+                android:onClick="early_Mth">
+
+
+                <View
+                    android:id="@+id/vs3"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivs3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs3"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_takapo"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs3"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:textColor="@color/subTitle"
+                    android:text="خدمات مرکز نوآوری و فناوری سلامت(تکاپو)"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
+                android:background="#cafcbd" />
+            <RelativeLayout
+                android:id="@+id/rl_drawer6"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="early_Mth">
+
+
+                <View
+                    android:id="@+id/vs4"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivs4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs4"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_opk"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs4"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="خدمات دانشکاه علوم پزشکی"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_salamat"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp">
+
+
+                <View
+                    android:id="@+id/vs"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivs"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_salamat"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_drawerTitlesalamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="خدمات بیمه سلامت"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_drawer7"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="early_Mth">
+
+
+                <View
+                    android:id="@+id/vs5"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivs5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs5"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_kste"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs5"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="خدمات سازمان تامین اجتماعی"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_drawer9"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="early_Mth">
+
+
+                <View
+                    android:id="@+id/vs7"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+
+                    android:id="@+id/ivs7"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs7"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_ict"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs7"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="خدمات دفاتر ICT"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_drawer10"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="early_Mth">
+
+
+                <View
+                    android:id="@+id/vs8"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivs8"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs8"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_dp_"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs8"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="خدمات دفاتر پیشخوان"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_drawer11"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:onClick="early_Mth">
+
+
+                <View
+                    android:id="@+id/vs9"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivs9"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs9"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_post"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs9"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="خدمات نوین پستی"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="20dp"
+                android:background="#cafcbd" />
+            <RelativeLayout
+                android:id="@+id/rl_drawer2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp">
+
+                <View
+                    android:id="@+id/v2"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white"
+                    android:visibility="invisible" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/v2"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_bookmark_m"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_drawerTitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/iv2"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="نشان شده ها"
+                    android:textColor="@color/green"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_drawer_badge"
+                    android:layout_width="5dp"
+                    android:layout_height="5dp"
+                    android:layout_toStartOf="@+id/tv_drawerTitle2"
+                    android:background="@drawable/red_circle"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_drawer3"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp">
+
+                <View
+                    android:id="@+id/v3"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/v3"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_about"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_drawerTitle3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/iv3"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="درباره ما"
+                    android:textColor="@color/green"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_drawer4"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="4dp">
+
+                <View
+                    android:id="@+id/v4"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="6dp"
+                    android:layout_toStartOf="@+id/v4"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_contact"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_drawerTitle4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/iv4"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="تماس با ما"
+                    android:textColor="@color/green"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_drawer12"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp">
+
+
+                <View
+                    android:id="@+id/vs1"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivs1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs1"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_rules"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs1"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:textColor="@color/green"
+                    android:text="قوانین و مقررات"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:visibility="gone">
+
+
+                    <View
+                        android:id="@+id/vs2"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/green"
+                        android:visibility="invisible" />
+
+                    <ImageView
+                        android:id="@+id/ivs2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/vs2"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_salamat" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/ivs2"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="17dp"
+                        android:text="ورود / ثبت نام"
+                        android:textColor="@color/title"
+                        android:textSize="16sp"
+                        app:fontFamily="@font/yekan" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:id="@+id/viewx"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_above="@+id/rl_exit"
+        android:background="@color/back" />
+
+    <RelativeLayout
+        android:id="@+id/rl_exit"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/iv_exit"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_exit" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/iv_exit"
+            android:gravity="center"
+            android:text="خروج از برنامه"
+            android:textSize="16sp"
+            app:fontFamily="@font/yekan" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

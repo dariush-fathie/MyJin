@@ -1,0 +1,98 @@
+<resources>
+    <string name="reciver">myjin.pro.ahoora.myjin.play</string>
+    <string name="reciver2">myjin.pro.ahoora.myjin.play2</string>
+    <string name="app_name">MyJin</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="ic_doctor_m">http://myjin.ir/photos/ic_doctor_m.png</string>
+    <string name="ic_doctor_f">http://myjin.ir/photos/ic_doctor_f.png</string>
+    <string name="dnj">دریافت نسخه جدید</string>
+    <string name="hbnjbrvsh">لطفا ابتدا نسخه کنونی را حذف کرده و آن را از بازار دریافت کنید .</string>
+    <string name="addarabdk">اگر تمایل دارید آن را از بازار دریافت کنید .</string>
+    <string name="continue_">ادامه</string>
+    <string name="app_intro_skip">Skip</string>
+    <string-array name="provArray">
+        <item> آذربایجان شرقی</item>
+        <item> آذربایجان غربی</item>
+        <item>اردبیل</item>
+        <item> اصفهان</item>
+        <item>البرز</item>
+        <item>ایلام</item>
+        <item>بوشهر</item>
+        <item>تهران</item>
+        <item>چهار محال و بختیاری</item>
+        <item>خراسان جنوبی</item>
+        <item>خراسان رضوی</item>
+        <item>خراسان شمالی</item>
+        <item>خوزستان</item>
+        <item>زنجان</item>
+        <item>سمنان</item>
+        <item>سیستان و بلوچستان</item>
+        <item>فارس</item>
+        <item>قزوین</item>
+        <item>قم</item>
+        <item>کردستان</item>
+        <item>کرمان</item>
+        <item>کرمانشاه</item>
+        <item>کهگیلویه و بویر احمد</item>
+        <item>گلستان</item>
+        <item>گیلان</item>
+        <item>لرستان</item>
+        <item>مازندران</item>
+        <item>مرکزی</item>
+        <item>هرمزگان</item>
+        <item>همدان</item>
+        <item>یزد</item>
+    </string-array>
+</resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
