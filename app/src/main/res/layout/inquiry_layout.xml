@@ -9,9 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        app:layout_behavior="myjin.pro.ahoora.myjin.customClasses.FixedAppBarLayoutBehavior">
+
+
+    <android.support.design.widget.CollapsingToolbarLayout
 
             android:id="@+id/ctl"
             android:layout_width="140dp"

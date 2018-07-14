@@ -16,7 +16,7 @@
         android:layout_marginTop="82dp"
         android:gravity="center"
         android:padding="16dp"
-        android:text="با عرض پوزش سرور در دست تعمیر است ، \n\nبزودی بر می گردیم"
+        android:text="گویا مشکلی در برقراری ارتباط پیش آمده ، \n\nکارشناسان ما این مورد را به زودی بررسی خواهند کرد"
         app:fontFamily="@font/yekan" />
 
     <android.support.v7.widget.AppCompatButton
@@ -26,7 +26,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="45dp"
-        android:text="تلاش مجدد" />
+        android:text="تلاش دوباره" />
 
 
 </RelativeLayout>

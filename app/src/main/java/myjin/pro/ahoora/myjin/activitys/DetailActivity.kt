@@ -298,7 +298,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         str += "${tv_subTitle.text}\n\n"
         str += " آدرس : " + "${tv_addr.text}\n\n"
 
-        str +="لینک دانلود ژین من در کافه بازار \n"
+        str +="لینک دانلود ژین من \n"
 
         if(realm.isInTransaction)  realm.commitTransaction()
 

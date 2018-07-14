@@ -65,7 +65,7 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="165dp">
+                            android:layout_height="160dp">
 
                             <android.support.v7.widget.RecyclerView
                                 android:id="@+id/rv_imageListBig"
@@ -130,11 +130,11 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
-                                    android:layout_toLeftOf="@+id/aiv_logoImg"
-                                    android:layout_toRightOf="@id/iv_save"
+                                    android:layout_toStartOf="@+id/aiv_logoImg"
+                                    android:layout_toEndOf="@id/iv_save"
                                     android:lines="1"
                                     android:paddingBottom="8dp"
-
+                                    android:paddingEnd="10dp"
                                     android:text="نام"
                                     android:textColor="@color/title"
                                     android:textSize="15sp"
@@ -148,7 +148,7 @@
                                     android:layout_below="@+id/tv_title"
                                     android:layout_toStartOf="@+id/aiv_logoImg"
                                     android:orientation="vertical"
-                                    android:paddingEnd="16dp"
+                                    android:paddingEnd="10dp"
                                     android:paddingStart="3dp">
 
 

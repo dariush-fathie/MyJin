@@ -19,7 +19,7 @@
         android:id="@+id/btn_tryAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="تلاش مجدد" />
+        android:text="تلاش دوباره" />
 
     <android.support.v7.widget.AppCompatTextView
         app:fontFamily="@font/yekan"
@@ -28,9 +28,10 @@
         android:layout_marginTop="50dp"
         android:gravity="center"
         android:padding="16dp"
-        android:text="به اینترنت دسترسی ندارید !!\n\n لطفا بررسی کنید." />
+        android:text=" گویا به اینترنت دسترسی ندارید \n خواهشمند است بررسی فرمایید. \n\n نمایش موارد نشان شده بصورت آفلاین" />
 
     <android.support.v7.widget.AppCompatButton
+        android:layout_marginTop="10dp"
         android:id="@+id/btn_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

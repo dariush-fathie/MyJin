@@ -6,8 +6,8 @@
     <string name="ic_doctor_m">http://myjin.ir/photos/ic_doctor_m.png</string>
     <string name="ic_doctor_f">http://myjin.ir/photos/ic_doctor_f.png</string>
     <string name="dnj">دریافت نسخه جدید</string>
-    <string name="hbnjbrvsh">لطفا ابتدا نسخه کنونی را حذف کرده و آن را از بازار دریافت کنید .</string>
-    <string name="addarabdk">اگر تمایل دارید آن را از بازار دریافت کنید .</string>
+    <string name="hbnjbrvsh">به دلیل تغییرات ساختاری، لازم است نسخه جدید را حتما دانلود کنید. </string>
+    <string name="addarabdk">اگر تمایل دارید آن را دریافت کنید .</string>
     <string name="continue_">ادامه</string>
     <string name="app_intro_skip">Skip</string>
     <string-array name="provArray">

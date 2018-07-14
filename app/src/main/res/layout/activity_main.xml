@@ -167,7 +167,7 @@
             <android.support.design.widget.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
+                app:layout_behavior="myjin.pro.ahoora.myjin.customClasses.FixedAppBarLayoutBehavior">
 
                 <android.support.design.widget.CollapsingToolbarLayout
                     android:layout_width="match_parent"

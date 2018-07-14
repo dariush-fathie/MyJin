@@ -17,22 +17,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import myjin.pro.ahoora.myjin.R;
-
 public class SpinnerDialog {
-    ArrayList<String> items;
-    Activity context;
-    String dTitle;
-    String closeTitle = "Close";
-    OnSpinerItemClick onSpinerItemClick;
-    AlertDialog alertDialog;
-    int pos;
-    int style;
+    private ArrayList<String> items;
+    private   Activity context;
+    private String dTitle;
+    private String closeTitle ;
+    private OnSpinerItemClick onSpinerItemClick;
+    private AlertDialog alertDialog;
+    private int pos;
+    private int style;
 
-    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle) {
-        this.items = items;
-        this.context = activity;
-        this.dTitle = dialogTitle;
-    }
+
 
     public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle, String closeTitle) {
         this.items = items;
@@ -41,20 +36,7 @@ public class SpinnerDialog {
         this.closeTitle = closeTitle;
     }
 
-    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle, int style) {
-        this.items = items;
-        this.context = activity;
-        this.dTitle = dialogTitle;
-        this.style = style;
-    }
 
-    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle, int style, String closeTitle) {
-        this.items = items;
-        this.context = activity;
-        this.dTitle = dialogTitle;
-        this.style = style;
-        this.closeTitle = closeTitle;
-    }
 
     public void bindOnSpinerListener(OnSpinerItemClick onSpinerItemClick1) {
         this.onSpinerItemClick = onSpinerItemClick1;
@@ -67,9 +49,9 @@ public class SpinnerDialog {
         AppCompatTextView title = v.findViewById(R.id.spinerTitle);
         rippleViewClose.setText(this.closeTitle);
         title.setText(this.dTitle);
-        ListView listView = (ListView) v.findViewById(R.id.list);
+        ListView listView =v.findViewById(R.id.list);
         final AppCompatEditText searchBox = v.findViewById(R.id.searchBox);
-        final ArrayAdapter<String> adapter = new ArrayAdapter(this.context, R.layout.items_view, this.items);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.context, R.layout.items_view, this.items);
         listView.setAdapter(adapter);
         adb.setView(v);
         this.alertDialog = adb.create();
@@ -77,10 +59,10 @@ public class SpinnerDialog {
         this.alertDialog.setCancelable(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView t = (TextView) view.findViewById(R.id.text1);
+                TextView t = view.findViewById(R.id.text1);
 
                 for (int j = 0; j < SpinnerDialog.this.items.size(); ++j) {
-                    if (t.getText().toString().equalsIgnoreCase(((String) SpinnerDialog.this.items.get(j)).toString())) {
+                    if (t.getText().toString().equalsIgnoreCase((SpinnerDialog.this.items.get(j)))) {
                         SpinnerDialog.this.pos = j;
                     }
                 }

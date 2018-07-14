@@ -76,7 +76,7 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
         var tv_costom_title: TextView
         val view2 = LayoutInflater.from(this@StartActivity).inflate(R.layout.hea_inc_services_title, null, false)
         tv_costom_title = view2.findViewById(R.id.tv_customTitle)
-        tv_costom_title.setText("نسخه $v موجود است : ")
+        tv_costom_title.setText("نسخه جدید ژین من آماده است (نسخه $v)")
         val builder: AlertDialog.Builder
         builder = AlertDialog.Builder(this@StartActivity)
         builder.setCancelable(false)

@@ -37,11 +37,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_toLeftOf="@+id/iv_itemImage"
+
+            android:layout_toStartOf="@+id/iv_itemImage"
             android:layout_toRightOf="@id/iv_starLike"
             android:lines="1"
             android:paddingBottom="8dp"
-
+            android:paddingEnd="10dp"
             android:text="نام"
             android:textColor="@color/title"
             android:textSize="15sp"
@@ -55,8 +56,7 @@
             android:layout_below="@+id/tv_title"
             android:layout_toStartOf="@+id/iv_itemImage"
             android:orientation="vertical"
-            android:paddingEnd="16dp"
-            android:paddingStart="3dp">
+            android:paddingEnd="10dp">
 
 
             <android.support.v7.widget.AppCompatTextView
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:gravity="center"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:text="آدرس"
                 android:textColor="@color/c1"
                 android:textSize="13sp" />
