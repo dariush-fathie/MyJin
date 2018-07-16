@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     app:behavior_hideable="true"
     app:behavior_peekHeight="0dp"
+    android:background="@color/white"
     app:layout_behavior="myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior">
 
     <myjin.pro.ahoora.myjin.customClasses.CustomMapView

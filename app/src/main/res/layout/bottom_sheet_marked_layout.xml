@@ -10,6 +10,8 @@
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <FrameLayout
+
+        android:background="@color/white"
         android:id="@+id/fl_sheetContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
