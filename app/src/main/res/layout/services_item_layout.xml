@@ -3,22 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<android.support.v7.widget.AppCompatTextView
-    android:id="@+id/tv_service_title"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:text="عنوان"
-    android:gravity="center"
-    android:fontFamily="@font/yekan"
-    android:textSize="14sp"
-    />
-    <TextView
-        android:textColorLink="@color/blue"
-        android:padding="5dp"
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_service_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:fontFamily="@font/yekan"
         android:gravity="center"
-        android:text="ژین من :\n \n http://myjin.ir"
-        android:autoLink="web"
+        android:text="عنوان"
+        android:textSize="14sp" />
+
+    <TextView
         android:id="@+id/tv_service_context"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:autoLink="web"
+        android:gravity="center"
+        android:text="ژین من :\n \n http://myjin.ir"
+        android:textColorLink="@color/blue" />
 </LinearLayout>
