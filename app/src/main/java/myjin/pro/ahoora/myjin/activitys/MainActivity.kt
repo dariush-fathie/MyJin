@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             R.id.rl_ict_services->early_Mth()
             R.id.rl_pishkhan_services -> early_Mth()
             R.id.rl_post_services->early_Mth()
-            R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString())
+            R.id.rl_salamat -> startActivity(Intent(this@MainActivity,HeaIncServiceActivity::class.java))
 
             R.id.rl_drawer2 -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)

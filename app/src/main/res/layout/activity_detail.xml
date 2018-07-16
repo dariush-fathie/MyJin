@@ -242,7 +242,6 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="3dp"
-                                            android:autoLink="phone"
                                             android:gravity="center|start"
                                             android:lines="1"
                                             android:minHeight="27dp"
