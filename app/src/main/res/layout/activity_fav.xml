@@ -95,7 +95,7 @@
         android:fontFamily="@font/yekan"
         android:gravity="center"
         android:padding="30dp"
-        android:text="هیج موردی تا کنون نشان نشده است !"
+        android:text="هیچ موردی تا کنون نشان نشده است !"
         android:textColor="@color/title"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

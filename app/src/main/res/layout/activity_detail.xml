@@ -130,8 +130,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="8dp"
-                                    android:layout_toStartOf="@+id/aiv_logoImg"
                                     android:layout_toEndOf="@id/iv_save"
+                                    android:layout_toStartOf="@+id/aiv_logoImg"
                                     android:lines="1"
                                     android:paddingBottom="8dp"
                                     android:paddingEnd="10dp"
@@ -156,12 +156,12 @@
                                         android:id="@+id/tv_subTitle"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_toLeftOf="@+id/aiv_logoImg"
                                         android:lines="1"
                                         android:paddingBottom="5dp"
                                         android:text="متخصص"
                                         android:textColor="@color/subTitle"
                                         android:textSize="13sp"
-                                        android:layout_toLeftOf="@+id/aiv_logoImg"
                                         app:fontFamily="@font/yekan" />
 
                                     <android.support.v7.widget.AppCompatTextView
@@ -169,10 +169,10 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="end"
+                                        android:layout_toLeftOf="@+id/aiv_logoImg"
                                         android:gravity="center|start"
                                         android:maxLines="2"
                                         android:text="آدرس"
-                                        android:layout_toLeftOf="@+id/aiv_logoImg"
                                         android:textColor="@color/c1"
                                         android:textSize="13sp" />
 
@@ -236,11 +236,13 @@
                                         android:layout_centerVertical="true"
                                         android:layout_margin="2dp"
                                         android:background="@drawable/tel_tag">
+
                                         <android.support.v7.widget.AppCompatTextView
                                             android:id="@+id/tv_telephone"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="3dp"
+                                            android:autoLink="phone"
                                             android:gravity="center|start"
                                             android:lines="1"
                                             android:minHeight="27dp"
@@ -280,6 +282,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="3dp"
+                                            android:autoLink="web"
                                             android:gravity="center|start"
                                             android:lines="1"
                                             android:minHeight="27dp"
@@ -319,6 +322,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_margin="3dp"
+                                            android:autoLink="email"
                                             android:gravity="center|start"
                                             android:lines="1"
                                             android:minHeight="27dp"
@@ -357,8 +361,8 @@
                                         android:id="@+id/aiv_logoImg_weekdays"
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
-                                        android:padding="2dp"
                                         android:layout_alignParentRight="true"
+                                        android:padding="2dp"
                                         android:src="@drawable/ic_weekdays"
                                         android:tint="@color/blue" />
 

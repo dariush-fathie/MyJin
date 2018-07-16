@@ -126,7 +126,7 @@ public class HeaIncAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             view1 = LayoutInflater.from(context).inflate(R.layout.request_layout, null, false);
 
             alertDialog_mth(view1,"نه");*/
-            Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("http://myjin.ir/service/healthInsuranceCard/"));
+            Intent intent= new Intent(Intent.ACTION_VIEW, Uri.parse("http://myjin.ir/health_insurance/index.html"));
             context.startActivity(intent);
            
         }

@@ -103,15 +103,12 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
             if (item.logoImg.equals("")) {
 
 
+                holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
                 if (item.gen?.equals("0")!!) {
-                    holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor),android.graphics.PorterDuff.Mode.SRC_IN)
                     url = g_url
                 } else if (item.gen?.equals("1")!!) {
-                    holder.image.setColorFilter(null)
                     url = context.getString(R.string.ic_doctor_f)
                 } else if (item.gen?.equals("2")!!) {
-
-                    holder.image.setColorFilter(null)
                     url = context.getString(R.string.ic_doctor_m)
                 }
 
@@ -225,7 +222,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
                         (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail, options.toBundle())
 
 
-                    }else{
+                    } else {
                         val i = Intent(context, DetailActivity::class.java)
                         i.putExtra(StaticValues.MODEL, 0)
                         i.putExtra(StaticValues.ID, ids.get(adapterPosition))

@@ -22,20 +22,29 @@
         android:text="تلاش دوباره" />
 
     <android.support.v7.widget.AppCompatTextView
-        app:fontFamily="@font/yekan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
-        android:padding="16dp"
-        android:text=" گویا به اینترنت دسترسی ندارید \n خواهشمند است بررسی فرمایید. \n\n نمایش موارد نشان شده بصورت آفلاین" />
+        android:lineSpacingExtra="8dp"
+        android:text=" گویا به اینترنت دسترسی ندارید \n خواهشمند است بررسی فرمایید. "
+        app:fontFamily="@font/yekan" />
 
     <android.support.v7.widget.AppCompatButton
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
         android:id="@+id/btn_fav"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/white_round_rect"
         android:text="نشان شده ها" />
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="نمایش موارد نشان شده بصورت آفلاین"
+        app:fontFamily="@font/yekan" />
+
 
 </LinearLayout>

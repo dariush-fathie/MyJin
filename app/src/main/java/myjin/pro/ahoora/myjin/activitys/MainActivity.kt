@@ -12,11 +12,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.ScaleAnimation
-import android.widget.ImageView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import io.realm.Realm
@@ -34,8 +29,6 @@ import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
 import myjin.pro.ahoora.myjin.utils.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,26 +57,73 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             R.id.rl_exit -> showExitDialog()
             R.id.iv_menu -> openDrawerLayout()
             R.id.fab_search -> search()
-            R.id.rl_drawer1 -> drawerClick(0)
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString())
+            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo))
+            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString())
+            R.id.rl_tamin_services -> early_Mth()
+            R.id.rl_ict_services->early_Mth()
+            R.id.rl_pishkhan_services -> early_Mth()
+            R.id.rl_post_services->early_Mth()
+            R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString())
+
             R.id.rl_drawer2 -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
-            R.id.rl_salamat -> drawerClick(4)
+
             R.id.rl_city -> openCityDialog()
             R.id.rl_prov -> openProvDialog()
         }
     }
 
+    private fun setClickListeners() {
+        rl_exit.setOnClickListener(this)
+        iv_menu.setOnClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
+        rl_drawer2.setOnClickListener(this)
+        rl_drawer3.setOnClickListener(this)
+        rl_drawer4.setOnClickListener(this)
+        rl_salamat.setOnClickListener(this)
+        btn_tryAgain.setOnClickListener(this)
+        btn_fav.setOnClickListener(this)
+        fab_search.setOnClickListener(this)
+        rl_prov.setOnClickListener(this)
+        rl_city.setOnClickListener(this)
+        iv_jinDrawer.setOnLongClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
+        rl_takapoo_services.setOnClickListener(this)
+        rl_university_services.setOnClickListener(this)
+        rl_tamin_services.setOnClickListener(this)
+        rl_ict_services.setOnClickListener(this)
+        rl_pishkhan_services .setOnClickListener(this)
+        rl_post_services.setOnClickListener(this)
+        rl_salamat .setOnClickListener(this)
 
-    fun animatePlay(view: ImageView) {
-        val animation = AnimationSet(true)
-        animation.addAnimation(AlphaAnimation(0.0f, 1.0f))
-        animation.addAnimation(ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f))
-        animation.duration = 400
-        animation.repeatMode = Animation.REVERSE
-        view.startAnimation(animation)
     }
+    private fun goToServicesActivity(title:String){
+        val intent=Intent(this@MainActivity, ServicesActivity::class.java)
+        intent.putExtra("ServiceTitle",title)
+        startActivity(intent)
+    }
+    private fun drawerClick(position: Int) {
+        when (position) {
 
+            1 -> {
+                startActivity(Intent(this@MainActivity, FavActivity::class.java))
+
+            }
+            2 -> {
+                startActivity(Intent(this@MainActivity, AboutUs::class.java))
+
+            }
+            3 -> {
+                startActivity(Intent(this@MainActivity, ContactUs::class.java))
+
+            }
+
+        }
+
+
+    }
 
     private fun showExitDialog() {
         closeDrawerLayout()
@@ -153,33 +193,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         dialog.showSpinerDialog()
     }
 
-    private fun drawerClick(position: Int) {
-        closeDrawerLayout()
-        when (position) {
-        // 0 -> closeDrawerLayout()
-            1 -> {
-                startActivity(Intent(this@MainActivity, FavActivity::class.java))
-
-            }
-            2 -> {
-                startActivity(Intent(this@MainActivity, AboutUs::class.java))
-
-            }
-            3 -> {
-                startActivity(Intent(this@MainActivity, ContactUs::class.java))
-
-            }
-            4 -> {
-
-                startActivity(Intent(this@MainActivity, HeaIncServiceActivity::class.java))
-
-            }
-        }
 
 
-    }
-
-    fun early_Mth(v: View) {
+    fun early_Mth() {
         Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
     }
 
@@ -235,22 +251,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
 
 
-    private fun setClickListeners() {
-        rl_exit.setOnClickListener(this)
-        iv_menu.setOnClickListener(this)
-        rl_drawer1.setOnClickListener(this)
-        rl_drawer2.setOnClickListener(this)
-        rl_drawer3.setOnClickListener(this)
-        rl_drawer4.setOnClickListener(this)
-        rl_salamat.setOnClickListener(this)
-        btn_tryAgain.setOnClickListener(this)
-        btn_fav.setOnClickListener(this)
-        fab_search.setOnClickListener(this)
-        rl_prov.setOnClickListener(this)
-        rl_city.setOnClickListener(this)
-        iv_jinDrawer.setOnLongClickListener(this)
 
-    }
 
     override fun onStart() {
         super.onStart()

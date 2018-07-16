@@ -304,15 +304,15 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                 var url = ""
 
                 if (dataSet[realPosition].logoImg.equals("")) {
+                    holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
+
                     if (dataSet[realPosition].gen?.equals("0")!!) {
-                        holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
                         url = g_url
                     } else if (dataSet[realPosition].gen?.equals("1")!!) {
-                        holder.image.setColorFilter(null)
+
                         url = this@SearchActivity.getString(R.string.ic_doctor_f)
                     } else if (dataSet[realPosition].gen?.equals("2")!!) {
 
-                        holder.image.setColorFilter(null)
                         url = this@SearchActivity.getString(R.string.ic_doctor_m)
                     }
 

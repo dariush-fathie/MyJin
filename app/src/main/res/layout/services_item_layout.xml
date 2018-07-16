@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<android.support.v7.widget.AppCompatTextView
+    android:id="@+id/tv_service_title"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:text="عنوان"
+    android:gravity="center"
+    android:fontFamily="@font/yekan"
+    android:textSize="14sp"
+    />
+    <TextView
+        android:padding="5dp"
+        android:gravity="right"
+        android:text="ژین من :\n \n http://myjin.ir"
+        android:autoLink="web"
+        android:id="@+id/tv_service_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

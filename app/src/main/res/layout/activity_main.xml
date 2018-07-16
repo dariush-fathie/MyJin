@@ -65,7 +65,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
                 android:text="0 مرکز"
-                android:textColor="@color/green"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 app:fontFamily="@font/yekan" />
 
@@ -74,7 +74,7 @@
         <LinearLayout
             android:id="@+id/ll_location"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
+            android:layout_height="40dp"
             android:layout_below="@+id/toolbar"
             android:orientation="horizontal">
 
@@ -100,7 +100,7 @@
                         android:layout_margin="4dp"
                         android:layout_toStartOf="@+id/tv_city"
                         android:src="@drawable/spin"
-                        android:tint="@color/logoColor" />
+                        android:tint="@color/tabTextDef" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_city"
@@ -139,7 +139,7 @@
                         android:layout_margin="4dp"
                         android:layout_toStartOf="@+id/tv_prov"
                         android:src="@drawable/spin"
-                        android:tint="@color/logoColor" />
+                        android:tint="@color/tabTextDef" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_prov"

@@ -56,7 +56,7 @@ class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnChe
                 }
 
                 list = urls
-                var adapter = IntroAdapter(this@AppIntro, list!!)
+                val adapter = IntroAdapter(this@AppIntro, list!!)
 
                 rv_intro.layoutManager = LinearLayoutManager(this@AppIntro, LinearLayoutManager.HORIZONTAL, false)
                 rv_intro.adapter = adapter

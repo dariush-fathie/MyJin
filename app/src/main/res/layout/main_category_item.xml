@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="15 مورد"
-            android:textColor="@color/subTitle"
+            android:textColor="@color/c1"
             android:textSize="12sp"
             app:fontFamily="@font/yekan" />
 

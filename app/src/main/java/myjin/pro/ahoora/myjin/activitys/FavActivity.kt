@@ -11,14 +11,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.activity_fav.*
 import kotlinx.android.synthetic.main.drawer_layout.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.GroupItemSaveAdapter
-import myjin.pro.ahoora.myjin.customClasses.GridItemDecoration
 import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
@@ -79,13 +77,45 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
         ctb.addOnTabSelectedListener(this)
         iv_goback.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
-        rl_drawer1.setOnClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
         rl_drawer2.setOnClickListener(this)
         rl_drawer3.setOnClickListener(this)
         rl_drawer4.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
         iv_jinDrawer.setOnLongClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
+        rl_takapoo_services.setOnClickListener(this)
+        rl_university_services.setOnClickListener(this)
+        rl_tamin_services.setOnClickListener(this)
+        rl_ict_services.setOnClickListener(this)
+        rl_pishkhan_services .setOnClickListener(this)
+        rl_post_services.setOnClickListener(this)
+        rl_salamat .setOnClickListener(this)
 
+    }
+    override fun onClick(p0: View?) {
+
+        when (p0?.getId()) {
+            R.id.iv_menu -> openDrawerLayout()
+            R.id.iv_goback -> finish()
+
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString())
+            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo))
+            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString())
+            R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString())
+            R.id.rl_ict_services->goToServicesActivity(tv_ict_services.text.toString())
+            R.id.rl_pishkhan_services -> goToServicesActivity(tv_pishkhan_services.text.toString())
+            R.id.rl_post_services->goToServicesActivity(tv_post_services.text.toString())
+            R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString())
+
+            R.id.rl_drawer3 -> drawerClick(2)
+            R.id.rl_drawer4 -> drawerClick(3)
+        }
+    }
+    private fun goToServicesActivity(title:String){
+        val intent=Intent(this@FavActivity, ServicesActivity::class.java)
+        intent.putExtra("ServiceTitle",title)
+        startActivity(intent)
 
     }
 
@@ -103,25 +133,14 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
 
     private fun drawerClick(position: Int) {
         when (position) {
-            0 -> {
-                startActivity(Intent(this@FavActivity, MainActivity::class.java))
 
-                finish()
-            }
-            1 -> closeDrawerLayout()
             2 -> {
                 startActivity(Intent(this@FavActivity, AboutUs::class.java))
 
-                finish()
             }
             3 -> {
                 startActivity(Intent(this@FavActivity, ContactUs::class.java))
-                finish()
-            }
-            4 -> {
-                startActivity(Intent(this@FavActivity, HeaIncServiceActivity::class.java))
 
-                finish()
             }
         }
 
@@ -171,18 +190,7 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
         }
     }
 
-    override fun onClick(p0: View?) {
 
-        when (p0?.getId()) {
-            R.id.iv_menu -> openDrawerLayout()
-            R.id.iv_goback -> finish()
-            R.id.rl_drawer1 -> drawerClick(0)
-            R.id.rl_drawer2 -> drawerClick(1)
-            R.id.rl_drawer3 -> drawerClick(2)
-            R.id.rl_drawer4 -> drawerClick(3)
-            R.id.rl_salamat -> drawerClick(4)
-        }
-    }
 
 
     fun filter(id: Int) {

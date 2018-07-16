@@ -3,10 +3,8 @@ package myjin.pro.ahoora.myjin.activitys
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
@@ -26,7 +24,6 @@ import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
 import android.widget.RelativeLayout
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -59,15 +56,13 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     var groupId = 0
     var provId = 19
     var cityId = 1
-    var g_url=""
+    var g_url = ""
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var bottomSheetCallback: BottomSheetBehavior.BottomSheetCallback
     private lateinit var tabLayoutInterface: TabLayoutInterface
     private lateinit var adapter: GroupItemAdapter
     var idArray = ArrayList<Int>()
     var filterArray = ArrayList<Int>()
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,13 +93,14 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         view_divider.visibility = View.GONE
         rl_filter.visibility = View.GONE
     }
+
     //`center_id` IN(682,681,680,679,678,677,676,675,674)
     private fun getTitleFromDb(): String {
         Log.e("gid", "$groupId")
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         val name = realm.where(KotlinGroupModel::class.java).equalTo("groupId", groupId).findFirst()?.name
-        g_url= realm.where(KotlinGroupModel::class.java).equalTo("groupId", groupId).findFirst()?.g_url!!
+        g_url = realm.where(KotlinGroupModel::class.java).equalTo("groupId", groupId).findFirst()?.g_url!!
         realm.commitTransaction()
         return name!!
     }
@@ -116,12 +112,20 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         fab_goUp.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
 
-        rl_drawer1.setOnClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
         rl_drawer2.setOnClickListener(this)
         rl_drawer3.setOnClickListener(this)
         rl_drawer4.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
         iv_jinDrawer.setOnLongClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
+        rl_takapoo_services.setOnClickListener(this)
+        rl_university_services.setOnClickListener(this)
+        rl_tamin_services.setOnClickListener(this)
+        rl_ict_services.setOnClickListener(this)
+        rl_pishkhan_services .setOnClickListener(this)
+        rl_post_services.setOnClickListener(this)
+        rl_salamat .setOnClickListener(this)
     }
 
     private fun initList(list: ArrayList<Int>) {
@@ -138,9 +142,9 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                 controlFabVisibility()
             }
         })
-        val decor = SimpleItemDecoration(this, 10)
+        val decor = SimpleItemDecoration(this, 6)
         rv_items.addItemDecoration(decor)
-        adapter = GroupItemAdapter(this, list,g_url,getTitleFromDb())
+        adapter = GroupItemAdapter(this, list, g_url, getTitleFromDb())
         rv_items.adapter = adapter
         hideMainProgressLayout()
     }
@@ -171,7 +175,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
         if (Utils.isNetworkAvailable(this)) {
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-            apiInterface.getItems(groupId,provId,cityId).enqueue(object : Callback<List<KotlinItemModel>> {
+            apiInterface.getItems(groupId, provId, cityId).enqueue(object : Callback<List<KotlinItemModel>> {
                 override fun onResponse(call: Call<List<KotlinItemModel>>?, response: Response<List<KotlinItemModel>>?) {
                     val list = response?.body()
                     Log.e("success", list.toString() + " res")
@@ -231,7 +235,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     var bottomSheetExpanded = false
     var flagScrollGoesDown = false
 
- private fun getBottomSheetCallback(): BottomSheetBehavior.BottomSheetCallback {
+    private fun getBottomSheetCallback(): BottomSheetBehavior.BottomSheetCallback {
         val a = Utils.pxFromDp(this, 80f)
         bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
 
@@ -267,29 +271,31 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
 
-
     private fun sort(sort: Sort) {
         // todo add filters
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
-        val result: RealmResults<KotlinItemModel>
+        var result: RealmResults<KotlinItemModel>
         if (filterFlag) {
             result = realm.where(KotlinItemModel::class.java)
                     .equalTo("groupId", groupId)
-                    .`in`("specialityList.specialtyId", filterArray.toTypedArray())
-                    .sort("firstName", sort)
-                    .findAll()
+                    .`in`("specialityList.specialtyId", filterArray.toTypedArray()).findAll()
+            result = result.sort("firstName", sort)
         } else {
             result = realm.where(KotlinItemModel::class.java)
-                    .equalTo("groupId", groupId)
-                    .sort("firstName", sort).findAll()
+                    .equalTo("groupId", groupId).findAll()
+            result = result.sort("firstName", sort)
         }
 
         realm.commitTransaction()
+
         idArray.clear()
+
         result.forEach { item: KotlinItemModel ->
             idArray.add(item.centerId)
         }
+
+
         initList(idArray)
     }
 
@@ -306,6 +312,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         realm.commitTransaction()
         idArray.clear()
         result.forEach { item: KotlinItemModel ->
+
             idArray.add(item.centerId)
         }
 
@@ -342,13 +349,26 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.iv_goback -> onBackPressed()
             R.id.iv_menu -> openDrawerLayout()
             R.id.fab_goUp -> rv_items.smoothScrollToPosition(0)
-            R.id.rl_drawer1 -> drawerClick(0)
+
             R.id.rl_drawer2 -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
-            R.id.rl_salamat -> startActivity(Intent(this@OfficeActivity, HeaIncServiceActivity::class.java))
+
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString())
+            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo))
+            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString())
+            R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString())
+            R.id.rl_ict_services->goToServicesActivity(tv_ict_services.text.toString())
+            R.id.rl_pishkhan_services -> goToServicesActivity(tv_pishkhan_services.text.toString())
+            R.id.rl_post_services->goToServicesActivity(tv_post_services.text.toString())
+            R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString())
 
         }
+    }
+    private fun goToServicesActivity(title:String){
+        val intent=Intent(this@OfficeActivity, ServicesActivity::class.java)
+        intent.putExtra("ServiceTitle",title)
+        startActivity(intent)
     }
 
     override fun onLongClick(v: View?): Boolean {
@@ -364,29 +384,29 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
     private fun drawerClick(position: Int) {
-        when (position) {
-            0 -> {
-                startActivity(Intent(this@OfficeActivity, MainActivity::class.java))
 
-                finish()
-            }
+        when (position) {
+
             1 -> {
                 startActivity(Intent(this@OfficeActivity, FavActivity::class.java))
 
-                finish()
             }
-            2 -> closeDrawerLayout()
+            2 -> {
+                startActivity(Intent(this@OfficeActivity, AboutUs::class.java))
+
+            }
             3 -> {
                 startActivity(Intent(this@OfficeActivity, ContactUs::class.java))
 
-                finish()
             }
+
         }
 
 
     }
+
     fun early_Mth() {
-        Toast.makeText(this,"بزودی",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
     }
 
     private fun openDrawerLayout() {
@@ -398,13 +418,13 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    private fun createRevealAnimation(){
-        val startRadius=0
-        val endRadius=0
-        Math.hypot(rv_items.width.toDouble(),rv_items.height.toDouble()).toInt()
-        val anim=ViewAnimationUtils.createCircularReveal(rv_items,0,0,0f,endRadius.toFloat())
-        anim.duration=500
-        anim.interpolator=AccelerateInterpolator()
+    private fun createRevealAnimation() {
+        val startRadius = 0
+        val endRadius = 0
+        Math.hypot(rv_items.width.toDouble(), rv_items.height.toDouble()).toInt()
+        val anim = ViewAnimationUtils.createCircularReveal(rv_items, 0, 0, 0f, endRadius.toFloat())
+        anim.duration = 500
+        anim.interpolator = AccelerateInterpolator()
         anim.start()
     }
 
@@ -425,7 +445,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         val filterView: View = LayoutInflater.from(this@OfficeActivity).inflate(R.layout.filter, null, false)
         val tList: RecyclerView = filterView.findViewById(R.id.rv_tList)
         val adapter = TAdapter(this@OfficeActivity, filterArray)
-        tList.layoutManager =RtlGridLayoutManager(this@OfficeActivity, 3)
+        tList.layoutManager = RtlGridLayoutManager(this@OfficeActivity, 3)
         tList.adapter = adapter
 
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)

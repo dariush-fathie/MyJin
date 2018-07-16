@@ -5,7 +5,10 @@ import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
+import myjin.pro.ahoora.myjin.models.KotlinItemModel;
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel;
 
 public class SharedPer {
@@ -49,8 +52,6 @@ public class SharedPer {
         this.mContext = mContext;
         sharedPreference =  mContext.getSharedPreferences("spz", 0);
         editor1 = sharedPreference.edit();
-
-
 
     }
 
