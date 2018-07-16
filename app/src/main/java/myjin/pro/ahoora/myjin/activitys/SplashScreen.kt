@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import com.bumptech.glide.Glide
-
 import myjin.pro.ahoora.myjin.R
-import java.util.*
 
 
 class SplashScreen : AppCompatActivity() {
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +17,15 @@ class SplashScreen : AppCompatActivity() {
 
         Clear_GlideCaches()
 
-          Handler().postDelayed({ finish() }, 2500)
+        Handler().postDelayed({ finish() }, 2500)
 
 
     }
+
     override fun onStart() {
         super.onStart()
     }
+
     fun Clear_GlideCaches() {
         Handler().postDelayed(Runnable { Glide.get(this@SplashScreen).clearMemory() }, 0)
         AsyncTask.execute(Runnable { Glide.get(this@SplashScreen).clearDiskCache() })

@@ -49,8 +49,6 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
     }
 
     override fun onClick(p0: View?) {
-
-
         when (p0?.id) {
             R.id.btn_fav -> {
                 startActivity(Intent(this@StartActivity, FavActivity::class.java))
@@ -72,7 +70,6 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
     }
 
     private fun newVersion(v: String, force: Int) {
-
         var tv_costom_title: TextView
         val view2 = LayoutInflater.from(this@StartActivity).inflate(R.layout.hea_inc_services_title, null, false)
         tv_costom_title = view2.findViewById(R.id.tv_customTitle)

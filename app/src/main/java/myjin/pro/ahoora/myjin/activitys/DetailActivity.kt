@@ -2,10 +2,7 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.PorterDuff
@@ -35,7 +32,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.github.chrisbanes.photoview.PhotoView
+import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -58,7 +55,10 @@ import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.SimpleResponseModel
-import myjin.pro.ahoora.myjin.utils.*
+import myjin.pro.ahoora.myjin.utils.ApiInterface
+import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.LoginClass
+import myjin.pro.ahoora.myjin.utils.StaticValues
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
@@ -70,6 +70,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private val request_location_setting = 1053
 
     private val realm = Realm.getDefaultInstance()!!
+
     private var id = 0
     private var i = 0
     private var isSaved = false
@@ -104,7 +105,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     private lateinit var currentPoint: LatLng
 
-    private val updateInterval: Long = 10000
+    private val updateInterval: Long = 15000
     private val fastestUpdateInterval: Long = updateInterval / 2
 
     override fun onClick(v: View?) {
@@ -147,11 +148,10 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             R.id.cv_level -> selectModeLevel()
             R.id.iv_share -> share()
 
-            R.id.tv_website->goToWebSite()
-            R.id.tv_telephone-> call()
+            R.id.tv_website -> goToWebSite()
+            R.id.tv_telephone -> call()
         }
     }
-
 
 
     fun animateBookmark(view: ImageView) {
@@ -231,7 +231,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
             Receiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
-                    if (intent.getAction().equals(getString(R.string.reciver2))) {
+                    if (intent.action == getString(R.string.reciver2)) {
                         playOrStop()
                     }
                 }
@@ -290,17 +290,17 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     private fun share() {
         val imageUri: Uri = Uri.parse("android.resource://$packageName/drawable/ic_jin")
-        val shareIntent: Intent = Intent()
+        val shareIntent = Intent()
 
         var str = ""
 
-        str =  "${tv_title.text}\n\n"
+        str = "${tv_title.text}\n\n"
         str += "${tv_subTitle.text}\n\n"
         str += " آدرس : " + "${tv_addr.text}\n\n"
 
-        str +="لینک دانلود ژین من \n"
+        str += "لینک دانلود ژین من \n"
 
-        if(realm.isInTransaction)  realm.commitTransaction()
+        if (realm.isInTransaction) realm.commitTransaction()
 
         val id = 1
 
@@ -309,7 +309,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         val res = realm.where(KotlinAboutContactModel::class.java)
                 .equalTo("id", id)
                 .findFirst()!!
-        str+= res.tKafeh.toString()
+        str += res.tKafeh.toString()
         realm.commitTransaction()
 
 /*String url= MediaStore.Images.Media.insertImage(this.getContentResolver(), theBitmap, "title", "description");
@@ -401,6 +401,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         polyline = mMap.addPolyline(PolylineOptions().addAll(paths).color(ContextCompat.getColor(this, R.color.green)))
     }
 
+
     @SuppressLint("MissingPermission")
     private fun initLocationApi() {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -423,39 +424,44 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         mLocationRequest.interval = updateInterval
         mLocationRequest.fastestInterval = fastestUpdateInterval
         mLocationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
         checkLocationSetting()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == request_location_setting) {
+            Log.e("resultCode", "$resultCode")
             checkLocationSetting()
         }
     }
 
-    //open location setting page to active location toggle buttton
-    private fun locationSettingDialog() {
-        val dialog = AlertDialog.Builder(this)
-        dialog.setMessage("برای استفاده از نقشه باید تنظیمات مکان یابی دستگاه و همچنین gps را فعال کنید ")
-        dialog.setPositiveButton("فعال کردن") { _, _ ->
-            val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivityForResult(myIntent, request_location_setting)
-        }
-        dialog.show()
-    }
 
     // check if location setting is enabled?
     private fun checkLocationSetting() {
-        mLocationSettingsRequest = LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest).build()
+        mLocationSettingsRequest = LocationSettingsRequest.Builder().setAlwaysShow(true).addLocationRequest(mLocationRequest).build()
         mSettingsClient.checkLocationSettings(mLocationSettingsRequest)
                 .addOnSuccessListener {
-                    Log.e("Location", "success")
-                    // location setting in enabled
                     createLocationCallback()
-                }.addOnFailureListener {
-                    Log.e("Location", "failure")
-                    locationSettingDialog()
+                }.addOnFailureListener { exception ->
+                    if (exception is ResolvableApiException) {
+                        // Location settings are not satisfied, but this can be fixed
+                        // by showing the user a dialog.
+                        try {
+                            // Show the dialog by calling startResolutionForResult(),
+                            // and check the result in onActivityResult().
+                            exception.startResolutionForResult(this@DetailActivity,
+                                    request_location_setting)
+                        } catch (sendEx: IntentSender.SendIntentException) {
+                            // Ignore the error.
+                        }
+                    }
+                    Log.e("Location", "failure ${exception.message}")
+                    //locationSettingDialog()
                     // location setting not enabled
+                } . addOnCanceledListener {
+                    Log.e("Location","onCanecl")
                 }
+
     }
 
     @SuppressLint("MissingPermission")
@@ -606,12 +612,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
             }
         }
+
         checkLocationPermissions()
         mMap?.setOnCameraMoveListener(this)
         val p = LatLng(item.addressList!![0]?.latitude?.toDouble()!!, item.addressList!![0]?.longitude?.toDouble()!!)
         mMap?.addMarker(MarkerOptions().title("${item.firstName} ${item.lastName}").position(p))?.showInfoWindow()
         mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(p, 16f))
         checkUserLoggedIn()
+
     }
 
     private fun formatLatLng(p: LatLng): String {
@@ -685,7 +693,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         snapHelper.attachToRecyclerView(rv_imageListBig)
     }
 
-    private  fun autoScrollSlide() {
+    private fun autoScrollSlide() {
 
         val handler = Handler()
 
@@ -700,9 +708,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                     } else {
                         rv_imageListBig.smoothScrollToPosition(n--)
                     }
-                    if (n == rv_imageListBig.adapter.itemCount-1) {
+                    if (n == rv_imageListBig.adapter.itemCount - 1) {
                         forward = false
-                        n=rv_imageListBig.adapter.itemCount-1
+                        n = rv_imageListBig.adapter.itemCount - 1
 
                     }
                     if (n == 0) {
@@ -730,15 +738,16 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             autoScrollSlide()
 
         }
-        Log.e("ddddd","dddd")
+        Log.e("ddddd", "dddd")
     }
 
 
-    private fun goToWebSite(){
+    private fun goToWebSite() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tv_website.text.toString().trim()))
-       startActivity(intent)
+        startActivity(intent)
     }
-    private fun call(){
+
+    private fun call() {
         val phone = tv_telephone.text.toString().trim()
         val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
         startActivity(intent)
@@ -774,66 +783,68 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         tv_subTitle.text = str
         tv_addr.text = item.addressList!![0]?.locTitle
 
-        tv_telephone.text= item.addressList!![0]?.tel1
+        tv_telephone.text = item.addressList!![0]?.tel1
 
-      /*  if (!item.addressList!![0]?.tel2.toString().trim().equals("")){
-            tv_telephone.text= item.addressList!![0]?.tel1+" - "+item.addressList!![0]?.tel2
-        }*/
+        /*  if (!item.addressList!![0]?.tel2.toString().trim().equals("")){
+              tv_telephone.text= item.addressList!![0]?.tel1+" - "+item.addressList!![0]?.tel2
+          }*/
 
-        tv_cv.text=item.bio
-        tv_service.text=item.serviceList
+        tv_cv.text = item.bio
+        tv_service.text = item.serviceList
 
-        str=""
+        str = ""
 
-        item.cInsuranceList?.forEach { inc->
+        item.cInsuranceList?.forEach { inc ->
 
-            str+=inc.name+"\n"+inc.description+"\n\n"
+            str += inc.name + "\n" + inc.description + "\n\n"
 
         }
-        tv_incurance.text=str
+        tv_incurance.text = str
 
-        tv_website.text=item.addressList!![0]?.site
-        tv_mail.text=item.addressList!![0]?.mail
+        tv_website.text = item.addressList!![0]?.site
+        tv_mail.text = item.addressList!![0]?.mail
 
-        str=""
+        str = ""
 
-        if (item.addressList!![0]?.sat_attend!!){
-            str="شنبه - "
+        if (item.addressList!![0]?.sat_attend!!) {
+            str = "شنبه - "
         }
-        if (item.addressList!![0]?.sun_attend!!){
-            str+="یکشنبه - "
+        if (item.addressList!![0]?.sun_attend!!) {
+            str += "یکشنبه - "
         }
-        if (item.addressList!![0]?.mon_attend!!){
-            str+="دوشنبه - "
+        if (item.addressList!![0]?.mon_attend!!) {
+            str += "دوشنبه - "
         }
-        if (item.addressList!![0]?.tues_attend!!){
-            str+="سه شنبه - "
+        if (item.addressList!![0]?.tues_attend!!) {
+            str += "سه شنبه - "
         }
-        if (item.addressList!![0]?.wed_attend!!){
-            str+="چهار شنبه - "
+        if (item.addressList!![0]?.wed_attend!!) {
+            str += "چهار شنبه - "
         }
-        if (item.addressList!![0]?.thurs_attend!!){
-            str+="پنجشنبه - "
+        if (item.addressList!![0]?.thurs_attend!!) {
+            str += "پنجشنبه - "
         }
-        if (item.addressList!![0]?.fri_attend!!){
-            str+="جمعه - "
+        if (item.addressList!![0]?.fri_attend!!) {
+            str += "جمعه - "
         }
 
-        str=str.trim().substring(0,str.length-2)
-        tv_attend.text=str
+        str = str.trim().substring(0, str.length - 2)
+        tv_attend.text = str
 
 
         var drawable = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_jin)
         var url = ""
 
         if (item.logoImg.equals("")) {
-            aiv_logoImg.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
-
             if (item.gen?.equals("0")!!) {
-                 url = g_url
+                aiv_logoImg.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+                url = g_url
             } else if (item.gen?.equals("1")!!) {
+                aiv_logoImg.setColorFilter(null)
                 url = this@DetailActivity.getString(R.string.ic_doctor_f)
             } else if (item.gen?.equals("2")!!) {
+
+                aiv_logoImg.setColorFilter(null)
                 url = this@DetailActivity.getString(R.string.ic_doctor_m)
             }
 
@@ -935,7 +946,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                         , arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
                         , request_permission)
             }
-        }else{
+        } else {
             createLocationRequest()
         }
     }
