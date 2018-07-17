@@ -26,6 +26,7 @@ import myjin.pro.ahoora.myjin.customClasses.OnSpinerItemClick
 import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
 import myjin.pro.ahoora.myjin.interfaces.TempListener
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
+import myjin.pro.ahoora.myjin.models.KotlinServicesModel
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
 import myjin.pro.ahoora.myjin.utils.*
@@ -58,9 +59,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             R.id.rl_exit -> showExitDialog()
             R.id.iv_menu -> openDrawerLayout()
             R.id.fab_search -> search()
-            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString())
-            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo))
-            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString())
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(),1)
+            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo),2)
+            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString(),3)
             R.id.rl_tamin_services -> early_Mth()
             R.id.rl_ict_services->early_Mth()
             R.id.rl_pishkhan_services -> early_Mth()
@@ -101,9 +102,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         tv_login_outsign.setOnClickListener(this)
 
     }
-    private fun goToServicesActivity(title:String){
+    private fun goToServicesActivity(title:String,i:Int){
         val intentM=Intent(this@MainActivity, ServicesActivity::class.java)
         intentM.putExtra("ServiceTitle",title)
+        intentM.putExtra("groupId",i)
         startActivity(intentM)
     }
     private fun drawerClick(position: Int) {
@@ -306,6 +308,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         getGroupCount()
         getSpList()// from server
         sliderUrls()
+        getServicesList()
+    }
+
+    private fun getServicesList() {
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        val response = apiInterface.servicesList
+        response.enqueue(object : Callback<List<KotlinServicesModel>> {
+            override fun onResponse(call: Call<List<KotlinServicesModel>>?, response: Response<List<KotlinServicesModel>>?) {
+                val list: List<KotlinServicesModel>? = response?.body()
+                val realm = Realm.getDefaultInstance()
+                realm.executeTransactionAsync { db: Realm? ->
+                    db?.where(KotlinServicesModel::class.java)?.findAll()?.deleteAllFromRealm()
+                    db?.copyToRealm(list!!)
+
+                }
+            }
+            override fun onFailure(call: Call<List<KotlinServicesModel>>?, t: Throwable?) {
+                Toast.makeText(this@MainActivity, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 

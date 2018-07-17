@@ -5,6 +5,7 @@ import java.util.List;
 import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel;
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel;
 import myjin.pro.ahoora.myjin.models.KotlinItemModel;
+import myjin.pro.ahoora.myjin.models.KotlinServicesModel;
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel;
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel;
 import myjin.pro.ahoora.myjin.models.TempModel;
@@ -41,5 +42,8 @@ public interface ApiInterface {
 
     @GET("sliderMain/{slide}")
     Call<List<KotlinSlideMainModel>> sliderMain(@Path("slide") int slide);
+
+    @GET("getServicesList/")
+    Call<List<KotlinServicesModel>> getServicesList();
 
 }

@@ -1,24 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/back"
     android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_service_title"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:fontFamily="@font/yekan"
-        android:gravity="center"
-        android:text="عنوان"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/tv_service_context"
+    <com.github.florent37.expansionpanel.ExpansionHeader
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:gravity="center"
-        android:text="ژین من :\n \n http://myjin.ir"
-        android:textColorLink="@color/blue" />
+        android:background="@drawable/bg_service_title"
+        app:expansion_headerIndicator="@+id/headerIndicator"
+        app:expansion_layout="@+id/expansionLayout"
+        app:expansion_toggleOnClick="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+
+                android:id="@+id/tv_service_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/yekan"
+                android:text="عنوان"
+                android:textColor="#272727"
+                android:textSize="14dp" />
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/headerIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="16dp"
+            android:adjustViewBounds="true"
+            android:tint="@color/white"
+            app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
+
+
+    </com.github.florent37.expansionpanel.ExpansionHeader>
+
+    <com.github.florent37.expansionpanel.ExpansionLayout
+        android:id="@+id/expansionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:orientation="vertical"
+            android:background="@color/back">
+
+            <TextView
+                android:id="@+id/tv_service_context"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:fontFamily="@font/yekan"
+                android:gravity="center"
+                android:text="content" />
+
+        </LinearLayout>
+
+    </com.github.florent37.expansionpanel.ExpansionLayout>
+
+
 </LinearLayout>
+
+
