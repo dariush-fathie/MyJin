@@ -61,6 +61,7 @@
             android:background="@color/back">
 
             <TextView
+                android:textColorLink="@color/subTitle"
                 android:id="@+id/tv_service_context"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
