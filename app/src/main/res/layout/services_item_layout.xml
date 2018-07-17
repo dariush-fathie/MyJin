@@ -30,7 +30,7 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/yekan"
                 android:text="عنوان"
-                android:textColor="#272727"
+                android:textColor="@color/white"
                 android:textSize="14dp" />
         </RelativeLayout>
 
