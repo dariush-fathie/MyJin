@@ -91,11 +91,13 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
         rl_pishkhan_services .setOnClickListener(this)
         rl_post_services.setOnClickListener(this)
         rl_salamat .setOnClickListener(this)
-
+        tv_login_outsign.setOnClickListener(this)
     }
     override fun onClick(p0: View?) {
 
         when (p0?.getId()) {
+            R.id.tv_login_outsign->Toast.makeText(this@FavActivity,"این قسمت در نسخه جدید ارائه شده است",Toast.LENGTH_LONG).show()
+
             R.id.iv_menu -> openDrawerLayout()
             R.id.iv_goback -> finish()
 
@@ -114,9 +116,9 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
         }
     }
     private fun goToServicesActivity(title:String){
-        val intent=Intent(this@FavActivity, ServicesActivity::class.java)
-        intent.putExtra("ServiceTitle",title)
-        startActivity(intent)
+        val intentF=Intent(this@FavActivity, ServicesActivity::class.java)
+        intentF.putExtra("ServiceTitle",title)
+        startActivity(intentF)
 
     }
 

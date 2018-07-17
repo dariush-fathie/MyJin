@@ -126,6 +126,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rl_pishkhan_services .setOnClickListener(this)
         rl_post_services.setOnClickListener(this)
         rl_salamat .setOnClickListener(this)
+        tv_login_outsign.setOnClickListener(this)
     }
 
     private fun initList(list: ArrayList<Int>) {
@@ -344,6 +345,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.tv_login_outsign->Toast.makeText(this@OfficeActivity,"این قسمت در نسخه جدید ارائه شده است",Toast.LENGTH_LONG).show()
+
             R.id.rl_filter -> onFilterClick()
             R.id.rl_sort -> onSortClick()
             R.id.iv_goback -> onBackPressed()
@@ -367,9 +370,9 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         }
     }
     private fun goToServicesActivity(title:String){
-        val intent=Intent(this@OfficeActivity, ServicesActivity::class.java)
-        intent.putExtra("ServiceTitle",title)
-        startActivity(intent)
+        val intentO=Intent(this@OfficeActivity, ServicesActivity::class.java)
+        intentO.putExtra("ServiceTitle",title)
+        startActivity(intentO)
     }
 
     override fun onLongClick(v: View?): Boolean {

@@ -96,6 +96,7 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activitys.NotificationActivity" />
         <activity android:name=".activitys.ServerStatusActivity" />
+        <activity android:name=".activitys.ServicesActivity"/>
 
     </application>
 

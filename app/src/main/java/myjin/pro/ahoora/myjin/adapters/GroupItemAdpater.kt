@@ -121,7 +121,6 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
                     .load(url)
                     .apply {
                         RequestOptions()
-
                                 .placeholder(drawable)
                     }
                     .into(holder.image)

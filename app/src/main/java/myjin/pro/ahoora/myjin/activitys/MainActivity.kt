@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.tv_login_outsign->Toast.makeText(this@MainActivity,"این قسمت در نسخه جدید ارائه شده است",Toast.LENGTH_LONG).show()
             R.id.btn_fav -> openDrawerLayout()
             R.id.btn_tryAgain -> tryAgain()
             R.id.rl_exit -> showExitDialog()
@@ -97,12 +98,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         rl_pishkhan_services .setOnClickListener(this)
         rl_post_services.setOnClickListener(this)
         rl_salamat .setOnClickListener(this)
+        tv_login_outsign.setOnClickListener(this)
 
     }
     private fun goToServicesActivity(title:String){
-        val intent=Intent(this@MainActivity, ServicesActivity::class.java)
-        intent.putExtra("ServiceTitle",title)
-        startActivity(intent)
+        val intentM=Intent(this@MainActivity, ServicesActivity::class.java)
+        intentM.putExtra("ServiceTitle",title)
+        startActivity(intentM)
     }
     private fun drawerClick(position: Int) {
         when (position) {
