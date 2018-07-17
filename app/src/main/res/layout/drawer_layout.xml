@@ -25,10 +25,57 @@
                 android:background="@drawable/menu_title" />
 
             <RelativeLayout
+                android:id="@+id/rl_login_outsign"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="4dp">
+
+
+                <View
+                    android:id="@+id/vs2"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivs2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vs2"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_password"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_login_outsign"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivs2"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="ورود / عضویت"
+                    android:textColor="@color/title"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:fontFamily="@font/yekan" />
+            </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="#333" />
+
+            <RelativeLayout
 
                 android:id="@+id/rl_myjin_services"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="4dp">
 
 
@@ -70,7 +117,7 @@
                 android:layout_marginBottom="7dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/back" />
+                android:background="@color/split" />
 
 
             <RelativeLayout
@@ -115,7 +162,7 @@
                 android:layout_marginBottom="7dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/back" />
+                android:background="@color/split" />
             <RelativeLayout
                 android:id="@+id/rl_university_services"
                 android:layout_width="match_parent"
@@ -351,7 +398,7 @@
                 android:layout_marginBottom="7dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="20dp"
-                android:background="@color/back" />
+                android:background="@color/split" />
             <RelativeLayout
                 android:id="@+id/rl_drawer2"
                 android:layout_width="match_parent"
@@ -511,42 +558,32 @@
                     app:fontFamily="@font/yekan" />
 
 
-                <RelativeLayout
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/split" />
+            <RelativeLayout
+                android:id="@+id/rl_version"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/tv_version_Title1"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="4dp"
-                    android:visibility="gone">
-
-
-                    <View
-                        android:id="@+id/vs2"
-                        android:layout_width="4dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:background="@color/green"
-                        android:visibility="invisible" />
-
-                    <ImageView
-                        android:id="@+id/ivs2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="8dp"
-                        android:layout_toStartOf="@+id/vs2"
-                        android:padding="6dp"
-                        android:src="@drawable/ic_salamat" />
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_toStartOf="@+id/ivs2"
-                        android:gravity="center_vertical"
-                        android:paddingEnd="17dp"
-                        android:text="ورود / ثبت نام"
-                        android:textColor="@color/title"
-                        android:textSize="16sp"
-                        app:fontFamily="@font/yekan" />
-                </RelativeLayout>
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingEnd="17dp"
+                    android:lineSpacingExtra="5dp"
+                    android:text="@string/version"
+                    android:textSize="12sp"
+                    app:fontFamily="@font/yekan"
+                    />
             </RelativeLayout>
 
         </LinearLayout>
@@ -557,7 +594,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_above="@+id/rl_exit"
-        android:background="@color/back" />
+        android:background="@color/split" />
 
     <RelativeLayout
         android:id="@+id/rl_exit"

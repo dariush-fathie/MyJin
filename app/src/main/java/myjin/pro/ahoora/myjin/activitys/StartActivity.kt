@@ -62,7 +62,9 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
         serverStatus = ServerStatus(this, this@StartActivity)
-        serverStatus?.IsOkServer()
+
+            serverStatus?.IsOkServer()
+
 
         btn_tryAgain.setOnClickListener(this)
         btn_fav.setOnClickListener(this)

@@ -11,7 +11,8 @@
     <string name="continue_">ادامه</string>
     <string name="app_intro_skip">Skip</string>
     <string name="takapoo">تکاپو</string>
-    <string name="lorem">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.</string>
+    <string name="version">نسخه 1.0.1 \n 1397 / 4 / 26</string>
+
     <string-array name="provArray">
         <item> آذربایجان شرقی</item>
         <item> آذربایجان غربی</item>

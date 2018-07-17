@@ -61,7 +61,7 @@ class HListAdapter(ctx: Context, array: ArrayList<Int>) : RecyclerView.Adapter<R
         var url = ""
 
         if (item.logoImg.equals("")) {
-            holder.image.setColorFilter(ContextCompat.getColor(context, R.color.green),android.graphics.PorterDuff.Mode.SRC_IN)
+            holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor),android.graphics.PorterDuff.Mode.SRC_IN)
 
             if (item.gen?.equals("0")!!) {
                 url = g_url

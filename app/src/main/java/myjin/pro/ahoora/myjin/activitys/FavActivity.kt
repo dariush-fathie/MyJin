@@ -91,17 +91,19 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
         rl_pishkhan_services .setOnClickListener(this)
         rl_post_services.setOnClickListener(this)
         rl_salamat .setOnClickListener(this)
-
+        tv_login_outsign.setOnClickListener(this)
     }
     override fun onClick(p0: View?) {
 
         when (p0?.getId()) {
+            R.id.tv_login_outsign->Toast.makeText(this@FavActivity,"این قسمت در نسخه جدید ارائه شده است",Toast.LENGTH_LONG).show()
+
             R.id.iv_menu -> openDrawerLayout()
             R.id.iv_goback -> finish()
 
-            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString())
-            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo))
-            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString())
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(),1)
+            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo),2)
+            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString(),3)
             R.id.rl_tamin_services -> early_Mth()
             R.id.rl_ict_services->early_Mth()
             R.id.rl_pishkhan_services -> early_Mth()
@@ -113,10 +115,11 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
             R.id.rl_drawer4 -> drawerClick(3)
         }
     }
-    private fun goToServicesActivity(title:String){
-        val intent=Intent(this@FavActivity, ServicesActivity::class.java)
-        intent.putExtra("ServiceTitle",title)
-        startActivity(intent)
+    private fun goToServicesActivity(title:String,i:Int){
+        val intentF=Intent(this@FavActivity, ServicesActivity::class.java)
+        intentF.putExtra("ServiceTitle",title)
+        intentF.putExtra("groupId",i)
+        startActivity(intentF)
 
     }
 
