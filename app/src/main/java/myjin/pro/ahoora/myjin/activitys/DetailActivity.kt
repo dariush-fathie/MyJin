@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.provider.Settings
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
@@ -129,8 +128,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
                 animateBookmark(iv_save)
             }
-
-            R.id.rl_seeOnMap -> {
+            R.id.rl_seeOnMap, R.id.iv_showMap, R.id.btn_showMap -> {
                 openMapSheet()
             }
             R.id.fab_closeMap -> {
@@ -206,6 +204,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             btn_savePoint.setOnClickListener(this)
             fab_closeMap.setOnClickListener(this)
             rl_seeOnMap.setOnClickListener(this)
+            iv_showMap.setOnClickListener(this)
+            btn_showMap.setOnClickListener(this)
             fab_direction.setOnClickListener(this)
             iv_goback.setOnClickListener(this)
             iv_share.setOnClickListener(this)
@@ -441,6 +441,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         mLocationSettingsRequest = LocationSettingsRequest.Builder().setAlwaysShow(true).addLocationRequest(mLocationRequest).build()
         mSettingsClient.checkLocationSettings(mLocationSettingsRequest)
                 .addOnSuccessListener {
+
                     createLocationCallback()
                 }.addOnFailureListener { exception ->
                     if (exception is ResolvableApiException) {
@@ -458,8 +459,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                     Log.e("Location", "failure ${exception.message}")
                     //locationSettingDialog()
                     // location setting not enabled
-                } . addOnCanceledListener {
-                    Log.e("Location","onCanecl")
+                }.addOnCanceledListener {
+                    Log.e("Location", "onCanecl")
                 }
 
     }
@@ -473,6 +474,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private fun createLocationCallback() {
         Log.e("loc", "1")
         mLocationCallback = object : LocationCallback() {
+
             override fun onLocationResult(locationResult: LocationResult?) {
                 Log.e("loc", "2")
                 locationResult ?: return
@@ -482,6 +484,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 Log.e("Location Update", "location updated!")
             }
         }
+
         startLocationUpdate()
         enableMyLocation()
     }
@@ -767,8 +770,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         tv_title.text = "${item?.firstName} ${item?.lastName}"
 
 
-
-
         if (!item.gen.equals("0")!!) {
             if (item.groupId == 1) {
                 str = item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
@@ -840,7 +841,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 aiv_logoImg.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
                 url = g_url
             } else if (item.gen?.equals("1")!!) {
-                aiv_logoImg.setColorFilter(null)
+                aiv_logoImg.colorFilter = null
                 url = this@DetailActivity.getString(R.string.ic_doctor_f)
             } else if (item.gen?.equals("2")!!) {
 
@@ -931,7 +932,11 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     // return true if app has location permission
     private fun hasLocationPermission(): Boolean {
-        return ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true
+        }
     }
 
     // request location permission
