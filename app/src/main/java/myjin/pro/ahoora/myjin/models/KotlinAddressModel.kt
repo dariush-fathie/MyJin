@@ -69,24 +69,24 @@ open class KotlinAddressModel : RealmObject() {
     open var mail: String? = ""
     @SerializedName("sat_attend")
     @Expose
-    open var sat_attend: Boolean?=true
+    open var sat_attend: Int?=1
     @SerializedName("sun_attend")
     @Expose
-    open var sun_attend: Boolean?=true
+    open var sun_attend: Int?=1
     @SerializedName("mon_attend")
     @Expose
-    open var mon_attend: Boolean?=true
+    open var mon_attend: Int?=1
     @SerializedName("tues_attend")
     @Expose
-    open var tues_attend: Boolean?=true
+    open var tues_attend: Int?=1
     @SerializedName("wed_attend")
     @Expose
-    open var wed_attend: Boolean?=true
+    open var wed_attend: Int?=1
     @SerializedName("thurs_attend")
     @Expose
-    open var thurs_attend: Boolean?=true
+    open var thurs_attend: Int?=1
     @SerializedName("fri_attend")
     @Expose
-    open var fri_attend: Boolean?=false
+    open var fri_attend: Int?=0
 
 }
