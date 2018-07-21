@@ -790,25 +790,26 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         str = ""
 
-        if (item.addressList!![0]?.sat_attend!!) {
+        if (item.addressList!![0]?.sat_attend!!>0) {
             str = "شنبه - "
         }
-        if (item.addressList!![0]?.sun_attend!!) {
+        if (item.addressList!![0]?.sun_attend!!>0) {
             str += "یکشنبه - "
         }
-        if (item.addressList!![0]?.mon_attend!!) {
+        if (item.addressList!![0]?.mon_attend!!>0) {
             str += "دوشنبه - "
         }
-        if (item.addressList!![0]?.tues_attend!!) {
+        if (item.addressList!![0]?.tues_attend!!>0) {
             str += "سه شنبه - "
         }
-        if (item.addressList!![0]?.wed_attend!!) {
+        if (item.addressList!![0]?.wed_attend!!>0) {
             str += "چهار شنبه - "
         }
-        if (item.addressList!![0]?.thurs_attend!!) {
+        if (item.addressList!![0]?.thurs_attend!!>0) {
             str += "پنجشنبه - "
         }
-        if (item.addressList!![0]?.fri_attend!!) {
+        if (item.addressList!![0]?.fri_attend!!>0) {
+
             str += "جمعه - "
         }
 
