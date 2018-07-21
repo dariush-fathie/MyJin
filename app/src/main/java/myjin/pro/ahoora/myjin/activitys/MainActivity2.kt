@@ -2,9 +2,11 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.AppBarLayout
+import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
@@ -19,10 +21,32 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
+import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
+import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
+import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
+import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.Colors
+import myjin.pro.ahoora.myjin.utils.KotlinApiClient
 import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, ViewPager.OnPageChangeListener, AppBarLayout.OnOffsetChangedListener {
+class MainActivity2 : AppCompatActivity(),
+        TabLayout.OnTabSelectedListener,
+        ViewPager.OnPageChangeListener,
+        AppBarLayout.OnOffsetChangedListener,
+        View.OnClickListener {
+
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.fab_search -> {
+                search()
+            }
+        }
+    }
 
 
     private val bankPosition = 0
@@ -31,13 +55,16 @@ class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, View
 
     override fun onStart() {
         super.onStart()
+        EventBus.getDefault().register(this)
         abp_main.addOnOffsetChangedListener(this)
         Log.e("sdklfjslf", "ffsdklfjsdlf")
     }
 
     override fun onStop() {
-        super.onStop()
         abp_main.removeOnOffsetChangedListener(this)
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
@@ -47,7 +74,6 @@ class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, View
             view_gradient.visibility = View.GONE
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,26 +93,60 @@ class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, View
 
         vp_mainContainer.adapter = PagerAdapter(supportFragmentManager)
         vp_mainContainer.addOnPageChangeListener(this)
+        vp_mainContainer.offscreenPageLimit = 4
         tbl_main.setupWithViewPager(vp_mainContainer)
-
         Handler().postDelayed({
             tbl_main?.getTabAt(0)?.select()
             ipi_main.attachToViewPager(vp_mainContainer)
         }, 50)
+        setListener()
 
-        rv_mainSlider.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_mainSlider.addItemDecoration(SliderDecoration(this, 8))
-        rv_mainSlider.adapter = SliderAdapter(this, arrayListOf("", "", "", ""))
+        checkNetState()
+    }
+
+    @Subscribe
+    fun netEvent(e: NetChangeEvent) {
 
     }
 
+    private fun checkNetState() {
+        if (true) {
+            getSlides()
+            //todo : get services and others ...
+        } else {
+            showNetErrSnack()
+        }
+    }
+
+
+    @Subscribe
+    fun tryAgainEvent(e: TryAgainEvent) {
+        if (!sliderLoadFlag) {
+            getSlides()
+        }
+        // todo : get services
+    }
+
+
+    fun showNetErrSnack() {
+        hideSliderCPV()
+        Snackbar.make(cl_homeContainer, "خطایی رخ داد دوباره امتحان کنید", Snackbar.LENGTH_INDEFINITE)
+                .setAction("تلاش دوباره") {
+                    Handler().postDelayed({
+                        EventBus.getDefault().post(TryAgainEvent())
+                    }, 1000)
+                }.show()
+    }
+
+    private fun setListener() {
+        fab_search.setOnClickListener(this)
+    }
 
     override fun onPageScrollStateChanged(state: Int) {
 
     }
 
     private var mOffset = 0f
-
 
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
         /*if (positionOffset > mOffset) {
@@ -102,7 +162,6 @@ class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, View
         tbl_main.getTabAt(i)?.customView?.alpha = 1 - positionOffset*/
     }
 
-
     override fun onPageSelected(position: Int) {
         if (position != bankPosition) {
             hideLocation()
@@ -117,7 +176,6 @@ class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, View
         }
         EventBus.getDefault().post(0)
     }
-
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
     }
@@ -164,6 +222,10 @@ class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, View
         tv_location.visibility = View.GONE
     }
 
+    fun visibleSearchFab() {
+        fab_search.visibility = View.VISIBLE
+        showSearchFab()
+    }
 
     private fun showSearchFab() {
         val animSet = AnimatorSet()
@@ -174,7 +236,6 @@ class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, View
         isSearchVisible = true
     }
 
-
     private fun hideSearchFab() {
         val animSet = AnimatorSet()
         val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 1f, 0f)
@@ -184,5 +245,59 @@ class MainActivity2 : AppCompatActivity(), TabLayout.OnTabSelectedListener, View
         isSearchVisible = false
     }
 
+    private fun search() {
+        startActivity(Intent(this, SearchActivity::class.java))
+    }
+
+    private var sliderLoadFlag = false
+
+    private fun initSlider(list: ArrayList<String>) {
+        Log.e("sdfdsfds", "sdfsfsfsf")
+        Handler().postDelayed({
+            rv_mainSlider.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            rv_mainSlider.addItemDecoration(SliderDecoration(this, 8))
+            rv_mainSlider.adapter = SliderAdapter(this, list)
+            hideSliderCPV()
+        }, 500)
+
+        sliderLoadFlag = true
+    }
+
+    private fun getSlides() {
+        Log.e("sdfdsfds", "sdfsfsfsf")
+        showSliderCPV()
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        apiInterface.sliderMain(1).enqueue(object : Callback<List<KotlinSlideMainModel>> {
+
+            override fun onResponse(call: Call<List<KotlinSlideMainModel>>?, response: Response<List<KotlinSlideMainModel>>?) {
+
+                response?.body() ?: onFailure(call, Throwable("null body"))
+                response?.body() ?: return
+
+                val list = response.body()
+                val urls = ArrayList<String>()
+                list?.get(0)!!.slideList?.forEach { i ->
+                    urls.add(i.fileUrl!!)
+                }
+
+                initSlider(urls)
+            }
+
+            override fun onFailure(call: Call<List<KotlinSlideMainModel>>?, t: Throwable?) {
+                Log.e("ERR", t?.message + "  ")
+                sliderLoadFlag = false
+                showNetErrSnack()
+            }
+        })
+    }
+
+
+    private fun showSliderCPV() {
+        cpv_slideLoad.visibility = View.VISIBLE
+    }
+
+    private fun hideSliderCPV() {
+        cpv_slideLoad.visibility = View.GONE
+    }
 
 }

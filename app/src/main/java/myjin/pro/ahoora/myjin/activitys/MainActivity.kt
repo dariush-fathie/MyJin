@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.net_err_layout.*
 import kotlinx.android.synthetic.main.progress_layout.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
-import myjin.pro.ahoora.myjin.customClasses.GridItemDecoration
+import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
 import myjin.pro.ahoora.myjin.customClasses.OnSpinerItemClick
 import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
 import myjin.pro.ahoora.myjin.interfaces.TempListener
@@ -62,10 +62,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
-            R.id.rl_tamin_services -> commingSoon()
-            R.id.rl_ict_services -> commingSoon()
-            R.id.rl_pishkhan_services -> commingSoon()
-            R.id.rl_post_services -> commingSoon()
+            R.id.rl_tamin_services -> cummingSoon()
+            R.id.rl_ict_services -> cummingSoon()
+            R.id.rl_pishkhan_services -> cummingSoon()
+            R.id.rl_post_services -> cummingSoon()
             R.id.rl_salamat -> startActivity(Intent(this@MainActivity, HeaIncServiceActivity::class.java))
             R.id.rl_drawer2 -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
@@ -187,15 +187,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         dialog.showSpinerDialog()
     }
 
-
-    private fun commingSoon() {
+    private fun cummingSoon() {
         Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
     }
 
     private fun tryAgain() {
         initList()
     }
-
 
     private fun showNetErrLayout() {
         ll_netErr.visibility = View.VISIBLE
@@ -212,7 +210,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     private fun closeDrawerLayout() {
         drawerLayout.closeDrawers()
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -242,12 +239,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         startReceive()
     }
 
-
     override fun onStart() {
         super.onStart()
         registerReceiver(Receiver, IntentFilter(getString(R.string.reciver)))
     }
-
 
     private fun playOrStop() {
         if (play) {
@@ -311,7 +306,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         })
     }
 
-
     override fun IsNotOk() {
         if (VarableValues.NetworkState) {
             startActivity(Intent(this, ServerStatusActivity::class.java))
@@ -353,6 +347,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         list_indicator_m.attachToRecyclerView(rv_main_slider)
         autoScrollSlide()
     }
+
 
     private fun sliderUrls() {
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
@@ -448,7 +443,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         })
     }
 
-
     private fun loadAdapter(list: List<KotlinGroupModel>) {
         adapter = CategoryAdapter(list)
         rv_category.layoutManager = GridLayoutManager(this, 3)
@@ -457,7 +451,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             rv_category.removeItemDecorationAt(0)
         }
 
-        val itemDecoration = GridItemDecoration(this, 6)
+        val itemDecoration = TwoColGridDecoration(this, 6)
         rv_category.addItemDecoration(itemDecoration)
         rv_category.adapter = adapter
     }

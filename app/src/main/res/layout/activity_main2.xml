@@ -8,6 +8,7 @@
     android:background="@color/back">
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/cl_homeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -45,6 +46,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginTop="44dp" />
+
+                <com.github.rahatarmanahmed.cpv.CircularProgressView
+                    android:id="@+id/cpv_slideLoad"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="100dp"
+                    android:visibility="gone"
+                    app:cpv_animAutostart="true"
+                    app:cpv_indeterminate="true" />
 
                 <myjin.pro.ahoora.myjin.customClasses.CustomCardTab
                     android:id="@+id/tbl_main"
@@ -139,7 +150,7 @@
         <View
             android:id="@+id/view_gradient"
             android:layout_width="match_parent"
-            android:layout_height="3dp"
+            android:layout_height="5dp"
             android:background="@drawable/gradient"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -164,6 +175,7 @@
             android:layout_gravity="bottom"
             android:layout_margin="16dp"
             android:src="@drawable/icon_search_white"
+            android:visibility="gone"
             app:backgroundTint="@color/niceBlue"
             app:fabSize="normal" />
 

@@ -1,13 +1,17 @@
 package myjin.pro.ahoora.myjin.adapters
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
 import java.util.*
@@ -16,6 +20,7 @@ import java.util.*
 class SliderAdapter(context: Context, list: ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val mContext = context
     val item = list
+    private var onlyForFirstTime = true
 
 
     val width = Converter.getScreenWidthPx(context)
@@ -30,7 +35,7 @@ class SliderAdapter(context: Context, list: ArrayList<String>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        /*try {
+        try {
             Glide.with(mContext)
                     .load(item.get(position))
                     .apply(RequestOptions()
@@ -38,11 +43,24 @@ class SliderAdapter(context: Context, list: ArrayList<String>) : RecyclerView.Ad
                             .placeholder(R.color.colorAccent))
                     .into((holder as ImageHolder)
                             .ivImage)
-
-
         } catch (e: Exception) {
             Log.e("glideErr", e.message + " ")
-        }*/
+        }
+        setAnimation(holder.itemView, position)
+    }
+
+    private fun setAnimation(viewToAnimate: View, position: Int) {
+        if (onlyForFirstTime) {
+            val a = ObjectAnimator.ofFloat(viewToAnimate, "translationX", width.toFloat()/2, 0f)
+            val r = Random()
+            val i1 = r.nextInt(300)
+            a.duration = i1.toLong()
+            a.start()
+        }
+
+        if (position == itemCount - 1) {
+            onlyForFirstTime = false
+        }
     }
 
     internal inner class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
