@@ -9,6 +9,8 @@
     <color name="white">#FFF</color>
     <color name="tabTextDef">#BDC2C5</color>
     <color name="back">#f7f8f9</color>
+    <color name="back0">#fafafa</color>
+
     <color name="title">#424b55</color>
     <color name="logoColor">#7a02aeef</color>
     <color name="subTitle">#02aeef</color>
@@ -16,4 +18,23 @@
     <color name="androidTextColor">#808080</color>
     <color name="red">#ff0000</color>
     <color name="split">#efefef</color>
+    <color name="back1">#eeeeef</color>
+    <color name="transparent">#00ffffff</color>
+
+    <color name="blue1">#b1ede8</color>
+    <color name="blue2">#340068</color>
+    <color name="blue3">#16a8c7</color>
+    <color name="niceBlue">#673ab7</color>
+
+    <color name="red1">#ff6978</color>
+    <color name="red2">#b93848</color>
+    <color name="red3">#ff0505</color>
+
+    <color name="semiTransparent">#d63d3a56</color>
+    <color name="orange1">#fc7753</color>
+
+    <color name="yellow">#dbd56e</color>
+    <color name="u">#f2efea</color>
+
+
 </resources>

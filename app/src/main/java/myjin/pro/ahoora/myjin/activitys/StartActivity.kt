@@ -149,7 +149,7 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
                     }
 
                     if (list?.version!! > versionCode) {
-                        newVersion(list?.version!!.toString(), list?.force!!)
+                        newVersion(list.version!!.toString(), list.force!!)
                     } else {
                         notNewVersion()
                     }

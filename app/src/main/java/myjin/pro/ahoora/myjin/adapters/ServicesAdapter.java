@@ -1,7 +1,5 @@
 package myjin.pro.ahoora.myjin.adapters;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
@@ -24,32 +22,23 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Activity context;
     private int groupId = 1;
     private final ExpansionLayoutCollection expansionsCollection = new ExpansionLayoutCollection();
-    public ArrayList<KotlinServicesModel> buffer = new ArrayList<>();
+    private ArrayList<KotlinServicesModel> buffer = new ArrayList<>();
 
     public ServicesAdapter(Activity context, int groupId) {
         expansionsCollection.openOnlyOne(true);
         this.context = context;
         this.groupId = groupId;
-        fillbuffer();
-
+        fillBuffer();
     }
 
-    private void fillbuffer() {
-
+    private void fillBuffer() {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-
         RealmResults<KotlinServicesModel> res = realm.where(KotlinServicesModel.class).equalTo("groupId", groupId)
                 .findAll();
-        res=res.sort("priority");
-
+        res = res.sort("priority");
         realm.commitTransaction();
-
-        for (KotlinServicesModel k : res)
-        {
-            buffer.add(k);
-        }
-
+        buffer.addAll(res);
 
     }
 
@@ -59,16 +48,14 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
         view = LayoutInflater.from(context).inflate(R.layout.services_item_layout, parent, false);
-
-
         return new ServicesAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder)holder).tv_service_title.setText(buffer.get(position).getTitle().toString());
-        ((ViewHolder)holder).tv_service_context.setText(buffer.get(position).getContext().toString());
-        expansionsCollection.add(((ViewHolder)holder).expansionLayout);
+        ((ViewHolder) holder).tv_service_title.setText(buffer.get(position).getTitle());
+        ((ViewHolder) holder).tv_service_context.setText(buffer.get(position).getContext());
+        expansionsCollection.add(((ViewHolder) holder).expansionLayout);
     }
 
     @Override
@@ -82,11 +69,12 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         AppCompatTextView tv_service_title;
         AppCompatTextView tv_service_context;
         ExpansionLayout expansionLayout;
+
         ViewHolder(View itemView) {
             super(itemView);
             tv_service_title = itemView.findViewById(R.id.tv_service_title);
             tv_service_context = itemView.findViewById(R.id.tv_service_context);
-            expansionLayout=itemView.findViewById(R.id.expansionLayout);
+            expansionLayout = itemView.findViewById(R.id.expansionLayout);
         }
 
     }

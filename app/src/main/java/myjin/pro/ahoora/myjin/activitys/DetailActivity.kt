@@ -152,7 +152,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
 
-    fun animateBookmark(view: ImageView) {
+    private fun animateBookmark(view: ImageView) {
         val animation = AnimationSet(true)
         animation.addAnimation(AlphaAnimation(0.0f, 1.0f))
         animation.addAnimation(ScaleAnimation(0.0f, 1.0f, 0.0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f))
@@ -160,7 +160,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         animation.repeatMode = Animation.REVERSE
         view.startAnimation(animation)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -180,6 +179,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
                 iv_save.setImageDrawable(draw)
             }
+
             if (intent.getIntExtra(StaticValues.MODEL, 0) == 0) {
                 i = 0
             } else if (intent.getIntExtra(StaticValues.MODEL, 0) == 1) {
@@ -200,25 +200,28 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             }
 
             loadDetails()
-            iv_save.setOnClickListener(this)
-            btn_savePoint.setOnClickListener(this)
-            fab_closeMap.setOnClickListener(this)
-            rl_seeOnMap.setOnClickListener(this)
-            iv_showMap.setOnClickListener(this)
-            btn_showMap.setOnClickListener(this)
-            fab_direction.setOnClickListener(this)
-            iv_goback.setOnClickListener(this)
-            iv_share.setOnClickListener(this)
-            cv_direction.setOnClickListener(this)
-            cv_level.setOnClickListener(this)
-
-            tv_website.setOnClickListener(this)
-            tv_telephone.setOnClickListener(this)
-
         }
+
+        setListener()
         initBottomSheet()
         initLists()
         startReceive()
+    }
+
+    private fun setListener() {
+        iv_save.setOnClickListener(this)
+        btn_savePoint.setOnClickListener(this)
+        fab_closeMap.setOnClickListener(this)
+        rl_seeOnMap.setOnClickListener(this)
+        iv_showMap.setOnClickListener(this)
+        btn_showMap.setOnClickListener(this)
+        fab_direction.setOnClickListener(this)
+        iv_goback.setOnClickListener(this)
+        iv_share.setOnClickListener(this)
+        cv_direction.setOnClickListener(this)
+        cv_level.setOnClickListener(this)
+        tv_website.setOnClickListener(this)
+        tv_telephone.setOnClickListener(this)
     }
 
     override fun onStart() {
@@ -228,7 +231,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     private fun startReceive() {
         if (Receiver == null) {
-
             Receiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
                     if (intent.action == getString(R.string.reciver2)) {
@@ -251,7 +253,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 R.id.walking -> {
                     mode = true
                     iv_direction.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_walking))
-
                 }
             }
             true
@@ -271,15 +272,12 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                     mMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
                 }
                 R.id.satelite -> {
-
                     mapType = 1
                     mMap?.mapType = GoogleMap.MAP_TYPE_SATELLITE
                 }
                 R.id.terrain -> {
                     mapType = 2
                     mMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
-
-
                 }
             }
             true
@@ -350,8 +348,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             val directionReq: DirectionsApiRequest = DirectionsApi.newRequest(getGeoContext())
             directionReq.destination(origin)
             directionReq.origin(destination)
-            directionReq.mode(TravelMode.WALKING)
+            if (mode) {
+                directionReq.mode(TravelMode.WALKING)
+            } else {
+                directionReq.mode(TravelMode.DRIVING)
+            }
             directionReq.alternatives(false)
+            directionReq.optimizeWaypoints(true)
             directionReq.setCallback(object : PendingResult.Callback<DirectionsResult> {
                 override fun onResult(result: DirectionsResult?) {
                     runOnUiThread {
@@ -553,7 +556,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         b.show()
     }
 
-
     private fun closeMapSheet() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
@@ -697,15 +699,12 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     private fun autoScrollSlide() {
-
         val handler = Handler()
-
         t = Timer()
 
         t.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 handler.post {
-
                     if (forward) {
                         rv_imageListBig.smoothScrollToPosition(n++)
                     } else {
@@ -714,22 +713,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                     if (n == rv_imageListBig.adapter.itemCount - 1) {
                         forward = false
                         n = rv_imageListBig.adapter.itemCount - 1
-
                     }
                     if (n == 0) {
                         forward = true
-
                     }
-
-
                 }
-
             }
-
-
         }, 1, 4000)
-
-
     }
 
     private fun playOrStop() {
@@ -743,7 +733,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         }
         Log.e("ddddd", "dddd")
     }
-
 
     private fun goToWebSite() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tv_website.text.toString().trim()))
@@ -769,16 +758,13 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         tv_title.text = "${item?.firstName} ${item?.lastName}"
 
-
-        if (!item.gen.equals("0")!!) {
-            if (item.groupId == 1) {
-                str = item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
+        str = when {
+            !item.gen.equals("0") -> if (item.groupId == 1) {
+                item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
             } else {
-                str = g_name
+                g_name
             }
-
-        } else {
-            str = g_name
+            else -> g_name
         }
 
         tv_subTitle.text = str
@@ -796,12 +782,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         str = ""
 
         item.cInsuranceList?.forEach { inc ->
-
             str += inc.name + "\n" + inc.description + "\n\n"
-
         }
         tv_incurance.text = str
-
         tv_website.text = item.addressList!![0]?.site
         tv_mail.text = item.addressList!![0]?.mail
 
@@ -833,7 +816,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         tv_attend.text = str
 
 
-        var drawable = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_jin)
+        val drawable = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_jin)
         var url = ""
 
         if (item.logoImg.equals("")) {
@@ -844,13 +827,12 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 aiv_logoImg.colorFilter = null
                 url = this@DetailActivity.getString(R.string.ic_doctor_f)
             } else if (item.gen?.equals("2")!!) {
-
-                aiv_logoImg.setColorFilter(null)
+                aiv_logoImg.colorFilter = null
                 url = this@DetailActivity.getString(R.string.ic_doctor_m)
             }
 
         } else {
-            aiv_logoImg.setColorFilter(null)
+            aiv_logoImg.colorFilter = null
             url = item.logoImg!!
         }
 
@@ -864,11 +846,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                             .skipMemoryCache(true)
                 }
                 .into(aiv_logoImg)
-
-
         // theBitmap = (aiv_logoImg.drawable as BitmapDrawable).bitmap
-
-
     }
 
     override fun onBackPressed() {
@@ -883,11 +861,11 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             }
             super.onBackPressed()
         }
-
     }
 
     // show list of slides in real size
     inner class ImageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             val v = LayoutInflater.from(this@DetailActivity).inflate(R.layout.image_big_item, parent, false)
             return ImageHolder(v)
@@ -918,9 +896,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 sendBroadcast(i)
             }
 
-
-            val cvImage = itemView.findViewById<CardView>(R.id.cv_bigItem)
-            val ivImage = itemView.findViewById<AppCompatImageView>(R.id.iv_imageBig)
+            val cvImage: CardView = itemView.findViewById<CardView>(R.id.cv_bigItem)
+            val ivImage: AppCompatImageView = itemView.findViewById<AppCompatImageView>(R.id.iv_imageBig)
 
             init {
                 itemView.setOnClickListener(this)

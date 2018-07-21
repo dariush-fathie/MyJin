@@ -38,6 +38,7 @@ import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClickListener, TempListener {
+
     internal var Receiver: BroadcastReceiver? = null
     var serverStatus: ServerStatus? = null
     lateinit var adapter: CategoryAdapter
@@ -50,28 +51,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     private var t = Timer()
     private var play = true
 
-
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_login_outsign->Toast.makeText(this@MainActivity,"این قسمت در نسخه جدید ارائه شده است",Toast.LENGTH_LONG).show()
+            R.id.tv_login_outsign -> Toast.makeText(this@MainActivity, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
             R.id.btn_fav -> openDrawerLayout()
             R.id.btn_tryAgain -> tryAgain()
             R.id.rl_exit -> showExitDialog()
             R.id.iv_menu -> openDrawerLayout()
             R.id.fab_search -> search()
-            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(),1)
-            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo),2)
-            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString(),3)
-            R.id.rl_tamin_services -> early_Mth()
-            R.id.rl_ict_services->early_Mth()
-            R.id.rl_pishkhan_services -> early_Mth()
-            R.id.rl_post_services->early_Mth()
-            R.id.rl_salamat -> startActivity(Intent(this@MainActivity,HeaIncServiceActivity::class.java))
-
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
+            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
+            R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
+            R.id.rl_tamin_services -> commingSoon()
+            R.id.rl_ict_services -> commingSoon()
+            R.id.rl_pishkhan_services -> commingSoon()
+            R.id.rl_post_services -> commingSoon()
+            R.id.rl_salamat -> startActivity(Intent(this@MainActivity, HeaIncServiceActivity::class.java))
             R.id.rl_drawer2 -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
-
             R.id.rl_city -> openCityDialog()
             R.id.rl_prov -> openProvDialog()
         }
@@ -96,37 +94,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         rl_university_services.setOnClickListener(this)
         rl_tamin_services.setOnClickListener(this)
         rl_ict_services.setOnClickListener(this)
-        rl_pishkhan_services .setOnClickListener(this)
+        rl_pishkhan_services.setOnClickListener(this)
         rl_post_services.setOnClickListener(this)
-        rl_salamat .setOnClickListener(this)
+        rl_salamat.setOnClickListener(this)
         tv_login_outsign.setOnClickListener(this)
 
     }
-    private fun goToServicesActivity(title:String,i:Int){
-        val intentM=Intent(this@MainActivity, ServicesActivity::class.java)
-        intentM.putExtra("ServiceTitle",title)
-        intentM.putExtra("groupId",i)
+
+    private fun goToServicesActivity(title: String, i: Int) {
+        val intentM = Intent(this@MainActivity, ServicesActivity::class.java)
+        intentM.putExtra("ServiceTitle", title)
+        intentM.putExtra("groupId", i)
         startActivity(intentM)
     }
+
     private fun drawerClick(position: Int) {
         when (position) {
-
             1 -> {
                 startActivity(Intent(this@MainActivity, FavActivity::class.java))
-
             }
             2 -> {
                 startActivity(Intent(this@MainActivity, AboutUs::class.java))
-
             }
             3 -> {
                 startActivity(Intent(this@MainActivity, ContactUs::class.java))
-
             }
-
         }
-
-
     }
 
     private fun showExitDialog() {
@@ -168,14 +161,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         val dialog = SpinnerDialog(this@MainActivity, cityArray, "شهر خود را انتخاب کنید :", "نمیخوام")
         dialog.bindOnSpinerListener(OnSpinerItemClick { name, index ->
             cityId = index
-
-
             initList()
             tv_city.text = name
         })
         dialog.showSpinerDialog()
     }
-
 
     private fun openProvDialog() {
         val x = resources.getStringArray(R.array.provArray)
@@ -198,8 +188,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
 
 
-
-    fun early_Mth() {
+    private fun commingSoon() {
         Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
     }
 
@@ -228,9 +217,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (VarableValues.first) {
-
             startActivity(Intent(this, SplashScreen::class.java))
-        }else{
+        } else {
             startActivity(Intent(this, AppIntro::class.java))
         }
 
@@ -255,8 +243,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
 
 
-
-
     override fun onStart() {
         super.onStart()
         registerReceiver(Receiver, IntentFilter(getString(R.string.reciver)))
@@ -267,17 +253,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         if (play) {
             play = false
             t.cancel()
-
         } else {
             play = true
             autoScrollSlide()
-
         }
     }
 
     private fun startReceive() {
         if (Receiver == null) {
-
             Receiver = object : BroadcastReceiver() {
                 override fun onReceive(context: Context, intent: Intent) {
                     if (intent.getAction().equals(getString(R.string.reciver))) {
@@ -294,10 +277,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     private fun initList() {
         if (Utils.isNetworkAvailable(this@MainActivity)) {
-
             t.cancel()
             serverStatus?.IsOkServer()
-
         } else {
             showNetErrLayout()
             Toast.makeText(this, "به اینترنت متصل نیستید", Toast.LENGTH_SHORT).show()
@@ -321,9 +302,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
                 realm.executeTransactionAsync { db: Realm? ->
                     db?.where(KotlinServicesModel::class.java)?.findAll()?.deleteAllFromRealm()
                     db?.copyToRealm(list!!)
-
                 }
             }
+
             override fun onFailure(call: Call<List<KotlinServicesModel>>?, t: Throwable?) {
                 Toast.makeText(this@MainActivity, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
             }
@@ -343,14 +324,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     private fun autoScrollSlide() {
         val handler = Handler()
-
         t = Timer()
-
         t.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 handler.post {
-
-
                     if (forward) {
                         rv_main_slider.smoothScrollToPosition(n++)
                     } else {
@@ -364,27 +341,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
                     }
                     if (n == 0) {
                         forward = true
-
                     }
-
-
                 }
-
             }
-
-
         }, 1, 4000)
-
-
     }
 
     private fun slider(list: ArrayList<String>) {
-
         rv_main_slider.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
         rv_main_slider.adapter = SliderAdapter(this@MainActivity, list)
         list_indicator_m.attachToRecyclerView(rv_main_slider)
         autoScrollSlide()
-
     }
 
     private fun sliderUrls() {
@@ -393,15 +360,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
             override fun onResponse(call: Call<List<KotlinSlideMainModel>>?, response: Response<List<KotlinSlideMainModel>>?) {
                 val list = response?.body()
-
                 val urls = ArrayList<String>()
-
                 list?.get(0)!!.slideList?.forEach { i ->
                     urls.add(i.fileUrl!!)
                 }
-
                 slider(urls)
-
             }
 
             override fun onFailure(call: Call<List<KotlinSlideMainModel>>?, t: Throwable?) {
@@ -465,20 +428,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
                 realm.executeTransactionAsync { db: Realm? ->
                     db?.where(KotlinGroupModel::class.java)?.findAll()?.deleteAllFromRealm()
                     db?.copyToRealm(list!!)
-
                     /*val r = db?.where(KotlinGroupModel::class.java)?.findAll()
                     r?.forEach { model: KotlinGroupModel? ->
                         Log.e("GM", "${model?.name}:${model?.groupId}")
                     }*/
                 }
-                var c = 0
-                list!!.forEach { item: KotlinGroupModel ->
-                    c += item.counter
-                }
-
-
+                val c = list!!.size
                 AllCentars.text = "$c مرکز "
-
                 loadAdapter(list)
                 hideProgressLayout()
                 hideNetErrLayout()
@@ -486,7 +442,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
             override fun onFailure(call: Call<List<KotlinGroupModel>>?, t: Throwable?) {
                 Toast.makeText(this@MainActivity, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
-
                 hideProgressLayout()
                 showNetErrLayout()
             }
@@ -497,9 +452,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     private fun loadAdapter(list: List<KotlinGroupModel>) {
         adapter = CategoryAdapter(list)
         rv_category.layoutManager = GridLayoutManager(this, 3)
+
         while (rv_category.itemDecorationCount > 0) {
             rv_category.removeItemDecorationAt(0)
         }
+
         val itemDecoration = GridItemDecoration(this, 6)
         rv_category.addItemDecoration(itemDecoration)
         rv_category.adapter = adapter
@@ -542,12 +499,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
 
         private fun setAnimation(viewToAnimate: View) {
-            var a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", 200f, 100f, 50f, 0f)
+            var a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", 200f, 0f)
             if (!scrollToBottom) {
-                a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", -200f, -100f, -50f, 0f)
+                a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", -200f, 0f)
             }
             val r = Random()
-            val i1 = r.nextInt(250 - 50) + 50
+            val i1 = r.nextInt(200) + 50
             a.duration = i1.toLong()
             a.start()
 
@@ -556,24 +513,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
         inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, TempListener {
             override fun IsOk() {
-
-
-                if (groupsList.get(adapterPosition).counter > 0) {
+                if (groupsList[adapterPosition].counter > 0) {
                     val i = Intent(this@MainActivity, OfficeActivity::class.java)
                     i.putExtra(StaticValues.CATEGORY, groupsList.get(adapterPosition).groupId)
                     i.putExtra(StaticValues.PROVID, provId)
                     i.putExtra(StaticValues.CITYID, cityId)
                     startActivity(i)
-
                 } else {
                     Toast.makeText(this@MainActivity, "پایگاه داده ژین در حال تکمیل شدن اطلاعات است ...", Toast.LENGTH_SHORT).show()
                 }
-
             }
 
             override fun IsNotOk() {
-
-
                 if (VarableValues.NetworkState) {
                     startActivity(Intent(this@MainActivity, ServerStatusActivity::class.java))
                     finish()
@@ -585,13 +536,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
             override fun onClick(v: View?) {
                 if (Utils.isNetworkAvailable(this@MainActivity)) {
-                    ss?.IsOkServer()
-
+                    ss.IsOkServer()
                 } else {
                     showNetErrLayout()
                     Toast.makeText(this@MainActivity, "به اینترنت متصل نیستید", Toast.LENGTH_SHORT).show()
                 }
-
             }
 
             val imageView: AppCompatImageView = itemView.findViewById(R.id.iv_mainCategoryImage)
@@ -613,7 +562,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             closeDrawerLayout()
         } else {
             showExitDialog()
-            unregisterReceiver(Receiver);
+            unregisterReceiver(Receiver)
         }
     }
 

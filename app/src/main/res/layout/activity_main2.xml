@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/back">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/abp_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:elevation="0dp">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="90dp"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
+
+                <com.github.florent37.arclayout.ArcLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    app:arc_cropDirection="cropOutside"
+                    app:arc_height="20dp"
+                    app:arc_position="bottom"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.65">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorPrimaryDark" />
+
+                </com.github.florent37.arclayout.ArcLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_mainSlider"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="44dp" />
+
+                <myjin.pro.ahoora.myjin.customClasses.CustomCardTab
+                    android:id="@+id/tbl_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginTop="194dp"
+                    app:tabIndicatorColor="@color/back1"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabPaddingEnd="-1dp"
+                    app:tabPaddingStart="-1dp" />
+
+                <RelativeLayout
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="@color/colorPrimaryDark"
+                    app:layout_collapseMode="pin">
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/iv_menu"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="4dp"
+                        android:padding="11dp"
+                        android:src="@drawable/ic_menu"
+                        app:tint="@color/white" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/iv_menu"
+                        android:paddingEnd="16dp"
+                        android:paddingStart="8dp"
+                        android:text="@string/myJin"
+                        android:textColor="@color/white"
+                        android:textSize="17sp"
+                        android:textStyle="bold|italic"
+                        app:fontFamily="@font/yekan"
+                        tools:ignore="RelativeOverlap" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/iv_locationArrrow"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:rotation="180"
+                        android:src="@drawable/ic_up_arrow" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/iv_locationArrrow"
+                        android:gravity="center"
+                        android:padding="4dp"
+                        android:text="در تهران"
+                        android:textColor="@color/white"
+                        app:fontFamily="@font/yekan"
+                        tools:ignore="RelativeOverlap" />
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/AllCentars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/counter"
+                        android:padding="3dp"
+                        android:text="@string/zero_center_count"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        app:fontFamily="@font/yekan" />
+
+                </RelativeLayout>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_mainContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <View
+            android:id="@+id/view_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@drawable/gradient"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator
+            android:id="@+id/ipi_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            app:dotColor="@color/title"
+            app:dotCount="3"
+            app:dotRadius="3dp"
+            app:dotSeparation="5dp"
+            app:selectedDotColor="@color/colorPrimaryDark"
+            app:selectedDotRadius="4dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/icon_search_white"
+            app:backgroundTint="@color/niceBlue"
+            app:fabSize="normal" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/white" />
+
+</android.support.v4.widget.DrawerLayout>

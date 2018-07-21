@@ -1,7 +1,7 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import kotlinx.android.synthetic.main.activity_services.*
@@ -10,11 +10,11 @@ import myjin.pro.ahoora.myjin.adapters.ServicesAdapter
 
 class ServicesActivity : AppCompatActivity(), View.OnClickListener {
 
-    var groupId=1
+    var groupId = 1
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.iv_goback->onBackPressed()
+        when (v?.id) {
+            R.id.iv_goback -> onBackPressed()
         }
 
     }
@@ -23,8 +23,8 @@ class ServicesActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_services)
         if (intent != null) {
-            tv_ServicesTitle.text=intent.getStringExtra("ServiceTitle")
-            groupId=intent.getIntExtra("groupId",1)
+            tv_ServicesTitle.text = intent.getStringExtra("ServiceTitle")
+            groupId = intent.getIntExtra("groupId", 1)
         }
         onClick()
         getServicesTitle()
@@ -34,8 +34,8 @@ class ServicesActivity : AppCompatActivity(), View.OnClickListener {
         iv_goback.setOnClickListener(this)
     }
 
-    private fun getServicesTitle(){
+    private fun getServicesTitle() {
         rv_services.layoutManager = LinearLayoutManager(this@ServicesActivity, LinearLayoutManager.VERTICAL, false)
-        rv_services.adapter =ServicesAdapter(this@ServicesActivity,groupId)
+        rv_services.adapter = ServicesAdapter(this@ServicesActivity, groupId)
     }
 }

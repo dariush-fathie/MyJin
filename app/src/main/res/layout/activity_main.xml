@@ -7,19 +7,16 @@
     android:background="@color/back">
 
     <RelativeLayout
-
         android:id="@+id/rl_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
-
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:background="@color/green"
             app:layout_collapseMode="pin">
-
             <RelativeLayout
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -44,7 +41,6 @@
             </RelativeLayout>
 
             <android.support.v7.widget.AppCompatTextView
-
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -241,7 +237,6 @@
             android:src="@drawable/icon_search_white"
             app:backgroundTint="@color/colorAccent"
             app:fabSize="normal" />
-
 
     </RelativeLayout>
 
