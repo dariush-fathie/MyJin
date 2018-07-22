@@ -26,6 +26,7 @@ import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.StaticValues
 
 class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
     private val context = ctx
     private val ids = idList
     private var realm: Realm = Realm.getDefaultInstance()
@@ -34,14 +35,14 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
 
     private fun getModelByCenterId(centerId: Int): KotlinItemModel {
         var item = KotlinItemModel()
-        realm.executeTransaction({ db ->
+        realm.executeTransaction { db ->
             item = db.where(KotlinItemModel::class.java)
                     .equalTo("centerId", centerId)
                     .findFirst()!!
             g_name = db.where(KotlinGroupModel::class.java).equalTo("groupId", item.groupId).findFirst()?.name!!
             g_url = db.where(KotlinGroupModel::class.java).equalTo("groupId", item.groupId).findFirst()?.g_url!!
 
-        })
+        }
         return item
     }
 
@@ -49,7 +50,7 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
 
         val i = Intent()
         i.action = "myjin.pro.ahoora.myjin"
-        context?.sendBroadcast(i)
+        context.sendBroadcast(i)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -61,34 +62,32 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
         holder as ItemHolder
         val item = getModelByCenterId(ids!![position])
 
-
         try {
             holder.title.text = "${item?.firstName} ${item?.lastName}"
 
             var str = ""
-            if (!item.gen.equals("0")!!) {
+            str = if (!item.gen.equals("0")) {
                 if (item.groupId == 1) {
-                    str = item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
+                    item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
                 } else {
-                    str = g_name
+                    g_name
                 }
-
             } else {
-                str = g_name
+                g_name
             }
 
             holder.subTitle.text = str
             holder.tv_addr.text = item.addressList!![0]?.locTitle
 
 
-            var drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
+            val drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
             var url = ""
 
             if (item.logoImg.equals("")) {
-                holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor),android.graphics.PorterDuff.Mode.SRC_IN)
+                holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
 
                 if (item.gen?.equals("0")!!) {
-                     url = g_url
+                    url = g_url
                 } else if (item.gen?.equals("1")!!) {
                     url = context.getString(R.string.ic_doctor_f)
                 } else if (item.gen?.equals("2")!!) {
@@ -125,15 +124,14 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
     }
 
     fun deleteItem(centerId: Int, position: Int) {
-        realm.executeTransaction({ db ->
+        realm.executeTransaction { db ->
             val item = db.where(KotlinItemModel::class.java)
                     .equalTo("centerId", centerId)
                     .findFirst()!!
             item.saved = false
-        })
+        }
 
         ids?.remove(centerId)
-
         notifyItemRemoved(position)
 
         if (ids?.size == 0) {
@@ -157,22 +155,18 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.rl_item -> {
-
                     getG_name(ids?.get(adapterPosition)!!)
-
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as FavActivity), image, "transition_name")
-
                         val i = Intent(context, DetailActivity::class.java)
                         i.putExtra(StaticValues.MODEL, 1)
-                        i.putExtra(StaticValues.ID, ids?.get(adapterPosition))
+                        i.putExtra(StaticValues.ID, ids.get(adapterPosition))
                         i.putExtra("g_url", g_url)
-                        context.startActivity(i,options.toBundle())
-
-                    }else{
+                        context.startActivity(i, options.toBundle())
+                    } else {
                         val i = Intent(context, DetailActivity::class.java)
                         i.putExtra(StaticValues.MODEL, 1)
-                        i.putExtra(StaticValues.ID, ids?.get(adapterPosition))
+                        i.putExtra(StaticValues.ID, ids.get(adapterPosition))
                         i.putExtra("g_url", g_url)
                         context.startActivity(i)
                     }
@@ -190,6 +184,7 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
         val item: RelativeLayout = itemView.findViewById(R.id.rl_item)
         val ivDelete: AppCompatImageView = itemView.findViewById(R.id.iv_starLike)
         val image: CircleImageView = itemView.findViewById(R.id.iv_itemImage)
+
         init {
             item.setOnClickListener(this)
             ivDelete.setImageResource(R.drawable.ic_trash)

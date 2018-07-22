@@ -31,7 +31,7 @@
     <color name="red3">#ff0505</color>
 
     <color name="semiTransparent">#d63d3a56</color>
-    <color name="blackTransparent">#a7797979</color>
+    <color name="blackTransparent">#48000000</color>
     <color name="orange1">#fc7753</color>
 
     <color name="yellow">#dbd56e</color>
