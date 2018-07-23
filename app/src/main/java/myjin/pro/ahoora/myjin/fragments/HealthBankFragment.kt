@@ -20,6 +20,7 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.activitys.ServerStatusActivity
+import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
 import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
 import myjin.pro.ahoora.myjin.interfaces.TempListener
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
@@ -33,7 +34,14 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 
-class HealthBankFragment : Fragment() {
+class HealthBankFragment : Fragment(), View.OnClickListener {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.tv_location -> {
+                openProvAndCityDialog()
+            }
+        }
+    }
 
     private var provId = 19
     private var cityId = 0
@@ -65,6 +73,10 @@ class HealthBankFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (activity as MainActivity2).tvLocation.setOnClickListener(this)
+
+        // todo get pro and city from sharedPrefs
+        (activity as MainActivity2).tvLocation.text = "کردستان،همه شهرها"
 
         checkNetState()
     }
@@ -79,6 +91,7 @@ class HealthBankFragment : Fragment() {
 
     private fun getGroupCount() {
         showCPV()
+        (activity as MainActivity2).hideSearchFab()
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
         val response = apiInterface.getGroupCount(provId, cityId)
         response.enqueue(object : Callback<List<KotlinGroupModel>> {
@@ -266,4 +279,20 @@ class HealthBankFragment : Fragment() {
     }
 
 
+    private fun openProvAndCityDialog() {
+        val dialog = SpinnerDialog(activity, "نام شهر یا استان را جست و جو کنید ...", "نمیخوام")
+        dialog.bindOnSpinerListener { name, provId, cityId ->
+            //initList()
+            if (provId != 19) {
+                Toast.makeText(activity, "این برنامه در حال حاضر تنها استان کردستان را پوشش می دهد ..", Toast.LENGTH_LONG).show()
+            } else {
+                (activity as MainActivity2).tvLocation.text = name
+                this.provId = provId
+                this.cityId = cityId
+                loadFlag = false
+                getGroupCount()
+            }
+        }
+        dialog.showSpinerDialog()
+    }
 }

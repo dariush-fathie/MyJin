@@ -5,6 +5,7 @@ import java.util.List;
 import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel;
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel;
 import myjin.pro.ahoora.myjin.models.KotlinItemModel;
+import myjin.pro.ahoora.myjin.models.KotlinProvCityModel;
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel;
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel;
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel;
@@ -45,5 +46,8 @@ public interface ApiInterface {
 
     @GET("getServicesList/")
     Call<List<KotlinServicesModel>> getServicesList();
+
+    @GET("getProvinceAndCitiesList/")
+    Call<List<KotlinProvCityModel>> getProvinceAndCitiesList();
 
 }

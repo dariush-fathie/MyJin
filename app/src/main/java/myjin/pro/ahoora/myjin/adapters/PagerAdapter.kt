@@ -25,7 +25,7 @@ class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         return when (position) {
             0 -> "بانک سلامت"
             1 -> "پیام ها"
-            else -> "ذخیره شده ها"
+            else -> "نشان شده ها"
         }
     }
 }

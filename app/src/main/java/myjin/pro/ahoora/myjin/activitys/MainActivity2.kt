@@ -2,26 +2,31 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.AppBarLayout
-import android.support.design.widget.BaseTransientBottomBar
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import kotlinx.android.synthetic.main.activity_main2.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
+import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
+import myjin.pro.ahoora.myjin.models.KotlinServicesModel
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
@@ -53,6 +58,10 @@ class MainActivity2 : AppCompatActivity(),
     private val bankPosition = 0
     private var fabH = 0f
     private var isSearchVisible = true
+    private var appBarOffset = 0
+    private var currentPage = 0
+
+    lateinit var tvLocation: AppCompatTextView
 
     override fun onStart() {
         super.onStart()
@@ -69,16 +78,25 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
-        if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
-            view_gradient.visibility = View.VISIBLE
-        } else {
-            view_gradient.visibility = View.GONE
+        setVisibleShadow(appBarLayout, verticalOffset)
+        appBarOffset = verticalOffset
+    }
+
+    private fun setVisibleShadow(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+        if (currentPage == 0) {
+            if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
+                view_gradient.visibility = View.VISIBLE
+            } else {
+                view_gradient.visibility = View.GONE
+            }
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+
+        tvLocation = tv_location
 
         fabH = Converter.pxFromDp(this, 16f + 50f + 20)
 
@@ -113,6 +131,8 @@ class MainActivity2 : AppCompatActivity(),
     private fun checkNetState() {
         if (true) {
             getSlides()
+            getServicesList()
+            getProvinceAndCitiesList()
             //todo : get services and others ...
         } else {
             showNetErrSnack()
@@ -124,6 +144,12 @@ class MainActivity2 : AppCompatActivity(),
     fun tryAgainEvent(e: TryAgainEvent) {
         if (!sliderLoadFlag) {
             getSlides()
+        }
+        if (!servicesLoadFlag) {
+            getServicesList()
+        }
+        if (!provsLoadFlag) {
+            getProvinceAndCitiesList()
         }
         // todo : get services
     }
@@ -141,6 +167,7 @@ class MainActivity2 : AppCompatActivity(),
 
     private fun setListener() {
         fab_search.setOnClickListener(this)
+        tv_location.setOnClickListener(this)
     }
 
     override fun onPageScrollStateChanged(state: Int) {
@@ -164,12 +191,15 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     override fun onPageSelected(position: Int) {
+        currentPage = position
         if (position != bankPosition) {
+            view_gradient.visibility = View.GONE
             hideLocation()
             if (isSearchVisible) {
                 hideSearchFab()
             }
         } else {
+            setVisibleShadow(abp_main, appBarOffset)
             showLocation()
             if (!isSearchVisible) {
                 showSearchFab()
@@ -237,7 +267,7 @@ class MainActivity2 : AppCompatActivity(),
         isSearchVisible = true
     }
 
-    private fun hideSearchFab() {
+    fun hideSearchFab() {
         val animSet = AnimatorSet()
         val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 1f, 0f)
         val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", 0f, fabH)
@@ -251,6 +281,8 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private var sliderLoadFlag = false
+    private var servicesLoadFlag = false
+    private var provsLoadFlag = false
 
     private fun initSlider(list: ArrayList<String>) {
         Log.e("sdfdsfds", "sdfsfsfsf")
@@ -292,6 +324,27 @@ class MainActivity2 : AppCompatActivity(),
         })
     }
 
+    private fun getServicesList() {
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        val response = apiInterface.servicesList
+        response.enqueue(object : Callback<List<KotlinServicesModel>> {
+            override fun onResponse(call: Call<List<KotlinServicesModel>>?, response: Response<List<KotlinServicesModel>>?) {
+                val list: List<KotlinServicesModel>? = response?.body()
+                val realm = Realm.getDefaultInstance()
+                realm.executeTransactionAsync { db: Realm? ->
+                    db?.where(KotlinServicesModel::class.java)?.findAll()?.deleteAllFromRealm()
+                    db?.copyToRealm(list!!)
+                }
+                servicesLoadFlag = true
+            }
+
+            override fun onFailure(call: Call<List<KotlinServicesModel>>?, t: Throwable?) {
+                Toast.makeText(this@MainActivity2, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
+                servicesLoadFlag = false
+                showNetErrSnack()
+            }
+        })
+    }
 
     private fun showSliderCPV() {
         cpv_slideLoad.visibility = View.VISIBLE
@@ -299,6 +352,44 @@ class MainActivity2 : AppCompatActivity(),
 
     private fun hideSliderCPV() {
         cpv_slideLoad.visibility = View.GONE
+    }
+
+
+    private fun showExitDialog() {
+        val alertDialog = AlertDialog.Builder(this)
+        alertDialog.setMessage("خارج می شوید ؟")
+                .setNegativeButton("نه", DialogInterface.OnClickListener { dialog, _ ->
+                    dialog.dismiss()
+                })
+                .setPositiveButton("بله", DialogInterface.OnClickListener { _, _ ->
+                    finish()
+                })
+        alertDialog.show()
+    }
+
+    // todo put this in splash
+    private fun getProvinceAndCitiesList() {
+        tv_location.visibility = View.GONE
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        val response = apiInterface.provinceAndCitiesList
+        response.enqueue(object : Callback<List<KotlinProvCityModel>> {
+            override fun onResponse(call: Call<List<KotlinProvCityModel>>?, response: Response<List<KotlinProvCityModel>>?) {
+                val list: List<KotlinProvCityModel>? = response?.body()
+                val realm = Realm.getDefaultInstance()
+                realm.executeTransactionAsync { db: Realm? ->
+                    db?.where(KotlinProvCityModel::class.java)?.findAll()?.deleteAllFromRealm()
+                    db?.copyToRealm(list!!)
+                }
+                provsLoadFlag = true
+                tv_location.visibility = View.VISIBLE
+            }
+
+            override fun onFailure(call: Call<List<KotlinProvCityModel>>?, t: Throwable?) {
+                Toast.makeText(this@MainActivity2, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
+                provsLoadFlag = false
+                showNetErrSnack()
+            }
+        })
     }
 
 }

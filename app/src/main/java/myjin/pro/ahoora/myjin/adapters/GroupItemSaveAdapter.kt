@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Build
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -20,7 +21,6 @@ import de.hdodenhof.circleimageview.CircleImageView
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailActivity
-import myjin.pro.ahoora.myjin.activitys.FavActivity
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.StaticValues
@@ -157,7 +157,7 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
                 R.id.rl_item -> {
                     getG_name(ids?.get(adapterPosition)!!)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as FavActivity), image, "transition_name")
+                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as AppCompatActivity), image, "transition_name")
                         val i = Intent(context, DetailActivity::class.java)
                         i.putExtra(StaticValues.MODEL, 1)
                         i.putExtra(StaticValues.ID, ids.get(adapterPosition))

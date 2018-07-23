@@ -2,44 +2,66 @@ package myjin.pro.ahoora.myjin.customClasses;
 
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
 import myjin.pro.ahoora.myjin.R;
+import myjin.pro.ahoora.myjin.models.KotlinProvCityModel;
+
 public class SpinnerDialog {
-    private ArrayList<String> items;
-    private   Activity context;
+    private ArrayList<KotlinProvCityModel> items;
+    private Activity context;
     private String dTitle;
-    private String closeTitle ;
+    private String closeTitle;
     private OnSpinerItemClick onSpinerItemClick;
     private AlertDialog alertDialog;
-    private int pos;
+    private int provId;
+    private int cityId;
     private int style;
+    private Realm realm;
+    private String name ;
 
-
-
-    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle, String closeTitle) {
-        this.items = items;
+    public SpinnerDialog(Activity activity, String dialogTitle, String closeTitle) {
         this.context = activity;
         this.dTitle = dialogTitle;
         this.closeTitle = closeTitle;
+        items = new ArrayList<>();
     }
-
 
 
     public void bindOnSpinerListener(OnSpinerItemClick onSpinerItemClick1) {
         this.onSpinerItemClick = onSpinerItemClick1;
+    }
+
+    public void fillBuffer(String t) {
+        realm = Realm.getDefaultInstance();
+
+        realm.beginTransaction();
+
+        RealmResults<KotlinProvCityModel> res = realm.where(KotlinProvCityModel.class)
+                .contains("nameC",t).or().contains("nameP",t).findAll();
+
+
+        realm.commitTransaction();
+
+        items.clear();
+        for (KotlinProvCityModel x : res) {
+            items.add(x);
+        }
     }
 
     public void showSpinerDialog() {
@@ -49,39 +71,43 @@ public class SpinnerDialog {
         AppCompatTextView title = v.findViewById(R.id.spinerTitle);
         rippleViewClose.setText(this.closeTitle);
         title.setText(this.dTitle);
-        ListView listView =v.findViewById(R.id.list);
+        final RecyclerView listView = v.findViewById(R.id.list);
         final AppCompatEditText searchBox = v.findViewById(R.id.searchBox);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.context, R.layout.items_view, this.items);
+
+        String t = searchBox.getText().toString();
+        fillBuffer(t);
+
+        final LinearLayoutManager layoutmanager = new LinearLayoutManager(this.context);
+        listView.setLayoutManager(layoutmanager);
+        final AdapterSpiner adapter = new AdapterSpiner();
         listView.setAdapter(adapter);
         adb.setView(v);
         this.alertDialog = adb.create();
         this.alertDialog.getWindow().getAttributes().windowAnimations = this.style;
         this.alertDialog.setCancelable(true);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView t = view.findViewById(R.id.text1);
 
-                for (int j = 0; j < SpinnerDialog.this.items.size(); ++j) {
-                    if (t.getText().toString().equalsIgnoreCase((SpinnerDialog.this.items.get(j)))) {
-                        SpinnerDialog.this.pos = j;
-                    }
-                }
-
-                SpinnerDialog.this.onSpinerItemClick.onClick(t.getText().toString(), SpinnerDialog.this.pos);
-                SpinnerDialog.this.alertDialog.dismiss();
-            }
-        });
         searchBox.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
             }
 
-            public void afterTextChanged(Editable editable) {
-                adapter.getFilter().filter(searchBox.getText().toString());
+            @Override
+            public void afterTextChanged(Editable s) {
+                String t = searchBox.getText().toString();
+                fillBuffer(t);
+
+                listView.setAdapter(null);
+                final AdapterSpiner adapter = new AdapterSpiner();
+                listView.setAdapter(adapter);
             }
         });
+
         rippleViewClose.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 SpinnerDialog.this.alertDialog.dismiss();
@@ -89,5 +115,51 @@ public class SpinnerDialog {
         });
         this.alertDialog.show();
     }
+
+    public class AdapterSpiner extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+
+        @NonNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view;
+            view = LayoutInflater.from(context).inflate(R.layout.items_view, parent, false);
+            return new ViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+            SpinnerDialog.this.name=items.get(position).getNameP()+" ، "+items.get(position).getNameC();
+            ((ViewHolder) holder).text1.setText(SpinnerDialog.this.name);
+        }
+
+        @Override
+        public int getItemCount() {
+            return items.size();
+        }
+
+        private class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+            TextView text1;
+
+            ViewHolder(View itemView) {
+                super(itemView);
+                text1 = itemView.findViewById(R.id.text1);
+                itemView.setOnClickListener(this);
+            }
+
+            @Override
+            public void onClick(View v) {
+
+                SpinnerDialog.this.provId = items.get(getAdapterPosition()).getProvId();
+                SpinnerDialog.this.cityId= items.get(getAdapterPosition()).getCityId();
+
+
+                SpinnerDialog.this.onSpinerItemClick.onClick(text1.getText().toString(), SpinnerDialog.this.provId,SpinnerDialog.this.cityId);
+                SpinnerDialog.this.alertDialog.dismiss();
+            }
+        }
+    }
 }
+
 

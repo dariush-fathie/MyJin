@@ -122,6 +122,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         }
     }
 
+    /*copied*/
     private fun showExitDialog() {
         closeDrawerLayout()
         val alertDialog = AlertDialog.Builder(this)
@@ -146,7 +147,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
 
     private fun openCityDialog() {
-        val cityArray = ArrayList<String>()
+        /*val cityArray = ArrayList<String>()
         cityArray.add("همه")
         cityArray.add("سنندج")
         cityArray.add("سقز")
@@ -164,7 +165,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             initList()
             tv_city.text = name
         })
-        dialog.showSpinerDialog()
+        dialog.showSpinerDialog()*/
     }
 
     private fun openProvDialog() {
@@ -175,7 +176,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             provArray.add(s)
         }
 
-        val dialog = SpinnerDialog(this@MainActivity, provArray, "استان خود را انتخاب کنید :", "نمیخوام")
+        /*val dialog = SpinnerDialog(this@MainActivity, provArray, "استان خود را انتخاب کنید :", "نمیخوام")
 
         dialog.bindOnSpinerListener { _, index ->
             //initList()
@@ -184,7 +185,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             }
             tv_prov.text = provArray.get(19)
         }
-        dialog.showSpinerDialog()
+        dialog.showSpinerDialog()*/
     }
 
     private fun cummingSoon() {
@@ -266,6 +267,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         }
     }
 
+    /*copied*/
     private fun search() {
         startActivity(Intent(this, SearchActivity::class.java))
     }
@@ -287,6 +289,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         getServicesList()
     }
 
+    /*copied*/
     private fun getServicesList() {
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
         val response = apiInterface.servicesList
@@ -341,6 +344,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         }, 1, 4000)
     }
 
+    /*copied*/
     private fun slider(list: ArrayList<String>) {
         rv_main_slider.layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
         rv_main_slider.adapter = SliderAdapter(this@MainActivity, list)
@@ -348,7 +352,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         autoScrollSlide()
     }
 
-
+    /*copied*/
     private fun sliderUrls() {
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
         apiInterface.sliderMain(1).enqueue(object : Callback<List<KotlinSlideMainModel>> {
@@ -369,6 +373,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
         })
     }
+
 
     private fun showProgressLayout() {
         ll_progressLayout.visibility = View.VISIBLE
@@ -412,6 +417,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         })
     }
 
+    /*copied*/
     private fun getGroupCount() {
         showProgressLayout()
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
@@ -443,6 +449,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         })
     }
 
+    /*copied*/
     private fun loadAdapter(list: List<KotlinGroupModel>) {
         adapter = CategoryAdapter(list)
         rv_category.layoutManager = GridLayoutManager(this, 3)
@@ -464,6 +471,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         rv_category.adapter = null
     }
 
+    /*copied*/
     inner class CategoryAdapter(gList: List<KotlinGroupModel>) : RecyclerView.Adapter<CategoryAdapter.ItemHolder>() {
 
         var groupsList: List<KotlinGroupModel> = gList
