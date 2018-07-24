@@ -30,6 +30,7 @@ import myjin.pro.ahoora.myjin.models.KotlinServicesModel
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
+import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.Colors
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
@@ -54,7 +55,6 @@ class MainActivity2 : AppCompatActivity(),
         }
     }
 
-
     private val bankPosition = 0
     private var fabH = 0f
     private var isSearchVisible = true
@@ -62,6 +62,11 @@ class MainActivity2 : AppCompatActivity(),
     private var currentPage = 0
 
     lateinit var tvLocation: AppCompatTextView
+
+    override fun onResume() {
+        super.onResume()
+        EventBus.getDefault().post(VisibilityEvent(currentPage))
+    }
 
     override fun onStart() {
         super.onStart()
@@ -205,7 +210,9 @@ class MainActivity2 : AppCompatActivity(),
                 showSearchFab()
             }
         }
-        EventBus.getDefault().post(0)
+
+        EventBus.getDefault().post(VisibilityEvent(position))
+
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {

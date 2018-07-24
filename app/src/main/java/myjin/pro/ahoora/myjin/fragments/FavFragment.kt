@@ -22,11 +22,25 @@ import myjin.pro.ahoora.myjin.adapters.GroupItemSaveAdapter
 import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
+import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
+
     val tabListId = ArrayList<Int>()
     var Receiver: BroadcastReceiver? = null
+
+    private var firstLoad = false
+    private var updated = false
+
+    @Subscribe
+    fun onBecomeVisible(e: VisibilityEvent) {
+        if (e.position == 2) {
+            Log.e(MessagesFragment::class.java.simpleName, "${e.position}")
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_fav, container, false)
@@ -63,6 +77,8 @@ class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
         tabListId.clear()
         if (result.size > 0) {
+            v1.visibility = View.VISIBLE
+            ctb.visibility = View.VISIBLE
             val drawable = ContextCompat.getDrawable(activity as Context, R.drawable.ic_all)
             drawable?.setColorFilter(ContextCompat.getColor(activity as Context, R.color.green), PorterDuff.Mode.SRC_IN)
             ctb.addTab(ctb.newTab().setText("همه").setIcon(drawable))
@@ -73,6 +89,8 @@ class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
             }
 
         } else {
+            v1.visibility = View.GONE
+            ctb.visibility = View.GONE
             tv_empty.visibility = View.VISIBLE
         }
 
@@ -81,7 +99,6 @@ class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
         }
         ctb.addOnTabSelectedListener(this)
     }
-
 
     private fun getTitleFromDb(groupId: Int): String {
         val realm = Realm.getDefaultInstance()
@@ -111,7 +128,6 @@ class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
             filter(tabListId.get(pos!!))
         }
     }
-
 
     fun filter(id: Int) {
         val realm = Realm.getDefaultInstance()
@@ -146,12 +162,14 @@ class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     override fun onStart() {
         super.onStart()
+        EventBus.getDefault().register(this)
         (activity as Context).registerReceiver(Receiver, IntentFilter("myjin.pro.ahoora.myjin"))
     }
 
     override fun onStop() {
-        super.onStop()
         (activity as Context).unregisterReceiver(Receiver)
+        EventBus.getDefault().unregister(this)
+        super.onStop()
     }
 
     private fun startReceive() {
@@ -164,6 +182,5 @@ class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
             }
         }
     }
-
 
 }

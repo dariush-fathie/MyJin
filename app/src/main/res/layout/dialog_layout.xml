@@ -9,6 +9,7 @@
         android:id="@+id/spinerTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/yekan"
         android:gravity="center_vertical|start"
         android:paddingBottom="8dp"
         android:paddingEnd="16dp"
@@ -17,8 +18,7 @@
         android:text="شهر خود را انتخاب کنید"
         android:textColor="@color/title"
         android:textSize="17sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/yekan"/>
+        android:textStyle="bold" />
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_se"
@@ -49,12 +49,13 @@
                 android:background="@null"
                 android:focusable="true"
                 android:gravity="start|center"
-                android:hint="بیابید ..."
+                android:hint="شهر یا استان را جست و جو کنید ..."
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:paddingEnd="0dp"
                 android:paddingStart="20dp"
                 android:textColorHint="@color/tabTextDef"
+                android:textSize="14sp"
                 app:fontFamily="@font/yekan" />
 
             <android.support.v7.widget.AppCompatImageView
@@ -67,13 +68,11 @@
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_below="@id/cv_se"
-
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:paddingTop="8dp"

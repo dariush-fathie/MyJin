@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.*
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ import myjin.pro.ahoora.myjin.interfaces.TempListener
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
+import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -35,6 +37,7 @@ import retrofit2.Response
 import java.util.*
 
 class HealthBankFragment : Fragment(), View.OnClickListener {
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_location -> {
@@ -47,12 +50,20 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     private var cityId = 0
     private var loadFlag = false
     private var scrollToBottom = true
+
     private var scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
             scrollToBottom = dy > 0
         }
     }
 
+
+    @Subscribe
+    fun onBecomeVisible(e: VisibilityEvent){
+        if (e.position == 0) {
+            Log.e(MessagesFragment::class.java.simpleName , "${e.position}")
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_health_bank, container, false)
@@ -280,7 +291,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
 
     private fun openProvAndCityDialog() {
-        val dialog = SpinnerDialog(activity, "نام شهر یا استان را جست و جو کنید ...", "نمیخوام")
+        val dialog = SpinnerDialog(activity, "ژین من در سایر شهر", "نمیخوام")
         dialog.bindOnSpinerListener { name, provId, cityId ->
             //initList()
             if (provId != 19) {
