@@ -4,20 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <myjin.pro.ahoora.myjin.customClasses.CustomTabLayout
+        android:id="@+id/ctb_messages"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabGravity="center"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorAccent" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/srl_messages"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctb_messages">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_messages"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <View
+        android:id="@+id/v1"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@drawable/gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctb_messages" />
 
 </android.support.constraint.ConstraintLayout>

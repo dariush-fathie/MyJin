@@ -10,8 +10,8 @@ import myjin.pro.ahoora.myjin.models.KotlinProvCityModel;
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel;
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel;
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel;
-import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.models.SimpleResponseModel;
+import myjin.pro.ahoora.myjin.models.TempModel;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -19,10 +19,10 @@ import retrofit2.http.Path;
 public interface ApiInterface {
 
     @GET("getMainGroupList/{provId}/{cityId}")
-    Call<List<KotlinGroupModel>> getGroupCount(@Path("provId") int provId,@Path("cityId") int cityId);
+    Call<List<KotlinGroupModel>> getGroupCount(@Path("provId") int provId, @Path("cityId") int cityId);
 
     @GET("getItems/{gId}/{provId}/{cityId}")
-    Call<List<KotlinItemModel>> getItems(@Path("gId") int groupId,@Path("provId") int provId,@Path("cityId") int cityId);
+    Call<List<KotlinItemModel>> getItems(@Path("gId") int groupId, @Path("provId") int provId, @Path("cityId") int cityId);
 
     @GET("getSpList/")
     Call<List<KotlinSpecialityModel>> getSpList();
@@ -48,10 +48,10 @@ public interface ApiInterface {
     @GET("getServicesList/")
     Call<List<KotlinServicesModel>> getServicesList();
 
-    @GET("getProvinceAndCitiesList/")
-    Call<List<KotlinProvCityModel>> getProvinceAndCitiesList();
+    @GET("getProvinceAndCitiesList/{cityCount}")
+    Call<List<KotlinProvCityModel>> getProvinceAndCitiesList(@Path("cityCount") int cityCount);
 
-    @GET("getMessagesList/")
+    @GET("getMessagesList")
     Call<List<KotlinMessagesModel>> getMessages();
 
 }

@@ -310,7 +310,6 @@ class MainActivity2 : AppCompatActivity(),
         apiInterface.sliderMain(1).enqueue(object : Callback<List<KotlinSlideMainModel>> {
 
             override fun onResponse(call: Call<List<KotlinSlideMainModel>>?, response: Response<List<KotlinSlideMainModel>>?) {
-
                 response?.body() ?: onFailure(call, Throwable("null body"))
                 response?.body() ?: return
 
@@ -361,7 +360,6 @@ class MainActivity2 : AppCompatActivity(),
         cpv_slideLoad.visibility = View.GONE
     }
 
-
     private fun showExitDialog() {
         val alertDialog = AlertDialog.Builder(this)
         alertDialog.setMessage("خارج می شوید ؟")
@@ -377,16 +375,33 @@ class MainActivity2 : AppCompatActivity(),
     // todo put this in splash
     private fun getProvinceAndCitiesList() {
         tv_location.visibility = View.GONE
+
+        val realm = Realm.getDefaultInstance()
+        realm.beginTransaction()
+        val cityCount = realm.where(KotlinProvCityModel::class.java).findAll().size
+        realm.commitTransaction()
+
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-        val response = apiInterface.provinceAndCitiesList
+        val response = apiInterface.getProvinceAndCitiesList(cityCount)
         response.enqueue(object : Callback<List<KotlinProvCityModel>> {
             override fun onResponse(call: Call<List<KotlinProvCityModel>>?, response: Response<List<KotlinProvCityModel>>?) {
-                val list: List<KotlinProvCityModel>? = response?.body()
-                val realm = Realm.getDefaultInstance()
-                realm.executeTransactionAsync { db: Realm? ->
-                    db?.where(KotlinProvCityModel::class.java)?.findAll()?.deleteAllFromRealm()
-                    db?.copyToRealm(list!!)
+                response?.body() ?: onFailure(call, Throwable("null body"))
+                response?.body() ?: return
+
+                val list: List<KotlinProvCityModel>? = response.body()
+                if (list != null) {
+                    if (list.isNotEmpty()) {
+                        val realm1 = Realm.getDefaultInstance()
+                        realm1.executeTransactionAsync { db: Realm? ->
+                            db?.where(KotlinProvCityModel::class.java)?.findAll()?.deleteAllFromRealm()
+                            db?.copyToRealm(list)
+                        }
+                    }
+                } else {
+                    onFailure(call, Throwable("null city list"))
+                    return
                 }
+
                 provsLoadFlag = true
                 tv_location.visibility = View.VISIBLE
             }
