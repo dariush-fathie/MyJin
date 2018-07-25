@@ -51,7 +51,7 @@ public interface ApiInterface {
     @GET("getProvinceAndCitiesList/{cityCount}")
     Call<List<KotlinProvCityModel>> getProvinceAndCitiesList(@Path("cityCount") int cityCount);
 
-    @GET("getMessagesList")
+    @GET("getMessagesList/")
     Call<List<KotlinMessagesModel>> getMessages();
 
 }

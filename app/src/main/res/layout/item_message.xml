@@ -6,7 +6,7 @@
     android:background="@color/white">
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
+        android:id="@+id/iv_messageImage"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
@@ -21,7 +21,7 @@
         app:layout_constraintWidth_percent="0.3" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView4"
+        android:id="@+id/tv_messageTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -35,13 +35,13 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:fontFamily="@font/yekan"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+        app:layout_constraintEnd_toStartOf="@+id/iv_messageImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView7"
+        android:id="@+id/tv_messageShortDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -53,11 +53,12 @@
         android:textColor="@color/androidTextColor"
         android:textSize="13sp"
         app:fontFamily="@font/yekan"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+        app:layout_constraintEnd_toStartOf="@+id/iv_messageImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_messageTitle" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_messageDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -69,10 +70,12 @@
         android:textSize="12sp"
         app:fontFamily="@font/yekan"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
+        app:layout_constraintEnd_toStartOf="@+id/iv_messageImage"
+        app:layout_constraintTop_toBottomOf="@+id/tv_messageShortDesc"
+        app:layout_constraintVertical_bias="1" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_messageType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
