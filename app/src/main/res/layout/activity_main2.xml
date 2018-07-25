@@ -23,7 +23,7 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="90dp"
+                android:minHeight="44dp"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
 
                 <com.github.florent37.arclayout.ArcLayout
@@ -87,6 +87,7 @@
                         app:tint="@color/white" />
 
                     <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_mainTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

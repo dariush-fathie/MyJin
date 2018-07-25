@@ -85,6 +85,21 @@ class MainActivity2 : AppCompatActivity(),
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
         setVisibleShadow(appBarLayout, verticalOffset)
         appBarOffset = verticalOffset
+        if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
+            when (currentPage) {
+                0 -> {
+                    tv_mainTitle.text = "بانک سلامت"
+                }
+                1 -> {
+                    tv_mainTitle.text = "پیام ها"
+                }
+                2 -> {
+                    tv_mainTitle.text = "نشان شده ها"
+                }
+            }
+        } else {
+            tv_mainTitle.text = getString(R.string.myJin)
+        }
     }
 
     private fun setVisibleShadow(appBarLayout: AppBarLayout?, verticalOffset: Int) {
@@ -144,7 +159,6 @@ class MainActivity2 : AppCompatActivity(),
         }
     }
 
-
     @Subscribe
     fun tryAgainEvent(e: TryAgainEvent) {
         if (!sliderLoadFlag) {
@@ -158,7 +172,6 @@ class MainActivity2 : AppCompatActivity(),
         }
         // todo : get services
     }
-
 
     fun showNetErrSnack() {
         hideSliderCPV()
