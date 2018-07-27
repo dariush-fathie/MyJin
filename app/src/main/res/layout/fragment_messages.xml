@@ -14,21 +14,14 @@
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/colorAccent" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/srl_messages"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_messages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctb_messages">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_messages"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </android.support.v4.widget.SwipeRefreshLayout>
+        app:layout_constraintTop_toBottomOf="@+id/ctb_messages" />
 
     <View
         android:id="@+id/v1"
@@ -38,5 +31,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctb_messages" />
+
 
 </android.support.constraint.ConstraintLayout>

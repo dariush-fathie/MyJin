@@ -96,8 +96,8 @@
                         android:paddingStart="8dp"
                         android:text="@string/myJin"
                         android:textColor="@color/white"
-                        android:textSize="17sp"
-                        android:textStyle="bold|italic"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
                         app:fontFamily="@font/yekan"
                         tools:ignore="RelativeOverlap" />
 

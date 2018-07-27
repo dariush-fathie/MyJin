@@ -24,12 +24,9 @@ public class ServerStatus {
         this.tempListener = tempListener;
         this.mContaxt = context;
 
-
     }
 
     public void IsOkServer() {
-
-
         try {
             KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class).IsOkServer().enqueue(new Callback<TempModel>() {
                 @Override
@@ -44,12 +41,9 @@ public class ServerStatus {
                         if (v.equals("ok")) {
                             tempListener.IsOk();
                         } else {
-
                             tempListener.IsNotOk();
-
                         }
                     } catch (Exception e) {
-
                         VarableValues.INSTANCE.setNetworkState(true);
                         tempListener.IsNotOk();
                     }
@@ -64,7 +58,6 @@ public class ServerStatus {
             });
 
         } catch (Exception e) {
-
             Toast.makeText(mContaxt, "خطایی رخ داده است", Toast.LENGTH_SHORT).show();
             tempListener.IsNotOk();
         }
