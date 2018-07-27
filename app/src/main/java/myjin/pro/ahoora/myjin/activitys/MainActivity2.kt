@@ -120,7 +120,6 @@ class MainActivity2 : AppCompatActivity(),
 
         fabH = Converter.pxFromDp(this, 16f + 50f + 20)
 
-
         tbl_main?.addTab(tbl_main.newTab()
                 .setText("بانک سلامت"), false)
         tbl_main?.addTab(tbl_main.newTab()
