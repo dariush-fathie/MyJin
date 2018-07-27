@@ -129,7 +129,14 @@ public class SpinnerDialog {
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            SpinnerDialog.this.name=items.get(position).getNameP()+" ، "+items.get(position).getNameC();
+
+            if (items.get(position).getCityId()!=0){
+                SpinnerDialog.this.name=items.get(position).getNameP()+" ، "+items.get(position).getNameC();
+            }else {
+                SpinnerDialog.this.name=items.get(position).getNameP();
+            }
+
+
             ((ViewHolder) holder).text1.setText(SpinnerDialog.this.name);
         }
 
