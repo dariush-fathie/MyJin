@@ -51,9 +51,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_login_outsign -> Toast.makeText(this@MainActivity, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
             R.id.btn_fav -> openDrawerLayout()
             R.id.btn_tryAgain -> tryAgain()
+            R.id.tv_login_outsign -> Toast.makeText(this@MainActivity, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
             R.id.rl_exit -> showExitDialog()
             R.id.iv_menu -> openDrawerLayout()
             R.id.fab_search -> search()
@@ -74,18 +74,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
 
     private fun setClickListeners() {
+        btn_tryAgain.setOnClickListener(this)
+        rl_prov.setOnClickListener(this)
+        rl_city.setOnClickListener(this)
         rl_exit.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         rl_myjin_services.setOnClickListener(this)
         rl_drawer2.setOnClickListener(this)
         rl_drawer3.setOnClickListener(this)
-        rl_drawer4.setOnClickListener(this)
-        rl_salamat.setOnClickListener(this)
-        btn_tryAgain.setOnClickListener(this)
         btn_fav.setOnClickListener(this)
         fab_search.setOnClickListener(this)
-        rl_prov.setOnClickListener(this)
-        rl_city.setOnClickListener(this)
+        rl_drawer4.setOnClickListener(this)
+        rl_salamat.setOnClickListener(this)
+
         iv_jinDrawer.setOnLongClickListener(this)
         rl_myjin_services.setOnClickListener(this)
         rl_takapoo_services.setOnClickListener(this)
