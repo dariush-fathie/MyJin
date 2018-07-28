@@ -22,9 +22,7 @@ import kotlinx.android.synthetic.main.progress_layout.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
-import myjin.pro.ahoora.myjin.customClasses.OnSpinerItemClick
-import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
-import myjin.pro.ahoora.myjin.interfaces.TempListener
+import myjin.pro.ahoora.myjin.interfaces.ServerStatusResponse
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
@@ -37,7 +35,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClickListener, TempListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClickListener, ServerStatusResponse {
 
     internal var Receiver: BroadcastReceiver? = null
     var serverStatus: ServerStatus? = null
@@ -275,14 +273,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     private fun initList() {
         if (Utils.isNetworkAvailable(this@MainActivity)) {
             t.cancel()
-            serverStatus?.IsOkServer()
+            //serverStatus?.IsOkServer()
         } else {
             showNetErrLayout()
             Toast.makeText(this, "به اینترنت متصل نیستید", Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun IsOk() {
+    override fun isOk() {
         getGroupCount()
         getSpList()// from server
         sliderUrls()
@@ -309,7 +307,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         })
     }
 
-    override fun IsNotOk() {
+    override fun notOk() {
         if (VarableValues.NetworkState) {
             startActivity(Intent(this, ServerStatusActivity::class.java))
             finish()
@@ -513,8 +511,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         }
 
 
-        inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, TempListener {
-            override fun IsOk() {
+        inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, ServerStatusResponse {
+            override fun isOk() {
                 if (groupsList[adapterPosition].counter > 0) {
                     val i = Intent(this@MainActivity, OfficeActivity::class.java)
                     i.putExtra(StaticValues.CATEGORY, groupsList.get(adapterPosition).groupId)
@@ -526,7 +524,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
                 }
             }
 
-            override fun IsNotOk() {
+            override fun notOk() {
                 if (VarableValues.NetworkState) {
                     startActivity(Intent(this@MainActivity, ServerStatusActivity::class.java))
                     finish()
@@ -538,7 +536,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
             override fun onClick(v: View?) {
                 if (Utils.isNetworkAvailable(this@MainActivity)) {
-                    ss.IsOkServer()
+                    //ss.IsOkServer()
                 } else {
                     showNetErrLayout()
                     Toast.makeText(this@MainActivity, "به اینترنت متصل نیستید", Toast.LENGTH_SHORT).show()

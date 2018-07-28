@@ -16,6 +16,11 @@
     <string name="myJin">ژین من</string>
     <string name="zero_center_count">0 مرکز</string>
     <string name="nothingMarkedYet">هیچ موردی تا کنون نشان نشده است !</string>
+    <string name="tryAgain">تلاش مجدد</string>
+    <string name="checkYourConnection">به اینترنت متصل نیستید، لطفا بررسی کنید</string>
+    <string name="fav">نشان شده ها</string>
+    <string name="doYouConnected">به اینترنت متصل نیستید ؟ می توانید نشان شده ها را ببیند در غیر این صورت دوباره تلاش کنید!</string>
+    <string name="introductionFlag">introFlag</string>
 
     <string-array name="provArray2">
         <item> آذربایجان شرقی</item>

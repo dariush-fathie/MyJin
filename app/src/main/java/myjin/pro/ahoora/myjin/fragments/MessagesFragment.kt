@@ -9,15 +9,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.realm.Realm
 import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
 import kotlinx.android.synthetic.main.fragment_messages.*
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.adapters.MessagesAdapter
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
-import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
-import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
+import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
@@ -35,24 +32,33 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
     private var loadFlag = false
 
+    private var netAvailability = false
+
+
+    @Subscribe
+    fun netEvent(e: NetChangeEvent) {
+        netAvailability = e.isCon
+    }
+
     @Subscribe
     fun onBecomeVisible(e: VisibilityEvent) {
         if (e.position == 1) {
             Log.e(MessagesFragment::class.java.simpleName, "${e.position}")
             if (firstLoad) {
-                getMessages()
+                if (netAvailability) {
+                    getMessages()
+                    loadTabs()
+                } else {
+                    // todo :: connection not availabel
+                }
+            } else {
+                // todo : it's not first load
             }
             if (updated) {
                 // todo : do something honey!!
-            }
-        }
-    }
+            } else {
 
-    @Subscribe
-    fun tryAgainEvent(e: TryAgainEvent) {
-        // todo load if fragment is visible else wait until become visible
-        if (!loadFlag) {
-            getMessages()
+            }
         }
     }
 
@@ -69,17 +75,6 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messages, container, false)
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        loadTabs()
-
-        // todo remove this line please
-        getMessages()
-
-    }
-
 
     private fun loadTabs() {
         ctb_messages.addTab(ctb_messages.newTab().setText("همه"))
@@ -105,8 +100,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
 
     private fun getMessages() {
+        hideErrLayout()
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-
         val response = apiInterface.messages
         response.enqueue(object : Callback<List<KotlinMessagesModel>> {
             override fun onResponse(call: Call<List<KotlinMessagesModel>>?, response: Response<List<KotlinMessagesModel>>?) {
@@ -115,21 +110,38 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
                 response?.body() ?: return
 
                 val result = response.body()
+
+                result ?: onFailure(call, Throwable("null list"))
+                result ?: return
+
                 // todo saveMessages in realm
-                result?.forEach { item: KotlinMessagesModel ->
+                result.forEach { item: KotlinMessagesModel ->
                     Log.e("Messages", item.toString())
                 }
 
-                loadAdapter(result!!)
+                loadAdapter(result)
+                loadFlag = true
             }
 
             override fun onFailure(call: Call<List<KotlinMessagesModel>>?, t: Throwable?) {
                 Log.e("Messages", "${t?.message} - error")
                 loadFlag = false
-                (activity as MainActivity2).showNetErrSnack()
+                showErrLayout()
             }
         })
 
+    }
+
+    private fun tryAgain() {
+        // todo
+    }
+
+    private fun showErrLayout() {
+        // todo
+    }
+
+    private fun hideErrLayout() {
+        // todo
     }
 
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
@@ -137,6 +149,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
         rv_messages.addItemDecoration(VerticalLinearLayoutDecoration(activity as Context
                 , 8, 8, 8, 8))
         rv_messages.adapter = MessagesAdapter(activity as Context, list)
+
     }
 
 }

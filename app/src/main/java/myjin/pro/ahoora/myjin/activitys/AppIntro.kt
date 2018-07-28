@@ -1,10 +1,10 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PagerSnapHelper
 import android.support.v7.widget.RecyclerView
@@ -12,16 +12,17 @@ import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
 import kotlinx.android.synthetic.main.activity_app_intro.*
-
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.IntroAdapter
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.SharedPer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+
 
 class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private var list: ArrayList<String>? = null
@@ -40,24 +41,18 @@ class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnChe
         }
     }
 
-
     private fun introUrls() {
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
         apiInterface.sliderMain(0).enqueue(object : Callback<List<KotlinSlideMainModel>> {
 
             override fun onResponse(call: Call<List<KotlinSlideMainModel>>?, response: Response<List<KotlinSlideMainModel>>?) {
                 val list1 = response?.body()
-
                 val urls = ArrayList<String>()
-
                 list1?.get(0)!!.slideList?.forEach { i ->
-
                     urls.add(i.fileUrl!!)
                 }
-
                 list = urls
                 val adapter = IntroAdapter(this@AppIntro, list!!)
-
                 rv_intro.layoutManager = LinearLayoutManager(this@AppIntro, LinearLayoutManager.HORIZONTAL, false)
                 rv_intro.adapter = adapter
                 list_indicator_i.attachToRecyclerView(rv_intro)
@@ -75,10 +70,10 @@ class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnChe
     }
 
     override fun onClick(p0: View?) {
-
-
         when (p0?.id) {
             R.id.tv_next -> {
+                SharedPer(this).setBoolean(getString(R.string.introductionFlag), true)
+                startActivity(Intent(this, SplashScreen::class.java))
                 finish()
             }
             R.id.iv_next -> {
@@ -90,7 +85,6 @@ class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnChe
         }
 
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,7 +115,6 @@ class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnChe
                 super.onScrolled(recyclerView, dx, dy)
             }
         })
-
         introUrls()
 
     }
@@ -147,21 +140,15 @@ class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnChe
     }
 
     private fun autoScrollSlide() {
-
         var n = 0
         val handler = Handler()
         var forward = true
-
         val t = Timer()
-
         t.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 handler.post {
-
-
                     if (forward) {
                         rv_intro.smoothScrollToPosition(n++)
-
                     } else {
                         if (n == rv_intro.adapter.itemCount + 1) {
                             t.cancel()
@@ -169,25 +156,16 @@ class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnChe
                         }
                         n++
                     }
-
                     if (n == rv_intro.adapter.itemCount) {
                         forward = false
                         rv_intro.adapter.notifyItemChanged(n - 1)
 
                         rv_intro.smoothScrollToPosition(0)
-
                     }
-
-
                 }
-
             }
-
-
         }, 1, 300)
 
-
     }
-
 
 }

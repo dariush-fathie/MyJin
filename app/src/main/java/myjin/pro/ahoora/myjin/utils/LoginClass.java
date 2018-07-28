@@ -9,7 +9,7 @@ import android.widget.Toast;
 import myjin.pro.ahoora.myjin.activitys.DetailActivity;
 import myjin.pro.ahoora.myjin.activitys.LoginActivity;
 import myjin.pro.ahoora.myjin.activitys.ServerStatusActivity;
-import myjin.pro.ahoora.myjin.interfaces.TempListener;
+import myjin.pro.ahoora.myjin.interfaces.ServerStatusResponse;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,14 +22,14 @@ public class LoginClass {
     private String val = "";
     private Context mContaxt;
     boolean ch;
-    private TempListener tempListener;
+    private ServerStatusResponse serverStatusResponse;
 
-    public LoginClass(Context context, TempListener tempListener) {
+    public LoginClass(Context context, ServerStatusResponse serverStatusResponse) {
         this.mContaxt = context;
         pass = "*";
         user = "*";
         ch = false;
-        this.tempListener = tempListener;
+        this.serverStatusResponse = serverStatusResponse;
         callBachServer();
     }
 
@@ -89,11 +89,11 @@ public class LoginClass {
                                 Toast.makeText(mContaxt, "ورود انجام شد", Toast.LENGTH_SHORT).show();
                                 ((LoginActivity) mContaxt).finish();
                             } else {
-                                tempListener.IsOk();
+                                serverStatusResponse.isOk();
                             }
 
                         } else if (val.equals("empty")) {
-                            tempListener.IsNotOk();
+                            serverStatusResponse.notOk();
                         }
                     }
 
@@ -107,7 +107,7 @@ public class LoginClass {
                         Toast.makeText(mContaxt, "خطایی رخ داده است", Toast.LENGTH_SHORT).show();
 
                     } else {
-                        tempListener.IsNotOk();
+                        serverStatusResponse.notOk();
                     }
 
                 }
@@ -118,7 +118,7 @@ public class LoginClass {
                 Toast.makeText(mContaxt, "خطایی رخ داده است", Toast.LENGTH_SHORT).show();
 
             } else {
-                tempListener.IsNotOk();
+                serverStatusResponse.notOk();
             }
         }
 

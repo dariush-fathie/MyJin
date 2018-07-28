@@ -49,7 +49,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.detail_map.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior
-import myjin.pro.ahoora.myjin.interfaces.TempListener
+import myjin.pro.ahoora.myjin.interfaces.ServerStatusResponse
 import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
@@ -565,8 +565,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     private fun checkUserLoggedIn() {
-        LoginClass(this, object : TempListener {
-            override fun IsOk() {
+        LoginClass(this, object : ServerStatusResponse {
+            override fun isOk() {
                 Log.e("session", "exist")
 
                 tv_point.visibility = View.GONE
@@ -577,7 +577,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 tv_point.text = formatLatLng(centerPoint!!)
             }
 
-            override fun IsNotOk() {
+            override fun notOk() {
                 Log.e("session", "not exist")
             }
         })
@@ -822,13 +822,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         if (item.logoImg.equals("")) {
             if (item.gen?.equals("0")!!) {
-                aiv_logoImg.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+               // aiv_logoImg.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
                 url = g_url
+
             } else if (item.gen?.equals("1")!!) {
-                aiv_logoImg.colorFilter = null
+
                 url = this@DetailActivity.getString(R.string.ic_doctor_f)
             } else if (item.gen?.equals("2")!!) {
-                aiv_logoImg.colorFilter = null
+
                 url = this@DetailActivity.getString(R.string.ic_doctor_m)
             }
 

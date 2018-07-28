@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.*
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,16 +18,13 @@ import ir.paad.audiobook.utils.Converter
 import kotlinx.android.synthetic.main.fragment_health_bank.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
-import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.activitys.ServerStatusActivity
 import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
 import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
-import myjin.pro.ahoora.myjin.interfaces.TempListener
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
-import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
-import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
-import myjin.pro.ahoora.myjin.utils.*
+import myjin.pro.ahoora.myjin.utils.ApiInterface
+import myjin.pro.ahoora.myjin.utils.KotlinApiClient
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call
@@ -48,27 +44,28 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
     private var provId = 19
     private var cityId = 0
-    private var loadFlag = false
-    private var scrollToBottom = true
 
+    private var loadFlag = false
+
+    private var scrollToBottom = true
     private var scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
             scrollToBottom = dy > 0
         }
     }
 
+    private var netAvailability = false
+
 
     @Subscribe
-    fun onBecomeVisible(e: VisibilityEvent){
-        if (e.position == 0) {
-            Log.e(MessagesFragment::class.java.simpleName , "${e.position}")
-        }
+    fun netEvent(e: NetChangeEvent) {
+        netAvailability = e.isCon
     }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_health_bank, container, false)
     }
-
 
     override fun onStop() {
         mainList.removeOnScrollListener(scrollListener)
@@ -85,61 +82,75 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity2).tvLocation.setOnClickListener(this)
-
         // todo get pro and city from sharedPrefs
         (activity as MainActivity2).tvLocation.text = "کردستان،همه شهرها"
-
         checkNetState()
     }
 
     private fun checkNetState() {
-        if (true) {
+        if (netAvailability) {
+            hideErrLayout()
             getGroupCount()
         } else {
             // error
+            showErrLayout()
         }
     }
 
-    private fun getGroupCount() {
-        showCPV()
-        (activity as MainActivity2).hideSearchFab()
-        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-        val response = apiInterface.getGroupCount(provId, cityId)
-        response.enqueue(object : Callback<List<KotlinGroupModel>> {
-            override fun onResponse(call: Call<List<KotlinGroupModel>>?, response: Response<List<KotlinGroupModel>>?) {
-                response?.body() ?: onFailure(call, Throwable("null body"))
-                response?.body() ?: return
 
-                val list: List<KotlinGroupModel>? = response.body()
-                val realm = Realm.getDefaultInstance()
-                realm.executeTransactionAsync { db: Realm? ->
-                    db?.where(KotlinGroupModel::class.java)?.findAll()?.deleteAllFromRealm()
-                    db?.copyToRealm(list!!)
-                    /*val r = db?.where(KotlinGroupModel::class.java)?.findAll()
-                    r?.forEach { model: KotlinGroupModel? ->
-                        Log.e("GM", "${model?.name}:${model?.groupId}")
-                    }*/
-                }
-                //val c = list!!.size
-                // todo : control
-                //AllCentars.text = "$c مرکز "
-
-                loadAdapter(list!!)
-            }
-
-            override fun onFailure(call: Call<List<KotlinGroupModel>>?, t: Throwable?) {
-                Toast.makeText(activity, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
-                loadFlag = false
-                showNetErrSnack()
-                // todo : control
-                //hideProgressLayout()
-                //showNetErrLayout()
-            }
-        })
+    private fun tryAgain() {
+        // todo
     }
 
-    private fun showNetErrSnack() {
-        (activity as MainActivity2).showNetErrSnack()
+    private fun showErrLayout() {
+        // todo
+    }
+
+    private fun hideErrLayout() {
+        // todo
+    }
+
+    private var lock = false
+
+    private fun getGroupCount() {
+        if (!lock) {
+            lock = true
+            showCPV()
+            (activity as MainActivity2).hideSearchFab()
+            val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+            val response = apiInterface.getGroupCount(provId, cityId)
+            response.enqueue(object : Callback<List<KotlinGroupModel>> {
+                override fun onResponse(call: Call<List<KotlinGroupModel>>?, response: Response<List<KotlinGroupModel>>?) {
+                    response?.body() ?: onFailure(call, Throwable("null body"))
+                    response?.body() ?: return
+
+                    val list: List<KotlinGroupModel>? = response.body()
+                    val realm = Realm.getDefaultInstance()
+                    realm.executeTransactionAsync { db: Realm? ->
+                        db?.where(KotlinGroupModel::class.java)?.findAll()?.deleteAllFromRealm()
+                        db?.copyToRealm(list!!)
+                        /*val r = db?.where(KotlinGroupModel::class.java)?.findAll()
+                        r?.forEach { model: KotlinGroupModel? ->
+                            Log.e("GM", "${model?.name}:${model?.groupId}")
+                        }*/
+                    }
+                    //val c = list!!.size
+                    // todo : control
+                    //AllCentars.text = "$c مرکز "
+
+                    loadAdapter(list!!)
+                    lock = false
+                }
+
+                override fun onFailure(call: Call<List<KotlinGroupModel>>?, t: Throwable?) {
+                    Toast.makeText(activity, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
+                    lock = false
+                    loadFlag = false
+                    showErrLayout()
+                    hideCPV()
+                }
+            })
+        }
     }
 
     private lateinit var adapter: CategoryAdapter
@@ -177,18 +188,22 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         cpv_hbf.visibility = View.GONE
     }
 
-
-    @Subscribe
-    fun netEvent(e: NetChangeEvent) {
-
-    }
-
-    @Subscribe
-    fun tryAgainEvent(e: TryAgainEvent) {
-        if (!loadFlag) {
-            // todo : load again
-            getGroupCount()
+    private fun openProvAndCityDialog() {
+        val dialog = SpinnerDialog(activity, "ژین من در سایر شهر", "نمیخوام")
+        dialog.bindOnSpinerListener { name, provId, cityId ->
+            //initList()
+            if (provId != 19) {
+                Toast.makeText(activity, "این برنامه در حال حاضر تنها استان کردستان را پوشش می دهد ..", Toast.LENGTH_LONG).show()
+            } else {
+                (activity as MainActivity2).tvLocation.text = name
+                this.provId = provId
+                this.cityId = cityId
+                loadFlag = false
+                // todo : check net connection first please
+                getGroupCount()
+            }
         }
+        dialog.showSpinerDialog()
     }
 
     inner class CategoryAdapter(private val context: Context, gList: List<KotlinGroupModel>)
@@ -239,71 +254,23 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
         }
 
-        inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, TempListener {
-
-            override fun IsOk() {
-                if (groupsList[adapterPosition].counter > 0) {
-                    val i = Intent(context, OfficeActivity::class.java)
-                    i.putExtra(StaticValues.CATEGORY, groupsList.get(adapterPosition).groupId)
-                    i.putExtra(StaticValues.PROVID, provId)
-                    i.putExtra(StaticValues.CITYID, cityId)
-                    startActivity(i)
-                } else {
-                    Toast.makeText(context, "پایگاه داده ژین در حال تکمیل شدن اطلاعات است ...", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun IsNotOk() {
-                if (VarableValues.NetworkState) {
-                    startActivity(Intent(context, ServerStatusActivity::class.java))
-                    // todo : what is this ?!!
-                    activity?.finish()
-                } else {
-                    // todo : control
-                    //showNetErrLayout()
-                    Toast.makeText(context, "به اینترنت متصل نیستید", Toast.LENGTH_SHORT).show()
-                }
-            }
+        inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
             override fun onClick(v: View?) {
-                if (Utils.isNetworkAvailable(activity as Context)) {
-                    ss.IsOkServer()
-                } else {
-                    // todo : control
-                    //showNetErrLayout()
-                    Toast.makeText(context, "به اینترنت متصل نیستید", Toast.LENGTH_SHORT).show()
-                }
+                startActivity(Intent(context, ServerStatusActivity::class.java))
             }
 
             val imageView: AppCompatImageView = itemView.findViewById(R.id.iv_mainCategoryImage)
             val titleTv: AppCompatTextView = itemView.findViewById(R.id.tv_mainCategoryTitle)
             val subTitle: AppCompatTextView = itemView.findViewById(R.id.tv_mainCategorySubTitle)
             val container: CardView = itemView.findViewById(R.id.cv_mainCategoryContainer)
-            val ss: ServerStatus
+
 
             init {
                 container.setOnClickListener(this)
-                ss = ServerStatus(this, context)
             }
         }
 
     }
 
-
-    private fun openProvAndCityDialog() {
-        val dialog = SpinnerDialog(activity, "ژین من در سایر شهر", "نمیخوام")
-        dialog.bindOnSpinerListener { name, provId, cityId ->
-            //initList()
-            if (provId != 19) {
-                Toast.makeText(activity, "این برنامه در حال حاضر تنها استان کردستان را پوشش می دهد ..", Toast.LENGTH_LONG).show()
-            } else {
-                (activity as MainActivity2).tvLocation.text = name
-                this.provId = provId
-                this.cityId = cityId
-                loadFlag = false
-                getGroupCount()
-            }
-        }
-        dialog.showSpinerDialog()
-    }
 }

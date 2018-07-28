@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
@@ -69,23 +70,22 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_office)
 
-        initListener()
-
-        if (intent != null) {
-            groupId = intent.getIntExtra(StaticValues.CATEGORY, 0)
-            provId = intent.getIntExtra(StaticValues.PROVID, 19)
-            cityId = intent.getIntExtra(StaticValues.CITYID, 1)
-        }
-
-        if (groupId != 1) {
-            hideFilter()
-        }
-
-        tv_officeTitle.text = getTitleFromDb()
-        initBottomSheet()
-        tabLayoutInterface = TabLayoutInterface(this, supportFragmentManager, bottomSheetBehavior, ll_progress)
-        ctbl.addOnTabSelectedListener(tabLayoutInterface)
-        getItems()
+        Handler().postDelayed({
+            initListener()
+            if (intent != null) {
+                groupId = intent.getIntExtra(StaticValues.CATEGORY, 0)
+                provId = intent.getIntExtra(StaticValues.PROVID, 19)
+                cityId = intent.getIntExtra(StaticValues.CITYID, 1)
+            }
+            if (groupId != 1) {
+                hideFilter()
+            }
+            tv_officeTitle.text = getTitleFromDb()
+            initBottomSheet()
+            tabLayoutInterface = TabLayoutInterface(this, supportFragmentManager, bottomSheetBehavior, ll_progress)
+            ctbl.addOnTabSelectedListener(tabLayoutInterface)
+            getItems()
+        }, 50)
 
     }
 
@@ -123,9 +123,9 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rl_university_services.setOnClickListener(this)
         rl_tamin_services.setOnClickListener(this)
         rl_ict_services.setOnClickListener(this)
-        rl_pishkhan_services .setOnClickListener(this)
+        rl_pishkhan_services.setOnClickListener(this)
         rl_post_services.setOnClickListener(this)
-        rl_salamat .setOnClickListener(this)
+        rl_salamat.setOnClickListener(this)
         tv_login_outsign.setOnClickListener(this)
     }
 
@@ -172,8 +172,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
 
     private fun getItems() {
-
-
         if (Utils.isNetworkAvailable(this)) {
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
             apiInterface.getItems(groupId, provId, cityId).enqueue(object : Callback<List<KotlinItemModel>> {
@@ -345,7 +343,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.tv_login_outsign->Toast.makeText(this@OfficeActivity,"این قسمت در نسخه جدید ارائه شده است",Toast.LENGTH_LONG).show()
+            R.id.tv_login_outsign -> Toast.makeText(this@OfficeActivity, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
 
             R.id.rl_filter -> onFilterClick()
             R.id.rl_sort -> onSortClick()
@@ -357,22 +355,23 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
 
-            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(),1)
-            R.id.rl_takapoo_services->goToServicesActivity(getString(R.string.takapoo),2)
-            R.id.rl_university_services->goToServicesActivity(tv_university_services_Title1.text.toString(),3)
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
+            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
+            R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
             R.id.rl_tamin_services -> early_Mth()
-            R.id.rl_ict_services->early_Mth()
+            R.id.rl_ict_services -> early_Mth()
             R.id.rl_pishkhan_services -> early_Mth()
-            R.id.rl_post_services->early_Mth()
-            R.id.rl_salamat -> startActivity(Intent(this@OfficeActivity,HeaIncServiceActivity::class.java))
+            R.id.rl_post_services -> early_Mth()
+            R.id.rl_salamat -> startActivity(Intent(this@OfficeActivity, HeaIncServiceActivity::class.java))
 
 
         }
     }
-    private fun goToServicesActivity(title:String,i:Int){
-        val intentO=Intent(this@OfficeActivity, ServicesActivity::class.java)
-        intentO.putExtra("ServiceTitle",title)
-        intentO.putExtra("groupId",i)
+
+    private fun goToServicesActivity(title: String, i: Int) {
+        val intentO = Intent(this@OfficeActivity, ServicesActivity::class.java)
+        intentO.putExtra("ServiceTitle", title)
+        intentO.putExtra("groupId", i)
         startActivity(intentO)
     }
 

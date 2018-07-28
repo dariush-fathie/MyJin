@@ -1,20 +1,195 @@
 package myjin.pro.ahoora.myjin.activitys
 
+import android.content.Intent
+import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
+import android.widget.Toast
 import com.bumptech.glide.Glide
+import io.realm.Realm
+import ir.paad.audiobook.utils.NetworkUtil
+import kotlinx.android.synthetic.main.activity_splash.*
+import myjin.pro.ahoora.myjin.BuildConfig
 import myjin.pro.ahoora.myjin.R
+import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
+import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
+import myjin.pro.ahoora.myjin.models.KotlinServicesModel
+import myjin.pro.ahoora.myjin.utils.ApiInterface
+import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.SharedPer
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
-class SplashScreen : AppCompatActivity() {
+class SplashScreen : AppCompatActivity(), View.OnClickListener {
+
+    var versionCode = BuildConfig.VERSION_CODE
+    val realm = Realm.getDefaultInstance()!!
+    private var netAvailability: Boolean = false
+
+    private var cityCount = 0
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_splashTryAgain -> tryAgain()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        clearGlideCache()
-        Handler().postDelayed({ finish() }, 2500)
+        if (!SharedPer(this).getBoolean(getString(R.string.introductionFlag))) {
+            gotoIntro()
+            finish()
+        } else {
+            setContentView(R.layout.activity_splash)
+            btn_splashTryAgain.setOnClickListener(this)
+            netAvailability = NetworkUtil().isNetworkAvailable(this)
+            clearGlideCache()
+
+            realm.beginTransaction()
+            cityCount = realm.where(KotlinProvCityModel::class.java).findAll().size
+            realm.commitTransaction()
+
+            if (netAvailability) {
+                getConfig()
+            } else {
+                if (cityCount == 0) {
+                    // todo try without fav
+                } else {
+                    // todo try with fav
+                }
+            }
+            clearServices()
+        }
+    }
+
+    var statusItem: KotlinAboutContactModel? = null
+    private var configLock = false
+
+    private fun getConfig() {
+        if (!configLock) {
+            configLock = true
+            hideNetErrLayout()
+            val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+            val response = apiInterface.ac
+            response.enqueue(object : Callback<KotlinAboutContactModel> {
+                override fun onResponse(call: Call<KotlinAboutContactModel>?, response: Response<KotlinAboutContactModel>?) {
+                    val result = response?.body()
+
+                    result ?: onFailure(call, Throwable("null body"))
+                    result ?: return
+
+                    statusItem = response.body()
+
+                    realm.executeTransactionAsync { db: Realm? ->
+                        db?.where(KotlinAboutContactModel::class.java)?.findAll()?.deleteAllFromRealm()
+                        db?.copyToRealm(result)
+                    }
+
+                    if (result.serverStatus == "ok") {
+                        getProvinceAndCitiesList()
+                    } else {
+                        // todo server needs repair we comeback soon
+                        // fav or nothing
+                        if (cityCount != 0) {
+                            tv_splashContent.text = "در حال ارتقای سرور هستیم به زودی بر می گردیم! می توانید نشان شده ها را ببینید"
+                        } else {
+                            tv_splashContent.text = "در حال ارتقای سرور هستیم به زودی بر می گردیم!"
+
+                        }
+                    }
+                    configLock = false
+                }
+
+                override fun onFailure(call: Call<KotlinAboutContactModel>?, t: Throwable?) {
+                    showNetErrLayout()
+                    configLock = false
+                }
+            })
+        }
+    }
+
+
+    private var lock = false
+    private fun getProvinceAndCitiesList() {
+        if (!lock) {
+            lock = true
+            showCpv()
+            val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+            val response = apiInterface.getProvinceAndCitiesList(cityCount)
+            response.enqueue(object : Callback<List<KotlinProvCityModel>> {
+                override fun onResponse(call: Call<List<KotlinProvCityModel>>?, response: Response<List<KotlinProvCityModel>>?) {
+                    response?.body() ?: onFailure(call, Throwable("null body"))
+                    response?.body() ?: return
+
+                    val list: List<KotlinProvCityModel>? = response.body()
+                    if (list != null) {
+                        if (list.isNotEmpty()) {
+                            realm.executeTransactionAsync { db: Realm? ->
+                                db?.where(KotlinProvCityModel::class.java)?.findAll()?.deleteAllFromRealm()
+                                db?.copyToRealm(list)
+                            }
+                        }
+                    } else {
+                        onFailure(call, Throwable("null city list"))
+                        return
+                    }
+                    hideCpv()
+                    hideNetErrLayout()
+                    lock = false
+
+                    if (statusItem?.version!! > versionCode) {
+                        newVersion(statusItem?.version!!.toString(), statusItem?.force!!)
+                    } else {
+                        gotoHome1()
+                    }
+                }
+
+                override fun onFailure(call: Call<List<KotlinProvCityModel>>?, t: Throwable?) {
+                    hideCpv()
+                    showNetErrLayout()
+                    lock = false
+                }
+            })
+
+        }
+    }
+
+    private fun tryAgain() {
+        netAvailability = NetworkUtil().isNetworkAvailable(this)
+        if (netAvailability) {
+            hideNetErrLayout()
+            showCpv()
+            getProvinceAndCitiesList()
+            getConfig()
+        } else {
+            hideCpv()
+            showNetErrLayout()
+        }
+    }
+
+    private fun showNetErrLayout() {
+        // todo check if cityCount don't show fav button
+        cl_netErrLayout.visibility = View.VISIBLE
+    }
+
+    private fun hideNetErrLayout() {
+        cl_netErrLayout.visibility = View.GONE
+    }
+
+    private fun showCpv() {
+        cpv_splash.visibility = View.VISIBLE
+    }
+
+    private fun hideCpv() {
+        cpv_splash.visibility = View.GONE
     }
 
     private fun clearGlideCache() {
@@ -22,5 +197,58 @@ class SplashScreen : AppCompatActivity() {
         AsyncTask.execute(Runnable { Glide.get(this@SplashScreen).clearDiskCache() })
     }
 
+    private fun clearServices() {
+        realm.executeTransaction { db ->
+            db.where(KotlinServicesModel::class.java).findAll().deleteAllFromRealm()
+        }
+    }
 
+    private fun newVersion(v: String, force: Int) {
+        val tvCustomTitle: TextView
+        val view2 = LayoutInflater.from(this).inflate(R.layout.hea_inc_services_title, null, false)
+        tvCustomTitle = view2.findViewById(R.id.tv_customTitle)
+        tvCustomTitle.text = "نسخه جدید ژین من آماده است (نسخه $v)"
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setCancelable(false)
+        builder.setCustomTitle(view2)
+        builder.setMessage(R.string.hbnjbrvsh)
+
+        builder.setPositiveButton(R.string.dnj) { _, _ -> update() }
+        builder.setNeutralButton("خروج از برنامه") { _, _ ->
+
+        }
+        if (force != 1) {
+            builder.setNegativeButton(R.string.continue_) { _, _ ->
+                gotoHome1()
+            }
+            builder.setMessage(R.string.addarabdk)
+        }
+        builder.show()
+    }
+
+    fun update() {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("bazaar://details?id=" + BuildConfig.APPLICATION_ID)
+            intent.setPackage("com.farsitel.bazaar")
+            startActivity(intent)
+            finish()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "خطا در اتصال به بازار", Toast.LENGTH_LONG).show()
+            finish()
+        }
+    }
+
+    private fun gotoHome1() {
+        startActivity(Intent(this, MainActivity2::class.java))
+    }
+
+    private fun goToFav1() {
+        startActivity(Intent(this, FavActivity::class.java))
+    }
+
+    private fun gotoIntro() {
+        startActivity(Intent(this, AppIntro::class.java))
+    }
 }

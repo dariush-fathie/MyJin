@@ -14,7 +14,7 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.net_err_layout_start.*
 import myjin.pro.ahoora.myjin.BuildConfig
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.interfaces.TempListener
+import myjin.pro.ahoora.myjin.interfaces.ServerStatusResponse
 import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 import myjin.pro.ahoora.myjin.utils.*
 import retrofit2.Call
@@ -22,16 +22,17 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
-    private var serverStatus: ServerStatus? = null
-    private var isFirstStart: Boolean = false
-    internal var versionCode = BuildConfig.VERSION_CODE
+class StartActivity : AppCompatActivity(), View.OnClickListener, ServerStatusResponse {
 
-    override fun IsOk() {
+    private lateinit var serverStatus: ServerStatus
+    private var isFirstStart: Boolean = false
+    var versionCode = BuildConfig.VERSION_CODE
+
+    override fun isOk() {
         init_()
     }
 
-    override fun IsNotOk() {
+    override fun notOk() {
         if (VarableValues.NetworkState) {
             startActivity(Intent(this, ServerStatusActivity::class.java))
             finish()
@@ -46,7 +47,7 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
             R.id.btn_fav -> {
                 startActivity(Intent(this@StartActivity, FavActivity::class.java))
             }
-            R.id.btn_tryAgain -> serverStatus?.IsOkServer()
+            R.id.btn_tryAgain -> serverStatus.checkServer()
         }
     }
 
@@ -55,7 +56,7 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start)
         serverStatus = ServerStatus(this, this)
-        serverStatus?.IsOkServer()
+        serverStatus.checkServer()
 
         btn_tryAgain.setOnClickListener(this)
         btn_fav.setOnClickListener(this)
@@ -94,14 +95,6 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
         }
     }
 
-    private fun showNetErrLayout() {
-        ll_netErr_start.visibility = View.VISIBLE
-    }
-
-    private fun hideNetErrLayout() {
-        ll_netErr_start.visibility = View.GONE
-    }
-
     private fun notNewVersion() {
         val getSharedPreferences = PreferenceManager
                 .getDefaultSharedPreferences(baseContext)
@@ -113,6 +106,7 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
         startActivity(i)
         overridePendingTransition(R.anim.in_, R.anim.out)
         finish()
+
     }
 
     private fun init_() {
@@ -124,10 +118,12 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
                 override fun onResponse(call: Call<KotlinAboutContactModel>?, response: Response<KotlinAboutContactModel>?) {
                     val list: KotlinAboutContactModel? = response?.body()
                     val realm = Realm.getDefaultInstance()
+
                     realm.executeTransactionAsync { db: Realm? ->
                         db?.where(KotlinAboutContactModel::class.java)?.findAll()?.deleteAllFromRealm()
                         db?.copyToRealm(list!!)
                     }
+
                     if (list?.version!! > versionCode) {
                         newVersion(list.version!!.toString(), list.force!!)
                     } else {
@@ -143,4 +139,13 @@ class StartActivity : AppCompatActivity(), View.OnClickListener, TempListener {
             showNetErrLayout()
         }
     }
+
+    private fun showNetErrLayout() {
+        ll_netErr_start.visibility = View.VISIBLE
+    }
+
+    private fun hideNetErrLayout() {
+        ll_netErr_start.visibility = View.GONE
+    }
+
 }
