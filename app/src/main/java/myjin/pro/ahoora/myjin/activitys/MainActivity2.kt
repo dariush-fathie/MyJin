@@ -9,6 +9,7 @@ import android.os.Handler
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
+import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -21,10 +22,12 @@ import android.widget.Toast
 import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import kotlinx.android.synthetic.main.activity_main2.*
+import kotlinx.android.synthetic.main.drawer_layout.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
+import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
@@ -34,6 +37,7 @@ import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.Colors
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.Utils
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call
@@ -44,15 +48,69 @@ class MainActivity2 : AppCompatActivity(),
         TabLayout.OnTabSelectedListener,
         ViewPager.OnPageChangeListener,
         AppBarLayout.OnOffsetChangedListener,
-        View.OnClickListener {
+        View.OnClickListener, View.OnLongClickListener {
 
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.fab_search -> {
-                search()
+            R.id.tv_login_outsign -> Toast.makeText(this@MainActivity2, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
+            R.id.rl_exit -> showExitDialog()
+            R.id.iv_menu -> openDrawerLayout()
+            R.id.fab_search -> search()
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
+            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
+            R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
+            R.id.rl_tamin_services -> cummingSoon()
+            R.id.rl_ict_services -> cummingSoon()
+            R.id.rl_pishkhan_services -> cummingSoon()
+            R.id.rl_post_services -> cummingSoon()
+            R.id.rl_salamat -> startActivity(Intent(this@MainActivity2, HeaIncServiceActivity::class.java))
+            R.id.rl_drawer2 -> drawerClick(1)
+            R.id.rl_drawer3 -> drawerClick(2)
+            R.id.rl_drawer4 -> drawerClick(3)
+        }
+    }
+
+    private fun openDrawerLayout() {
+        drawerLayout.openDrawer(GravityCompat.END)
+    }
+
+    private fun closeDrawerLayout() {
+        drawerLayout.closeDrawers()
+    }
+    private fun cummingSoon() {
+        Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
+    }
+    private fun goToServicesActivity(title: String, i: Int) {
+        val intentM = Intent(this@MainActivity2, ServicesActivity::class.java)
+        intentM.putExtra("ServiceTitle", title)
+        intentM.putExtra("groupId", i)
+        startActivity(intentM)
+    }
+
+    private fun drawerClick(position: Int) {
+        when (position) {
+            1 -> {
+
+                startActivity(Intent(this@MainActivity2, FavActivity::class.java))
+            }
+            2 -> {
+                startActivity(Intent(this@MainActivity2, AboutUs::class.java))
+            }
+            3 -> {
+                startActivity(Intent(this@MainActivity2, ContactUs::class.java))
             }
         }
+    }
+
+    override fun onLongClick(v: View?): Boolean {
+        when (v?.id) {
+            R.id.iv_jinDrawer -> {
+                startActivity(Intent(this@MainActivity2, LoginActivity::class.java))
+                return true
+            }
+        }
+        return false
     }
 
     private val bankPosition = 0
@@ -142,6 +200,30 @@ class MainActivity2 : AppCompatActivity(),
         checkNetState()
     }
 
+    private fun getAC_() {
+        if (Utils.isNetworkAvailable(this@MainActivity2)) {
+
+            val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+            val response = apiInterface.ac
+            response.enqueue(object : Callback<KotlinAboutContactModel> {
+                override fun onResponse(call: Call<KotlinAboutContactModel>?, response: Response<KotlinAboutContactModel>?) {
+
+                    val list: KotlinAboutContactModel? = response?.body()
+                    val realm = Realm.getDefaultInstance()
+                    realm.executeTransactionAsync { db: Realm? ->
+                        db?.where(KotlinAboutContactModel::class.java)?.findAll()?.deleteAllFromRealm()
+                        db?.copyToRealm(list!!)
+                    }
+
+                }
+
+                override fun onFailure(call: Call<KotlinAboutContactModel>?, t: Throwable?) {
+
+                }
+            })
+        }
+    }
+
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
 
@@ -152,6 +234,7 @@ class MainActivity2 : AppCompatActivity(),
             getSlides()
             getServicesList()
             getProvinceAndCitiesList()
+            getAC_()
             //todo : get services and others ...
         } else {
             showNetErrSnack()
@@ -183,8 +266,26 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private fun setListener() {
+        rl_exit.setOnClickListener(this)
+        iv_menu.setOnClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
+        rl_drawer2.setOnClickListener(this)
+        rl_drawer3.setOnClickListener(this)
+        fab_search.setOnClickListener(this)
+        rl_drawer4.setOnClickListener(this)
+        rl_salamat.setOnClickListener(this)
         fab_search.setOnClickListener(this)
         tv_location.setOnClickListener(this)
+        iv_jinDrawer.setOnLongClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
+        rl_takapoo_services.setOnClickListener(this)
+        rl_university_services.setOnClickListener(this)
+        rl_tamin_services.setOnClickListener(this)
+        rl_ict_services.setOnClickListener(this)
+        rl_pishkhan_services.setOnClickListener(this)
+        rl_post_services.setOnClickListener(this)
+        rl_salamat.setOnClickListener(this)
+        tv_login_outsign.setOnClickListener(this)
     }
 
     override fun onPageScrollStateChanged(state: Int) {
