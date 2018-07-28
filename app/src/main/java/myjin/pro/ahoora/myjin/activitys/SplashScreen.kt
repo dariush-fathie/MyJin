@@ -10,22 +10,14 @@ import myjin.pro.ahoora.myjin.R
 
 class SplashScreen : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        Clear_GlideCaches()
-
+        clearGlideCache()
         Handler().postDelayed({ finish() }, 2500)
-
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
-    fun Clear_GlideCaches() {
+    private fun clearGlideCache() {
         Handler().postDelayed(Runnable { Glide.get(this@SplashScreen).clearMemory() }, 0)
         AsyncTask.execute(Runnable { Glide.get(this@SplashScreen).clearDiskCache() })
     }
