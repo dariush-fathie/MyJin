@@ -4,15 +4,88 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <myjin.pro.ahoora.myjin.customClasses.CustomTabLayout
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_MessagesText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:drawableTop="@drawable/ic_wifi_not_connected"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/checkConnectionAndTryAgain"
+        android:textColor="@color/title"
+        android:visibility="gone"
+        app:fontFamily="@font/yekan"
+        app:layout_constraintBottom_toTopOf="@+id/btn_messagesTryAgain"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_sources" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_messagesTryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_refresh_test"
+        android:text="@string/tryAgain"
+        android:visibility="gone"
+        app:fontFamily="@font/yekan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_MessagesText"
+        app:layout_constraintVertical_bias="0.2" />
+
+
+    <!--<myjin.pro.ahoora.myjin.customClasses.CustomTabLayout
         android:id="@+id/ctb_messages"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="center"
         app:tabMode="scrollable"
-        app:tabSelectedTextColor="@color/colorAccent" />
+        app:tabSelectedTextColor="@color/colorAccent" />-->
+
+
+    <com.github.rahatarmanahmed.cpv.CircularProgressView
+        android:id="@+id/cpv_messages"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:cpv_animAutostart="true"
+        app:cpv_indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:visibility="gone"
+        android:id="@+id/spinner_sources"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:background="@color/transparent"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toStartOf="@id/spinner_types"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:visibility="gone"
+        android:id="@+id/spinner_types"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:background="@color/transparent"
+        android:spinnerMode="dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/spinner_sources"
+        app:layout_constraintWidth_percent="0.5" />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_messages"
@@ -21,16 +94,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctb_messages" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_sources" />
 
     <View
         android:id="@+id/v1"
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="@drawable/gradient"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ctb_messages" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_sources" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -30,4 +30,32 @@
         app:layout_constraintVertical_bias="0.2" />
 
 
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_healthBankText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:drawableTop="@drawable/ic_wifi_not_connected"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="@string/checkConnectionAndTryAgain"
+        android:textColor="@color/title"
+        android:visibility="gone"
+        app:fontFamily="@font/yekan"
+        app:layout_constraintBottom_toTopOf="@+id/cpv_hbf" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_healthBankTryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_refresh_test"
+        android:text="@string/tryAgain"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+
 </android.support.constraint.ConstraintLayout>

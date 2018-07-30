@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.*
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,7 @@ import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_health_bank.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
-import myjin.pro.ahoora.myjin.activitys.ServerStatusActivity
+import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
 import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
@@ -28,6 +27,7 @@ import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
 import myjin.pro.ahoora.myjin.utils.SharedPer
+import myjin.pro.ahoora.myjin.utils.StaticValues
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call
@@ -41,6 +41,9 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             R.id.tv_location -> {
                 openProvAndCityDialog()
+            }
+            R.id.btn_healthBankTryAgain -> {
+                tryAgain()
             }
         }
     }
@@ -62,7 +65,6 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
-        Log.e("SDFSFSfd", "${e.isCon}")
         netAvailability = e.isCon
     }
 
@@ -87,6 +89,9 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity2).tvLocation.setOnClickListener(this)
         netAvailability = NetworkUtil().isNetworkAvailable(activity as Context)
+
+        btn_healthBankTryAgain.setOnClickListener(this)
+
         getCityAndProvFromSp()
         checkNetState()
     }
@@ -96,7 +101,11 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         val sp = SharedPer(activity as Context)
         provId = sp.getInteger(getString(R.string.provId))
         cityId = sp.getInteger(getString(R.string.cityId))
-        (activity as MainActivity2).tvLocation.text = sp.getString(getString(R.string.provCityPair))
+        var n = sp.getString(getString(R.string.provCityPair))
+        if (n == "") {
+            n = "کردستان"
+        }
+        (activity as MainActivity2).tvLocation.text = n
     }
 
     private fun checkNetState() {
@@ -111,15 +120,18 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
 
     private fun tryAgain() {
-        // todo
+        checkNetState()
     }
 
     private fun showErrLayout() {
-        // todo
+        tv_healthBankText.visibility = View.VISIBLE
+        btn_healthBankTryAgain.visibility = View.VISIBLE
     }
 
     private fun hideErrLayout() {
-        // todo
+        tv_healthBankText.visibility = View.GONE
+        btn_healthBankTryAgain.visibility = View.GONE
+
     }
 
     private var lock = false
@@ -128,6 +140,8 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         if (!lock) {
             lock = true
             showCPV()
+            hideErrLayout()
+
             (activity as MainActivity2).hideSearchFab()
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
             val response = apiInterface.getGroupCount(provId, cityId)
@@ -152,12 +166,16 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
                     loadAdapter(list!!)
                     lock = false
+
+                    hideCPV()
+
                 }
 
                 override fun onFailure(call: Call<List<KotlinGroupModel>>?, t: Throwable?) {
                     Toast.makeText(activity, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
                     lock = false
                     loadFlag = false
+
                     showErrLayout()
                     hideCPV()
                 }
@@ -277,14 +295,21 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
             override fun onClick(v: View?) {
-                startActivity(Intent(context, ServerStatusActivity::class.java))
+                if (groupsList[adapterPosition].counter > 0) {
+                    val i = Intent(activity, OfficeActivity::class.java)
+                    i.putExtra(StaticValues.CATEGORY, groupsList.get(adapterPosition).groupId)
+                    i.putExtra(StaticValues.PROVID, provId)
+                    i.putExtra(StaticValues.CITYID, cityId)
+                    startActivity(i)
+                } else {
+                    Toast.makeText(activity, "پایگاه داده ژین در حال تکمیل شدن اطلاعات است ...", Toast.LENGTH_SHORT).show()
+                }
             }
 
             val imageView: AppCompatImageView = itemView.findViewById(R.id.iv_mainCategoryImage)
             val titleTv: AppCompatTextView = itemView.findViewById(R.id.tv_mainCategoryTitle)
             val subTitle: AppCompatTextView = itemView.findViewById(R.id.tv_mainCategorySubTitle)
             val container: CardView = itemView.findViewById(R.id.cv_mainCategoryContainer)
-
 
             init {
                 container.setOnClickListener(this)

@@ -25,6 +25,7 @@
     <string name="cityId">cityId</string>
     <string name="provCityPair">provCityPair</string>
     <string name="skip">بگذر</string>
+    <string name="checkConnectionAndTryAgain">از اتصال دستگاه به اینترنت مطمئن شوید سپس دوباره تلاش کنید</string>
 
     <string-array name="provArray2">
         <item> آذربایجان شرقی</item>

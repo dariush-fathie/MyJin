@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
 import kotlinx.android.synthetic.main.fragment_messages.*
 import myjin.pro.ahoora.myjin.R
@@ -24,14 +26,17 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
+class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnClickListener {
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_messagesTryAgain -> {
+                tryAgain()
+            }
+        }
+    }
 
-
-    private var firstLoad = false
     private var updated = false
-
     private var loadFlag = false
-
     private var netAvailability = false
 
 
@@ -44,20 +49,16 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
     fun onBecomeVisible(e: VisibilityEvent) {
         if (e.position == 1) {
             Log.e(MessagesFragment::class.java.simpleName, "${e.position}")
-            if (firstLoad) {
+            if (!loadFlag) {
                 if (netAvailability) {
                     getMessages()
-                    loadTabs()
                 } else {
-                    // todo :: connection not availabel
+                    showErrLayout()
                 }
             } else {
-                // todo : it's not first load
-            }
-            if (updated) {
-                // todo : do something honey!!
-            } else {
-
+                if (updated) {
+                    tryAgain()
+                }
             }
         }
     }
@@ -76,16 +77,66 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
         return inflater.inflate(R.layout.fragment_messages, container, false)
     }
 
-    private fun loadTabs() {
-        ctb_messages.addTab(ctb_messages.newTab().setText("همه"))
-        ctb_messages.addTab(ctb_messages.newTab().setText("آموزشی"))
-        ctb_messages.addTab(ctb_messages.newTab().setText("هشدار"))
-        ctb_messages.addTab(ctb_messages.newTab().setText("اطلاعیه"))
-        ctb_messages.addTab(ctb_messages.newTab().setText("سلامت"))
-        ctb_messages.addTab(ctb_messages.newTab().setText("طب سنتی"))
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btn_messagesTryAgain.setOnClickListener(this)
+    }
 
-        ctb_messages.removeOnTabSelectedListener(this)
-        ctb_messages.addOnTabSelectedListener(this)
+    private fun loadTabsAndSpinner() {
+        v1.visibility = View.VISIBLE
+        spinner_sources.visibility = View.VISIBLE
+        spinner_types.visibility = View.VISIBLE
+
+        spinner_types.prompt = "دسته بندی"
+        spinner_sources.prompt = "منابع"
+
+        val typesArray = ArrayList<String>()
+        typesArray.add("ذخیره شده ها")
+        typesArray.add("همه")
+        typesArray.add("آموزشی")
+        typesArray.add("هشدار")
+        typesArray.add("اطلاعیه")
+
+        spinner_types.adapter = ArrayAdapter<String>(activity as Context
+                , R.layout.spinner_item_layout
+                , R.id.tv_spinnerTitle
+                , typesArray)
+
+
+
+        spinner_types.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.e("messagesFragment", "types position $position")
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+
+
+        val sourceArray = ArrayList<String>()
+        // todo load sources
+        sourceArray.add("دانشگاه علوم پزشکی")
+        sourceArray.add("استانداری استان کردستان")
+        sourceArray.add("مجمع عالی پزشکان")
+        sourceArray.add("بیمارستان بعثت")
+
+        spinner_sources.adapter = ArrayAdapter<String>(activity as Context
+                , R.layout.spinner_item_layout
+                , R.id.tv_spinnerTitle
+                , sourceArray)
+
+        spinner_sources.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.e("messagesFragment", "sources position $position")
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+        }
+
     }
 
 
@@ -98,53 +149,82 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener {
     override fun onTabSelected(tab: TabLayout.Tab?) {
     }
 
+    private var lock = false
 
     private fun getMessages() {
-        hideErrLayout()
-        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-        val response = apiInterface.messages
-        response.enqueue(object : Callback<List<KotlinMessagesModel>> {
-            override fun onResponse(call: Call<List<KotlinMessagesModel>>?, response: Response<List<KotlinMessagesModel>>?) {
+        if (!lock) {
+            lock = true
+            hideErrLayout()
+            showCPV()
+            val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+            val response = apiInterface.messages
+            response.enqueue(object : Callback<List<KotlinMessagesModel>> {
+                override fun onResponse(call: Call<List<KotlinMessagesModel>>?, response: Response<List<KotlinMessagesModel>>?) {
 
-                response?.body() ?: onFailure(call, Throwable("null body"))
-                response?.body() ?: return
+                    response?.body() ?: onFailure(call, Throwable("null body"))
+                    response?.body() ?: return
 
-                val result = response.body()
+                    val result = response.body()
 
-                result ?: onFailure(call, Throwable("null list"))
-                result ?: return
+                    result ?: onFailure(call, Throwable("null list"))
+                    result ?: return
 
-                // todo saveMessages in realm
-                result.forEach { item: KotlinMessagesModel ->
-                    Log.e("Messages", item.toString())
+                    // todo saveMessages in realm
+                    result.forEach { item: KotlinMessagesModel ->
+                        Log.e("Messages", item.toString())
+                    }
+
+                    loadTabsAndSpinner()
+
+                    loadAdapter(result)
+                    loadFlag = true
+
+                    hideCPV()
+                    hideErrLayout()
+                    lock = false
                 }
 
-                loadAdapter(result)
-                loadFlag = true
-            }
-
-            override fun onFailure(call: Call<List<KotlinMessagesModel>>?, t: Throwable?) {
-                Log.e("Messages", "${t?.message} - error")
-                loadFlag = false
-                showErrLayout()
-            }
-        })
-
+                override fun onFailure(call: Call<List<KotlinMessagesModel>>?, t: Throwable?) {
+                    Log.e("Messages", "${t?.message} - error")
+                    loadFlag = false
+                    showErrLayout()
+                    hideCPV()
+                    lock = false
+                }
+            })
+        }
     }
 
     private fun tryAgain() {
-        // todo
+        hideErrLayout()
+        if (netAvailability) {
+            getMessages()
+        } else {
+            showErrLayout()
+        }
     }
 
     private fun showErrLayout() {
-        // todo
+        tv_MessagesText.visibility = View.VISIBLE
+        btn_messagesTryAgain.visibility = View.VISIBLE
     }
 
     private fun hideErrLayout() {
-        // todo
+        tv_MessagesText.visibility = View.GONE
+        btn_messagesTryAgain.visibility = View.GONE
     }
 
+    private fun showCPV() {
+        cpv_messages.visibility = View.VISIBLE
+    }
+
+    private fun hideCPV() {
+        cpv_messages.visibility = View.GONE
+    }
+
+
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
+        Log.e("messages", "loadAdapter")
         rv_messages.layoutManager = LinearLayoutManager(activity)
         rv_messages.addItemDecoration(VerticalLinearLayoutDecoration(activity as Context
                 , 8, 8, 8, 8))
