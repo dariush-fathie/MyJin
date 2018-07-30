@@ -28,6 +28,7 @@ import android.widget.Toast
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
+import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.activity_office.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -84,9 +85,47 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             initBottomSheet()
             tabLayoutInterface = TabLayoutInterface(this, supportFragmentManager, bottomSheetBehavior, ll_progress)
             ctbl.addOnTabSelectedListener(tabLayoutInterface)
-            getItems()
+
+            if (NetworkUtil().isNetworkAvailable(this)) {
+                getItems()
+            } else {
+                showErrLayout()
+            }
         }, 50)
 
+    }
+
+    private fun showSomeViews() {
+        view_shadow.visibility = View.VISIBLE
+        cl_bottomSheetLayout.visibility = View.VISIBLE
+        ll_t.visibility = View.VISIBLE
+    }
+
+    private fun hideSomeViews() {
+        view_shadow.visibility = View.GONE
+        cl_bottomSheetLayout.visibility = View.GONE
+        ll_t.visibility = View.GONE
+    }
+
+    private fun showErrLayout() {
+        hideMainProgressLayout()
+        hideSomeViews()
+        btn_tryAgain.visibility = View.VISIBLE
+        tv_netErrText.visibility = View.VISIBLE
+    }
+
+    private fun hideErrLayout() {
+        btn_tryAgain.visibility = View.GONE
+        tv_netErrText.visibility = View.GONE
+    }
+
+    private fun tryAgain() {
+        hideErrLayout()
+        if (NetworkUtil().isNetworkAvailable(this)) {
+            getItems()
+        } else {
+            showErrLayout()
+        }
     }
 
     private fun hideFilter() {
@@ -106,6 +145,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
     private fun initListener() {
+        btn_tryAgain.setOnClickListener(this)
         rl_filter.setOnClickListener(this)
         rl_sort.setOnClickListener(this)
         iv_goback.setOnClickListener(this)
@@ -170,9 +210,10 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         ll_progressMain.visibility = View.VISIBLE
     }
 
-
     private fun getItems() {
         if (Utils.isNetworkAvailable(this)) {
+            hideErrLayout()
+            showMainProgressLayout()
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
             apiInterface.getItems(groupId, provId, cityId).enqueue(object : Callback<List<KotlinItemModel>> {
                 override fun onResponse(call: Call<List<KotlinItemModel>>?, response: Response<List<KotlinItemModel>>?) {
@@ -181,9 +222,9 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
                     val realmDatabase = Realm.getDefaultInstance()
                     realmDatabase.executeTransactionAsync { realm: Realm? ->
-
                         val savedItem = realm?.where(KotlinItemModel::class.java)
                                 ?.equalTo("saved", true)
+                                ?.equalTo("groupId", groupId)
                                 ?.findAll()
                         val savedItemIds = ArrayList<Int>()
                         savedItem?.forEach { model: KotlinItemModel? ->
@@ -210,15 +251,21 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                         }
                         runOnUiThread {
                             initList(idArray)
-
                         }
                     }
+                    hideErrLayout()
+                    hideMainProgressLayout()
+                    showSomeViews()
                 }
 
                 override fun onFailure(call: Call<List<KotlinItemModel>>?, t: Throwable?) {
                     Log.e("ERR", t?.message + "  ")
+                    showErrLayout()
+                    hideMainProgressLayout()
                 }
             })
+        } else {
+            showErrLayout()
         }
     }
 
@@ -343,6 +390,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     override fun onClick(v: View?) {
         when (v?.id) {
+            R.id.btn_tryAgain -> tryAgain()
             R.id.tv_login_outsign -> Toast.makeText(this@OfficeActivity, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
 
             R.id.rl_filter -> onFilterClick()
@@ -363,7 +411,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.rl_pishkhan_services -> early_Mth()
             R.id.rl_post_services -> early_Mth()
             R.id.rl_salamat -> startActivity(Intent(this@OfficeActivity, HeaIncServiceActivity::class.java))
-
 
         }
     }

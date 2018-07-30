@@ -9,6 +9,7 @@ import android.os.Handler
 import android.support.design.widget.AppBarLayout
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
+import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -17,6 +18,7 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -25,6 +27,7 @@ import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
+import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
@@ -151,6 +154,7 @@ class MainActivity2 : AppCompatActivity(),
     private fun checkNetState() {
         if (netAvailability) {
             getSlides()
+            getSpList()
             //todo : get services and others ...
         } else {
             showNetErrSnack()
@@ -161,6 +165,10 @@ class MainActivity2 : AppCompatActivity(),
     fun tryAgainEvent(e: TryAgainEvent) {
         if (!sliderLoadFlag) {
             getSlides()
+        }
+
+        if (!spLoadFlag) {
+            getSpList()
         }
         // todo : get services
     }
@@ -293,6 +301,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private var sliderLoadFlag = false
+    private var spLoadFlag = false
 
     private fun initSlider(list: ArrayList<String>) {
         Log.e("sdfdsfds", "sdfsfsfsf")
@@ -321,7 +330,7 @@ class MainActivity2 : AppCompatActivity(),
                 list?.get(0)!!.slideList?.forEach { i ->
                     urls.add(i.fileUrl!!)
                 }
-
+                sliderLoadFlag = true
                 initSlider(urls)
             }
 
@@ -329,6 +338,40 @@ class MainActivity2 : AppCompatActivity(),
                 Log.e("ERR", t?.message + "  ")
                 sliderLoadFlag = false
                 showNetErrSnack()
+            }
+        })
+    }
+
+    private fun getSpList() {
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        val response = apiInterface.spList
+        response.enqueue(object : Callback<List<KotlinSpecialityModel>> {
+            override fun onResponse(call: Call<List<KotlinSpecialityModel>>?, response: Response<List<KotlinSpecialityModel>>?) {
+                val list: List<KotlinSpecialityModel>? = response?.body()
+                list?.forEach { sp: KotlinSpecialityModel ->
+                    sp.saved = true
+                }
+                val realmDatabase = Realm.getDefaultInstance()
+                realmDatabase.executeTransactionAsync { realm: Realm? ->
+                    realm?.copyToRealmOrUpdate(list!!)
+                    /*val savedSps = realm?.where(KotlinSpecialityModel::class.java)?.findAll()
+                    realm?.where(KotlinSpecialityModel::class.java)?.findAll()?.deleteAllFromRealm()
+                    list?.forEach { spl: KotlinSpecialityModel ->
+                        spl.saved = true
+                        realm?.copyToRealm(spl)
+                    }*/
+                    /*val r = realm?.where(KotlinSpecialityModel::class.java)?.findAll()
+                    r!!.forEach { model: KotlinSpecialityModel? ->
+                        Log.e("SP", "${model?.name}:${model?.specialtyId}:${model?.saved}")
+                    }
+                    */
+                }
+                spLoadFlag = true
+            }
+
+            override fun onFailure(call: Call<List<KotlinSpecialityModel>>?, t: Throwable?) {
+                Log.e("ERR", t?.message + "  ")
+                spLoadFlag = false
             }
         })
     }
@@ -351,6 +394,15 @@ class MainActivity2 : AppCompatActivity(),
                     finish()
                 })
         alertDialog.show()
+    }
+
+
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+            drawerLayout.closeDrawers()
+        } else {
+            showExitDialog()
+        }
     }
 
 

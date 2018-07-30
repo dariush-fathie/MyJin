@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
+import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_messages.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.MessagesAdapter
@@ -50,7 +51,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         if (e.position == 1) {
             Log.e(MessagesFragment::class.java.simpleName, "${e.position}")
             if (!loadFlag) {
-                if (netAvailability) {
+                if (NetworkUtil().isNetworkAvailable(activity as Context)) {
                     getMessages()
                 } else {
                     showErrLayout()
@@ -103,8 +104,6 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                 , R.layout.spinner_item_layout
                 , R.id.tv_spinnerTitle
                 , typesArray)
-
-
 
         spinner_types.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -199,7 +198,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
     private fun tryAgain() {
         hideErrLayout()
-        if (netAvailability) {
+        if (NetworkUtil().isNetworkAvailable(activity as Context)) {
             getMessages()
         } else {
             showErrLayout()

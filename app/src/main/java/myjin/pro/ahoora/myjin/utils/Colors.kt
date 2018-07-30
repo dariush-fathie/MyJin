@@ -15,6 +15,8 @@ class Colors(context: Context) {
 
     val niceBlue = ContextCompat.getColor(context, R.color.niceBlue)
     val orange = ContextCompat.getColor(context, R.color.colorAccent)
+    val red1 = ContextCompat.getColor(context, R.color.red1)
+    val blue3 = ContextCompat.getColor(context, R.color.blue3)
 
 
 }

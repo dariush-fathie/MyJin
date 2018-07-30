@@ -104,6 +104,8 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         var n = sp.getString(getString(R.string.provCityPair))
         if (n == "") {
             n = "کردستان"
+            provId = 19
+            cityId = 0
         }
         (activity as MainActivity2).tvLocation.text = n
     }
@@ -230,11 +232,16 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                 this.cityId = cityId
                 saveProv(name)
                 loadFlag = false
+                clearAdapter()
                 // todo : check net connection first please
                 getGroupCount()
             }
         }
         dialog.showSpinerDialog()
+    }
+
+    private fun clearAdapter() {
+        mainList.adapter = null
     }
 
     private fun saveProv(name: String) {

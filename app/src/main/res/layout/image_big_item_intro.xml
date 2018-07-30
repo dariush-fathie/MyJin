@@ -8,26 +8,28 @@
     android:paddingBottom="72dp">
 
     <android.support.v7.widget.AppCompatImageView
-        android:padding="16dp"
         android:id="@+id/iv_imageBig"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="48dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:fontFamily="@font/yekan"
         android:id="@+id/tv_slides_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="5dp"
         android:lineSpacingMultiplier="1.2"
         android:maxLines="2"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:paddingEnd="24dp"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"
         android:text="@string/lorem"
         android:textColor="@color/white"
         android:textSize="15sp"

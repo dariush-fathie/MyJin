@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     }
 
+
     private fun goToServicesActivity(title: String, i: Int) {
         val intentM = Intent(this@MainActivity, ServicesActivity::class.java)
         intentM.putExtra("ServiceTitle", title)
@@ -384,6 +385,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         fab_search.visibility = View.VISIBLE
     }
 
+    /*copied*/
     private fun getSpList() {
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
         val response = apiInterface.spList

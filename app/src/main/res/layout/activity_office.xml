@@ -5,202 +5,237 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/back">
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/back">
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/back">
 
-        <RelativeLayout
-            android:id="@+id/rl_toolbar"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/green"
-            android:clickable="true"
-            android:focusable="true">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_officeTitle"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:text="مطب ها"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:fontFamily="@font/yekan" />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_menu"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:padding="11dp"
-                android:src="@drawable/ic_menu"
-                app:tint="@color/white" />
-
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_goback"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentStart="true"
-                android:padding="12dp"
-                android:src="@drawable/ic_back"
-                app:tint="@color/white" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_t"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/white"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rl_toolbar">
+            android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/rl_sort"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/white_round_rect"
-                android:gravity="center">
+                android:id="@+id/rl_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/green"
+                android:clickable="true"
+                android:focusable="true">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_sort"
+                    android:id="@+id/tv_officeTitle"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_toStartOf="@+id/iv_sort"
-                    android:gravity="start|center_vertical"
-                    android:paddingEnd="8dp"
-                    android:paddingStart="8dp"
-                    android:text="مرتب سازی"
-                    android:textSize="17sp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:text="مطب ها"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
                     app:fontFamily="@font/yekan" />
 
                 <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/iv_sort"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:id="@+id/iv_menu"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
                     android:layout_alignParentEnd="true"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_sort"
-                    app:tint="@color/green" />
+                    android:layout_alignParentTop="true"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_menu"
+                    app:tint="@color/white" />
 
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/iv_goback"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:layout_alignParentStart="true"
+                    android:padding="7dp"
+                    android:src="@drawable/ic_back_test"
+                    app:tint="@color/white" />
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_t"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@color/white"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rl_toolbar">
+
+                <RelativeLayout
+                    android:id="@+id/rl_sort"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_round_rect"
+                    android:gravity="center">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_sort"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:layout_toStartOf="@+id/iv_sort"
+                        android:gravity="start|center_vertical"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:text="مرتب سازی"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/yekan" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/iv_sort"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_alignParentEnd="true"
+                        android:padding="7dp"
+                        android:src="@drawable/ic_sort_test"
+                        app:tint="@color/green" />
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_divider"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/c1" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_filter"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:background="@drawable/white_round_rect"
+                    android:gravity="center">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/tv_filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="44dp"
+                        android:layout_toStartOf="@+id/iv_category"
+                        android:gravity="start|center_vertical"
+                        android:maxLines="1"
+                        android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
+                        android:text="فیلتر کردن"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/yekan" />
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/iv_category"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_alignParentEnd="true"
+                        android:padding="7dp"
+                        android:src="@drawable/ic_filter_test"
+                        app:tint="@color/green" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_items"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_t" />
 
             <View
-                android:id="@+id/view_divider"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:background="@color/c1" />
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/gradient"
+                app:layout_constraintTop_toBottomOf="@+id/ll_t" />
 
-            <RelativeLayout
-                android:id="@+id/rl_filter"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/white_round_rect"
-                android:gravity="center">
+            <LinearLayout
+                android:id="@+id/ll_progressMain"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/back"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ll_t">
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_toStartOf="@+id/iv_category"
-                    android:gravity="start|center_vertical"
-                    android:maxLines="1"
-                    android:paddingEnd="8dp"
-                    android:paddingStart="8dp"
-                    android:text="فیلتر کردن"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/yekan" />
-
-                <android.support.v7.widget.AppCompatImageView
-                    android:id="@+id/iv_category"
+                <com.github.rahatarmanahmed.cpv.CircularProgressView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_filter"
-                    app:tint="@color/green" />
+                    app:cpv_animAutostart="true"
+                    app:cpv_indeterminate="true" />
+            </LinearLayout>
 
-            </RelativeLayout>
 
-        </LinearLayout>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_netErrText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:drawableTop="@drawable/ic_wifi_not_connected"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/checkConnectionAndTryAgain"
+                android:textColor="@color/title"
+                android:visibility="gone"
+                app:fontFamily="@font/yekan"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_items"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_t" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_tryAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/ic_refresh_test"
+                android:text="@string/tryAgain"
+                android:visibility="gone"
+                app:fontFamily="@font/yekan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_netErrText"
+                app:layout_constraintVertical_bias="0.2" />
+
+        </android.support.constraint.ConstraintLayout>
 
         <View
+            android:id="@+id/view_shadow"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="3dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="48dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/gradient"
+            android:rotation="180"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@+id/ll_t" />
 
-        <LinearLayout
-            android:id="@+id/ll_progressMain"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/back"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_t">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_goUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="72dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_up_arrow"
+            android:visibility="gone"
+            app:elevation="2dp"
+            app:fabSize="mini" />
 
-            <com.github.rahatarmanahmed.cpv.CircularProgressView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:cpv_animAutostart="true"
-                app:cpv_indeterminate="true" />
-        </LinearLayout>
+        <include layout="@layout/bottom_sheet_layout" />
 
-    </android.support.constraint.ConstraintLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="48dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/gradient"
-        android:rotation="180"
-        app:layout_constraintTop_toBottomOf="@+id/ll_t" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:visibility="gone"
-        app:elevation="2dp"
-        android:id="@+id/fab_goUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="72dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_up_arrow"
-        app:fabSize="mini" />
-
-    <include layout="@layout/bottom_sheet_layout" />
-</android.support.design.widget.CoordinatorLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <include layout="@layout/drawer_layout" />
 

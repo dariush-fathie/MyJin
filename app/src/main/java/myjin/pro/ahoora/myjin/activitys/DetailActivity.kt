@@ -2,7 +2,8 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.*
+import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.PorterDuff
@@ -64,9 +65,10 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCallback, GoogleMap.OnCameraMoveListener {
-    internal var Receiver: BroadcastReceiver? = null
-    private val request_permission = 1052
-    private val request_location_setting = 1053
+
+    //var receiver: BroadcastReceiver? = null
+    private val requestPermission = 1052
+    private val requestLocationSetting = 1053
 
     private val realm = Realm.getDefaultInstance()!!
 
@@ -77,8 +79,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private var g_url = ""
     private var n = 0
     private var forward = true
-    private var t = Timer()
-    private var play = true
 
     private lateinit var polyline: Polyline
 
@@ -165,47 +165,49 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        if (intent != null) {
-            id = intent.getIntExtra("id", 1)
-            isSaved = checkItemIsSaved()
-            g_url = intent.getStringExtra("g_url")
+        Handler().postDelayed({
+            if (intent != null) {
+                id = intent.getIntExtra("id", 1)
+                isSaved = checkItemIsSaved()
+                g_url = intent.getStringExtra("g_url")
 
-            if (isSaved) {
-                val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_bookmark)
-                draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
-                iv_save.setImageDrawable(draw)
-            } else {
-                val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.icons_bookmark_1)
-                draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
-                iv_save.setImageDrawable(draw)
+                if (isSaved) {
+                    val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_bookmark)
+                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
+                    iv_save.setImageDrawable(draw)
+                } else {
+                    val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.icons_bookmark_1)
+                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
+                    iv_save.setImageDrawable(draw)
+                }
+
+                if (intent.getIntExtra(StaticValues.MODEL, 0) == 0) {
+                    i = 0
+                } else if (intent.getIntExtra(StaticValues.MODEL, 0) == 1) {
+                    i = 1
+                    iv_save.visibility = View.GONE
+                } else if (intent.getIntExtra(StaticValues.MODEL, 0) == 2) {
+                    i = 2
+                    iv_save.visibility = View.VISIBLE
+                }
+
+                if (i != 2) {
+                    val realm = Realm.getDefaultInstance()
+                    realm.beginTransaction()
+                    item = realm.where(KotlinItemModel::class.java).equalTo("centerId", id).findFirst()!!
+                    realm.commitTransaction()
+                } else {
+                    item = SearchActivity.tempModel
+                }
+
+                loadDetails()
             }
 
-            if (intent.getIntExtra(StaticValues.MODEL, 0) == 0) {
-                i = 0
-            } else if (intent.getIntExtra(StaticValues.MODEL, 0) == 1) {
-                i = 1
-                iv_save.visibility = View.GONE
-            } else if (intent.getIntExtra(StaticValues.MODEL, 0) == 2) {
-                i = 2
-                iv_save.visibility = View.VISIBLE
-            }
+            setListener()
+            initBottomSheet()
+            initLists()
+        }, 200)
 
-            if (i != 2) {
-                val realm = Realm.getDefaultInstance()
-                realm.beginTransaction()
-                item = realm.where(KotlinItemModel::class.java).equalTo("centerId", id).findFirst()!!
-                realm.commitTransaction()
-            } else {
-                item = SearchActivity.tempModel
-            }
-
-            loadDetails()
-        }
-
-        setListener()
-        initBottomSheet()
-        initLists()
-        startReceive()
     }
 
     private fun setListener() {
@@ -226,20 +228,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     override fun onStart() {
         super.onStart()
-        registerReceiver(Receiver, IntentFilter(getString(R.string.reciver2)))
     }
 
-    private fun startReceive() {
-        if (Receiver == null) {
-            Receiver = object : BroadcastReceiver() {
-                override fun onReceive(context: Context, intent: Intent) {
-                    if (intent.action == getString(R.string.reciver2)) {
-                        playOrStop()
-                    }
-                }
-            }
-        }
-    }
 
     private fun selectModeDir() {
         val popupMenu = PopupMenu(this@DetailActivity, cv_direction, Gravity.END)
@@ -295,7 +285,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         str = "${tv_title.text}\n\n"
         str += "${tv_subTitle.text}\n\n"
         str += " آدرس : " + "${tv_addr.text}\n\n"
-
         str += "لینک دانلود ژین من \n"
 
         if (realm.isInTransaction) realm.commitTransaction()
@@ -312,7 +301,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
 /*String url= MediaStore.Images.Media.insertImage(this.getContentResolver(), theBitmap, "title", "description");
         intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));*/
-
 
         shareIntent.action = Intent.ACTION_SEND
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
@@ -372,6 +360,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 }
             })
         } else {
+            alert.dismiss()
             Toast.makeText(this, "مکان فعلی شما مشخص نیست", Toast.LENGTH_SHORT).show()
         }
     }
@@ -432,7 +421,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == request_location_setting) {
+        if (requestCode == requestLocationSetting) {
             Log.e("resultCode", "$resultCode")
             checkLocationSetting()
         }
@@ -444,7 +433,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         mLocationSettingsRequest = LocationSettingsRequest.Builder().setAlwaysShow(true).addLocationRequest(mLocationRequest).build()
         mSettingsClient.checkLocationSettings(mLocationSettingsRequest)
                 .addOnSuccessListener {
-
                     createLocationCallback()
                 }.addOnFailureListener { exception ->
                     if (exception is ResolvableApiException) {
@@ -454,7 +442,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                             // Show the dialog by calling startResolutionForResult(),
                             // and check the result in onActivityResult().
                             exception.startResolutionForResult(this@DetailActivity,
-                                    request_location_setting)
+                                    requestLocationSetting)
                         } catch (sendEx: IntentSender.SendIntentException) {
                             // Ignore the error.
                         }
@@ -511,10 +499,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     override fun onStop() {
-        super.onStop()
         stopLocationUpdate()
-        t.cancel()
-        unregisterReceiver(Receiver);
+        super.onStop()
     }
 
     // save map center point in center information
@@ -608,23 +594,18 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 googleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
             }
             1 -> {
-
                 googleMap?.mapType = GoogleMap.MAP_TYPE_SATELLITE
             }
             2 -> {
                 googleMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
-
-
             }
         }
-
         checkLocationPermissions()
         mMap?.setOnCameraMoveListener(this)
         val p = LatLng(item.addressList!![0]?.latitude?.toDouble()!!, item.addressList!![0]?.longitude?.toDouble()!!)
         mMap?.addMarker(MarkerOptions().title("${item.firstName} ${item.lastName}").position(p))?.showInfoWindow()
         mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(p, 16f))
         checkUserLoggedIn()
-
     }
 
     private fun formatLatLng(p: LatLng): String {
@@ -698,42 +679,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         snapHelper.attachToRecyclerView(rv_imageListBig)
     }
 
-    private fun autoScrollSlide() {
-        val handler = Handler()
-        t = Timer()
-
-        t.scheduleAtFixedRate(object : TimerTask() {
-            override fun run() {
-                handler.post {
-                    if (forward) {
-                        rv_imageListBig.smoothScrollToPosition(n++)
-                    } else {
-                        rv_imageListBig.smoothScrollToPosition(n--)
-                    }
-                    if (n == rv_imageListBig.adapter.itemCount - 1) {
-                        forward = false
-                        n = rv_imageListBig.adapter.itemCount - 1
-                    }
-                    if (n == 0) {
-                        forward = true
-                    }
-                }
-            }
-        }, 1, 4000)
-    }
-
-    private fun playOrStop() {
-        if (play) {
-            play = false
-            t.cancel()
-        } else {
-            play = true
-            autoScrollSlide()
-
-        }
-        Log.e("ddddd", "dddd")
-    }
-
     private fun goToWebSite() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tv_website.text.toString().trim()))
         startActivity(intent)
@@ -790,25 +735,25 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         str = ""
 
-        if (item.addressList!![0]?.sat_attend!!>0) {
+        if (item.addressList!![0]?.sat_attend!! > 0) {
             str = "شنبه - "
         }
-        if (item.addressList!![0]?.sun_attend!!>0) {
+        if (item.addressList!![0]?.sun_attend!! > 0) {
             str += "یکشنبه - "
         }
-        if (item.addressList!![0]?.mon_attend!!>0) {
+        if (item.addressList!![0]?.mon_attend!! > 0) {
             str += "دوشنبه - "
         }
-        if (item.addressList!![0]?.tues_attend!!>0) {
+        if (item.addressList!![0]?.tues_attend!! > 0) {
             str += "سه شنبه - "
         }
-        if (item.addressList!![0]?.wed_attend!!>0) {
+        if (item.addressList!![0]?.wed_attend!! > 0) {
             str += "چهار شنبه - "
         }
-        if (item.addressList!![0]?.thurs_attend!!>0) {
+        if (item.addressList!![0]?.thurs_attend!! > 0) {
             str += "پنجشنبه - "
         }
-        if (item.addressList!![0]?.fri_attend!!>0) {
+        if (item.addressList!![0]?.fri_attend!! > 0) {
 
             str += "جمعه - "
         }
@@ -822,7 +767,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         if (item.logoImg.equals("")) {
             if (item.gen?.equals("0")!!) {
-               // aiv_logoImg.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+                // aiv_logoImg.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
                 url = g_url
 
             } else if (item.gen?.equals("1")!!) {
@@ -928,7 +873,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             } else {
                 ActivityCompat.requestPermissions(this
                         , arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
-                        , request_permission)
+                        , requestPermission)
             }
         } else {
             createLocationRequest()
@@ -937,14 +882,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        if (requestCode == request_permission) {
+        if (requestCode == requestPermission) {
             if (permissions[0] == android.Manifest.permission.ACCESS_FINE_LOCATION) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Log.e("granted", "success")
                     createLocationRequest()
                 } else {
                     Log.e("granted", "failed")
-
+                    fab_direction.visibility = View.GONE
                 }
             }
         }
