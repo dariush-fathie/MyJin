@@ -86,6 +86,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         v1.visibility = View.VISIBLE
         spinner_sources.visibility = View.VISIBLE
         spinner_types.visibility = View.VISIBLE
+        iv_arrowDown1.visibility = View.VISIBLE
+        iv_arrowDown2.visibility = View.VISIBLE
 
         spinner_types.prompt = "دسته بندی"
         spinner_sources.prompt = "منابع"
