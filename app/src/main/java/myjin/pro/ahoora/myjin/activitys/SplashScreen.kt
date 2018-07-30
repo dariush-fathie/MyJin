@@ -308,13 +308,16 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
 
     private fun gotoHome1() {
         startActivity(Intent(this, MainActivity2::class.java))
+        finish()
     }
 
     private fun goToFav1() {
         startActivity(Intent(this, FavActivity::class.java))
+        finish()
     }
 
     private fun gotoIntro() {
         startActivity(Intent(this, AppIntro::class.java))
+        finish()
     }
 }

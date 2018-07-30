@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.*
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
+import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_health_bank.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
@@ -60,6 +62,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
+        Log.e("SDFSFSfd", "${e.isCon}")
         netAvailability = e.isCon
     }
 
@@ -83,6 +86,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity2).tvLocation.setOnClickListener(this)
+        netAvailability = NetworkUtil().isNetworkAvailable(activity as Context)
         getCityAndProvFromSp()
         checkNetState()
     }

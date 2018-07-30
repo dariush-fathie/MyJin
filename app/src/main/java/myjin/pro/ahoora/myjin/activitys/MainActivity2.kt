@@ -112,6 +112,7 @@ class MainActivity2 : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         NetworkUtil().updateNetFlag(this)
+        netAvailability = NetworkUtil().isNetworkAvailable(this)
         setContentView(R.layout.activity_main2)
 
         tvLocation = tv_location
