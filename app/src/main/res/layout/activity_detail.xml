@@ -17,6 +17,16 @@
             android:clickable="true"
             android:focusable="true">
 
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_share"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:padding="12dp"
+                android:src="@drawable/ic_share"
+                app:tint="@color/white" />
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_goback"
                 android:layout_width="44dp"
@@ -25,6 +35,7 @@
                 android:padding="7dp"
                 android:src="@drawable/ic_back_test"
                 app:tint="@color/white" />
+
 
         </RelativeLayout>
 
@@ -68,76 +79,7 @@
                             app:selectedDotColor="@color/green" />
 
                     </RelativeLayout>
-
                 </android.support.v7.widget.CardView>
-
-                <com.google.android.flexbox.FlexboxLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:paddingTop="8dp"
-                    app:flexWrap="wrap"
-                    app:justifyContent="space_evenly">
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:cardBackgroundColor="@color/cpv_default_color"
-                        app:cardCornerRadius="20dp">
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_share"
-                            app:tint="@color/white" />
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:cardBackgroundColor="@color/green"
-                        app:cardCornerRadius="20dp">
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_pin"
-                            app:tint="@color/white" />
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:cardBackgroundColor="@color/colorAccent"
-                        app:cardCornerRadius="20dp">
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_bookmark"
-                            app:tint="@color/white" />
-
-                    </android.support.v7.widget.CardView>
-
-                    <android.support.v7.widget.CardView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:cardBackgroundColor="@color/red"
-                        app:cardCornerRadius="20dp">
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_tele"
-                            app:tint="@color/white" />
-                    </android.support.v7.widget.CardView>
-
-                </com.google.android.flexbox.FlexboxLayout>
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/cv_row1"
@@ -231,13 +173,20 @@
 
                 </android.support.v7.widget.CardView>
 
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_showMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="روی نقشه نشان بده"
+                    android:textColor="@color/white"
+                    app:backgroundTint="@color/colorAccent"
+                    app:fontFamily="@font/yekan" />
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/cv_row2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:visibility="gone">
+                    android:layout_marginTop="4dp">
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
@@ -335,58 +284,6 @@
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/cv_row4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-                    <android.support.constraint.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
-
-                        <android.support.v7.widget.AppCompatImageView
-                            android:id="@+id/aiv_logoImg_cv"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:padding="6dp"
-                            android:src="@drawable/ic_bio"
-                            android:tint="@color/blue"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <android.support.v7.widget.AppCompatTextView
-                            android:id="@+id/appCompatTextView2"
-                            android:layout_width="0dp"
-                            android:layout_height="36dp"
-                            android:layout_marginEnd="16dp"
-                            android:gravity="center_vertical"
-                            android:text="معرفی"
-                            android:textColor="@color/title"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            app:fontFamily="@font/yekan"
-                            app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_cv"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <android.support.v7.widget.AppCompatTextView
-                            android:id="@+id/tv_cv"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="8dp"
-                            android:text="@string/lorem"
-                            android:textColor="@color/c1"
-                            android:textSize="13sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView2"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
-                    </android.support.constraint.ConstraintLayout>
-                </android.support.v7.widget.CardView>
-
-                <android.support.v7.widget.CardView
                     android:id="@+id/cv_row3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -437,6 +334,58 @@
                             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
                     </android.support.constraint.ConstraintLayout>
 
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/cv_row4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/aiv_logoImg_cv"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:padding="6dp"
+                            android:src="@drawable/ic_bio"
+                            android:tint="@color/blue"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/appCompatTextView2"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_marginEnd="16dp"
+                            android:gravity="center_vertical"
+                            android:text="معرفی"
+                            android:textColor="@color/title"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            app:fontFamily="@font/yekan"
+                            app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_cv"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/tv_cv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="8dp"
+                            android:text="@string/lorem"
+                            android:textColor="@color/c1"
+                            android:textSize="13sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/appCompatTextView2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+                    </android.support.constraint.ConstraintLayout>
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView

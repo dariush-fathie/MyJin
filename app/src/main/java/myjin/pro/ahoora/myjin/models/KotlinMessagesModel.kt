@@ -38,6 +38,10 @@ open class KotlinMessagesModel : RealmObject() {
     @Expose
     open var type: String = ""
 
+    @SerializedName("typeId")
+    @Expose
+    open var typeId: Int = -1
+
     @SerializedName("priority")
     @Expose
     open var priority: Int = -1

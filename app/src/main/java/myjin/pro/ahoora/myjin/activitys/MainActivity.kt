@@ -48,15 +48,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     private var cityId = 1
     private var t = Timer()
     private var play = true
-
+    /*copied*/
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.btn_fav -> openDrawerLayout()
-            R.id.btn_tryAgain -> tryAgain()
+            //R.id.btn_fav -> openDrawerLayout()
+            //R.id.btn_tryAgain -> tryAgain()
             R.id.tv_login_outsign -> Toast.makeText(this@MainActivity, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
             R.id.rl_exit -> showExitDialog()
-            R.id.iv_menu -> openDrawerLayout()
-            R.id.fab_search -> search()
+            //R.id.iv_menu -> openDrawerLayout()
+            //R.id.fab_search -> search()
             R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
@@ -68,16 +68,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             R.id.rl_drawer2 -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
-            R.id.rl_city -> openCityDialog()
-            R.id.rl_prov -> openProvDialog()
+         /*   R.id.rl_city -> openCityDialog()
+            R.id.rl_prov -> openProvDialog()*/
         }
     }
-
+    /*copied*/
     private fun setClickListeners() {
-        btn_tryAgain.setOnClickListener(this)
-        rl_prov.setOnClickListener(this)
-        rl_city.setOnClickListener(this)
-        rl_exit.setOnClickListener(this)
+        //btn_tryAgain.setOnClickListener(this)
+        //rl_prov.setOnClickListener(this)
+        //rl_city.setOnClickListener(this)
+        //rl_exit.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         rl_myjin_services.setOnClickListener(this)
         rl_drawer2.setOnClickListener(this)
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     }
 
-
+    /*copied*/
     private fun goToServicesActivity(title: String, i: Int) {
         val intentM = Intent(this@MainActivity, ServicesActivity::class.java)
         intentM.putExtra("ServiceTitle", title)
@@ -108,6 +108,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         startActivity(intentM)
     }
 
+    /*copied*/
     private fun drawerClick(position: Int) {
         when (position) {
             1 -> {
@@ -136,6 +137,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         alertDialog.show()
     }
 
+    /*copied*/
     override fun onLongClick(v: View?): Boolean {
         when (v?.id) {
             R.id.iv_jinDrawer -> {
@@ -146,6 +148,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         return false
     }
 
+    /*copied*/
     private fun openCityDialog() {
         /*val cityArray = ArrayList<String>()
         cityArray.add("همه")
@@ -168,6 +171,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         dialog.showSpinerDialog()*/
     }
 
+    /*copied*/
     private fun openProvDialog() {
         val x = resources.getStringArray(R.array.provArray)
         val provArray = ArrayList<String>()
@@ -187,27 +191,27 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         }
         dialog.showSpinerDialog()*/
     }
-
+    /*copied*/
     private fun cummingSoon() {
         Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
     }
-
+    /*copied*/
     private fun tryAgain() {
         initList()
     }
-
+    /*copied*/
     private fun showNetErrLayout() {
         ll_netErr.visibility = View.VISIBLE
     }
-
+    /*copied*/
     private fun hideNetErrLayout() {
         ll_netErr.visibility = View.GONE
     }
-
+    /*copied*/
     private fun openDrawerLayout() {
         drawerLayout.openDrawer(GravityCompat.END)
     }
-
+    /*copied*/
     private fun closeDrawerLayout() {
         drawerLayout.closeDrawers()
     }

@@ -18,10 +18,12 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.activity_main2.*
+import kotlinx.android.synthetic.main.drawer_layout.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
@@ -44,15 +46,83 @@ class MainActivity2 : AppCompatActivity(),
         TabLayout.OnTabSelectedListener,
         ViewPager.OnPageChangeListener,
         AppBarLayout.OnOffsetChangedListener,
-        View.OnClickListener {
+        View.OnClickListener, View.OnLongClickListener {
 
+
+    override fun onLongClick(v: View?): Boolean {
+        when (v?.id) {
+            R.id.iv_jinDrawer -> {
+                startActivity(Intent(this, LoginActivity::class.java))
+                return true
+            }
+        }
+        return false
+    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.fab_search -> {
-                search()
+            R.id.fab_search -> search()
+            R.id.iv_menu -> openDrawerLayout()
+            R.id.tv_login_outsign -> Toast.makeText(this, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
+            R.id.rl_exit -> showExitDialog()
+            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
+            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
+            R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
+            R.id.rl_tamin_services -> cummingSoon()
+            R.id.rl_ict_services -> cummingSoon()
+            R.id.rl_pishkhan_services -> cummingSoon()
+            R.id.rl_post_services -> cummingSoon()
+            R.id.rl_salamat -> startActivity(Intent(this, HeaIncServiceActivity::class.java))
+            R.id.rl_drawer2 -> {
+                closeDrawerLayout()
+                vp_mainContainer.currentItem = 2
             }
+            R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
+            R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
         }
+    }
+
+
+    private fun cummingSoon() {
+        Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
+    }
+
+    private fun closeDrawerLayout() {
+        drawerLayout.closeDrawers()
+    }
+
+    private fun goToServicesActivity(title: String, i: Int) {
+        val intentM = Intent(this, ServicesActivity::class.java)
+        intentM.putExtra("ServiceTitle", title)
+        intentM.putExtra("groupId", i)
+        startActivity(intentM)
+    }
+
+    private fun setListener() {
+        iv_menu.setOnClickListener(this)
+        iv_jinDrawer.setOnLongClickListener(this)
+        fab_search.setOnClickListener(this)
+        tv_location.setOnClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
+        rl_drawer2.setOnClickListener(this)
+        rl_drawer3.setOnClickListener(this)
+        rl_drawer4.setOnClickListener(this)
+        rl_salamat.setOnClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
+        rl_takapoo_services.setOnClickListener(this)
+        rl_university_services.setOnClickListener(this)
+        rl_tamin_services.setOnClickListener(this)
+        rl_ict_services.setOnClickListener(this)
+        rl_pishkhan_services.setOnClickListener(this)
+        rl_post_services.setOnClickListener(this)
+        rl_salamat.setOnClickListener(this)
+        tv_login_outsign.setOnClickListener(this)
+        rl_exit.setOnClickListener(this)
+    }
+
+
+    private fun openDrawerLayout() {
+        drawerLayout.openDrawer(GravityCompat.END)
     }
 
     private val bankPosition = 0
@@ -183,10 +253,6 @@ class MainActivity2 : AppCompatActivity(),
                 }.show()
     }
 
-    private fun setListener() {
-        fab_search.setOnClickListener(this)
-        tv_location.setOnClickListener(this)
-    }
 
     override fun onPageScrollStateChanged(state: Int) {
 

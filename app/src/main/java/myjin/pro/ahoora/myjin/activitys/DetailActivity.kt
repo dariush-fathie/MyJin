@@ -128,7 +128,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
                 animateBookmark(iv_save)
             }
-            R.id.rl_seeOnMap, R.id.iv_showMap, R.id.btn_showMap -> {
+            R.id.btn_showMap -> {
                 openMapSheet()
             }
             R.id.fab_closeMap -> {
@@ -214,8 +214,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         iv_save.setOnClickListener(this)
         btn_savePoint.setOnClickListener(this)
         fab_closeMap.setOnClickListener(this)
-        rl_seeOnMap.setOnClickListener(this)
-        iv_showMap.setOnClickListener(this)
         btn_showMap.setOnClickListener(this)
         fab_direction.setOnClickListener(this)
         iv_goback.setOnClickListener(this)

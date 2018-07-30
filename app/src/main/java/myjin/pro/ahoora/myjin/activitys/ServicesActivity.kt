@@ -101,7 +101,10 @@ class ServicesActivity : AppCompatActivity(), View.OnClickListener, GetServicesL
                         realm.executeTransactionAsync { db: Realm? ->
                             db?.where(KotlinServicesModel::class.java)?.findAll()?.deleteAllFromRealm()
                             db?.copyToRealm(list!!)
-                            gsl.getSL()
+                            runOnUiThread {
+                                gsl.getSL()
+                            }
+
                         }
                     }
 
