@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 import myjin.pro.ahoora.myjin.BuildConfig
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
+import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel
 import myjin.pro.ahoora.myjin.utils.ApiInterface
@@ -34,49 +35,101 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     val realm = Realm.getDefaultInstance()!!
     private var netAvailability: Boolean = false
 
-    private var cityCount = 0
-
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_splashTryAgain -> tryAgain()
+            R.id.btn_splashFav -> goToFav1()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (!SharedPer(this).getBoolean(getString(R.string.introductionFlag))) {
-            gotoIntro()
-            finish()
+        setContentView(R.layout.activity_splash)
+        btn_splashTryAgain.setOnClickListener(this)
+        btn_splashFav.setOnClickListener(this)
+
+        netAvailability = NetworkUtil().isNetworkAvailable(this)
+        clearGlideCache()
+
+        if (netAvailability) {
+            getConfig()
         } else {
-            setContentView(R.layout.activity_splash)
-            btn_splashTryAgain.setOnClickListener(this)
-            netAvailability = NetworkUtil().isNetworkAvailable(this)
-            clearGlideCache()
-
-            realm.beginTransaction()
-            cityCount = realm.where(KotlinProvCityModel::class.java).findAll().size
-            realm.commitTransaction()
-
-            if (netAvailability) {
-                getConfig()
+            if (isThereAnyFav() && isThereAnyCity()) {
+                showNetErrLayout(1)
             } else {
-                if (cityCount == 0) {
-                    // todo try without fav
+                showNetErrLayout(0)
+            }
+        }
+        clearServices()
+    }
+
+    /**
+     * @param i:
+     * 0 - > try again
+     * 1 ->  try again - fav
+     * 2 -> server in repair - if there is some fav show
+     */
+
+    private fun showNetErrLayout(i: Int) {
+        // todo check if cityCount don't show fav button
+        hideCpv()
+
+        cl_netErrLayout.visibility = View.VISIBLE
+        when (i) {
+            0 -> {
+                btn_splashFav.visibility = View.GONE
+                btn_splashTryAgain.visibility = View.VISIBLE
+                tv_splashContent.text = "به اینترنت متصل نیستید؟ دوباره تلاش کنید"
+            }
+            1 -> {
+                btn_splashFav.visibility = View.VISIBLE
+                btn_splashTryAgain.visibility = View.VISIBLE
+                tv_splashContent.text = getString(R.string.doYouConnected)
+            }
+            2 -> {
+                if (isThereAnyCity() && isThereAnyFav()) {
+                    tv_splashContent.text = "در حال ارتقای سرور هستیم به زودی بر می گردیم! می توانید نشان شده ها را ببینید"
                 } else {
-                    // todo try with fav
+                    // todo : change back to repair
+                    tv_splashContent.text = "در حال ارتقای سرور هستیم به زودی بر می گردیم!"
                 }
             }
-            clearServices()
         }
     }
 
+
+    private fun isThereAnyFav(): Boolean {
+        realm.beginTransaction()
+        val i = realm.where(KotlinItemModel::class.java).equalTo("saved", true).findAll().size
+        realm.commitTransaction()
+        return i != 0
+    }
+
+    private fun isThereAnyCity(): Boolean {
+        realm.beginTransaction()
+        val cityCount = realm.where(KotlinProvCityModel::class.java).findAll().size
+        realm.commitTransaction()
+        return cityCount != 0
+    }
+
+    private fun getCityCount(): Int {
+        realm.beginTransaction()
+        val cityCount = realm.where(KotlinProvCityModel::class.java).findAll().size
+        realm.commitTransaction()
+        return cityCount
+    }
+
     var statusItem: KotlinAboutContactModel? = null
+
     private var configLock = false
 
     private fun getConfig() {
         if (!configLock) {
             configLock = true
+
             hideNetErrLayout()
+            showCpv()
+
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
             val response = apiInterface.ac
             response.enqueue(object : Callback<KotlinAboutContactModel> {
@@ -96,21 +149,24 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
                     if (result.serverStatus == "ok") {
                         getProvinceAndCitiesList()
                     } else {
-                        // todo server needs repair we comeback soon
-                        // fav or nothing
-                        if (cityCount != 0) {
-                            tv_splashContent.text = "در حال ارتقای سرور هستیم به زودی بر می گردیم! می توانید نشان شده ها را ببینید"
-                        } else {
-                            tv_splashContent.text = "در حال ارتقای سرور هستیم به زودی بر می گردیم!"
-
-                        }
+                        showNetErrLayout(2)
                     }
                     configLock = false
+
                 }
 
                 override fun onFailure(call: Call<KotlinAboutContactModel>?, t: Throwable?) {
-                    showNetErrLayout()
+                    hideCpv()
                     configLock = false
+
+                    if (!isThereAnyCity()) {
+                        showNetErrLayout(0)
+                        // todo try without fav
+                    } else {
+                        showNetErrLayout(1)
+                        // todo try with fav
+                    }
+
                 }
             })
         }
@@ -121,9 +177,12 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     private fun getProvinceAndCitiesList() {
         if (!lock) {
             lock = true
+
+            hideNetErrLayout()
             showCpv()
+
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-            val response = apiInterface.getProvinceAndCitiesList(cityCount)
+            val response = apiInterface.getProvinceAndCitiesList(getCityCount())
             response.enqueue(object : Callback<List<KotlinProvCityModel>> {
                 override fun onResponse(call: Call<List<KotlinProvCityModel>>?, response: Response<List<KotlinProvCityModel>>?) {
                     response?.body() ?: onFailure(call, Throwable("null body"))
@@ -148,13 +207,17 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
                     if (statusItem?.version!! > versionCode) {
                         newVersion(statusItem?.version!!.toString(), statusItem?.force!!)
                     } else {
-                        gotoHome1()
+                        if (!SharedPer(this@SplashScreen).getBoolean(getString(R.string.introductionFlag))) {
+                            gotoIntro()
+                        } else {
+                            gotoHome1()
+                        }
                     }
                 }
 
                 override fun onFailure(call: Call<List<KotlinProvCityModel>>?, t: Throwable?) {
                     hideCpv()
-                    showNetErrLayout()
+                    showNetErrLayout(0)
                     lock = false
                 }
             })
@@ -167,18 +230,17 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
         if (netAvailability) {
             hideNetErrLayout()
             showCpv()
-            getProvinceAndCitiesList()
             getConfig()
         } else {
             hideCpv()
-            showNetErrLayout()
+            if (isThereAnyFav() && isThereAnyCity()) {
+                showNetErrLayout(1)
+            } else {
+                showNetErrLayout(0)
+            }
         }
     }
 
-    private fun showNetErrLayout() {
-        // todo check if cityCount don't show fav button
-        cl_netErrLayout.visibility = View.VISIBLE
-    }
 
     private fun hideNetErrLayout() {
         cl_netErrLayout.visibility = View.GONE
@@ -215,11 +277,15 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
 
         builder.setPositiveButton(R.string.dnj) { _, _ -> update() }
         builder.setNeutralButton("خروج از برنامه") { _, _ ->
-
+            finish()
         }
         if (force != 1) {
             builder.setNegativeButton(R.string.continue_) { _, _ ->
-                gotoHome1()
+                if (!SharedPer(this@SplashScreen).getBoolean(getString(R.string.introductionFlag))) {
+                    gotoIntro()
+                } else {
+                    gotoHome1()
+                }
             }
             builder.setMessage(R.string.addarabdk)
         }

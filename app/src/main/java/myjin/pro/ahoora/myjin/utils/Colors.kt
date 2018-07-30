@@ -12,4 +12,9 @@ class Colors(context: Context) {
     val white = ContextCompat.getColor(context, R.color.white)
     val title = ContextCompat.getColor(context, R.color.title)
     val transparent = ContextCompat.getColor(context, R.color.transparent)
+
+    val niceBlue = ContextCompat.getColor(context, R.color.niceBlue)
+    val orange = ContextCompat.getColor(context, R.color.colorAccent)
+
+
 }

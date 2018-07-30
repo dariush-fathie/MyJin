@@ -17,16 +17,13 @@ import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
+import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.activity_main2.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
-import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
-import myjin.pro.ahoora.myjin.models.KotlinServicesModel
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
@@ -114,6 +111,7 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        NetworkUtil().updateNetFlag(this)
         setContentView(R.layout.activity_main2)
 
         tvLocation = tv_location
@@ -142,16 +140,16 @@ class MainActivity2 : AppCompatActivity(),
         checkNetState()
     }
 
+    private var netAvailability = false
+
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
-
+        netAvailability = e.isCon
     }
 
     private fun checkNetState() {
-        if (true) {
+        if (netAvailability) {
             getSlides()
-            getServicesList()
-            getProvinceAndCitiesList()
             //todo : get services and others ...
         } else {
             showNetErrSnack()
@@ -162,12 +160,6 @@ class MainActivity2 : AppCompatActivity(),
     fun tryAgainEvent(e: TryAgainEvent) {
         if (!sliderLoadFlag) {
             getSlides()
-        }
-        if (!servicesLoadFlag) {
-            getServicesList()
-        }
-        if (!provsLoadFlag) {
-            getProvinceAndCitiesList()
         }
         // todo : get services
     }
@@ -300,8 +292,6 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private var sliderLoadFlag = false
-    private var servicesLoadFlag = false
-    private var provsLoadFlag = false
 
     private fun initSlider(list: ArrayList<String>) {
         Log.e("sdfdsfds", "sdfsfsfsf")
@@ -342,28 +332,6 @@ class MainActivity2 : AppCompatActivity(),
         })
     }
 
-    private fun getServicesList() {
-        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-        val response = apiInterface.servicesList
-        response.enqueue(object : Callback<List<KotlinServicesModel>> {
-            override fun onResponse(call: Call<List<KotlinServicesModel>>?, response: Response<List<KotlinServicesModel>>?) {
-                val list: List<KotlinServicesModel>? = response?.body()
-                val realm = Realm.getDefaultInstance()
-                realm.executeTransactionAsync { db: Realm? ->
-                    db?.where(KotlinServicesModel::class.java)?.findAll()?.deleteAllFromRealm()
-                    db?.copyToRealm(list!!)
-                }
-                servicesLoadFlag = true
-            }
-
-            override fun onFailure(call: Call<List<KotlinServicesModel>>?, t: Throwable?) {
-                Toast.makeText(this@MainActivity2, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
-                servicesLoadFlag = false
-                showNetErrSnack()
-            }
-        })
-    }
-
     private fun showSliderCPV() {
         cpv_slideLoad.visibility = View.VISIBLE
     }
@@ -384,46 +352,5 @@ class MainActivity2 : AppCompatActivity(),
         alertDialog.show()
     }
 
-    // todo put this in splash
-    private fun getProvinceAndCitiesList() {
-        tv_location.visibility = View.GONE
-
-        val realm = Realm.getDefaultInstance()
-        realm.beginTransaction()
-        val cityCount = realm.where(KotlinProvCityModel::class.java).findAll().size
-        realm.commitTransaction()
-
-        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-        val response = apiInterface.getProvinceAndCitiesList(cityCount)
-        response.enqueue(object : Callback<List<KotlinProvCityModel>> {
-            override fun onResponse(call: Call<List<KotlinProvCityModel>>?, response: Response<List<KotlinProvCityModel>>?) {
-                response?.body() ?: onFailure(call, Throwable("null body"))
-                response?.body() ?: return
-
-                val list: List<KotlinProvCityModel>? = response.body()
-                if (list != null) {
-                    if (list.isNotEmpty()) {
-                        val realm1 = Realm.getDefaultInstance()
-                        realm1.executeTransactionAsync { db: Realm? ->
-                            db?.where(KotlinProvCityModel::class.java)?.findAll()?.deleteAllFromRealm()
-                            db?.copyToRealm(list)
-                        }
-                    }
-                } else {
-                    onFailure(call, Throwable("null city list"))
-                    return
-                }
-
-                provsLoadFlag = true
-                tv_location.visibility = View.VISIBLE
-            }
-
-            override fun onFailure(call: Call<List<KotlinProvCityModel>>?, t: Throwable?) {
-                Toast.makeText(this@MainActivity2, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
-                provsLoadFlag = false
-                showNetErrSnack()
-            }
-        })
-    }
 
 }

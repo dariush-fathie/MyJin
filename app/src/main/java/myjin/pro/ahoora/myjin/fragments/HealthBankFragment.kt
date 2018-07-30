@@ -25,6 +25,7 @@ import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.SharedPer
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call
@@ -82,9 +83,16 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity2).tvLocation.setOnClickListener(this)
-        // todo get pro and city from sharedPrefs
-        (activity as MainActivity2).tvLocation.text = "کردستان،همه شهرها"
+        getCityAndProvFromSp()
         checkNetState()
+    }
+
+
+    private fun getCityAndProvFromSp() {
+        val sp = SharedPer(activity as Context)
+        provId = sp.getInteger(getString(R.string.provId))
+        cityId = sp.getInteger(getString(R.string.cityId))
+        (activity as MainActivity2).tvLocation.text = sp.getString(getString(R.string.provCityPair))
     }
 
     private fun checkNetState() {
@@ -198,12 +206,20 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                 (activity as MainActivity2).tvLocation.text = name
                 this.provId = provId
                 this.cityId = cityId
+                saveProv(name)
                 loadFlag = false
                 // todo : check net connection first please
                 getGroupCount()
             }
         }
         dialog.showSpinerDialog()
+    }
+
+    private fun saveProv(name: String) {
+        val sp = SharedPer(activity as Context)
+        sp.setInteger(getString(R.string.provId), provId)
+        sp.setInteger(getString(R.string.cityId), cityId)
+        sp.setString(getString(R.string.provCityPair), name)
     }
 
     inner class CategoryAdapter(private val context: Context, gList: List<KotlinGroupModel>)

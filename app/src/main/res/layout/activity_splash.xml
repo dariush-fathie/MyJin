@@ -5,21 +5,29 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark">
 
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="center"
+        android:src="@drawable/splash_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/cl_netErrLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/guideline">
 
         <android.support.v7.widget.AppCompatImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_neterror"
-            app:layout_constraintBottom_toTopOf="@+id/tv_splashContent"
+            android:id="@+id/iv_splashImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_not_connected"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/colorAccent" />
@@ -36,37 +44,37 @@
             android:textColor="@color/white"
             android:textSize="15sp"
             app:fontFamily="@font/yekan"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_splashImage" />
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_splashFav"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/fav"
-            app:backgroundTint="@color/white"
-            app:layout_constraintEnd_toStartOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/tv_splashContent" />
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_splashContent">
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_splashTryAgain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/tryAgain"
-            app:backgroundTint="@color/white"
-            app:layout_constraintStart_toEndOf="@id/guideline1"
-            app:layout_constraintTop_toBottomOf="@+id/tv_splashContent" />
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_splashFav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:drawableEnd="@drawable/ic_mark_tes"
+                android:text="@string/fav"
+                app:backgroundTint="@color/white" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="180dp" />
-
-
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_splashTryAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawableEnd="@drawable/ic_refresh_test"
+                android:text="@string/tryAgain"
+                app:backgroundTint="@color/white"
+                app:layout_constraintStart_toEndOf="@id/guideline1"
+                app:layout_constraintTop_toBottomOf="@+id/tv_splashContent" />
+        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
     <com.github.rahatarmanahmed.cpv.CircularProgressView
@@ -81,6 +89,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
 
 
 </android.support.constraint.ConstraintLayout>

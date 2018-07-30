@@ -21,6 +21,10 @@
     <string name="fav">نشان شده ها</string>
     <string name="doYouConnected">به اینترنت متصل نیستید ؟ می توانید نشان شده ها را ببیند در غیر این صورت دوباره تلاش کنید!</string>
     <string name="introductionFlag">introFlag</string>
+    <string name="provId">provId</string>
+    <string name="cityId">cityId</string>
+    <string name="provCityPair">provCityPair</string>
+    <string name="skip">بگذر</string>
 
     <string-array name="provArray2">
         <item> آذربایجان شرقی</item>

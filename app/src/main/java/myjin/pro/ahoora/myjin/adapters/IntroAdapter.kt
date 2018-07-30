@@ -2,25 +2,22 @@ package myjin.pro.ahoora.myjin.adapters
 
 import android.content.Context
 import android.graphics.drawable.PictureDrawable
-import android.support.v7.widget.CardView
+import android.support.v7.widget.AppCompatImageView
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.customClasses.SVGLoader.GlideApp
 import myjin.pro.ahoora.myjin.customClasses.SVGLoader.SvgSoftwareLayerSetter
-import java.util.*
+import myjin.pro.ahoora.myjin.models.KotlinSlideModel
 
 
-class IntroAdapter(context: Context, list: ArrayList<String>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val mContext = context
-
-    val item = list
+class IntroAdapter(private val context: Context, private val list: Array<KotlinSlideModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val requestBuilder: RequestBuilder<PictureDrawable> = GlideApp.with(context)
             .`as`(PictureDrawable::class.java)
@@ -30,13 +27,12 @@ class IntroAdapter(context: Context, list: ArrayList<String>) : RecyclerView.Ada
             .listener(SvgSoftwareLayerSetter())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val v = LayoutInflater.from(mContext).inflate(R.layout.image_big_item_intro, parent, false)
+        val v = LayoutInflater.from(context).inflate(R.layout.image_big_item_intro, parent, false)
         return ImageHolder(v)
     }
 
     override fun getItemCount(): Int {
-
-        return item.size
+        return list.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -50,7 +46,9 @@ class IntroAdapter(context: Context, list: ArrayList<String>) : RecyclerView.Ada
                             .ivImage)
 
             */
-            requestBuilder.load(item[position]).into(holder.ivImage)
+
+            requestBuilder.load(list[position].fileUrl).into(holder.ivImage)
+            holder.tvDescription.text = list[position].description
 
         } catch (e: Exception) {
             Log.e("glideErrIntro", e.message + " ")
@@ -60,8 +58,9 @@ class IntroAdapter(context: Context, list: ArrayList<String>) : RecyclerView.Ada
     }
 
     internal inner class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val cvImage = itemView.findViewById<CardView>(R.id.cv_bigItem)
-        val ivImage = itemView.findViewById<ImageView>(R.id.iv_imageBig)
+
+        val ivImage: AppCompatImageView = itemView.findViewById(R.id.iv_imageBig)
+        val tvDescription: AppCompatTextView = itemView.findViewById(R.id.tv_slides_content)
 
     }
 

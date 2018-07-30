@@ -46,6 +46,15 @@ class SharedPer(mContext: Context) {
     }
 
 
+    fun setInteger(name: String, value: Int) {
+        editor1.putInt(name, value).apply()
+    }
+
+    fun getInteger(name: String): Int {
+        return sharedPreference.getInt(name, 0)
+    }
+
+
     fun setBoolean(name: String, value: Boolean) {
         editor1.putBoolean(name, value).apply()
     }
