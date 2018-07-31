@@ -68,6 +68,8 @@
                     android:layout_height="180dp"
                     android:src="@color/white"
                     android:scaleType="centerCrop"
+
+                    android:transitionName="transition_name"
                     />
             </android.support.v7.widget.CardView>
 

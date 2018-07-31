@@ -1,10 +1,13 @@
 package myjin.pro.ahoora.myjin.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.support.constraint.ConstraintLayout
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
@@ -24,8 +27,10 @@ import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
+import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.utils.DateConverter
+import myjin.pro.ahoora.myjin.utils.StaticValues
 
 
 class MessagesAdapter(private val context: Context, private val list: List<KotlinMessagesModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -135,6 +140,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
 
     internal inner class MessageHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
+        @SuppressLint("RestrictedApi")
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.iv_save_message -> {
@@ -151,10 +157,22 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                     animateBookmark(ivStar)
                 }
                 R.id.message_cl->{
-                    val i = Intent(context, DetailMessagesActivity::class.java)
-                    i.putExtra("messageId", list.get(adapterPosition).messageId)
 
-                    context.startActivity(i)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as MainActivity2),
+                                image, "transition_name")
+
+                        val i = Intent(context, DetailMessagesActivity::class.java)
+                        i.putExtra("messageId", list.get(adapterPosition).messageId)
+                        context.startActivity(i, options.toBundle())
+
+
+                    } else {
+                        val i = Intent(context, DetailMessagesActivity::class.java)
+                        i.putExtra("messageId", list.get(adapterPosition).messageId)
+                        (context as MainActivity2).startActivity(i)
+
+                    }
                 }
             }
         }

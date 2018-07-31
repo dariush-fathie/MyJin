@@ -18,7 +18,7 @@ import io.realm.Realm;
 public class RealmBackupRestore {
 
     private File EXPORT_REALM_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-    private String EXPORT_REALM_FILE_NAME = "backup.realm";
+    private String EXPORT_REALM_FILE_NAME = "glucosio.realm";
     private String IMPORT_REALM_FILE_NAME = "database.realm"; // Eventually replace this if you're using a custom db name
 
     private final static String TAG = RealmBackupRestore.class.getName();
@@ -79,6 +79,7 @@ public class RealmBackupRestore {
             File file = new File(activity.getApplicationContext().getFilesDir(), outFileName);
 
             FileOutputStream outputStream = new FileOutputStream(file);
+
             FileInputStream inputStream = new FileInputStream(new File(oldFilePath));
 
             byte[] buf = new byte[1024];

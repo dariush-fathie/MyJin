@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.activitys
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.net.Uri
@@ -51,6 +52,8 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
             }
 
             R.id.iv_share -> share()
+
+            R.id.iv_goback->onBackPressed()
         }
     }
 
@@ -83,6 +86,16 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        /* if (change) {
+             val resultPayload = Intent(this@DetailMessagesActivity, OfficeActivity::class.java)
+             resultPayload.putExtra("save", isSaved)
+             resultPayload.putExtra("messageId", messageId)
+             setResult(Activity.RESULT_OK, resultPayload)
+         }*/
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_messages)
@@ -94,6 +107,7 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
         iv_save.setOnClickListener(this)
         iv_share.setOnClickListener(this)
+        iv_goback.setOnClickListener(this)
         fill()
     }
 
