@@ -71,9 +71,8 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
      */
 
     private fun showNetErrLayout(i: Int) {
-
         hideCpv()
-
+        iv_splashImage.setImageResource(R.drawable.ic_wifi_not_connected)
         cl_netErrLayout.visibility = View.VISIBLE
         when (i) {
             0 -> {
@@ -87,11 +86,12 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
                 tv_splashContent.text = getString(R.string.doYouConnected)
             }
             2 -> {
+                iv_splashImage.setImageResource(R.drawable.ic_repair)
                 if (isThereAnyCity() && isThereAnyFav()) {
-                    tv_splashContent.text = "در حال ارتقای سرور هستیم به زودی بر می گردیم! می توانید نشان شده ها را ببینید"
+                    tv_splashContent.text = "گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد. می توانید نشان شده ها را ببینید"
                 } else {
                     // todo : change back to repair
-                    tv_splashContent.text = "در حال ارتقای سرور هستیم به زودی بر می گردیم!"
+                    tv_splashContent.text = "گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد!"
                 }
             }
         }

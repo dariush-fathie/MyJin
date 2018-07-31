@@ -290,7 +290,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         val id = 1
 
-
         realm.beginTransaction()
         val res = realm.where(KotlinAboutContactModel::class.java)
                 .equalTo("id", id)

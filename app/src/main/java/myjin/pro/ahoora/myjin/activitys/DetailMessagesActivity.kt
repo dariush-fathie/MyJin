@@ -80,7 +80,7 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
         shareIntent.action = Intent.ACTION_SEND
         shareIntent.putExtra(Intent.EXTRA_TEXT, str)
-        shareIntent.type = "image/*"
+        shareIntent.type = "text/plain"
         startActivity(Intent.createChooser(shareIntent, "send"))
 
     }
