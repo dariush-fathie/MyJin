@@ -48,7 +48,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     val requestCode = 1025
 
     init {
-        filedStarDrawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
+        filedStarDrawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark_fill_msg)!!
         filedStarDrawable.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { db ->
@@ -139,7 +139,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         if (markedItem[position]) {
             holder.ivStar.setImageDrawable(filedStarDrawable)
         } else {
-            holder.ivStar.setImageResource(R.drawable.icons_bookmark_1)
+            holder.ivStar.setImageResource(R.drawable.ic_bookmark_empty_msg)
         }
 
     }
@@ -158,7 +158,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                     val item = getModelByCenterId(list.get(adapterPosition).messageId)
                     if (item.saved) {
                         deleteItem(item.messageId) // set saved flag to false
-                        ivStar.setImageResource(R.drawable.icons_bookmark_1)
+                        ivStar.setImageResource(R.drawable.ic_bookmark_empty_msg)
                         markedItem[adapterPosition] = false
                     } else {
                         saveItem(item.messageId) // set save flag to ture

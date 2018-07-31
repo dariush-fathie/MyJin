@@ -33,15 +33,13 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
             R.id.iv_save -> {
                 change = true
                 if (isSaved) {
-                    val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.icons_bookmark_1)
-                    draw?.setColorFilter(ContextCompat.getColor(this@DetailMessagesActivity, R.color.white), PorterDuff.Mode.SRC_IN)
+                    val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.ic_bookmark_empty_msg)
                     iv_save.setImageDrawable(draw)
                     deleteItem()
                     isSaved = false
 
                 } else {
-                    val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.ic_bookmark)
-                    draw?.setColorFilter(ContextCompat.getColor(this@DetailMessagesActivity, R.color.white), PorterDuff.Mode.SRC_IN)
+                    val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.ic_bookmark_fill_msg)
                     iv_save.setImageDrawable(draw)
                     saveItem()
                     isSaved = true
@@ -176,12 +174,10 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
         isSaved = checkItemIsSaved()
         if (isSaved) {
-            val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.ic_bookmark)
-            draw?.setColorFilter(ContextCompat.getColor(this@DetailMessagesActivity, R.color.white), PorterDuff.Mode.SRC_IN)
+            val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.ic_bookmark_fill_msg)
             iv_save.setImageDrawable(draw)
         } else {
-            val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.icons_bookmark_1)
-            draw?.setColorFilter(ContextCompat.getColor(this@DetailMessagesActivity, R.color.white), PorterDuff.Mode.SRC_IN)
+            val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.ic_bookmark_empty_msg)
             iv_save.setImageDrawable(draw)
         }
     }
