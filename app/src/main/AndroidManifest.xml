@@ -109,7 +109,8 @@
             android:name=".activitys.ServicesActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".activitys.DetailMessagesActivity"></activity>
+
+        <activity android:name=".activitys.DetailMessagesActivity"/>
     </application>
 
 </manifest>

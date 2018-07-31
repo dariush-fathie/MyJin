@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
@@ -30,15 +31,21 @@ import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.utils.DateConverter
-import myjin.pro.ahoora.myjin.utils.StaticValues
 
 
-class MessagesAdapter(private val context: Context, private val list: List<KotlinMessagesModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MessagesAdapter(private val context: Context, private val list: List<KotlinMessagesModel>, private val iSend: SendIntentForResult) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var onlyForFirstTime = true
     lateinit var markedItem: BooleanArray
     val width = Converter.getScreenWidthPx(context)
     var filedStarDrawable: Drawable
     private var converter: DateConverter? = null
+
+
+    interface SendIntentForResult {
+        fun send(i: Intent, bundle: Bundle?, requestCode: Int)
+    }
+
+    private val requestCode = 1025
 
     init {
         filedStarDrawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
@@ -67,12 +74,12 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
 
     fun saveItem(Id: Int) {
         val realm = Realm.getDefaultInstance()
-        realm.executeTransaction({ db ->
+        realm.executeTransaction { db ->
             val item = db.where(KotlinMessagesModel::class.java)
                     .equalTo("messageId", Id)
                     .findFirst()!!
             item.saved = true
-        })
+        }
     }
 
     fun animateBookmark(view: ImageView) {
@@ -86,22 +93,22 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
 
     fun deleteItem(id: Int) {
         val realm = Realm.getDefaultInstance()
-        realm.executeTransaction({ db ->
+        realm.executeTransaction { db ->
             val item = db.where(KotlinMessagesModel::class.java)
                     .equalTo("messageId", id)
                     .findFirst()!!
             item.saved = false
-        })
+        }
     }
 
     fun getModelByCenterId(id: Int): KotlinMessagesModel {
         val realm = Realm.getDefaultInstance()
         var item = KotlinMessagesModel()
-        realm.executeTransaction({ db ->
+        realm.executeTransaction { db ->
             item = db.where(KotlinMessagesModel::class.java)
                     .equalTo("messageId", id)
                     .findFirst()!!
-        })
+        }
         return item
     }
 
@@ -126,7 +133,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
 
         holder.title.text = messageItem.title
         holder.shortDesc.text = messageItem.shortDescription
-        holder.date.text =converter?.convert2(messageItem.regDate)
+        holder.date.text = converter?.convert2(messageItem.regDate)
         holder.type.text = messageItem.type
 
         if (markedItem[position]) {
@@ -156,22 +163,17 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                     }
                     animateBookmark(ivStar)
                 }
-                R.id.message_cl->{
-
+                R.id.message_cl -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as MainActivity2),
                                 image, "transition_name")
-
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
-                        context.startActivity(i, options.toBundle())
-
-
+                        iSend.send(i, options.toBundle(), requestCode)
                     } else {
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
-                        (context as MainActivity2).startActivity(i)
-
+                        iSend.send(i, null, requestCode)
                     }
                 }
             }
@@ -183,7 +185,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         val shortDesc: AppCompatTextView = itemView.findViewById(R.id.tv_messageShortDesc)
         val date: AppCompatTextView = itemView.findViewById(R.id.tv_messageDate)
         val type: AppCompatTextView = itemView.findViewById(R.id.tv_messageType)
-        val message_cl: ConstraintLayout =itemView.findViewById(R.id.message_cl)
+        val message_cl: ConstraintLayout = itemView.findViewById(R.id.message_cl)
 
         init {
             message_cl.setOnClickListener(this)

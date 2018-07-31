@@ -1,6 +1,7 @@
 package myjin.pro.ahoora.myjin.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -85,6 +86,11 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         super.onStop()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.e("Messages", "onResume")
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messages, container, false)
     }
@@ -93,6 +99,13 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         super.onViewCreated(view, savedInstanceState)
         btn_messagesTryAgain.setOnClickListener(this)
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.e("messages", "onresult")
+        // todo کارتو اینجا بکن !!
+    }
+
 
     private fun loadTabsAndSpinner() {
         v1.visibility = View.VISIBLE
@@ -347,16 +360,23 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
 
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
-
         rv_messages.layoutManager = LinearLayoutManager(activity)
+
         while (rv_messages.itemDecorationCount > 0) {
             rv_messages.removeItemDecorationAt(0)
         }
 
-
         rv_messages.addItemDecoration(VerticalLinearLayoutDecoration(activity as Context
                 , 8, 8, 8, 8).apply { lastItemPadding(48) })
-        rv_messages.adapter = MessagesAdapter(activity as Context, list)
+        rv_messages.adapter = MessagesAdapter(activity as Context, list, object : MessagesAdapter.SendIntentForResult {
+            override fun send(i: Intent, bundle: Bundle?, requestCode: Int) {
+                if (bundle != null) {
+                    startActivityForResult(i, requestCode, bundle)
+                } else {
+                    startActivityForResult(i, requestCode)
+                }
+            }
+        })
 
     }
 

@@ -470,4 +470,9 @@ class MainActivity2 : AppCompatActivity(),
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.e("mainActivity2","onresult")
+    }
+
 }

@@ -3,7 +3,6 @@ package myjin.pro.ahoora.myjin.activitys
 import android.app.Activity
 import android.content.Intent
 import android.graphics.PorterDuff
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -53,7 +52,7 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
             R.id.iv_share -> share()
 
-            R.id.iv_goback->onBackPressed()
+            R.id.iv_goback -> onBackPressed()
         }
     }
 
@@ -87,15 +86,16 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        /* if (change) {
-             val resultPayload = Intent(this@DetailMessagesActivity, OfficeActivity::class.java)
-             resultPayload.putExtra("save", isSaved)
-             resultPayload.putExtra("messageId", messageId)
-             setResult(Activity.RESULT_OK, resultPayload)
-         }*/
-
+        if (change) {
+            val resultPayload = Intent(this@DetailMessagesActivity, MainActivity2::class.java)
+            resultPayload.putExtra("save", isSaved)
+            resultPayload.putExtra("messageId", messageId)
+            setResult(Activity.RESULT_OK, resultPayload)
+        } else {
+            super.onBackPressed()
+        }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_messages)
@@ -180,4 +180,5 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
             iv_save.setImageDrawable(draw)
         }
     }
+
 }
