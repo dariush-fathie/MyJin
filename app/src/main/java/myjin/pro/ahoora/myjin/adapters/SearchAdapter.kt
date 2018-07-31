@@ -69,13 +69,15 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
                 holder.image.background=ContextCompat.getDrawable(context,R.drawable.t2)
                 url = g_url
             } else if (dataSet.get(position).gen?.equals("1")!!) {
+                holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
                 url = context.getString(R.string.ic_doctor_f)
             } else if (dataSet.get(position).gen?.equals("2")!!) {
+                holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
                 url = context.getString(R.string.ic_doctor_m)
             }
 
         } else {
-            holder.image.setColorFilter(null)
+            holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
             url = dataSet.get(position).logoImg!!
         }
 
