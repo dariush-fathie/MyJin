@@ -43,6 +43,10 @@
 -dontwarn com.google.firebase.**
 
 
+
+-dontwarn com.caverock.androidsvg.**
+
+
 #-keep class org.json.** { *; }
 #-keep interface org.json.** { *; }
 #-keep class org.joda.time.** { *; }

@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Handler
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
@@ -16,22 +17,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.ScaleAnimation
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import de.hdodenhof.circleimageview.CircleImageView
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailActivity
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.StaticValues
-import android.support.v4.app.ActivityOptionsCompat
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.ScaleAnimation
-import android.widget.ImageView
-import de.hdodenhof.circleimageview.CircleImageView
 
 
 class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, title: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -61,10 +61,8 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
             }
 
         }
-
         filedStarDrawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
         filedStarDrawable.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
-
 
     }
 
@@ -82,7 +80,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
             holder.title.text = "${item.firstName} ${item?.lastName}"
 
             var str = "";
-            if (!item.gen.equals("0")!!) {
+            if (!item.gen.equals("0")) {
                 if (item.groupId == 1) {
                     str = item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
                 } else {
@@ -106,18 +104,18 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
                 // holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
 
                 if (item.gen?.equals("0")!!) {
-                    holder.image.background=ContextCompat.getDrawable(context,R.drawable.t2)
+                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t2)
                     url = g_url
                 } else if (item.gen?.equals("1")!!) {
-                    holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
+                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
                     url = context.getString(R.string.ic_doctor_f)
                 } else if (item.gen?.equals("2")!!) {
-                    holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
+                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
                     url = context.getString(R.string.ic_doctor_m)
                 }
 
             } else {
-                holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
+                holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
                 url = item.logoImg!!
             }
 
@@ -148,32 +146,27 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
     }
 
     override fun getItemCount(): Int {
-        val s = ids.size
-        return if (s == 0) {
-            0
-        } else {
-            s
-        }
+        return ids.size
     }
 
 
     fun getModelByCenterId(centerId: Int): KotlinItemModel {
         var item = KotlinItemModel()
-        realm.executeTransaction({ db ->
+        realm.executeTransaction { db ->
             item = db.where(KotlinItemModel::class.java)
                     .equalTo("centerId", centerId)
                     .findFirst()!!
-        })
+        }
         return item
     }
 
     fun saveItem(centerId: Int) {
-        realm.executeTransaction({ db ->
+        realm.executeTransaction { db ->
             val item = db.where(KotlinItemModel::class.java)
                     .equalTo("centerId", centerId)
                     .findFirst()!!
             item.saved = true
-        })
+        }
     }
 
     fun deleteItem(centerId: Int) {
@@ -266,6 +259,4 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
             ivStar.setOnClickListener(this)
         }
     }
-
-
 }

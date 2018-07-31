@@ -187,6 +187,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rv_items.addItemDecoration(decor)
         adapter = GroupItemAdapter(this, list, g_url, getTitleFromDb())
         rv_items.adapter = adapter
+        Log.e("itemSize", "${list.size}")
         hideMainProgressLayout()
     }
 
@@ -238,7 +239,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                                 ?.findAll()
                                 ?.deleteAllFromRealm()
 
-
                         list?.forEach { kotlinItemModel: KotlinItemModel ->
                             if (savedItemIds.contains(kotlinItemModel.centerId)) {
                                 kotlinItemModel.saved = true
@@ -246,23 +246,27 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                             realm?.copyToRealmOrUpdate(kotlinItemModel)
                         }
 
-                        val result1 = realm?.where(KotlinItemModel::class.java)
+                        val query = realm?.where(KotlinItemModel::class.java)
                                 ?.equalTo("groupId", groupId)
-                                ?.equalTo("addressList.cityId", cityId)
-                                ?.equalTo("addressList.provId", provId)
+                        if (cityId != 0) {
+                            query?.equalTo("addressList.cityId", cityId)
+                        }
+                        query?.equalTo("addressList.provId", provId)
                                 ?.sort("firstName", Sort.ASCENDING)
-                                ?.findAll()
+
+                        val result1 = query?.findAll()
+
                         idArray.clear()
                         result1?.forEach { itemModel: KotlinItemModel? ->
                             idArray.add(itemModel?.centerId!!)
                         }
                         runOnUiThread {
                             initList(idArray)
+                            hideErrLayout()
+                            hideMainProgressLayout()
+                            showSomeViews()
                         }
                     }
-                    hideErrLayout()
-                    hideMainProgressLayout()
-                    showSomeViews()
                 }
 
                 override fun onFailure(call: Call<List<KotlinItemModel>>?, t: Throwable?) {
@@ -347,7 +351,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         result.forEach { item: KotlinItemModel ->
             idArray.add(item.centerId)
         }
-
 
         initList(idArray)
     }
