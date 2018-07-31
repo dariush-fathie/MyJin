@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:id="@+id/message_cl">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv_messageImage"
@@ -17,7 +18,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.3" />
+        app:layout_constraintWidth_percent="0.3"
+
+        android:transitionName="transition_name"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_messageTitle"

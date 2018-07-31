@@ -1,8 +1,13 @@
 package myjin.pro.ahoora.myjin.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.os.Build
+import android.support.constraint.ConstraintLayout
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
@@ -21,7 +26,11 @@ import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
+import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
+import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
+import myjin.pro.ahoora.myjin.utils.DateConverter
+import myjin.pro.ahoora.myjin.utils.StaticValues
 
 
 class MessagesAdapter(private val context: Context, private val list: List<KotlinMessagesModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -29,6 +38,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     lateinit var markedItem: BooleanArray
     val width = Converter.getScreenWidthPx(context)
     var filedStarDrawable: Drawable
+    private var converter: DateConverter? = null
 
     init {
         filedStarDrawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
@@ -46,6 +56,8 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                 markedItem[i] = s.contains(list[i].messageId) // if item is saved put true in markedItem else put false
             }
         }
+
+        converter = DateConverter(context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -114,7 +126,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
 
         holder.title.text = messageItem.title
         holder.shortDesc.text = messageItem.shortDescription
-        holder.date.text = messageItem.regDate
+        holder.date.text =converter?.convert2(messageItem.regDate)
         holder.type.text = messageItem.type
 
         if (markedItem[position]) {
@@ -128,6 +140,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
 
     internal inner class MessageHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
+        @SuppressLint("RestrictedApi")
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.iv_save_message -> {
@@ -143,6 +156,24 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                     }
                     animateBookmark(ivStar)
                 }
+                R.id.message_cl->{
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as MainActivity2),
+                                image, "transition_name")
+
+                        val i = Intent(context, DetailMessagesActivity::class.java)
+                        i.putExtra("messageId", list.get(adapterPosition).messageId)
+                        context.startActivity(i, options.toBundle())
+
+
+                    } else {
+                        val i = Intent(context, DetailMessagesActivity::class.java)
+                        i.putExtra("messageId", list.get(adapterPosition).messageId)
+                        (context as MainActivity2).startActivity(i)
+
+                    }
+                }
             }
         }
 
@@ -152,9 +183,10 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         val shortDesc: AppCompatTextView = itemView.findViewById(R.id.tv_messageShortDesc)
         val date: AppCompatTextView = itemView.findViewById(R.id.tv_messageDate)
         val type: AppCompatTextView = itemView.findViewById(R.id.tv_messageType)
+        val message_cl: ConstraintLayout =itemView.findViewById(R.id.message_cl)
 
         init {
-            itemView.setOnClickListener(this)
+            message_cl.setOnClickListener(this)
             ivStar.setOnClickListener(this)
         }
     }
