@@ -222,6 +222,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
                     val realmDatabase = Realm.getDefaultInstance()
                     realmDatabase.executeTransactionAsync { realm: Realm? ->
+
                         val savedItem = realm?.where(KotlinItemModel::class.java)
                                 ?.equalTo("saved", true)
                                 ?.equalTo("groupId", groupId)
@@ -237,6 +238,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                                 ?.findAll()
                                 ?.deleteAllFromRealm()
 
+
                         list?.forEach { kotlinItemModel: KotlinItemModel ->
                             if (savedItemIds.contains(kotlinItemModel.centerId)) {
                                 kotlinItemModel.saved = true
@@ -244,7 +246,12 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                             realm?.copyToRealmOrUpdate(kotlinItemModel)
                         }
 
-                        val result1 = realm?.where(KotlinItemModel::class.java)?.equalTo("groupId", groupId)?.sort("firstName", Sort.ASCENDING)?.findAll()
+                        val result1 = realm?.where(KotlinItemModel::class.java)
+                                ?.equalTo("groupId", groupId)
+                                ?.equalTo("addressList.cityId", cityId)
+                                ?.equalTo("addressList.provId", provId)
+                                ?.sort("firstName", Sort.ASCENDING)
+                                ?.findAll()
                         idArray.clear()
                         result1?.forEach { itemModel: KotlinItemModel? ->
                             idArray.add(itemModel?.centerId!!)
