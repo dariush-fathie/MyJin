@@ -71,7 +71,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
      */
 
     private fun showNetErrLayout(i: Int) {
-        // todo check if cityCount don't show fav button
+
         hideCpv()
 
         cl_netErrLayout.visibility = View.VISIBLE
@@ -164,7 +164,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
                         // todo try without fav
                     } else {
                         showNetErrLayout(1)
-                        // todo try with fav
                     }
 
                 }
