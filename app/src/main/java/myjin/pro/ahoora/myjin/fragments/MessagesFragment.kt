@@ -246,44 +246,62 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                     result ?: return
 
                     realm.executeTransactionAsync { realm: Realm? ->
-                        realm?.copyToRealmOrUpdate(result!!)
-                        Log.e("ssss", "hhh")
-                    }
 
-                    // todo saveMessages in realm
-
-                    sourceArray.clear()
-                    typesArray.clear()
-                    idS.clear()
-                    idT.clear()
-
-                    sourceArray.add("همه")
-                    typesArray.add("همه")
-                    idT.add(0)
-                    idS.add(0)
-
-                    result.forEach { item: KotlinMessagesModel ->
-
-                        if ( !sourceArray.contains(item.groupName)) {
-                            sourceArray.add(item.groupName)
-                            idS.add(item.groupId)
+                        val savedItem = realm?.where(KotlinMessagesModel::class.java)
+                                ?.equalTo("saved", true)
+                                ?.findAll()
+                        val savedItemIds = ArrayList<Int>()
+                        savedItem?.forEach { model: KotlinMessagesModel? ->
+                            savedItemIds.add(model?.messageId!!)
                         }
-                        if (!typesArray.contains(item.type)) {
-                            typesArray.add(item.type)
-                            idT.add(item.typeId)
+
+                        realm?.where(KotlinMessagesModel::class.java)
+                                ?.equalTo("saved", false)
+                                ?.findAll()
+                                ?.deleteAllFromRealm()
+
+                        result?.forEach { kotlinItemModel: KotlinMessagesModel ->
+                            if (savedItemIds.contains(kotlinItemModel.messageId)) {
+                                kotlinItemModel.saved = true
+                            }
+                            realm?.copyToRealmOrUpdate(kotlinItemModel)
                         }
                     }
-                    typesArray.add("ذخیره شده ها")
-                    idT.add(-1)
-
-                    loadTabsAndSpinner()
 
 
-                    loadFlag = true
+                        sourceArray.clear()
+                        typesArray.clear()
+                        idS.clear()
+                        idT.clear()
 
-                    hideCPV()
-                    hideErrLayout()
-                    lock = false
+                        sourceArray.add("همه")
+                        typesArray.add("همه")
+                        idT.add(0)
+                        idS.add(0)
+
+                        result.forEach { item: KotlinMessagesModel ->
+
+                            if (!sourceArray.contains(item.groupName)) {
+                                sourceArray.add(item.groupName)
+                                idS.add(item.groupId)
+                            }
+                            if (!typesArray.contains(item.type)) {
+                                typesArray.add(item.type)
+                                idT.add(item.typeId)
+                            }
+                        }
+                        typesArray.add("ذخیره شده ها")
+                        idT.add(-1)
+
+                        loadTabsAndSpinner()
+
+
+                        loadFlag = true
+
+                        hideCPV()
+                        hideErrLayout()
+                        lock = false
+
                 }
 
                 override fun onFailure(call: Call<List<KotlinMessagesModel>>?, t: Throwable?) {
