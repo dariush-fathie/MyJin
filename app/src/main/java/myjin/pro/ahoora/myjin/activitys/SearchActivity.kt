@@ -310,15 +310,15 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                         holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t2)
                         url = g_url
                     } else if (dataSet[realPosition].gen?.equals("1")!!) {
-
+                        holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t)
                         url = this@SearchActivity.getString(R.string.ic_doctor_f)
                     } else if (dataSet[realPosition].gen?.equals("2")!!) {
-
+                        holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t)
                         url = this@SearchActivity.getString(R.string.ic_doctor_m)
                     }
 
                 } else {
-                    holder.image.setColorFilter(null)
+                    holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t)
                     url = dataSet[realPosition].logoImg!!
                 }
 

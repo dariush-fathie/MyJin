@@ -67,14 +67,15 @@ class HListAdapter(ctx: Context, array: ArrayList<Int>) : RecyclerView.Adapter<R
                 holder.image.background=ContextCompat.getDrawable(context,R.drawable.t2)
                 url = g_url
             } else if (item.gen?.equals("1")!!) {
+                holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
                 url = context.getString(R.string.ic_doctor_f)
             } else if (item.gen?.equals("2")!!) {
-
+                holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
                 url = context.getString(R.string.ic_doctor_m)
             }
 
         } else {
-            holder.image.setColorFilter(null)
+            holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
             url = item.logoImg!!
         }
 
