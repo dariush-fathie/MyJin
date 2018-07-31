@@ -462,7 +462,6 @@ class MainActivity2 : AppCompatActivity(),
         alertDialog.show()
     }
 
-
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
             drawerLayout.closeDrawers()
@@ -470,6 +469,5 @@ class MainActivity2 : AppCompatActivity(),
             showExitDialog()
         }
     }
-
 
 }

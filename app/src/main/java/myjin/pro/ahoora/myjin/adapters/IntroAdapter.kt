@@ -24,8 +24,6 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
 
     private val requestBuilder: RequestBuilder<PictureDrawable> = GlideApp.with(context)
             .`as`(PictureDrawable::class.java)
-            .placeholder(R.drawable.pl_ho_intro)
-            .error(R.drawable.ic_neterror)
             .transition(DrawableTransitionOptions.withCrossFade())
             .listener(SvgSoftwareLayerSetter())
 
