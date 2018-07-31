@@ -1,8 +1,10 @@
 package myjin.pro.ahoora.myjin.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.support.constraint.ConstraintLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
@@ -21,7 +23,9 @@ import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
+import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
+import myjin.pro.ahoora.myjin.utils.DateConverter
 
 
 class MessagesAdapter(private val context: Context, private val list: List<KotlinMessagesModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -29,6 +33,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     lateinit var markedItem: BooleanArray
     val width = Converter.getScreenWidthPx(context)
     var filedStarDrawable: Drawable
+    private var converter: DateConverter? = null
 
     init {
         filedStarDrawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
@@ -46,6 +51,8 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                 markedItem[i] = s.contains(list[i].messageId) // if item is saved put true in markedItem else put false
             }
         }
+
+        converter = DateConverter(context)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -114,7 +121,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
 
         holder.title.text = messageItem.title
         holder.shortDesc.text = messageItem.shortDescription
-        holder.date.text = messageItem.regDate
+        holder.date.text =converter?.convert2(messageItem.regDate)
         holder.type.text = messageItem.type
 
         if (markedItem[position]) {
@@ -143,6 +150,12 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                     }
                     animateBookmark(ivStar)
                 }
+                R.id.message_cl->{
+                    val i = Intent(context, DetailMessagesActivity::class.java)
+                    i.putExtra("messageId", list.get(adapterPosition).messageId)
+
+                    context.startActivity(i)
+                }
             }
         }
 
@@ -152,9 +165,10 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         val shortDesc: AppCompatTextView = itemView.findViewById(R.id.tv_messageShortDesc)
         val date: AppCompatTextView = itemView.findViewById(R.id.tv_messageDate)
         val type: AppCompatTextView = itemView.findViewById(R.id.tv_messageType)
+        val message_cl: ConstraintLayout =itemView.findViewById(R.id.message_cl)
 
         init {
-            itemView.setOnClickListener(this)
+            message_cl.setOnClickListener(this)
             ivStar.setOnClickListener(this)
         }
     }

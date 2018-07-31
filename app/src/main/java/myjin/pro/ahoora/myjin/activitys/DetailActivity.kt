@@ -74,7 +74,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     private var id = 0
     private var i = 0
-    private var isSaved = false
+
     private var mode = true
     private var g_url = ""
     private var n = 0
@@ -85,6 +85,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private var theBitmap: Bitmap? = null
     // if model save or delete form realm -> change = true  else change = false
     var change = false
+    private var isSaved = false
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var bottomSheetCallback: BottomSheetBehavior.BottomSheetCallback
     var mMap: GoogleMap? = null
@@ -168,9 +169,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         Handler().postDelayed({
             if (intent != null) {
                 id = intent.getIntExtra("id", 1)
-                isSaved = checkItemIsSaved()
-                g_url = intent.getStringExtra("g_url")
 
+                g_url = intent.getStringExtra("g_url")
+                isSaved = checkItemIsSaved()
                 if (isSaved) {
                     val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_bookmark)
                     draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)

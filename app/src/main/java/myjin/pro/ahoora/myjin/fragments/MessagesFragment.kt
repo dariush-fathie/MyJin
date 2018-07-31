@@ -13,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import io.realm.Realm
 import io.realm.RealmResults
+import io.realm.Sort
 import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
 import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_messages.*
@@ -133,6 +134,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                             res = realm.where(KotlinMessagesModel::class.java).equalTo("saved", true).findAll()
                         }
                     }
+
+                    res=res.sort("regDate", Sort.DESCENDING)
                     realm.commitTransaction()
 
                     var list = ArrayList<KotlinMessagesModel>()
@@ -189,6 +192,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                                     .equalTo("saved", true).findAll()
                         }
                     }
+
+                    res=res.sort("regDate", Sort.DESCENDING)
                     realm.commitTransaction()
 
                     var list = ArrayList<KotlinMessagesModel>()
@@ -246,8 +251,6 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                     }
 
                     // todo saveMessages in realm
-                    var a = 1
-                    var b = 1
 
                     sourceArray.clear()
                     typesArray.clear()
@@ -261,15 +264,13 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
                     result.forEach { item: KotlinMessagesModel ->
 
-                        if (item.groupId == a) {
+                        if ( !sourceArray.contains(item.groupName)) {
                             sourceArray.add(item.groupName)
                             idS.add(item.groupId)
-                            a++
                         }
-                        if (item.typeId == b) {
+                        if (!typesArray.contains(item.type)) {
                             typesArray.add(item.type)
                             idT.add(item.typeId)
-                            b++
                         }
                     }
                     typesArray.add("ذخیره شده ها")
