@@ -66,30 +66,25 @@
                     android:id="@+id/iv_messageImage"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
-                    android:src="@color/white"
                     android:scaleType="centerCrop"
-
-                    android:transitionName="transition_name"
-                    />
+                    android:src="@color/white"
+                    android:transitionName="transition_name" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:paddingBottom="5dp"
-                android:paddingEnd="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:paddingStart="10dp"
-                android:paddingTop="5dp"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
                 android:text="@string/lorem"
                 android:textAlignment="textEnd"
                 android:textColor="@color/title"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/yekan" />
 
@@ -97,39 +92,30 @@
                 android:id="@+id/tv_group"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:padding="5dp"
-                android:paddingBottom="5dp"
-                android:text="دانشگاه : چند لحظه پیش"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:text="دانشگاه علوم پزشکی کردستان : چند لحظه پیش"
                 android:textColor="@color/c1"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 app:fontFamily="@font/yekan" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/back1"
-                android:padding="5dp" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:autoLink="web"
                 android:ellipsize="end"
                 android:lineSpacingExtra="5dp"
-                android:padding="10dp"
-                android:paddingBottom="5dp"
+                android:paddingBottom="8dp"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
                 android:text="@string/lorem"
-                android:textColor="@color/subTitle"
+                android:textColor="@color/androidTextColor"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 app:fontFamily="@font/yekan" />
+
         </android.support.v7.widget.LinearLayoutCompat>
     </ScrollView>
 

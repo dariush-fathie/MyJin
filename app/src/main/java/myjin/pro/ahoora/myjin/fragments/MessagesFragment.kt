@@ -31,6 +31,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnClickListener {
+
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_messagesTryAgain -> {
@@ -48,6 +50,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
     val sourceArray = ArrayList<String>()
     val idT = ArrayList<Int>()
     val idS = ArrayList<Int>()
+
+
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
         netAvailability = e.isCon
@@ -109,7 +113,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         spinner_types.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.e("messagesFragment", "types position $position")
-                var posS =idS.get(spinner_sources.selectedItemPosition)
+                var posS = idS.get(spinner_sources.selectedItemPosition)
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()
@@ -135,7 +139,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                         }
                     }
 
-                    res=res.sort("regDate", Sort.DESCENDING)
+                    res = res.sort("regDate", Sort.DESCENDING)
                     realm.commitTransaction()
 
                     var list = ArrayList<KotlinMessagesModel>()
@@ -144,7 +148,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                         list.add(ii)
                     }
 
-                    Log.e("rrr",posS.toString()+"  "+idT.get(position))
+                    Log.e("rrr", posS.toString() + "  " + idT.get(position))
                     loadAdapter(list)
                 }
             }
@@ -165,35 +169,34 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         spinner_sources.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.e("messagesFragment", "sources position $position")
-                var posT =idT.get(spinner_types.selectedItemPosition)
+                var posT = idT.get(spinner_types.selectedItemPosition)
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()
 
                     if (idS.get(position) > 0) {
-                        if (posT>0){
-                            res = realm.where(KotlinMessagesModel::class.java).
-                                    equalTo("typeId", posT).and().equalTo("groupId",idS.get(position) ).findAll()
-                        }else if (posT>-1){
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId",idS.get(position) ).findAll()
-                        }else{
+                        if (posT > 0) {
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).and().equalTo("groupId", idS.get(position)).findAll()
+                        } else if (posT > -1) {
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", idS.get(position)).findAll()
+                        } else {
                             res = realm.where(KotlinMessagesModel::class.java)
-                                    .equalTo("saved", true).and().equalTo("groupId",idS.get(position) ).findAll()
+                                    .equalTo("saved", true).and().equalTo("groupId", idS.get(position)).findAll()
                         }
 
 
-                    } else  {
-                        if (posT>0){
+                    } else {
+                        if (posT > 0) {
                             res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).findAll()
-                        }else if (posT>-1){
+                        } else if (posT > -1) {
                             res = realm.where(KotlinMessagesModel::class.java).findAll()
-                        }else{
+                        } else {
                             res = realm.where(KotlinMessagesModel::class.java)
                                     .equalTo("saved", true).findAll()
                         }
                     }
 
-                    res=res.sort("regDate", Sort.DESCENDING)
+                    res = res.sort("regDate", Sort.DESCENDING)
                     realm.commitTransaction()
 
                     var list = ArrayList<KotlinMessagesModel>()
@@ -202,7 +205,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                         list.add(ii)
                     }
 
-                    Log.e("rrr",posT.toString()+"  "+idS.get(position))
+                    Log.e("rrr", posT.toString() + "  " + idS.get(position))
                     loadAdapter(list)
                 }
 
@@ -269,38 +272,38 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                     }
 
 
-                        sourceArray.clear()
-                        typesArray.clear()
-                        idS.clear()
-                        idT.clear()
+                    sourceArray.clear()
+                    typesArray.clear()
+                    idS.clear()
+                    idT.clear()
 
-                        sourceArray.add("همه")
-                        typesArray.add("همه")
-                        idT.add(0)
-                        idS.add(0)
+                    sourceArray.add("همه")
+                    typesArray.add("همه")
+                    idT.add(0)
+                    idS.add(0)
 
-                        result.forEach { item: KotlinMessagesModel ->
+                    result.forEach { item: KotlinMessagesModel ->
 
-                            if (!sourceArray.contains(item.groupName)) {
-                                sourceArray.add(item.groupName)
-                                idS.add(item.groupId)
-                            }
-                            if (!typesArray.contains(item.type)) {
-                                typesArray.add(item.type)
-                                idT.add(item.typeId)
-                            }
+                        if (!sourceArray.contains(item.groupName)) {
+                            sourceArray.add(item.groupName)
+                            idS.add(item.groupId)
                         }
-                        typesArray.add("ذخیره شده ها")
-                        idT.add(-1)
+                        if (!typesArray.contains(item.type)) {
+                            typesArray.add(item.type)
+                            idT.add(item.typeId)
+                        }
+                    }
+                    typesArray.add("ذخیره شده ها")
+                    idT.add(-1)
 
-                        loadTabsAndSpinner()
+                    loadTabsAndSpinner()
 
 
-                        loadFlag = true
+                    loadFlag = true
 
-                        hideCPV()
-                        hideErrLayout()
-                        lock = false
+                    hideCPV()
+                    hideErrLayout()
+                    lock = false
 
                 }
 
@@ -349,8 +352,10 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         while (rv_messages.itemDecorationCount > 0) {
             rv_messages.removeItemDecorationAt(0)
         }
+
+
         rv_messages.addItemDecoration(VerticalLinearLayoutDecoration(activity as Context
-                , 8, 8, 8, 8))
+                , 8, 8, 8, 8).apply { lastItemPadding(48) })
         rv_messages.adapter = MessagesAdapter(activity as Context, list)
 
     }
