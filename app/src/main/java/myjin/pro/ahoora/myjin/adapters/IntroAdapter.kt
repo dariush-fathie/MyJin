@@ -17,7 +17,6 @@ import myjin.pro.ahoora.myjin.customClasses.SVGLoader.GlideApp
 import myjin.pro.ahoora.myjin.customClasses.SVGLoader.SvgSoftwareLayerSetter
 import myjin.pro.ahoora.myjin.models.KotlinSlideModel
 import myjin.pro.ahoora.myjin.utils.Colors
-import java.net.URLEncoder
 import java.util.*
 
 
@@ -25,8 +24,6 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
 
     private val requestBuilder: RequestBuilder<PictureDrawable> = GlideApp.with(context)
             .`as`(PictureDrawable::class.java)
-            .placeholder(R.drawable.ic_doctor_f)
-            .error(R.drawable.ic_neterror)
             .transition(DrawableTransitionOptions.withCrossFade())
             .listener(SvgSoftwareLayerSetter())
 
