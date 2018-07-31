@@ -304,9 +304,10 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                 var url = ""
 
                 if (dataSet[realPosition].logoImg.equals("")) {
-                    holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
+                    //  holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
 
                     if (dataSet[realPosition].gen?.equals("0")!!) {
+                        holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t2)
                         url = g_url
                     } else if (dataSet[realPosition].gen?.equals("1")!!) {
 

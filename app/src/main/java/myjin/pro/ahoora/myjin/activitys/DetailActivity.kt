@@ -765,14 +765,12 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         if (item.logoImg.equals("")) {
             if (item.gen?.equals("0")!!) {
-                // aiv_logoImg.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+
+                aiv_logoImg.background=ContextCompat.getDrawable(this@DetailActivity,R.drawable.t2)
                 url = g_url
-
             } else if (item.gen?.equals("1")!!) {
-
                 url = this@DetailActivity.getString(R.string.ic_doctor_f)
             } else if (item.gen?.equals("2")!!) {
-
                 url = this@DetailActivity.getString(R.string.ic_doctor_m)
             }
 

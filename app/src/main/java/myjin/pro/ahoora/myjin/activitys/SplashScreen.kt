@@ -32,7 +32,7 @@ import retrofit2.Response
 class SplashScreen : AppCompatActivity(), View.OnClickListener {
 
     var versionCode = BuildConfig.VERSION_CODE
-    val realm = Realm.getDefaultInstance()!!
+    val realm = Realm.getDefaultInstance()
     private var netAvailability: Boolean = false
 
     override fun onClick(v: View?) {

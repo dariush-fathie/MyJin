@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import io.realm.Realm
+import io.realm.RealmResults
 import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
 import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_messages.*
@@ -36,11 +38,15 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         }
     }
 
+    private lateinit var res: RealmResults<KotlinMessagesModel>
     private var updated = false
     private var loadFlag = false
     private var netAvailability = false
-
-
+    private var realm: Realm = Realm.getDefaultInstance()
+    val typesArray = ArrayList<String>()
+    val sourceArray = ArrayList<String>()
+    val idT = ArrayList<Int>()
+    val idS = ArrayList<Int>()
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
         netAvailability = e.isCon
@@ -93,12 +99,6 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         spinner_types.prompt = "دسته بندی"
         spinner_sources.prompt = "منابع"
 
-        val typesArray = ArrayList<String>()
-        typesArray.add("ذخیره شده ها")
-        typesArray.add("همه")
-        typesArray.add("آموزشی")
-        typesArray.add("هشدار")
-        typesArray.add("اطلاعیه")
 
         spinner_types.adapter = ArrayAdapter<String>(activity as Context
                 , R.layout.spinner_item_layout
@@ -108,6 +108,42 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         spinner_types.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.e("messagesFragment", "types position $position")
+                var posS =idS.get(spinner_sources.selectedItemPosition)
+
+                if (!realm.isInTransaction) {
+                    realm.beginTransaction()
+
+                    if (idT.get(position) > 0) {
+                        if (posS > 0) {
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).and().equalTo("groupId", posS).findAll()
+                        } else {
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).findAll()
+                        }
+
+                    } else if (idT.get(position) > -1) {
+                        if (posS > 0) {
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", posS).findAll()
+                        } else {
+                            res = realm.where(KotlinMessagesModel::class.java).findAll()
+                        }
+                    } else {
+                        if (posS > 0) {
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", posS).and().equalTo("saved", true).findAll()
+                        } else {
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("saved", true).findAll()
+                        }
+                    }
+                    realm.commitTransaction()
+
+                    var list = ArrayList<KotlinMessagesModel>()
+
+                    res.forEach { ii ->
+                        list.add(ii)
+                    }
+
+                    Log.e("rrr",posS.toString()+"  "+idT.get(position))
+                    loadAdapter(list)
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -116,12 +152,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         }
 
 
-        val sourceArray = ArrayList<String>()
-        // todo load sources
-        sourceArray.add("دانشگاه علوم پزشکی")
-        sourceArray.add("استانداری استان کردستان")
-        sourceArray.add("مجمع عالی پزشکان")
-        sourceArray.add("بیمارستان بعثت")
+
 
         spinner_sources.adapter = ArrayAdapter<String>(activity as Context
                 , R.layout.spinner_item_layout
@@ -131,6 +162,45 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         spinner_sources.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.e("messagesFragment", "sources position $position")
+                var posT =idT.get(spinner_types.selectedItemPosition)
+
+                if (!realm.isInTransaction) {
+                    realm.beginTransaction()
+
+                    if (idS.get(position) > 0) {
+                        if (posT>0){
+                            res = realm.where(KotlinMessagesModel::class.java).
+                                    equalTo("typeId", posT).and().equalTo("groupId",idS.get(position) ).findAll()
+                        }else if (posT>-1){
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId",idS.get(position) ).findAll()
+                        }else{
+                            res = realm.where(KotlinMessagesModel::class.java)
+                                    .equalTo("saved", true).and().equalTo("groupId",idS.get(position) ).findAll()
+                        }
+
+
+                    } else  {
+                        if (posT>0){
+                            res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).findAll()
+                        }else if (posT>-1){
+                            res = realm.where(KotlinMessagesModel::class.java).findAll()
+                        }else{
+                            res = realm.where(KotlinMessagesModel::class.java)
+                                    .equalTo("saved", true).findAll()
+                        }
+                    }
+                    realm.commitTransaction()
+
+                    var list = ArrayList<KotlinMessagesModel>()
+
+                    res.forEach { ii ->
+                        list.add(ii)
+                    }
+
+                    Log.e("rrr",posT.toString()+"  "+idS.get(position))
+                    loadAdapter(list)
+                }
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -170,14 +240,44 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                     result ?: onFailure(call, Throwable("null list"))
                     result ?: return
 
-                    // todo saveMessages in realm
-                    result.forEach { item: KotlinMessagesModel ->
-                        Log.e("Messages", item.toString())
+                    realm.executeTransactionAsync { realm: Realm? ->
+                        realm?.copyToRealmOrUpdate(result!!)
+                        Log.e("ssss", "hhh")
                     }
+
+                    // todo saveMessages in realm
+                    var a = 1
+                    var b = 1
+
+                    sourceArray.clear()
+                    typesArray.clear()
+                    idS.clear()
+                    idT.clear()
+
+                    sourceArray.add("همه")
+                    typesArray.add("همه")
+                    idT.add(0)
+                    idS.add(0)
+
+                    result.forEach { item: KotlinMessagesModel ->
+
+                        if (item.groupId == a) {
+                            sourceArray.add(item.groupName)
+                            idS.add(item.groupId)
+                            a++
+                        }
+                        if (item.typeId == b) {
+                            typesArray.add(item.type)
+                            idT.add(item.typeId)
+                            b++
+                        }
+                    }
+                    typesArray.add("ذخیره شده ها")
+                    idT.add(-1)
 
                     loadTabsAndSpinner()
 
-                    loadAdapter(result)
+
                     loadFlag = true
 
                     hideCPV()
@@ -225,8 +325,11 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
 
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
-        Log.e("messages", "loadAdapter")
+
         rv_messages.layoutManager = LinearLayoutManager(activity)
+        while (rv_messages.itemDecorationCount > 0) {
+            rv_messages.removeItemDecorationAt(0)
+        }
         rv_messages.addItemDecoration(VerticalLinearLayoutDecoration(activity as Context
                 , 8, 8, 8, 8))
         rv_messages.adapter = MessagesAdapter(activity as Context, list)

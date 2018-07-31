@@ -64,6 +64,8 @@
         app:layout_constraintVertical_bias="0.2" />
 
 
+
+
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv_arrowDown1"
         android:layout_width="24dp"
@@ -71,21 +73,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="10dp"
         android:rotation="90"
-        android:src="@drawable/ic_expansion_header_indicator_grey_24dp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/iv_arrowDown2"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:rotation="90"
         android:src="@drawable/ic_expansion_header_indicator_grey_24dp"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/spinner_types"
+        app:layout_constraintStart_toStartOf="@+id/spinner_sources"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatSpinner
@@ -95,10 +85,8 @@
         android:background="@color/transparent"
         android:spinnerMode="dialog"
         android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/spinner_types"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.5" />
-
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/spinner_types"
         android:layout_width="0dp"
@@ -106,10 +94,20 @@
         android:background="@color/transparent"
         android:spinnerMode="dialog"
         android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/spinner_sources"
+        app:layout_constraintEnd_toStartOf="@id/spinner_sources"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.5" />
-
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/iv_arrowDown2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:rotation="90"
+        android:visibility="gone"
+        android:src="@drawable/ic_expansion_header_indicator_grey_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_messages"

@@ -79,6 +79,8 @@ class MainActivity2 : AppCompatActivity(),
             }
             R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
+
+
         }
     }
 

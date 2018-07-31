@@ -14,6 +14,8 @@ open class KotlinMessagesModel : RealmObject() {
     @Expose
     open var messageId: Int = -1
 
+    open var saved: Boolean = false
+
     @SerializedName("groupId")
     @Expose
     open var groupId: Int = -1
