@@ -41,10 +41,8 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
         holder as ItemHolder
         holder.title.text = dataSet.get(position).firstName + " " + dataSet.get(position).lastName
 
-
-
         var str = ""
-        if (!dataSet.get(position).gen.equals("0")!!) {
+        if (!dataSet.get(position).gen.equals("0")) {
             if (dataSet.get(position).groupId == 1) {
                 str = dataSet.get(position).levelList!![0]?.name + " _ " + dataSet.get(position).specialityList!![0]?.name
             } else {
@@ -85,7 +83,6 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
                 .load(url)
                 .apply {
                     RequestOptions()
-
                             .placeholder(drawable)
                 }
                 .into(holder.image)
@@ -99,8 +96,6 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
     internal inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         @SuppressLint("RestrictedApi")
         override fun onClick(v: View?) {
-
-
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as OfficeActivity), image, "transition_name")
