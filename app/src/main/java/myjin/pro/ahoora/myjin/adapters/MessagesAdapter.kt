@@ -45,7 +45,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         fun send(i: Intent, bundle: Bundle?, requestCode: Int)
     }
 
-    private val requestCode = 1025
+    val requestCode = 1025
 
     init {
         filedStarDrawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
@@ -144,6 +144,10 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
 
     }
 
+    fun mark(position: Int, mark: Boolean) {
+        markedItem[position] = mark
+        notifyItemChanged(position)
+    }
 
     internal inner class MessageHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
@@ -169,9 +173,11 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                                 image, "transition_name")
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
+                        i.putExtra("position", adapterPosition)
                         iSend.send(i, options.toBundle(), requestCode)
                     } else {
                         val i = Intent(context, DetailMessagesActivity::class.java)
+                        i.putExtra("position", adapterPosition)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
                         iSend.send(i, null, requestCode)
                     }

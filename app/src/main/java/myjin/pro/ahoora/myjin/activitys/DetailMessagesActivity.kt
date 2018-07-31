@@ -90,17 +90,22 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
             val resultPayload = Intent(this@DetailMessagesActivity, MainActivity2::class.java)
             resultPayload.putExtra("save", isSaved)
             resultPayload.putExtra("messageId", messageId)
+            resultPayload.putExtra("position", position)
             setResult(Activity.RESULT_OK, resultPayload)
+            finish()
         } else {
             super.onBackPressed()
         }
     }
+
+    private var position: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_messages)
         if (intent != null) {
             messageId = intent.getIntExtra("messageId", 1)
+            position = intent.getIntExtra("position", 1)
         }
         converter = DateConverter(this@DetailMessagesActivity)
 

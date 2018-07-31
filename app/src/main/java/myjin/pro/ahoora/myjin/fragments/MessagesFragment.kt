@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.fragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -102,8 +103,15 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.e("messages", "onresult")
-        // todo کارتو اینجا بکن !!
+        Log.e("messages", "onResult")
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == (rv_messages.adapter as MessagesAdapter).requestCode) {
+                data ?: return
+                val p = data.getIntExtra("position", 0)
+                val mark = data.getBooleanExtra("save", false)
+                (rv_messages.adapter as MessagesAdapter).mark(p, mark)
+            }
+        }
     }
 
 

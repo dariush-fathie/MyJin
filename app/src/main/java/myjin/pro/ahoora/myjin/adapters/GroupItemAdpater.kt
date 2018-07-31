@@ -177,12 +177,12 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
     }
 
     fun deleteItem(centerId: Int) {
-        realm.executeTransaction({ db ->
+        realm.executeTransaction { db ->
             val item = db.where(KotlinItemModel::class.java)
                     .equalTo("centerId", centerId)
                     .findFirst()!!
             item.saved = false
-        })
+        }
     }
 
 
