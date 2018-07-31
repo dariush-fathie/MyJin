@@ -176,10 +176,10 @@ public class DateConverter {
                 case 5:
                     return "5 روز پیش";
                 case 6:
-                    return "5 روز پیش";
+                    return "6 روز پیش";
             }
         }
-        return "";
+        return "یک روز پیش";
     }
 
     private String nMonthsAgo(int day) {

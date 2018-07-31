@@ -62,6 +62,7 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
         str = "${tv_title.text}\n\n"
         str += "${tv_group.text}\n\n"
+        str += "${tv_time.text}\n\n"
         str += "${tv_content.text}\n\n"
         str += "لینک دانلود ژین من \n"
 
@@ -159,8 +160,9 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
         realm.executeTransaction { db ->
             val Items = db.where(KotlinMessagesModel::class.java).equalTo("messageId", messageId).findFirst()
             tv_title.text = Items?.title
-            tv_group.text = Items?.groupName + " : " + Items?.type + " ، " + converter?.convert2(Items?.regDate)
+            tv_group.text ="منبع : "+ Items?.groupName + " ، " + Items?.type
             tv_content.text = Items?.content
+            tv_time.text=converter?.convert2(Items?.regDate)
 
             Glide.with(this@DetailMessagesActivity)
                     .load(Items?.imageUrl)

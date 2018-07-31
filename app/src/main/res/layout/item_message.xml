@@ -45,7 +45,7 @@
         android:id="@+id/iv_save_message"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:padding="6dp"
+        android:padding="4dp"
         android:src="@drawable/icons_bookmark_1"
         android:tint="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
