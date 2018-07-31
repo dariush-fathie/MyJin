@@ -1,4 +1,4 @@
-package myjin.pro.ahoora.myjin.adapters;
+package myjin.pro.ahoora.myjin.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context

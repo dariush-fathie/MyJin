@@ -227,7 +227,6 @@ class MainActivity2 : AppCompatActivity(),
         if (netAvailability) {
             getSlides()
             getSpList()
-            //todo : get services and others ...
         } else {
             showNetErrSnack()
         }
@@ -242,7 +241,7 @@ class MainActivity2 : AppCompatActivity(),
         if (!spLoadFlag) {
             getSpList()
         }
-        // todo : get services
+
     }
 
     fun showNetErrSnack() {
@@ -254,7 +253,6 @@ class MainActivity2 : AppCompatActivity(),
                     }, 1000)
                 }.show()
     }
-
 
     override fun onPageScrollStateChanged(state: Int) {
 
