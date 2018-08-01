@@ -55,8 +55,8 @@ class HeaIncServiceActivity : AppCompatActivity(), View.OnClickListener, View.On
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.iv_menu->openDrawerLayout()
-            R.id.iv_goback-> finish()
+            R.id.iv_menu -> openDrawerLayout()
+            R.id.iv_goback -> finish()
             R.id.rl_myjin_services -> drawerClick(0)
             R.id.rl_drawer2 -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
@@ -64,8 +64,9 @@ class HeaIncServiceActivity : AppCompatActivity(), View.OnClickListener, View.On
             R.id.rl_salamat -> drawerClick(4)
         }
     }
+
     fun early_Mth() {
-        Toast.makeText(this,"بزودی",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
     }
 
     override fun onLongClick(v: View?): Boolean {
@@ -79,10 +80,11 @@ class HeaIncServiceActivity : AppCompatActivity(), View.OnClickListener, View.On
         }
         return false
     }
+
     private fun drawerClick(position: Int) {
         when (position) {
             0 -> {
-                startActivity(Intent(this@HeaIncServiceActivity, MainActivity::class.java))
+                startActivity(Intent(this@HeaIncServiceActivity, MainActivity2::class.java))
 
                 finish()
             }
@@ -101,11 +103,12 @@ class HeaIncServiceActivity : AppCompatActivity(), View.OnClickListener, View.On
 
                 finish()
             }
-            4-> closeDrawerLayout()
+            4 -> closeDrawerLayout()
         }
 
 
     }
+
     private fun openDrawerLayout() {
         drawerLayout.openDrawer(GravityCompat.END)
     }

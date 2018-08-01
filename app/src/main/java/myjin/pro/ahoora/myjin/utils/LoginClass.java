@@ -1,14 +1,12 @@
 package myjin.pro.ahoora.myjin.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
 import myjin.pro.ahoora.myjin.activitys.DetailActivity;
 import myjin.pro.ahoora.myjin.activitys.LoginActivity;
-import myjin.pro.ahoora.myjin.activitys.ServerStatusActivity;
 import myjin.pro.ahoora.myjin.interfaces.ServerStatusResponse;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import retrofit2.Call;
@@ -73,7 +71,8 @@ public class LoginClass {
                     Log.e("val", val + "");
 
                     if (val.equals("noserver")) {
-                        mContaxt.startActivity(new Intent(mContaxt, ServerStatusActivity.class));
+                        //mContaxt.startActivity(new Intent(mContaxt, ServerStatusActivity.class));
+                        // todo goto repair
                         if (!ch) {
                             ((DetailActivity) mContaxt).finish();
                         } else {
