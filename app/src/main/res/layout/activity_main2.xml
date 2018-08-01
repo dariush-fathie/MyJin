@@ -68,7 +68,7 @@
                     app:tabMode="fixed"
                     app:tabSelectedTextColor="#000"
                     app:tabTextAppearance="@style/CustomTabTextFont"
-                    app:tabTextColor="@color/title" />
+                    app:tabTextColor="@color/androidTextColor" />
 
                 <RelativeLayout
                     android:id="@+id/toolbar"

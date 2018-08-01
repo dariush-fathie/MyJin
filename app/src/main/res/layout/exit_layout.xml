@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="5dp"
-    android:background="@color/back0">
+    android:background="@color/white"
+    android:padding="16dp">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/appCompatImageView"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:src="@drawable/ic_jin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/yekan"
         android:gravity="center"
         android:padding="10dp"
@@ -32,49 +30,32 @@
         app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_ok"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_ok"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView6"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6">
+        android:layout_marginTop="16dp"
+        android:text="بله"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/red1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_no"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
 
-        <android.support.v7.widget.AppCompatTextView
-
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/baleh"
-            android:textColor="@color/colorAccent"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_no"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_no"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-       android:layout_marginTop="5dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/cv_ok"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6">
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="خیر"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/green"
+        app:layout_constraintEnd_toStartOf="@+id/btn_ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
 
-        <android.support.v7.widget.AppCompatTextView
-
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="2dp"
-            android:background="@color/white"
-            android:gravity="center"
-            android:text="@string/no"
-            android:textColor="@color/colorAccent"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>

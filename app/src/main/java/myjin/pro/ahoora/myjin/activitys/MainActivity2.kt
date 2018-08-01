@@ -2,7 +2,6 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -13,8 +12,8 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
@@ -449,28 +448,24 @@ class MainActivity2 : AppCompatActivity(),
         val builder = AlertDialog.Builder(this@MainActivity2)
         val dialog: AlertDialog
         val view = View.inflate(this@MainActivity2, R.layout.exit_layout, null)
-        val alertDialog = AlertDialog.Builder(this)
-
-        val cv_ok: CardView =view.findViewById(R.id.cv_ok)
-        val cv_no:CardView=view.findViewById(R.id.cv_no)
+        val btn_ok: AppCompatButton = view.findViewById(R.id.btn_ok)
+        val btn_no: AppCompatButton = view.findViewById(R.id.btn_no)
         builder.setView(view)
         dialog = builder.create()
         dialog.show()
-        val listener = View.OnClickListener { view ->
-            when (view.id) {
-                R.id.cv_ok -> {
+        val listener = View.OnClickListener { v ->
+            when (v.id) {
+                R.id.btn_ok -> {
                     dialog.dismiss()
                     finish()
                 }
-                R.id.cv_no -> {
+                R.id.btn_no -> {
                     dialog.dismiss()
-
                 }
             }
         }
-        cv_ok.setOnClickListener(listener)
-        cv_no.setOnClickListener(listener)
-
+        btn_ok.setOnClickListener(listener)
+        btn_no.setOnClickListener(listener)
     }
 
     override fun onBackPressed() {
