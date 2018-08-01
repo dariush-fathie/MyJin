@@ -25,6 +25,9 @@
     <string name="cityId">cityId</string>
     <string name="provCityPair">provCityPair</string>
     <string name="skip">بگذر</string>
+    <string name="exieMsg">خارج میشوید ؟</string>
+    <string name="baleh">بله</string>
+    <string name="no">نه</string>
     <string name="checkConnectionAndTryAgain">از اتصال دستگاه به اینترنت مطمئن شوید سپس دوباره تلاش کنید</string>
 
     <string-array name="provArray2">

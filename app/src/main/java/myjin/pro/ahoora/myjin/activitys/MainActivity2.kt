@@ -14,6 +14,7 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
@@ -444,15 +445,32 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private fun showExitDialog() {
+
+        val builder = AlertDialog.Builder(this@MainActivity2)
+        val dialog: AlertDialog
+        val view = View.inflate(this@MainActivity2, R.layout.exit_layout, null)
         val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setMessage("خارج می شوید ؟")
-                .setNegativeButton("نه", DialogInterface.OnClickListener { dialog, _ ->
+
+        val cv_ok: CardView =view.findViewById(R.id.cv_ok)
+        val cv_no:CardView=view.findViewById(R.id.cv_no)
+        builder.setView(view)
+        dialog = builder.create()
+        dialog.show()
+        val listener = View.OnClickListener { view ->
+            when (view.id) {
+                R.id.cv_ok -> {
                     dialog.dismiss()
-                })
-                .setPositiveButton("بله", DialogInterface.OnClickListener { _, _ ->
                     finish()
-                })
-        alertDialog.show()
+                }
+                R.id.cv_no -> {
+                    dialog.dismiss()
+
+                }
+            }
+        }
+        cv_ok.setOnClickListener(listener)
+        cv_no.setOnClickListener(listener)
+
     }
 
     override fun onBackPressed() {
