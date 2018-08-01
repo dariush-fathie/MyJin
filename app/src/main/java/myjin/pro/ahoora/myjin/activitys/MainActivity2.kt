@@ -14,7 +14,6 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.CardView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
@@ -34,7 +33,6 @@ import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
-import myjin.pro.ahoora.myjin.utils.Colors
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -68,19 +66,14 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
-            R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString(),5)
-            R.id.rl_ict_services -> goToServicesActivity(tv_ict_services.text.toString(),6)
-            R.id.rl_pishkhan_services -> goToServicesActivity(tv_pishkhan_services.text.toString(),7)
-            R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(),8)
-            R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString(),4)
-            R.id.rl_drawer2 -> {
-                closeDrawerLayout()
-                vp_mainContainer.currentItem = 2
-            }
+            R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString(), 5)
+            R.id.rl_ict_services -> goToServicesActivity(tv_ict_services.text.toString(), 6)
+            R.id.rl_pishkhan_services -> goToServicesActivity(tv_pishkhan_services.text.toString(), 7)
+            R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(), 8)
+            R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString(), 4)
+            R.id.rl_drawer2 -> startActivity(Intent(this, FavActivity::class.java))
             R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
-
-
         }
     }
 
@@ -127,7 +120,7 @@ class MainActivity2 : AppCompatActivity(),
         drawerLayout.openDrawer(GravityCompat.END)
     }
 
-    private val bankPosition = 0
+    private val bankPosition = 1
     private var fabH = 0f
     private var isSearchVisible = true
     private var appBarOffset = 0
@@ -160,14 +153,14 @@ class MainActivity2 : AppCompatActivity(),
         if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
             when (currentPage) {
                 0 -> {
-                    tv_mainTitle.text = "بانک سلامت"
-                }
-                1 -> {
                     tv_mainTitle.text = "پیام ها"
                 }
-                2 -> {
-                    tv_mainTitle.text = "نشان شده ها"
+                1 -> {
+                    tv_mainTitle.text = "بانک سلامت"
                 }
+            /* 2 -> {
+                 tv_mainTitle.text = "نشان شده ها"
+             }*/
             }
         } else {
             tv_mainTitle.text = getString(R.string.myJin)
@@ -175,7 +168,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private fun setVisibleShadow(appBarLayout: AppBarLayout?, verticalOffset: Int) {
-        if (currentPage == 0) {
+        if (currentPage == 1) {
             if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
                 view_gradient.visibility = View.VISIBLE
             } else {
@@ -194,12 +187,12 @@ class MainActivity2 : AppCompatActivity(),
 
         fabH = Converter.pxFromDp(this, 16f + 50f + 20)
 
-        tbl_main?.addTab(tbl_main.newTab()
+/*        tbl_main?.addTab(tbl_main.newTab()
                 .setText("بانک سلامت"), false)
         tbl_main?.addTab(tbl_main.newTab()
                 .setText("پیغام ها"), false)
         tbl_main?.addTab(tbl_main.newTab()
-                .setText("نشان شده ها"), false)
+                .setText("نشان شده ها"), false)*/
 
         tbl_main.addOnTabSelectedListener(this)
 
@@ -208,7 +201,7 @@ class MainActivity2 : AppCompatActivity(),
         vp_mainContainer.offscreenPageLimit = 4
         tbl_main.setupWithViewPager(vp_mainContainer)
         Handler().postDelayed({
-            tbl_main?.getTabAt(0)?.select()
+            tbl_main?.getTabAt(1)?.select()
             ipi_main.attachToViewPager(vp_mainContainer)
         }, 50)
         setListener()
@@ -298,15 +291,15 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
-        addOrRemoveColorFilter(tab!!, false)
+        //addOrRemoveColorFilter(tab!!, false)
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
-        addOrRemoveColorFilter(tab!!, true)
+        //addOrRemoveColorFilter(tab!!, true)
         //newGenerSelected(tab.position)
     }
 
-    private fun addOrRemoveColorFilter(tab: TabLayout.Tab, addFilter: Boolean) {
+    /*private fun addOrRemoveColorFilter(tab: TabLayout.Tab, addFilter: Boolean) {
         val view = tab.customView
         val text = view?.findViewById<AppCompatTextView>(R.id.tv_customTabTitle)
         val cardView = view?.findViewById<CardView>(R.id.cv_customTabContainer)
@@ -327,7 +320,7 @@ class MainActivity2 : AppCompatActivity(),
             cardView?.cardElevation = 0f
             cardView?.setCardBackgroundColor(colors.transparent)
         }
-    }
+    }*/
 
     private fun showLocation() {
         iv_locationArrrow.visibility = View.VISIBLE
@@ -472,7 +465,7 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.e("mainActivity2","onresult")
+        Log.e("mainActivity2", "onresult")
     }
 
 }

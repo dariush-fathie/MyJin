@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -116,11 +117,9 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
 
     private fun loadTabsAndSpinner() {
-        v1.visibility = View.VISIBLE
-        spinner_sources.visibility = View.VISIBLE
-        spinner_types.visibility = View.VISIBLE
-        iv_arrowDown1.visibility = View.VISIBLE
-        iv_arrowDown2.visibility = View.VISIBLE
+        //v1.visibility = View.VISIBLE
+        cv1.visibility = View.VISIBLE
+        cv2.visibility = View.VISIBLE
 
         spinner_types.prompt = "دسته بندی"
         spinner_sources.prompt = "منابع"
@@ -132,8 +131,12 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                 , typesArray)
 
         spinner_types.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.e("messagesFragment", "types position $position")
+
+                (view as AppCompatTextView).text = "نوع : " + typesArray[position]
+
                 var posS = idS.get(spinner_sources.selectedItemPosition)
 
                 if (!realm.isInTransaction) {
@@ -180,8 +183,6 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         }
 
 
-
-
         spinner_sources.adapter = ArrayAdapter<String>(activity as Context
                 , R.layout.spinner_item_layout
                 , R.id.tv_spinnerTitle
@@ -191,6 +192,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.e("messagesFragment", "sources position $position")
                 var posT = idT.get(spinner_types.selectedItemPosition)
+
+                (view as AppCompatTextView).text = "منبع : " + sourceArray[position]
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()
@@ -368,6 +371,13 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
 
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
+
+        if (list.isEmpty()) {
+            tv_noItemfound.visibility = View.VISIBLE
+        } else {
+            tv_noItemfound.visibility = View.GONE
+        }
+
         rv_messages.layoutManager = LinearLayoutManager(activity)
 
         while (rv_messages.itemDecorationCount > 0) {

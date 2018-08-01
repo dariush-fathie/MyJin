@@ -11,20 +11,20 @@ class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int): Fragment? {
         return when (position) {
-            0 -> HealthBankFragment()
-            1 -> MessagesFragment()
+            1 -> HealthBankFragment()
+            0 -> MessagesFragment()
             else -> FavFragment()
         }
     }
 
     override fun getCount(): Int {
-        return 3
+        return 2
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "بانک سلامت"
-            1 -> "پیام ها"
+            1 -> "بانک سلامت"
+            0 -> "پیام ها"
             else -> "نشان شده ها"
         }
     }
