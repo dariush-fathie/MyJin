@@ -226,7 +226,7 @@
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv1"
-                            android:layout_width="36dp"
+                            android:layout_width="60dp"
                             android:layout_height="36dp"
                             android:layout_marginTop="8dp"
                             android:gravity="center"
@@ -235,7 +235,8 @@
                             android:text="تلفن"
                             android:tint="@color/blue"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_tel"
-                            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView1" />
+                            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView1"
+                            app:layout_constraintWidth_min="40dp" />
 
 
                         <android.support.v7.widget.AppCompatButton
@@ -267,7 +268,7 @@
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv2"
-                            android:layout_width="36dp"
+                            android:layout_width="60dp"
                             android:layout_height="36dp"
                             android:layout_marginBottom="4dp"
                             android:gravity="center"
@@ -276,7 +277,9 @@
                             android:text="وبسایت"
                             android:tint="@color/blue"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_web"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_tel" />
+                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_tel"
+                            app:layout_constraintWidth_max="60dp"
+                            app:layout_constraintWidth_min="40dp" />
 
                         <android.support.v7.widget.AppCompatButton
                             android:id="@+id/tv_website"
@@ -308,7 +311,7 @@
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv3"
-                            android:layout_width="36dp"
+                            android:layout_width="60"
                             android:layout_height="36dp"
                             android:layout_marginBottom="4dp"
                             android:gravity="center"
@@ -316,7 +319,9 @@
                             android:text="ایمیل"
                             android:tint="@color/blue"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_web"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_web" />
+                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_web"
+                            app:layout_constraintWidth_max="60dp"
+                            app:layout_constraintWidth_min="40dp" />
 
                         <android.support.v7.widget.AppCompatButton
                             android:id="@+id/tv_mail"
