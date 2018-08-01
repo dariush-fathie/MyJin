@@ -105,7 +105,7 @@ public class DateConverter {
                     }
                 } else {
                     // TODO: 11/15/2016 offset1 days ago
-                    return nDaysAgo(offset1);
+                    return nDaysAgo(offset1,y,m,d);
                 }
             } else {
                 if (dm == 1) {
@@ -113,13 +113,13 @@ public class DateConverter {
                 } else {
                     offset1 = (dm - 1) * 30 + c[2] + (30 - d);
                 }
-                if (offset1 <= 30) {
+               // if (offset1 <= 30) {
                     // TODO: 11/15/2016   offset1 days ago
-                    return   nDaysAgo(offset1);
-                } else {
+                    return   nDaysAgo(offset1,y,m,d);
+               /* } else {
                     // TODO: 11/15/2016   offset1 months ago
                     return   nMonthsAgo(offset1);
-                }
+                }*/
 
             }
         } else if (y < c[0]) {
@@ -127,11 +127,11 @@ public class DateConverter {
             offset1 = 365 - offset1;
             offset2 = calculateOffset(c[0], c[1], c[2]);
             offset1 += offset2;
-            if (offset1 > 30) {
+          /*  if (offset1 > 30) {
                 return  nMonthsAgo(offset1);
-            } else {
-                return nDaysAgo(offset1);
-            }
+            } else {*/
+                return nDaysAgo(offset1,y,m,d);
+           // }
             // TODO: 11/15/2016 offset1 days ago
         }
         return "";
@@ -150,10 +150,12 @@ public class DateConverter {
         }
     }
 
-    private String nDaysAgo(int day) {
+    private String nDaysAgo(int day,int y, int m, int d) {
         int week = day / 7;
         if (week > 0) {
-            switch (week) {
+            MiladiDate md = new MiladiDate(y, m, d);
+            SolarCalendar sc = new SolarCalendar(md);
+           /* switch (week) {
                 case 1:
                     return "یک هفته پیش";
                 case 2:
@@ -162,24 +164,27 @@ public class DateConverter {
                     return "3 هفته پیش";
                 case 4:
                     return "4 هفته پیش";
-            }
+            }*/
+           return sc.date+" "+sc.strMonth+" "+sc.year;
         } else {
             switch (day) {
-                case 1:
+                case 0:
                     return "یک روز پیش";
-                case 2:
+                case 1:
                     return "2 روز پیش";
-                case 3:
+                case 2:
                     return "3 روز پیش";
-                case 4:
+                case 3:
                     return "4 روز پیش";
-                case 5:
+                case 4:
                     return "5 روز پیش";
-                case 6:
+                case 5:
                     return "6 روز پیش";
+                case 6:
+                    return "یک هفته پیش";
             }
         }
-        return "یک روز پیش";
+        return "";
     }
 
     private String nMonthsAgo(int day) {

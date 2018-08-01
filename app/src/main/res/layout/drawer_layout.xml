@@ -559,6 +559,51 @@
 
 
             </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/split" />
+            <RelativeLayout
+                android:id="@+id/rl_setting"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp">
+
+
+                <View
+                    android:id="@+id/vset"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/green"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/ivsetting"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vset"
+                    android:src="@drawable/ic_setting"
+                    android:tint="@color/green" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivsetting"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:textColor="@color/title"
+                    android:text="تنظیمات"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/yekan" />
+
+
+            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"

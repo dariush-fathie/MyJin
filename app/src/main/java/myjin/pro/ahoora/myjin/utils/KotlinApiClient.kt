@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object KotlinApiClient {
 
-    private val BASE_URL = "http://unary.ir/service/"
+    private val BASE_URL = "http://myjin.ir/service/"
     private var retrofit: Retrofit? = null
 
     val gson = GsonBuilder().setExclusionStrategies(object : ExclusionStrategy {
