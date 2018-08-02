@@ -167,6 +167,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rl_post_services.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
         tv_login_outsign.setOnClickListener(this)
+        rl_setting.setOnClickListener(this)
     }
 
     private fun initList(list: ArrayList<Int>) {
@@ -421,6 +422,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.rl_ict_services -> goToServicesActivity(tv_ict_services.text.toString(),6)
             R.id.rl_pishkhan_services -> goToServicesActivity(tv_pishkhan_services.text.toString(),7)
             R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(),8)
+            R.id.rl_setting-> startActivity(Intent(this,SettingActivity::class.java))
 
         }
     }

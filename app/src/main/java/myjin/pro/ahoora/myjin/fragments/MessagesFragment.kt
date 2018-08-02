@@ -6,14 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -22,6 +19,7 @@ import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_messages.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.MessagesAdapter
+import myjin.pro.ahoora.myjin.customClasses.MsgSpinnerDialog
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
@@ -41,6 +39,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
             R.id.btn_messagesTryAgain -> {
                 tryAgain()
             }
+            R.id.cv1 -> openSourceDialog()
+            R.id.cv2 -> openTypeDialog()
         }
     }
 
@@ -53,8 +53,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
     val sourceArray = ArrayList<String>()
     val idT = ArrayList<Int>()
     val idS = ArrayList<Int>()
-
-
+    var posS = 0
+    var posT = 0
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
         netAvailability = e.isCon
@@ -117,128 +117,11 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
 
     private fun loadTabsAndSpinner() {
-        //v1.visibility = View.VISIBLE
+
         cv1.visibility = View.VISIBLE
         cv2.visibility = View.VISIBLE
-
-        spinner_types.prompt = "دسته بندی"
-        spinner_sources.prompt = "منابع"
-
-
-        spinner_types.adapter = ArrayAdapter<String>(activity as Context
-                , R.layout.spinner_item_layout
-                , R.id.tv_spinnerTitle
-                , typesArray)
-
-        spinner_types.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.e("messagesFragment", "types position $position")
-
-                (view as AppCompatTextView).text = "نوع : " + typesArray[position]
-
-                var posS = idS.get(spinner_sources.selectedItemPosition)
-
-                if (!realm.isInTransaction) {
-                    realm.beginTransaction()
-
-                    if (idT.get(position) > 0) {
-                        if (posS > 0) {
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).and().equalTo("groupId", posS).findAll()
-                        } else {
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).findAll()
-                        }
-
-                    } else if (idT.get(position) > -1) {
-                        if (posS > 0) {
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", posS).findAll()
-                        } else {
-                            res = realm.where(KotlinMessagesModel::class.java).findAll()
-                        }
-                    } else {
-                        if (posS > 0) {
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", posS).and().equalTo("saved", true).findAll()
-                        } else {
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("saved", true).findAll()
-                        }
-                    }
-
-                    res = res.sort("regDate", Sort.DESCENDING)
-                    realm.commitTransaction()
-
-                    var list = ArrayList<KotlinMessagesModel>()
-
-                    res.forEach { ii ->
-                        list.add(ii)
-                    }
-
-                    Log.e("rrr", posS.toString() + "  " + idT.get(position))
-                    loadAdapter(list)
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-        }
-
-
-        spinner_sources.adapter = ArrayAdapter<String>(activity as Context
-                , R.layout.spinner_item_layout
-                , R.id.tv_spinnerTitle
-                , sourceArray)
-
-        spinner_sources.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.e("messagesFragment", "sources position $position")
-                var posT = idT.get(spinner_types.selectedItemPosition)
-
-                (view as AppCompatTextView).text = "منبع : " + sourceArray[position]
-
-                if (!realm.isInTransaction) {
-                    realm.beginTransaction()
-
-                    if (idS.get(position) > 0) {
-                        if (posT > 0) {
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).and().equalTo("groupId", idS.get(position)).findAll()
-                        } else if (posT > -1) {
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", idS.get(position)).findAll()
-                        } else {
-                            res = realm.where(KotlinMessagesModel::class.java)
-                                    .equalTo("saved", true).and().equalTo("groupId", idS.get(position)).findAll()
-                        }
-
-
-                    } else {
-                        if (posT > 0) {
-                            res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).findAll()
-                        } else if (posT > -1) {
-                            res = realm.where(KotlinMessagesModel::class.java).findAll()
-                        } else {
-                            res = realm.where(KotlinMessagesModel::class.java)
-                                    .equalTo("saved", true).findAll()
-                        }
-                    }
-
-                    res = res.sort("regDate", Sort.DESCENDING)
-                    realm.commitTransaction()
-
-                    var list = ArrayList<KotlinMessagesModel>()
-
-                    res.forEach { ii ->
-                        list.add(ii)
-                    }
-
-                    Log.e("rrr", posT.toString() + "  " + idS.get(position))
-                    loadAdapter(list)
-                }
-
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-        }
+        cv1.setOnClickListener(this)
+        cv2.setOnClickListener(this)
 
     }
 
@@ -250,6 +133,88 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
+    }
+
+    private fun openSourceDialog() {
+        val dialog = MsgSpinnerDialog(activity, sourceArray, "گروه")
+        dialog.bindOnSpinerListener { name, position ->
+            posS = idS.get(position)
+            spinner_sources.text = sourceArray[position]
+
+            if (!realm.isInTransaction) {
+                realm.beginTransaction()
+
+                if (idS.get(position) > 0) {
+                    if (posT > 0) {
+                        res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).and().equalTo("groupId", idS.get(position)).findAll()
+                    } else {
+                        res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", idS.get(position)).findAll()
+                    }
+
+
+                } else {
+                    if (posT > 0) {
+                        res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).findAll()
+                    } else {
+                        res = realm.where(KotlinMessagesModel::class.java).findAll()
+                    }
+                }
+
+                res = res.sort("regDate", Sort.DESCENDING)
+                realm.commitTransaction()
+
+                var list = ArrayList<KotlinMessagesModel>()
+
+                res.forEach { ii ->
+                    list.add(ii)
+                }
+
+                Log.e("rrr", posT.toString() + "  " + idS.get(position))
+                loadAdapter(list)
+            }
+
+        }
+        dialog.showSpinerDialog()
+    }
+
+    private fun openTypeDialog() {
+        val dialog = MsgSpinnerDialog(activity, typesArray, "دسته بندی")
+        dialog.bindOnSpinerListener { name, position ->
+            posT = idT.get(position)
+            spinner_types.text =typesArray[position]
+
+            if (!realm.isInTransaction) {
+                realm.beginTransaction()
+
+                if (idT.get(position) > 0) {
+                    if (posS > 0) {
+                        res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).and().equalTo("groupId", posS).findAll()
+                    } else {
+                        res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).findAll()
+                    }
+
+                } else  {
+                    if (posS > 0) {
+                        res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", posS).findAll()
+                    } else {
+                        res = realm.where(KotlinMessagesModel::class.java).findAll()
+                    }
+                }
+
+                res = res.sort("regDate", Sort.DESCENDING)
+                realm.commitTransaction()
+
+                var list = ArrayList<KotlinMessagesModel>()
+
+                res.forEach { ii ->
+                    list.add(ii)
+                }
+
+                Log.e("rrr", posS.toString() + "  " + idT.get(position))
+                loadAdapter(list)
+            }
+        }
+        dialog.showSpinerDialog()
     }
 
     private var lock = false
@@ -305,9 +270,9 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                     typesArray.add("همه")
                     idT.add(0)
                     idS.add(0)
-
+                    var list = ArrayList<KotlinMessagesModel>()
                     result.forEach { item: KotlinMessagesModel ->
-
+                        list.add(item)
                         if (!sourceArray.contains(item.groupName)) {
                             sourceArray.add(item.groupName)
                             idS.add(item.groupId)
@@ -317,11 +282,10 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                             idT.add(item.typeId)
                         }
                     }
-                    typesArray.add("ذخیره شده ها")
-                    idT.add(-1)
+
 
                     loadTabsAndSpinner()
-
+                    loadAdapter(list)
 
                     loadFlag = true
 

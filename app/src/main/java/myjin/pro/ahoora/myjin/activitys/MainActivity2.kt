@@ -74,13 +74,12 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_drawer2 -> startActivity(Intent(this, FavActivity::class.java))
             R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
+            R.id.rl_setting-> startActivity(Intent(this,SettingActivity::class.java))
         }
     }
 
 
-    private fun cummingSoon() {
-        Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
-    }
+
 
     private fun closeDrawerLayout() {
         drawerLayout.closeDrawers()
@@ -111,6 +110,7 @@ class MainActivity2 : AppCompatActivity(),
         rl_pishkhan_services.setOnClickListener(this)
         rl_post_services.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
+        rl_setting.setOnClickListener(this)
         tv_login_outsign.setOnClickListener(this)
         rl_exit.setOnClickListener(this)
     }
@@ -153,7 +153,7 @@ class MainActivity2 : AppCompatActivity(),
         if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
             when (currentPage) {
                 0 -> {
-                    tv_mainTitle.text = "پیام ها"
+                    tv_mainTitle.text = "پیام و اطلاعیه"
                 }
                 1 -> {
                     tv_mainTitle.text = "بانک سلامت"

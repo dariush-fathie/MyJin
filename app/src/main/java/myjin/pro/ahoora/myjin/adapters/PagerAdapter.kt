@@ -24,7 +24,7 @@ class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
             1 -> "بانک سلامت"
-            0 -> "پیام ها"
+            0 -> "پیام و اطلاعیه"
             else -> "نشان شده ها"
         }
     }
