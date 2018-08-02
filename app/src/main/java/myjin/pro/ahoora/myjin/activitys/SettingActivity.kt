@@ -2,6 +2,7 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import android.widget.CompoundButton
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -12,7 +13,10 @@ import myjin.pro.ahoora.myjin.models.events.DeleteFavEvent
 import myjin.pro.ahoora.myjin.utils.SharedPer
 import org.greenrobot.eventbus.EventBus
 
-class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener {
+class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+    override fun onClick(v: View?) {
+        onBackPressed()
+    }
 
     val realmDatabase = Realm.getDefaultInstance()
     val isSavedC = false
@@ -69,6 +73,7 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
         sc_message.setOnCheckedChangeListener(this)
         sc_intro.setOnCheckedChangeListener(this)
         rb_centers.setOnCheckedChangeListener(this)
+        iv_goback.setOnClickListener(this)
     }
 
     private fun getFromRealm() {

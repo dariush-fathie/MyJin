@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -82,7 +83,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
     @Subscribe
     fun refresh(e: DeleteFavEvent){
         (rv_messages.adapter as MessagesAdapter).notifyDataSetChanged()
-        Log.e("fff","gggggg")
+
+       Toast.makeText(context,"DeleteFavEvent",Toast.LENGTH_LONG).show()
     }
 
     override fun onStart() {
