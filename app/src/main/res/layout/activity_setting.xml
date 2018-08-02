@@ -82,7 +82,7 @@
                 android:layout_below="@+id/v_fav"
                 android:fontFamily="@font/yekan"
                 android:padding="10dp"
-                android:text="مراکز سلامت"
+               android:text="@string/healthCenters"
                 android:textColor="@color/title"
                 android:textSize="15sp" />
 
@@ -103,7 +103,7 @@
                 android:layout_below="@+id/tv_title_c"
                 android:fontFamily="@font/yekan"
                 android:padding="10dp"
-                android:text="پیام و اطلاعیه"
+                android:text="@string/etlaeieh"
                 android:textColor="@color/title"
                 android:textSize="15sp" />
 
@@ -169,7 +169,7 @@
                     android:fontFamily="@font/yekan"
                     android:layoutDirection="rtl"
                     android:padding="10dp"
-                    android:text="مراکز سلامت"
+                   android:text="@string/healthCenters"
                     android:textColor="@color/title"
                     android:textSize="15sp" />
 
@@ -180,7 +180,7 @@
                     android:fontFamily="@font/yekan"
                     android:layoutDirection="rtl"
                     android:padding="10dp"
-                    android:text="پیام و اطلاعیه"
+                    android:text="@string/etlaeieh"
                     android:textColor="@color/title"
                     android:textSize="15sp" />
             </RadioGroup>

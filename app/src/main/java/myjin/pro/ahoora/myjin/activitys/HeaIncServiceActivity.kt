@@ -40,7 +40,7 @@ class HeaIncServiceActivity : AppCompatActivity(), View.OnClickListener, View.On
         iv_goback!!.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         rl_myjin_services.setOnClickListener(this)
-        rl_drawer2.setOnClickListener(this)
+
         rl_drawer3.setOnClickListener(this)
         rl_drawer4.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
@@ -58,7 +58,7 @@ class HeaIncServiceActivity : AppCompatActivity(), View.OnClickListener, View.On
             R.id.iv_menu -> openDrawerLayout()
             R.id.iv_goback -> finish()
             R.id.rl_myjin_services -> drawerClick(0)
-            R.id.rl_drawer2 -> drawerClick(1)
+
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
             R.id.rl_salamat -> drawerClick(4)

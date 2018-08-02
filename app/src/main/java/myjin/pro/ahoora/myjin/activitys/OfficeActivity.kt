@@ -152,11 +152,12 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         fab_goUp.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
 
-        rl_myjin_services.setOnClickListener(this)
-        rl_drawer2.setOnClickListener(this)
+
+
         rl_drawer3.setOnClickListener(this)
         rl_drawer4.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
+        rl_myjin_services.setOnClickListener(this)
         iv_jinDrawer.setOnLongClickListener(this)
         rl_myjin_services.setOnClickListener(this)
         rl_takapoo_services.setOnClickListener(this)
@@ -168,6 +169,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rl_salamat.setOnClickListener(this)
         tv_login_outsign.setOnClickListener(this)
         rl_setting.setOnClickListener(this)
+        tv_healthCenters.setOnClickListener(this)
     }
 
     private fun initList(list: ArrayList<Int>) {
@@ -410,7 +412,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.iv_menu -> openDrawerLayout()
             R.id.fab_goUp -> rv_items.smoothScrollToPosition(0)
 
-            R.id.rl_drawer2 -> drawerClick(1)
+            R.id.tv_healthCenters -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
 

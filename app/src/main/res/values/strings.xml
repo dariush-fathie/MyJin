@@ -25,6 +25,8 @@
     <string name="defTab">defTab</string>
     <string name="provId">provId</string>
     <string name="cityId">cityId</string>
+    <string name="healthCenters">مراکز سلامت</string>
+    <string name="etlaeieh">پیام و اطلاعیه</string>
     <string name="provCityPair">provCityPair</string>
     <string name="skip">بگذر</string>
     <string name="exieMsg">خارج میشوید ؟</string>
