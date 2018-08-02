@@ -21,6 +21,7 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.MessagesAdapter
 import myjin.pro.ahoora.myjin.customClasses.MsgSpinnerDialog
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
+import myjin.pro.ahoora.myjin.models.events.DeleteFavEvent
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
@@ -76,6 +77,12 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                 }
             }
         }
+    }
+
+    @Subscribe
+    fun refresh(e: DeleteFavEvent){
+        (rv_messages.adapter as MessagesAdapter).notifyDataSetChanged()
+        Log.e("fff","gggggg")
     }
 
     override fun onStart() {

@@ -31,6 +31,7 @@ import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.utils.DateConverter
+import org.greenrobot.eventbus.Subscribe
 
 
 class MessagesAdapter(private val context: Context, private val list: List<KotlinMessagesModel>, private val iSend: SendIntentForResult) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -132,9 +133,9 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         val messageItem = list[position]
 
         holder.title.text = messageItem.title
-        holder.shortDesc.text = messageItem.shortDescription
         holder.date.text = converter?.convert2(messageItem.regDate)
         holder.type.text = messageItem.type
+        holder.source.text = messageItem.groupName
 
         if (markedItem[position]) {
             holder.ivStar.setImageDrawable(filedStarDrawable)
@@ -188,9 +189,9 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         val ivStar: AppCompatImageView = itemView.findViewById(R.id.iv_save_message)
         val image: AppCompatImageView = itemView.findViewById(R.id.iv_messageImage)
         val title: AppCompatTextView = itemView.findViewById(R.id.tv_messageTitle)
-        val shortDesc: AppCompatTextView = itemView.findViewById(R.id.tv_messageShortDesc)
         val date: AppCompatTextView = itemView.findViewById(R.id.tv_messageDate)
         val type: AppCompatTextView = itemView.findViewById(R.id.tv_messageType)
+        val source: AppCompatTextView = itemView.findViewById(R.id.tv_messageSource)
         val message_cl: ConstraintLayout = itemView.findViewById(R.id.message_cl)
 
         init {
@@ -198,6 +199,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
             ivStar.setOnClickListener(this)
         }
     }
+
 
 }
 

@@ -30,7 +30,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:maxLines="2"
         android:paddingBottom="5dp"
         android:text="@string/lorem"
         android:textColor="@color/title"
@@ -51,22 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/tv_messageShortDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="8dp"
-        android:ellipsize="end"
-        android:maxLines="2"
-        android:paddingBottom="4dp"
-        android:text="@string/lorem"
-        android:textColor="@color/androidTextColor"
-        android:textSize="13sp"
-        app:fontFamily="@font/yekan"
-        app:layout_constraintEnd_toStartOf="@+id/iv_messageImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_messageTitle" />
+
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_messageDate"
@@ -82,24 +67,38 @@
         app:fontFamily="@font/yekan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/iv_messageImage"
-        app:layout_constraintTop_toBottomOf="@+id/tv_messageShortDesc"
         app:layout_constraintVertical_bias="1" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_messageSource"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/round_rect"
+        android:paddingEnd="4dp"
+        android:paddingStart="4dp"
+        android:paddingTop="3dp"
+        android:text="دانشگاه علوم پزشکی"
+        android:textSize="12sp"
+        android:layout_marginTop="10dp"
+        app:fontFamily="@font/yekan"
+        app:layout_constraintEnd_toStartOf="@+id/iv_messageImage"
+        app:layout_constraintTop_toBottomOf="@+id/tv_messageTitle" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_messageType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/round_rect"
-        android:paddingBottom="2dp"
         android:paddingEnd="4dp"
         android:paddingStart="4dp"
-        android:paddingTop="2dp"
+        android:paddingTop="3dp"
         android:text="آموزشی"
         android:textSize="12sp"
         app:fontFamily="@font/yekan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/tv_messageSource"
+        app:layout_constraintTop_toBottomOf="@+id/tv_messageTitle" />
 
 </android.support.constraint.ConstraintLayout>

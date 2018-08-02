@@ -53,7 +53,13 @@ class SharedPer(mContext: Context) {
     fun getInteger(name: String): Int {
         return sharedPreference.getInt(name, 0)
     }
+    fun setDefTab(name: String, value: Boolean) {
+        editor1.putBoolean(name, value).apply()
+    }
 
+    fun getDefTab(name: String): Boolean {
+        return sharedPreference.getBoolean(name, true)
+    }
 
     fun setBoolean(name: String, value: Boolean) {
         editor1.putBoolean(name, value).apply()
@@ -62,5 +68,11 @@ class SharedPer(mContext: Context) {
     fun getBoolean(name: String): Boolean {
         return sharedPreference.getBoolean(name, false)
     }
+    fun setIntro(name: String, value: Boolean) {
+        editor1.putBoolean(name, value).apply()
+    }
 
+    fun getIntro(name: String): Boolean {
+        return sharedPreference.getBoolean(name, false)
+    }
 }

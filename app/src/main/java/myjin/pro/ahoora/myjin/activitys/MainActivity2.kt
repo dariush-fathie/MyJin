@@ -34,6 +34,7 @@ import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.SharedPer
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call
@@ -74,11 +75,9 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_drawer2 -> startActivity(Intent(this, FavActivity::class.java))
             R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
-            R.id.rl_setting-> startActivity(Intent(this,SettingActivity::class.java))
+            R.id.rl_setting -> startActivity(Intent(this, SettingActivity::class.java))
         }
     }
-
-
 
 
     private fun closeDrawerLayout() {
@@ -203,10 +202,20 @@ class MainActivity2 : AppCompatActivity(),
         Handler().postDelayed({
             tbl_main?.getTabAt(1)?.select()
             ipi_main.attachToViewPager(vp_mainContainer)
+
+            if (!SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
+
+                vp_mainContainer.setCurrentItem(0)
+
+            }
+
         }, 50)
         setListener()
 
         checkNetState()
+
+        val tf = SharedPer(this@MainActivity2).getBoolean(getString(R.string.introductionFlag2))
+        SharedPer(this).setBoolean(getString(R.string.introductionFlag), tf)
     }
 
     private var netAvailability = false
@@ -268,6 +277,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     override fun onPageSelected(position: Int) {
+        Log.e("cure", position.toString())
         currentPage = position
         if (position != bankPosition) {
             view_gradient.visibility = View.GONE
@@ -292,11 +302,13 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
         //addOrRemoveColorFilter(tab!!, false)
+
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
         //addOrRemoveColorFilter(tab!!, true)
         //newGenerSelected(tab.position)
+
     }
 
     /*private fun addOrRemoveColorFilter(tab: TabLayout.Tab, addFilter: Boolean) {
