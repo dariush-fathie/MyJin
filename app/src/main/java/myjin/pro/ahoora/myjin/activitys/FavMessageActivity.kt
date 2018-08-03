@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import io.realm.Realm
 import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
@@ -57,7 +58,6 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
             }
         }, Realm.Transaction.OnSuccess {
             querying(-1, -1)
-            Realm.getDefaultInstance().close()
         })
     }
 
@@ -82,12 +82,17 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
             }
 
         }, Realm.Transaction.OnSuccess {
-            Realm.getDefaultInstance().close()
+            Log.e("onSuccess", "${itemsList.size}")
             loadAdapter(itemsList)
         })
     }
 
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
+
+        itemsList.forEach { item ->
+            Log.e("item", "${item.title}")
+        }
+
         if (list.isEmpty()) {
             tv_empty.visibility = View.VISIBLE
         } else {
