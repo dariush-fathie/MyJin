@@ -87,6 +87,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
+
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
 
         itemsList.forEach { item ->

@@ -204,7 +204,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
         @SuppressLint("RestrictedApi")
         override fun onClick(v: View?) {
             when (v?.id) {
-                R.id.rl_item -> {
+                R.id.cl_item -> {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as OfficeActivity),

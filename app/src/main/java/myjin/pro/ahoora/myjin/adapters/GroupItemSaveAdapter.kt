@@ -158,7 +158,7 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
     internal inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         override fun onClick(v: View?) {
             when (v?.id) {
-                R.id.rl_item -> {
+                R.id.cl_item -> {
                     getG_name(ids?.get(adapterPosition)!!)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as AppCompatActivity), image, "transition_name")

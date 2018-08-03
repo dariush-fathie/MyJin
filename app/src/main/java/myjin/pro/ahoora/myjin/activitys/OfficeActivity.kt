@@ -151,9 +151,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         iv_goback.setOnClickListener(this)
         fab_goUp.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
-
-
-
         rl_drawer3.setOnClickListener(this)
         rl_drawer4.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
