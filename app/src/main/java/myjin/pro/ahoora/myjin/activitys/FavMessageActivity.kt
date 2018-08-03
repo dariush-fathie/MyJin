@@ -25,7 +25,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
     private var groupId = -1
     private var typeId = -1
 
-    private val realm = Realm.getDefaultInstance()
+    private var realm = Realm.getDefaultInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +37,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun findDistinctTypesAndSources() {
         realm.executeTransactionAsync(Realm.Transaction { db ->
+
             val distinctSources = db.where(KotlinMessagesModel::class.java)
                     .equalTo("saved", true)
                     .distinct("groupId")
@@ -52,10 +53,15 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
                 sources.add(pair)
             }
 
+            sources.add(0, Pair("همه", -1))
+
             distinctTypes.forEach { item ->
                 val pair = Pair(item.type, item.typeId)
                 types.add(pair)
             }
+
+            types.add(0, Pair("همه", -1))
+
         }, Realm.Transaction.OnSuccess {
             querying(-1, -1)
         })
@@ -64,8 +70,15 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
     private var itemsList = ArrayList<KotlinMessagesModel>()
 
     private fun querying(groupId: Int, typeId: Int) {
+
+        if (realm.isClosed) {
+            realm = Realm.getDefaultInstance()
+        }
+
         realm.executeTransactionAsync(Realm.Transaction { db ->
-            val query = db.where(KotlinMessagesModel::class.java).equalTo("saved", true)
+            val query = db.where(KotlinMessagesModel::class.java)
+                    .equalTo("saved", true)
+
             if (groupId != -1) {
                 query.equalTo("groupId", groupId)
             }
@@ -78,23 +91,36 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
             itemsList.clear()
 
             result.forEach { item ->
-                itemsList.add(item)
+                val i = KotlinMessagesModel()
+                i.title = item.title
+                i.imageUrl = item.imageUrl
+                i.regDate = item.regDate
+                i.bgColor = item.bgColor
+                i.priority = item.priority
+                i.content = item.content
+                i.shortDescription = item.shortDescription
+                i.groupName = item.groupName
+                i.groupId = item.groupId
+                i.messageId = item.messageId
+                i.saved = item.saved
+                i.type = item.type
+                i.typeId = item.typeId
+
+                itemsList.add(i)
+                Log.e("items", item.toString())
             }
 
         }, Realm.Transaction.OnSuccess {
-            Log.e("onSuccess", "${itemsList.size}")
             loadAdapter(itemsList)
         })
     }
 
-
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
 
-        itemsList.forEach { item ->
-            Log.e("item", "${item.title}")
-        }
-
         if (list.isEmpty()) {
+            cv1.visibility = View.GONE
+            cv2.visibility = View.GONE
+
             tv_empty.visibility = View.VISIBLE
         } else {
             tv_empty.visibility = View.GONE
@@ -140,12 +166,18 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
         sources.forEach { pair ->
             sourcesName.add(pair.first)
         }
+
         val dialog = MsgSpinnerDialog(this@FavMessageActivity, sourcesName, "منبع مورد نظر را انتخاب کنید")
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
             override fun onClick(name: String, position: Int) {
                 tv_sources.text = "منبع : $name"
                 groupId = sources[position].second
+
+                // typeId = -1 - select all types
+                resetDefaultType()
+
                 querying(groupId, typeId)
+                getDistinctType(groupId)
             }
         })
         dialog.show()
@@ -159,6 +191,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
         val dialog = MsgSpinnerDialog(this@FavMessageActivity, typesName, "دسته بندی مورد نظر را انتخاب کنید")
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
             override fun onClick(name: String, position: Int) {
+                tv_types.text = "دسته بندی : $name"
                 typeId = types[position].second
                 querying(groupId, typeId)
             }
@@ -166,6 +199,32 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
         dialog.show()
     }
 
+    private fun resetDefaultType() {
+        typeId = -1
+        tv_types.text = "دسته بندی : همه"
+    }
+
+    private fun getDistinctType(groupId: Int) {
+        realm.executeTransactionAsync(Realm.Transaction { db ->
+            val query = db.where(KotlinMessagesModel::class.java)
+                    .equalTo("saved", true)
+            if (groupId != -1) {
+                query.equalTo("groupId", groupId)
+            }
+            query.distinct("typeId")
+            val result = query.findAll()
+
+            types.clear()
+            result.forEach { item ->
+                val pair = Pair(item.type, item.typeId)
+                types.add(pair)
+            }
+            types.add(0, Pair("همه", -1))
+
+        }, Realm.Transaction.OnSuccess {
+            querying(-1, -1)
+        })
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

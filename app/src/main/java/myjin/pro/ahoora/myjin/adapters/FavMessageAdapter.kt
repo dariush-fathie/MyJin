@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
@@ -43,24 +42,25 @@ class FavMessageAdapter(private val context: Context, private val list: List<Kot
 
 
     fun deleteItem(id: Int) {
-        val realm = Realm.getDefaultInstance()
+        /*val realm = Realm.getDefaultInstance()
         realm.executeTransaction { db ->
             val item = db.where(KotlinMessagesModel::class.java)
                     .equalTo("messageId", id)
                     .findFirst()!!
             item.saved = false
-        }
+        }*/
     }
 
-    fun getModelByCenterId(id: Int): KotlinMessagesModel {
-        val realm = Realm.getDefaultInstance()
+    fun getModelByCenterId(id: Int): KotlinMessagesModel? {
+        /*val realm = Realm.getDefaultInstance()
         var item = KotlinMessagesModel()
         realm.executeTransaction { db ->
             item = db.where(KotlinMessagesModel::class.java)
                     .equalTo("messageId", id)
                     .findFirst()!!
         }
-        return item
+        return item*/
+        return null
     }
 
     override fun getItemCount(): Int {
