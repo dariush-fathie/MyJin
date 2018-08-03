@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -17,7 +18,6 @@ import com.bumptech.glide.request.RequestOptions
 import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
-import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.utils.DateConverter
@@ -98,7 +98,7 @@ class FavMessageAdapter(private val context: Context, private val list: List<Kot
                 }
                 R.id.message_cl -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as MainActivity2),
+                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as AppCompatActivity),
                                 image, "transition_name")
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
@@ -107,7 +107,7 @@ class FavMessageAdapter(private val context: Context, private val list: List<Kot
                     } else {
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("position", adapterPosition)
-                        i.putExtra("messageId", list.get(adapterPosition).messageId)
+                        i.putExtra("messageId", list[adapterPosition].messageId)
                         iSend.send(i, null, requestCode)
                     }
                 }

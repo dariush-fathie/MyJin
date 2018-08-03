@@ -172,12 +172,11 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
             override fun onClick(name: String, position: Int) {
                 tv_sources.text = "منبع : $name"
                 groupId = sources[position].second
-
                 // typeId = -1 - select all types
                 resetDefaultType()
-
-                querying(groupId, typeId)
                 getDistinctType(groupId)
+                querying(groupId, typeId)
+
             }
         })
         dialog.show()
@@ -205,7 +204,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun getDistinctType(groupId: Int) {
-        realm.executeTransactionAsync(Realm.Transaction { db ->
+        realm.executeTransactionAsync { db ->
             val query = db.where(KotlinMessagesModel::class.java)
                     .equalTo("saved", true)
             if (groupId != -1) {
@@ -221,9 +220,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
             }
             types.add(0, Pair("همه", -1))
 
-        }, Realm.Transaction.OnSuccess {
-            querying(-1, -1)
-        })
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
