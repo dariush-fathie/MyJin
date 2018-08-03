@@ -42,7 +42,7 @@
     <View
         android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="50dp"
         android:background="@color/back1"
         app:layout_constraintTop_toBottomOf="@id/rl_toolbar" />
 

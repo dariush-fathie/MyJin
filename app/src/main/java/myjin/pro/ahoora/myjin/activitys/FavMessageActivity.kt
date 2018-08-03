@@ -76,7 +76,10 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
 
             val result = query.findAll()
             itemsList.clear()
-            itemsList.addAll(result)
+
+            result.forEach { item ->
+                itemsList.add(item)
+            }
 
         }, Realm.Transaction.OnSuccess {
             Realm.getDefaultInstance().close()

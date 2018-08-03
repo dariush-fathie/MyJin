@@ -4,105 +4,92 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/rl_item"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_item"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:minHeight="95dp"
-        android:paddingEnd="0dp"
-        android:paddingStart="16dp">
-
+        android:background="@color/white">
 
         <de.hdodenhof.circleimageview.CircleImageView
-
             android:id="@+id/iv_itemImage"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/t"
-            android:padding="6dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
             android:contentDescription="@null"
+            android:padding="6dp"
             android:src="@drawable/ic_jin"
             android:transitionName="transition_name"
             app:civ_border_color="@android:color/transparent"
-            app:civ_border_width="1dp"/>
-
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-
-            android:layout_toStartOf="@+id/iv_itemImage"
-            android:layout_toRightOf="@id/iv_starLike"
             android:lines="1"
-            android:paddingBottom="8dp"
-            android:paddingEnd="10dp"
             android:text="نام"
             android:textColor="@color/title"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:fontFamily="@font/yekan" />
+            app:fontFamily="@font/yekan"
+            app:layout_constraintEnd_toStartOf="@+id/iv_itemImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/ll_addr"
-            android:layout_width="match_parent"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_subTitle"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_title"
-            android:layout_toStartOf="@+id/iv_itemImage"
-            android:orientation="vertical"
-            android:paddingEnd="10dp">
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:text="متخصص"
+            android:textColor="@color/subTitle"
+            android:textSize="13sp"
+            app:fontFamily="@font/yekan"
+            app:layout_constraintEnd_toStartOf="@+id/iv_itemImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_subTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:lines="1"
-                android:paddingBottom="5dp"
-                android:text="متخصص"
-                android:textColor="@color/subTitle"
-                android:textSize="13sp"
-                app:fontFamily="@font/yekan" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_addr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:gravity="center"
-                android:maxLines="1"
-                android:text="آدرس"
-                android:textColor="@color/c1"
-                android:textSize="13sp" />
-
-            <android.support.v7.widget.AppCompatRatingBar
-                style="@style/Base.Widget.AppCompat.RatingBar.Small"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:clickable="false"
-                android:numStars="5"
-                android:paddingTop="4dp"
-                android:rating="4"
-                android:visibility="gone" />
-
-        </LinearLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_addr"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:maxLines="1"
+            android:text="آدرس"
+            android:textColor="@color/c1"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_itemImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_subTitle" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_starLike"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="10dp"
-            android:padding="6dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:padding="7dp"
             android:src="@drawable/icons_bookmark_1"
-            android:tint="@color/colorAccent" />
+            android:tint="@color/colorAccent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    </RelativeLayout>
+    </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
 

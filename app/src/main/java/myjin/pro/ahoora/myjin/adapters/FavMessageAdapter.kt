@@ -30,7 +30,6 @@ class FavMessageAdapter(private val context: Context, private val list: List<Kot
     val width = Converter.getScreenWidthPx(context)
     private var converter: DateConverter? = null
 
-
     val requestCode = 1025
 
     init {
@@ -121,10 +120,12 @@ class FavMessageAdapter(private val context: Context, private val list: List<Kot
         val date: AppCompatTextView = itemView.findViewById(R.id.tv_messageDate)
         val type: AppCompatTextView = itemView.findViewById(R.id.tv_messageType)
         val source: AppCompatTextView = itemView.findViewById(R.id.tv_messageSource)
-        val message_cl: ConstraintLayout = itemView.findViewById(R.id.message_cl)
+        private val messageCl: ConstraintLayout = itemView.findViewById(R.id.message_cl)
 
         init {
-            message_cl.setOnClickListener(this)
+            ivStar.setImageResource(R.drawable.ic_trash)
+            ivStar.clearColorFilter()
+            messageCl.setOnClickListener(this)
             ivStar.setOnClickListener(this)
         }
     }

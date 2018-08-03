@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
@@ -118,7 +119,7 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
         val title: AppCompatTextView = itemView.findViewById(R.id.tv_title)
         val subTitle: AppCompatTextView = itemView.findViewById(R.id.tv_subTitle)
         val tv_addr: AppCompatTextView = itemView.findViewById(R.id.tv_addr)
-        val item: RelativeLayout = itemView.findViewById(R.id.rl_item)
+        val item: ConstraintLayout = itemView.findViewById(R.id.cl_item)
         val image: CircleImageView = itemView.findViewById(R.id.iv_itemImage)
         val ivStar: AppCompatImageView = itemView.findViewById(R.id.iv_starLike)
 

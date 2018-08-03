@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Handler
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
@@ -22,7 +23,6 @@ import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
@@ -251,7 +251,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
         val subTitle: AppCompatTextView = itemView.findViewById(R.id.tv_subTitle)
         val tv_addr: AppCompatTextView = itemView.findViewById(R.id.tv_addr)
         val ivStar: AppCompatImageView = itemView.findViewById(R.id.iv_starLike)
-        val item: RelativeLayout = itemView.findViewById(R.id.rl_item)
+        val item: ConstraintLayout = itemView.findViewById(R.id.cl_item)
         val image: CircleImageView = itemView.findViewById(R.id.iv_itemImage)
 
         init {

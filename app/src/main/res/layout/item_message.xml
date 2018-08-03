@@ -46,7 +46,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:padding="3dp"
-        android:src="@drawable/icons_bookmark_1"
+        android:src="@drawable/ic_delete"
         android:tint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

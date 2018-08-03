@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -22,6 +21,7 @@ import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.adapters.MessagesAdapter
 import myjin.pro.ahoora.myjin.customClasses.MsgSpinnerDialog
 import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
+import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
@@ -134,18 +134,18 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     private fun openSourceDialog() {
         val dialog = MsgSpinnerDialog(activity as MainActivity2, sourceArray, "منبع مورد نظر را انتخاب کنید")
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
-            override fun onClick(var1: String, var2: Int) {
-                posS = idS[var2]
-                spinner_sources.text = "منبع : $var1"
+            override fun onClick(name: String, position: Int) {
+                posS = idS[position]
+                spinner_sources.text = "منبع : $name"
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()
 
-                    res = if (idS[var2] > 0) {
+                    res = if (idS[position] > 0) {
                         if (posT > 0) {
-                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).and().equalTo("groupId", idS.get(var2)).findAll()
+                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).and().equalTo("groupId", idS.get(position)).findAll()
                         } else {
-                            realm.where(KotlinMessagesModel::class.java).equalTo("groupId", idS.get(var2)).findAll()
+                            realm.where(KotlinMessagesModel::class.java).equalTo("groupId", idS.get(position)).findAll()
                         }
 
                     } else {
@@ -165,7 +165,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
                         list.add(ii)
                     }
 
-                    Log.e("rrr", posT.toString() + "  " + idS.get(var2))
+                    Log.e("rrr", posT.toString() + "  " + idS.get(position))
                     loadAdapter(list)
                 }
             }
@@ -176,18 +176,18 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     private fun openTypeDialog() {
         val dialog = MsgSpinnerDialog(activity as MainActivity2, typesArray, "دسته بندی مورد نظر را انتخاب کنید")
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
-            override fun onClick(var1: String, var2: Int) {
-                posT = idT.get(var2)
-                spinner_types.text = "دسته بندی : $var1"
+            override fun onClick(name: String, position: Int) {
+                posT = idT.get(position)
+                spinner_types.text = "دسته بندی : $name"
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()
 
-                    res = if (idT[var2] > 0) {
+                    res = if (idT[position] > 0) {
                         if (posS > 0) {
-                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(var2)).and().equalTo("groupId", posS).findAll()
+                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).and().equalTo("groupId", posS).findAll()
                         } else {
-                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(var2)).findAll()
+                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).findAll()
                         }
 
                     } else {
@@ -207,7 +207,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
                         list.add(ii)
                     }
 
-                    Log.e("rrr", posS.toString() + "  " + idT.get(var2))
+                    Log.e("rrr", posS.toString() + "  " + idT.get(position))
                     loadAdapter(list)
                 }
             }
@@ -346,7 +346,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
         rv_messages.addItemDecoration(VerticalLinearLayoutDecoration(activity as Context
                 , 8, 8, 8, 8).apply { lastItemPadding(48) })
-        rv_messages.adapter = MessagesAdapter(activity as Context, list, object : MessagesAdapter.SendIntentForResult {
+        rv_messages.adapter = MessagesAdapter(activity as Context, list, object : SendIntentForResult {
             override fun send(i: Intent, bundle: Bundle?, requestCode: Int) {
                 if (bundle != null) {
                     startActivityForResult(i, requestCode, bundle)
