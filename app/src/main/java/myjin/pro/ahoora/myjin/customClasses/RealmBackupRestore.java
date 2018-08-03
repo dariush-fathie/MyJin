@@ -74,6 +74,7 @@ public class RealmBackupRestore {
         Log.e(TAG, "oldFilePath = " + restoreFilePath);
 
         copyBundledRealmFile(restoreFilePath, IMPORT_REALM_FILE_NAME);
+
     }
 
     private String copyBundledRealmFile(String oldFilePath, String outFileName) {
@@ -91,7 +92,10 @@ public class RealmBackupRestore {
             }
             outputStream.close();
             Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.msgRestore), Toast.LENGTH_LONG).show();
+
+            Log.e("restore", file.getAbsolutePath());
             return file.getAbsolutePath();
+
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.msgNotRestore), Toast.LENGTH_LONG).show();
@@ -109,17 +113,18 @@ public class RealmBackupRestore {
             } else {
                 ActivityCompat.requestPermissions(
                         activity,
-                PERMISSIONS_STORAGE,
+                        PERMISSIONS_STORAGE,
                         REQUEST_EXTERNAL_STORAGE
                 );
-                Toast.makeText(activity,activity.getResources().getString(R.string.permission), Toast.LENGTH_LONG).show();
+                Toast.makeText(activity, activity.getResources().getString(R.string.permission), Toast.LENGTH_LONG).show();
                 return false;
             }
         } else {
             return true;
         }
     }
-    private String dbPath(){
+
+    private String dbPath() {
         return realm.getPath();
     }
 }

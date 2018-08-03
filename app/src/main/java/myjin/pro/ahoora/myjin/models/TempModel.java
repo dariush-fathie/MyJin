@@ -1,6 +1,5 @@
 package myjin.pro.ahoora.myjin.models;
 
-import android.widget.ImageView;
 
 import com.google.gson.annotations.SerializedName;
 
