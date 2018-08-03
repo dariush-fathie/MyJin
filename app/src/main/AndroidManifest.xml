@@ -28,7 +28,6 @@
             android:name=".activitys.MainActivity2"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".activitys.AppIntro"
             android:configChanges="orientation"
@@ -92,14 +91,13 @@
             android:name=".activitys.NotificationActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name=".activitys.ServicesActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity android:name=".activitys.DetailMessagesActivity" />
-        <activity android:name=".activitys.SettingActivity"></activity>
+        <activity android:name=".activitys.SettingActivity" />
+        <activity android:name=".activitys.FavMessageActivity"></activity>
     </application>
 
 </manifest>

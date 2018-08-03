@@ -7,10 +7,27 @@
     android:clickable="true"
     android:focusable="true">
 
+    <com.github.florent37.arclayout.ArcLayout
+        android:id="@+id/arc1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent"
+        app:arc_cropDirection="cropOutside"
+        app:arc_height="15dp"
+        app:arc_position="top">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/green" />
+
+    </com.github.florent37.arclayout.ArcLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/viewx">
+        android:paddingBottom="48dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +45,8 @@
                 android:id="@+id/rl_login_outsign"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -73,11 +91,11 @@
                 android:background="#333" />
 
             <RelativeLayout
-
                 android:id="@+id/rl_myjin_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -125,7 +143,8 @@
                 android:id="@+id/rl_takapoo_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="7dp">
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/item_selector">
 
                 <View
                     android:id="@+id/vs3"
@@ -171,7 +190,8 @@
                 android:id="@+id/rl_university_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
                 <View
                     android:id="@+id/vs4"
@@ -208,7 +228,8 @@
                 android:id="@+id/rl_salamat"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -246,7 +267,8 @@
                 android:id="@+id/rl_tamin_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -280,12 +302,12 @@
                     app:fontFamily="@font/yekan" />
             </RelativeLayout>
 
-
             <RelativeLayout
                 android:id="@+id/rl_ict_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -322,9 +344,11 @@
 
             <RelativeLayout
                 android:id="@+id/rl_pishkhan_services"
+
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -362,7 +386,8 @@
                 android:id="@+id/rl_post_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -414,6 +439,7 @@
             <com.github.florent37.expansionpanel.ExpansionHeader
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/item_selector"
                 app:expansion_headerIndicator="@id/headerIndicator"
                 app:expansion_layout="@id/expansionLayout"
                 app:expansion_toggleOnClick="true">
@@ -421,6 +447,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                     <View
                         android:id="@+id/vs_fav"
                         android:layout_width="4dp"
@@ -428,13 +455,14 @@
                         android:layout_alignParentEnd="true"
                         android:background="@color/green"
                         android:visibility="invisible" />
+
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/iv2"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_toStartOf="@+id/vs_fav"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/vs_fav"
                         android:padding="7dp"
                         android:src="@drawable/ic_bookmark_m"
                         android:tint="@color/green" />
@@ -458,7 +486,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
                         android:adjustViewBounds="true"
                         app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
 
@@ -479,31 +507,36 @@
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_healthCenters"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:gravity="center"
-                        android:paddingBottom="7dp"
                         android:layout_marginEnd="27dp"
-                        android:paddingTop="7dp"
+                        android:background="@drawable/item_selector"
+                        android:gravity="right"
+                        android:paddingBottom="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingTop="8dp"
                         android:text="@string/healthCenters"
                         android:textColor="@color/title"
                         android:textSize="14sp"
                         app:fontFamily="@font/yekan" />
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/tv_etlaeieh"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_messages"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="end"
                         android:layout_marginEnd="27dp"
-                        android:gravity="center"
-                        android:paddingBottom="7dp"
-                        android:paddingTop="7dp"
+                        android:background="@drawable/item_selector"
+                        android:gravity="right"
+                        android:paddingBottom="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingTop="8dp"
                         android:text="@string/etlaeieh"
                         android:textColor="@color/title"
                         android:textSize="14sp"
                         app:fontFamily="@font/yekan" />
+
                 </LinearLayout>
             </com.github.florent37.expansionpanel.ExpansionLayout>
 
@@ -522,7 +555,8 @@
                 android:id="@+id/rl_drawer3"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
                 <View
                     android:id="@+id/v3"
@@ -559,7 +593,8 @@
                 android:id="@+id/rl_drawer4"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
                 <View
                     android:id="@+id/v4"
@@ -596,7 +631,8 @@
                 android:id="@+id/rl_drawer12"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -644,7 +680,8 @@
                 android:id="@+id/rl_setting"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
 
                 <View
@@ -691,7 +728,8 @@
                 android:id="@+id/rl_version"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector">
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_version_Title1"
@@ -708,40 +746,14 @@
         </LinearLayout>
     </ScrollView>
 
-    <View
-        android:id="@+id/viewx"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_above="@+id/rl_exit"
-        android:background="@color/split" />
-
-    <RelativeLayout
-        android:id="@+id/rl_exit"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_alignParentBottom="true">
-
-        <ImageView
-            android:id="@+id/iv_exit"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_exit"
-            android:tint="@color/title" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/iv_exit"
-            android:gravity="center"
-            android:text="خروج از برنامه"
-            android:textSize="16sp"
-            app:fontFamily="@font/yekan" />
-    </RelativeLayout>
-
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:text="@string/exit"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/red1" />
 
 </RelativeLayout>

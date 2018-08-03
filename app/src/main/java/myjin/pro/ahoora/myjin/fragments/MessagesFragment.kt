@@ -11,7 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -19,10 +18,11 @@ import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
 import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_messages.*
 import myjin.pro.ahoora.myjin.R
+import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.adapters.MessagesAdapter
 import myjin.pro.ahoora.myjin.customClasses.MsgSpinnerDialog
+import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
-import myjin.pro.ahoora.myjin.models.events.DeleteFavEvent
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
@@ -33,7 +33,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnClickListener {
+class MessagesFragment : Fragment(), View.OnClickListener {
 
 
     override fun onClick(v: View?) {
@@ -57,6 +57,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
     val idS = ArrayList<Int>()
     var posS = 0
     var posT = 0
+
+
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
         netAvailability = e.isCon
@@ -64,7 +66,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
 
     @Subscribe
     fun onBecomeVisible(e: VisibilityEvent) {
-        if (e.position == 1) {
+        if (e.position == 0) {
             Log.e(MessagesFragment::class.java.simpleName, "${e.position}")
             if (!loadFlag) {
                 if (NetworkUtil().isNetworkAvailable(activity as Context)) {
@@ -80,12 +82,6 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         }
     }
 
-    @Subscribe
-    fun refresh(e: DeleteFavEvent){
-        (rv_messages.adapter as MessagesAdapter).notifyDataSetChanged()
-
-       Toast.makeText(context,"DeleteFavEvent",Toast.LENGTH_LONG).show()
-    }
 
     override fun onStart() {
         super.onStart()
@@ -120,110 +116,103 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                 val p = data.getIntExtra("position", 0)
                 val mark = data.getBooleanExtra("save", false)
                 (rv_messages.adapter as MessagesAdapter).mark(p, mark)
+            } else {
+
             }
         }
     }
 
 
     private fun loadTabsAndSpinner() {
-
         cv1.visibility = View.VISIBLE
         cv2.visibility = View.VISIBLE
         cv1.setOnClickListener(this)
         cv2.setOnClickListener(this)
-
     }
 
-
-    override fun onTabReselected(tab: TabLayout.Tab?) {
-    }
-
-    override fun onTabUnselected(tab: TabLayout.Tab?) {
-    }
-
-    override fun onTabSelected(tab: TabLayout.Tab?) {
-    }
 
     private fun openSourceDialog() {
-        val dialog = MsgSpinnerDialog(activity, sourceArray, "گروه")
-        dialog.bindOnSpinerListener { name, position ->
-            posS = idS.get(position)
-            spinner_sources.text = sourceArray[position]
+        val dialog = MsgSpinnerDialog(activity as MainActivity2, sourceArray, "منبع مورد نظر را انتخاب کنید")
+        dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
+            override fun onClick(var1: String, var2: Int) {
+                posS = idS[var2]
+                spinner_sources.text = "منبع : $var1"
 
-            if (!realm.isInTransaction) {
-                realm.beginTransaction()
+                if (!realm.isInTransaction) {
+                    realm.beginTransaction()
 
-                if (idS.get(position) > 0) {
-                    if (posT > 0) {
-                        res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).and().equalTo("groupId", idS.get(position)).findAll()
+                    res = if (idS[var2] > 0) {
+                        if (posT > 0) {
+                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).and().equalTo("groupId", idS.get(var2)).findAll()
+                        } else {
+                            realm.where(KotlinMessagesModel::class.java).equalTo("groupId", idS.get(var2)).findAll()
+                        }
+
                     } else {
-                        res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", idS.get(position)).findAll()
+                        if (posT > 0) {
+                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).findAll()
+                        } else {
+                            realm.where(KotlinMessagesModel::class.java).findAll()
+                        }
                     }
 
+                    res = res.sort("regDate", Sort.DESCENDING)
+                    realm.commitTransaction()
 
-                } else {
-                    if (posT > 0) {
-                        res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", posT).findAll()
-                    } else {
-                        res = realm.where(KotlinMessagesModel::class.java).findAll()
+                    val list = ArrayList<KotlinMessagesModel>()
+
+                    res.forEach { ii ->
+                        list.add(ii)
                     }
+
+                    Log.e("rrr", posT.toString() + "  " + idS.get(var2))
+                    loadAdapter(list)
                 }
-
-                res = res.sort("regDate", Sort.DESCENDING)
-                realm.commitTransaction()
-
-                var list = ArrayList<KotlinMessagesModel>()
-
-                res.forEach { ii ->
-                    list.add(ii)
-                }
-
-                Log.e("rrr", posT.toString() + "  " + idS.get(position))
-                loadAdapter(list)
             }
-
-        }
-        dialog.showSpinerDialog()
+        })
+        dialog.show()
     }
 
     private fun openTypeDialog() {
-        val dialog = MsgSpinnerDialog(activity, typesArray, "دسته بندی")
-        dialog.bindOnSpinerListener { name, position ->
-            posT = idT.get(position)
-            spinner_types.text =typesArray[position]
+        val dialog = MsgSpinnerDialog(activity as MainActivity2, typesArray, "دسته بندی مورد نظر را انتخاب کنید")
+        dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
+            override fun onClick(var1: String, var2: Int) {
+                posT = idT.get(var2)
+                spinner_types.text = "دسته بندی : $var1"
 
-            if (!realm.isInTransaction) {
-                realm.beginTransaction()
+                if (!realm.isInTransaction) {
+                    realm.beginTransaction()
 
-                if (idT.get(position) > 0) {
-                    if (posS > 0) {
-                        res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).and().equalTo("groupId", posS).findAll()
+                    res = if (idT[var2] > 0) {
+                        if (posS > 0) {
+                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(var2)).and().equalTo("groupId", posS).findAll()
+                        } else {
+                            realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(var2)).findAll()
+                        }
+
                     } else {
-                        res = realm.where(KotlinMessagesModel::class.java).equalTo("typeId", idT.get(position)).findAll()
+                        if (posS > 0) {
+                            realm.where(KotlinMessagesModel::class.java).equalTo("groupId", posS).findAll()
+                        } else {
+                            realm.where(KotlinMessagesModel::class.java).findAll()
+                        }
                     }
 
-                } else  {
-                    if (posS > 0) {
-                        res = realm.where(KotlinMessagesModel::class.java).equalTo("groupId", posS).findAll()
-                    } else {
-                        res = realm.where(KotlinMessagesModel::class.java).findAll()
+                    res = res.sort("regDate", Sort.DESCENDING)
+                    realm.commitTransaction()
+
+                    val list = ArrayList<KotlinMessagesModel>()
+
+                    res.forEach { ii ->
+                        list.add(ii)
                     }
+
+                    Log.e("rrr", posS.toString() + "  " + idT.get(var2))
+                    loadAdapter(list)
                 }
-
-                res = res.sort("regDate", Sort.DESCENDING)
-                realm.commitTransaction()
-
-                var list = ArrayList<KotlinMessagesModel>()
-
-                res.forEach { ii ->
-                    list.add(ii)
-                }
-
-                Log.e("rrr", posS.toString() + "  " + idT.get(position))
-                loadAdapter(list)
             }
-        }
-        dialog.showSpinerDialog()
+        })
+        dialog.show()
     }
 
     private var lock = false
@@ -236,8 +225,8 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
             val response = apiInterface.messages
             response.enqueue(object : Callback<List<KotlinMessagesModel>> {
-                override fun onResponse(call: Call<List<KotlinMessagesModel>>?, response: Response<List<KotlinMessagesModel>>?) {
 
+                override fun onResponse(call: Call<List<KotlinMessagesModel>>?, response: Response<List<KotlinMessagesModel>>?) {
                     response?.body() ?: onFailure(call, Throwable("null body"))
                     response?.body() ?: return
 
@@ -261,7 +250,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                                 ?.findAll()
                                 ?.deleteAllFromRealm()
 
-                        result?.forEach { kotlinItemModel: KotlinMessagesModel ->
+                        result.forEach { kotlinItemModel: KotlinMessagesModel ->
                             if (savedItemIds.contains(kotlinItemModel.messageId)) {
                                 kotlinItemModel.saved = true
                             }
@@ -279,7 +268,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
                     typesArray.add("همه")
                     idT.add(0)
                     idS.add(0)
-                    var list = ArrayList<KotlinMessagesModel>()
+                    val list = ArrayList<KotlinMessagesModel>()
                     result.forEach { item: KotlinMessagesModel ->
                         list.add(item)
                         if (!sourceArray.contains(item.groupName)) {
@@ -342,9 +331,7 @@ class MessagesFragment : Fragment(), TabLayout.OnTabSelectedListener, View.OnCli
         cpv_messages.visibility = View.GONE
     }
 
-
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
-
         if (list.isEmpty()) {
             tv_noItemfound.visibility = View.VISIBLE
         } else {

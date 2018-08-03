@@ -63,7 +63,7 @@ class MainActivity2 : AppCompatActivity(),
             R.id.fab_search -> search()
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> Toast.makeText(this, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
-            R.id.rl_exit -> showExitDialog()
+            R.id.btn_exit -> showExitDialog()
             R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
@@ -73,6 +73,7 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(), 8)
             R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString(), 4)
             R.id.tv_healthCenters -> startActivity(Intent(this, FavActivity::class.java))
+            R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
             R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
             R.id.rl_setting -> startActivity(Intent(this, SettingActivity::class.java))
@@ -98,6 +99,7 @@ class MainActivity2 : AppCompatActivity(),
         tv_location.setOnClickListener(this)
         rl_myjin_services.setOnClickListener(this)
         tv_healthCenters.setOnClickListener(this)
+        tv_messages.setOnClickListener(this)
         rl_drawer3.setOnClickListener(this)
         rl_drawer4.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
@@ -111,7 +113,7 @@ class MainActivity2 : AppCompatActivity(),
         rl_salamat.setOnClickListener(this)
         rl_setting.setOnClickListener(this)
         tv_login_outsign.setOnClickListener(this)
-        rl_exit.setOnClickListener(this)
+        btn_exit.setOnClickListener(this)
     }
 
 
@@ -121,7 +123,7 @@ class MainActivity2 : AppCompatActivity(),
 
     private val bankPosition = 1
     private var fabH = 0f
-    private var isSearchVisible = true
+    var isSearchVisible = true
     private var appBarOffset = 0
     private var currentPage = 0
 
@@ -183,7 +185,6 @@ class MainActivity2 : AppCompatActivity(),
         setContentView(R.layout.activity_main2)
 
         tvLocation = tv_location
-
         fabH = Converter.pxFromDp(this, 16f + 50f + 20)
 
 /*        tbl_main?.addTab(tbl_main.newTab()
@@ -197,21 +198,21 @@ class MainActivity2 : AppCompatActivity(),
 
         vp_mainContainer.adapter = PagerAdapter(supportFragmentManager)
         vp_mainContainer.addOnPageChangeListener(this)
-        vp_mainContainer.offscreenPageLimit = 4
+        vp_mainContainer.offscreenPageLimit = 2
         tbl_main.setupWithViewPager(vp_mainContainer)
+
+
         Handler().postDelayed({
-            tbl_main?.getTabAt(1)?.select()
             ipi_main.attachToViewPager(vp_mainContainer)
-
-            if (!SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
-
-                vp_mainContainer.setCurrentItem(0)
-
+            if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
+                vp_mainContainer.currentItem = 1
+                Log.e("XXX", "ZZZ")
+            } else {
+                onPageSelected(0)
             }
-
         }, 50)
-        setListener()
 
+        setListener()
         checkNetState()
 
         val tf = SharedPer(this@MainActivity2).getBoolean(getString(R.string.introductionFlag2))
@@ -239,11 +240,9 @@ class MainActivity2 : AppCompatActivity(),
         if (!sliderLoadFlag) {
             getSlides()
         }
-
         if (!spLoadFlag) {
             getSpList()
         }
-
     }
 
     fun showNetErrSnack() {
@@ -277,27 +276,23 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     override fun onPageSelected(position: Int) {
-        Log.e("cure", position.toString())
+        Log.e("pageSelected", position.toString())
         currentPage = position
         if (position != bankPosition) {
             view_gradient.visibility = View.GONE
             hideLocation()
-            if (isSearchVisible) {
-                hideSearchFab()
-            }
+            hideSearchFab()
         } else {
             setVisibleShadow(abp_main, appBarOffset)
             showLocation()
-            if (!isSearchVisible) {
-                showSearchFab()
-            }
+            showSearchFab()
         }
 
         EventBus.getDefault().post(VisibilityEvent(position))
-
     }
 
     override fun onTabReselected(tab: TabLayout.Tab?) {
+        Log.e("tabSelected", "${tab?.position}")
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -344,27 +339,29 @@ class MainActivity2 : AppCompatActivity(),
         tv_location.visibility = View.GONE
     }
 
-    fun visibleSearchFab() {
-        fab_search.visibility = View.VISIBLE
-        showSearchFab()
-    }
 
-    private fun showSearchFab() {
-        val animSet = AnimatorSet()
-        val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 0f, 1f)
-        val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", fabH, 0f)
-        animSet.playTogether(alphaAnimator, transitionAnimator)
-        animSet.start()
-        isSearchVisible = true
+    fun showSearchFab() {
+        if (currentPage == bankPosition) {
+            if (fab_search.translationY != 0f) {
+                isSearchVisible = true
+                val animSet = AnimatorSet()
+                val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 0f, 1f)
+                val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", fabH, 0f)
+                animSet.playTogether(alphaAnimator, transitionAnimator)
+                animSet.start()
+            }
+        }
     }
 
     fun hideSearchFab() {
-        val animSet = AnimatorSet()
-        val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 1f, 0f)
-        val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", 0f, fabH)
-        animSet.playTogether(alphaAnimator, transitionAnimator)
-        animSet.start()
-        isSearchVisible = false
+        if (fab_search.translationY != fabH) {
+            isSearchVisible = false
+            val animSet = AnimatorSet()
+            val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 1f, 0f)
+            val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", 0f, fabH)
+            animSet.playTogether(alphaAnimator, transitionAnimator)
+            animSet.start()
+        }
     }
 
     private fun search() {

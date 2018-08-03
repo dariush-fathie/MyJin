@@ -178,7 +178,7 @@
             android:layout_gravity="bottom"
             android:layout_margin="16dp"
             android:src="@drawable/icon_search_white"
-            android:visibility="gone"
+            android:translationY="86dp"
             app:backgroundTint="@color/niceBlue"
             app:fabSize="normal" />
 
