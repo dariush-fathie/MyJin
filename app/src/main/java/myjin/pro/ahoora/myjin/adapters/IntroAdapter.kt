@@ -16,8 +16,6 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.customClasses.SVGLoader.GlideApp
 import myjin.pro.ahoora.myjin.customClasses.SVGLoader.SvgSoftwareLayerSetter
 import myjin.pro.ahoora.myjin.models.KotlinSlideModel
-import myjin.pro.ahoora.myjin.utils.Colors
-import java.util.*
 
 
 class IntroAdapter(private val context: Context, private val list: Array<KotlinSlideModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -50,12 +48,11 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
 
             requestBuilder.load(list[position].fileUrl).into(holder.ivImage)
             holder.tvDescription.text = list[position].description
-            holder.rootLayout.setBackgroundColor(list[position].bgColor)
+            holder.rootLayout.setBackgroundColor(list[position].arrange.toInt())
 
         } catch (e: Exception) {
             Log.e("glideErrIntro", e.message + " ")
         }
-
 
     }
 

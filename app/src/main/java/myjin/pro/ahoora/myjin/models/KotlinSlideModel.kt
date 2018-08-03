@@ -18,7 +18,7 @@ open class KotlinSlideModel : RealmObject() {
 
     @SerializedName("arrange")
     @Expose
-    open var arrange: String? = ""
+    open var arrange: String = "43089"
 
     @SerializedName("bgColor")
     @Expose
