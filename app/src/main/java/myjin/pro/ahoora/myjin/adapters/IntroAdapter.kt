@@ -50,7 +50,7 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
 
             requestBuilder.load(list[position].fileUrl).into(holder.ivImage)
             holder.tvDescription.text = list[position].description
-            holder.rootLayout.setBackgroundColor(getColor(position))
+            holder.rootLayout.setBackgroundColor(list[position].bgColor)
 
         } catch (e: Exception) {
             Log.e("glideErrIntro", e.message + " ")
@@ -59,7 +59,6 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
 
     }
 
-    private val colorUtil = Colors(context)
 
     internal inner class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -67,31 +66,6 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
         val tvDescription: AppCompatTextView = itemView.findViewById(R.id.tv_slides_content)
         val rootLayout: ConstraintLayout = itemView.findViewById(R.id.cl_slidesRoot)
 
-    }
-
-    private fun getColor(position: Int): Int {
-        when (position) {
-            0 -> return colorUtil.green
-            1 -> return colorUtil.orange
-            2 -> return colorUtil.niceBlue
-            3 -> return colorUtil.title
-            4 -> return colorUtil.blue3
-            5 -> return colorUtil.red1
-        }
-        return randomColor()
-    }
-
-    private fun randomColor(): Int {
-        val random = Random()
-        when (Math.abs(random.nextInt(5))) {
-            0 -> return colorUtil.green
-            1 -> return colorUtil.orange
-            2 -> return colorUtil.niceBlue
-            3 -> return colorUtil.title
-            4 -> return colorUtil.blue3
-            5 -> return colorUtil.red1
-        }
-        return colorUtil.green
     }
 
 }

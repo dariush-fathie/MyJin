@@ -11,11 +11,17 @@ open class KotlinSlideModel : RealmObject() {
     @SerializedName("file_url")
     @Expose
     open var fileUrl: String? = ""
+
     @SerializedName("description")
     @Expose
     open var description: String? = ""
+
     @SerializedName("arrange")
     @Expose
     open var arrange: String? = ""
+
+    @SerializedName("bgColor")
+    @Expose
+    open var bgColor: Int = 43089
 
 }

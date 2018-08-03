@@ -18,12 +18,16 @@ import com.bumptech.glide.request.RequestOptions
 import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
+import myjin.pro.ahoora.myjin.interfaces.IDeleteClick
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.utils.DateConverter
 
 
-class FavMessageAdapter(private val context: Context, private val list: List<KotlinMessagesModel>, private val iSend: SendIntentForResult) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class FavMessageAdapter(private val context: Context,
+                        private val list: List<KotlinMessagesModel>,
+                        private val iSend: SendIntentForResult,
+                        private val i: IDeleteClick) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     val width = Converter.getScreenWidthPx(context)
@@ -94,7 +98,7 @@ class FavMessageAdapter(private val context: Context, private val list: List<Kot
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.iv_save_message -> {
-
+                    i.onDeleteClick(list[adapterPosition])
                 }
                 R.id.message_cl -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_fav_message.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.FavMessageAdapter
 import myjin.pro.ahoora.myjin.customClasses.MsgSpinnerDialog
+import myjin.pro.ahoora.myjin.interfaces.IDeleteClick
 import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
@@ -108,6 +109,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
 
                 itemsList.add(i)
                 Log.e("items", item.toString())
+
             }
 
         }, Realm.Transaction.OnSuccess {
@@ -141,7 +143,16 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
                     startActivityForResult(i, requestCode)
                 }
             }
+        }, object : IDeleteClick {
+            override fun onDeleteClick(item: KotlinMessagesModel) {
+                performDelete(item)
+            }
         })
+    }
+
+
+    fun performDelete(item: KotlinMessagesModel) {
+
     }
 
     override fun onClick(v: View?) {
@@ -176,7 +187,6 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
                 resetDefaultType()
                 getDistinctType(groupId)
                 querying(groupId, typeId)
-
             }
         })
         dialog.show()

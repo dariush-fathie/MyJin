@@ -3,14 +3,10 @@ package myjin.pro.ahoora.myjin
 import android.app.Application
 import android.content.IntentFilter
 import android.net.ConnectivityManager.CONNECTIVITY_ACTION
-import com.bumptech.glide.annotation.GlideModule
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.onesignal.OneSignal
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import ir.paad.audiobook.utils.NetworkUtil
-import myjin.pro.ahoora.myjin.customClasses.SVGLoader.SvgModule
-import myjin.pro.ahoora.myjin.utils.CustomNotificationOpenedHandler
 import myjin.pro.ahoora.myjin.utils.NetworkStateReceiver
 
 class App : Application() {
@@ -29,13 +25,13 @@ class App : Application() {
                 //.migration(new MyMigration())
                 .build()
 
-        OneSignal.startInit(this)
+        /*OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)
                 .filterOtherGCMReceivers(true)
                 .setNotificationOpenedHandler(CustomNotificationOpenedHandler(this))
                 //.setNotificationReceivedHandler(CustomNotificationReceivedHandler())
-                .init()
+                .init()*/
 
         Realm.setDefaultConfiguration(config)
 

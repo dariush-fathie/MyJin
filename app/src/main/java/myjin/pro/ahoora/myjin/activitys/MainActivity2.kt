@@ -159,9 +159,9 @@ class MainActivity2 : AppCompatActivity(),
                 1 -> {
                     tv_mainTitle.text = "بانک سلامت"
                 }
-            /* 2 -> {
-                 tv_mainTitle.text = "نشان شده ها"
-             }*/
+                /* 2 -> {
+                     tv_mainTitle.text = "نشان شده ها"
+                 }*/
             }
         } else {
             tv_mainTitle.text = getString(R.string.myJin)

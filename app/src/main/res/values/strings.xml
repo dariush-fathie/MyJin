@@ -40,6 +40,7 @@
     <string name="msgBackup">پشتیبان گیری موفقیت آمیز بود</string>
     <string name="msgRestore">بازگردانی موفقیت آمیز بود</string>
     <string name="msgNotRestore">بازگردانی نشد</string>
+    <string name="clean">پاک کردن</string>
 
     <string-array name="provArray2">
         <item> آذربایجان شرقی</item>
