@@ -152,12 +152,18 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                 override fun onResponse(call: Call<List<KotlinGroupModel>>?, response: Response<List<KotlinGroupModel>>?) {
                     response?.body() ?: onFailure(call, Throwable("null body"))
                     response?.body() ?: return
-
                     val list: List<KotlinGroupModel>? = response.body()
+
+                    var c = 0
+                    list!!.forEach { item ->
+                        c += item.counter
+                    }
+
+                    (activity as MainActivity2).tvLocation.append("(" + "$c" + "مرکز" + ")")
                     val realm = Realm.getDefaultInstance()
                     realm.executeTransactionAsync { db: Realm? ->
                         db?.where(KotlinGroupModel::class.java)?.findAll()?.deleteAllFromRealm()
-                        db?.copyToRealm(list!!)
+                        db?.copyToRealm(list)
                         /*val r = db?.where(KotlinGroupModel::class.java)?.findAll()
                         r?.forEach { model: KotlinGroupModel? ->
                             Log.e("GM", "${model?.name}:${model?.groupId}")
