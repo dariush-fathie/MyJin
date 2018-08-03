@@ -27,13 +27,19 @@
     <string name="cityId">cityId</string>
     <string name="healthCenters">مراکز سلامت</string>
     <string name="etlaeieh">پیام و اطلاعیه</string>
+    <string name="backup">پشتیبان گیری</string>
+    <string name="restore">بازگردانی</string>
     <string name="provCityPair">provCityPair</string>
+    <string name="permission">اجازه دستیابی به حافظه خارجی را صادر کرده و دوباره سعی کنید</string>
     <string name="skip">بگذر</string>
     <string name="exieMsg">خارج میشوید ؟</string>
     <string name="baleh">بله</string>
     <string name="no">نه</string>
     <string name="checkConnectionAndTryAgain">از اتصال دستگاه به اینترنت مطمئن شوید سپس دوباره تلاش کنید</string>
     <string name="exit">خروج</string>
+    <string name="msgBackup">پشتیبان گیری موفقیت آمیز بود</string>
+    <string name="msgRestore">بازگردانی موفقیت آمیز بود</string>
+    <string name="msgNotRestore">بازگردانی نشد</string>
 
     <string-array name="provArray2">
         <item> آذربایجان شرقی</item>

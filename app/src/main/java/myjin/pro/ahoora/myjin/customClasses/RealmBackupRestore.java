@@ -3,6 +3,7 @@ package myjin.pro.ahoora.myjin.customClasses;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -14,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import io.realm.Realm;
+import myjin.pro.ahoora.myjin.R;
 
 public class RealmBackupRestore {
 
@@ -39,8 +41,8 @@ public class RealmBackupRestore {
     }
 
     public void backup() {
-        // First check if we have storage permissions
-        checkStoragePermissions(activity);
+
+
         File exportRealmFile;
 
         Log.e(TAG, "Realm DB Path = " + realm.getPath());
@@ -56,9 +58,10 @@ public class RealmBackupRestore {
         // copy current realm to backup file
         realm.writeCopyTo(exportRealmFile);
 
-        String msg = "File exported to Path: " + EXPORT_REALM_PATH + "/" + EXPORT_REALM_FILE_NAME;
-        Toast.makeText(activity.getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-        Log.e(TAG, msg);
+
+        Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.msgBackup),
+                Toast.LENGTH_LONG).show();
+        Log.e(TAG, activity.getResources().getString(R.string.msgBackup));
 
         realm.close();
     }
@@ -71,7 +74,6 @@ public class RealmBackupRestore {
         Log.e(TAG, "oldFilePath = " + restoreFilePath);
 
         copyBundledRealmFile(restoreFilePath, IMPORT_REALM_FILE_NAME);
-        Log.e(TAG, "Data restore is done");
     }
 
     private String copyBundledRealmFile(String oldFilePath, String outFileName) {
@@ -88,23 +90,33 @@ public class RealmBackupRestore {
                 outputStream.write(buf, 0, bytesRead);
             }
             outputStream.close();
+            Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.msgRestore), Toast.LENGTH_LONG).show();
             return file.getAbsolutePath();
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(activity.getApplicationContext(), activity.getResources().getString(R.string.msgNotRestore), Toast.LENGTH_LONG).show();
+
         }
         return null;
     }
 
-    private void checkStoragePermissions(Activity activity) {
-        // Check if we have write permission
+    public Boolean checkStoragePermissions(Activity activity) {
         int permission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
-        if(permission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(
-                    activity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (permission == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(
+                        activity,
+                PERMISSIONS_STORAGE,
+                        REQUEST_EXTERNAL_STORAGE
+                );
+                Toast.makeText(activity,activity.getResources().getString(R.string.permission), Toast.LENGTH_LONG).show();
+                return false;
+            }
+        } else {
+            return true;
         }
     }
     private String dbPath(){
