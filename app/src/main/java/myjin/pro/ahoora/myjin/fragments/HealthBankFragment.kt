@@ -159,7 +159,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                         c += item.counter
                     }
 
-                    (activity as MainActivity2).tvLocation.append("(" + "$c" + "مرکز" + ")")
+                    (activity as MainActivity2).tvLocation.append("(" + "$c" + " مرکز" + ")")
                     val realm = Realm.getDefaultInstance()
                     realm.executeTransactionAsync { db: Realm? ->
                         db?.where(KotlinGroupModel::class.java)?.findAll()?.deleteAllFromRealm()

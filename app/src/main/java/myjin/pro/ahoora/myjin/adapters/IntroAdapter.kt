@@ -1,6 +1,7 @@
 package myjin.pro.ahoora.myjin.adapters
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.PictureDrawable
 import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.AppCompatImageView
@@ -48,7 +49,8 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
 
             requestBuilder.load(list[position].fileUrl).into(holder.ivImage)
             holder.tvDescription.text = list[position].description
-            holder.rootLayout.setBackgroundColor(list[position].arrange.toInt())
+            val bg="#ff"+list[position].arrange
+            holder.rootLayout.setBackgroundColor(Color.parseColor(bg))
 
         } catch (e: Exception) {
             Log.e("glideErrIntro", e.message + " ")

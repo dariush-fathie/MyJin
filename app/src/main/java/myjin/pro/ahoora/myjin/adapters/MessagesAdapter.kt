@@ -170,11 +170,13 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
                         i.putExtra("position", adapterPosition)
+                        i.putExtra("tf",false)
                         iSend.send(i, options.toBundle(), requestCode)
                     } else {
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("position", adapterPosition)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
+                        i.putExtra("tf",false)
                         iSend.send(i, null, requestCode)
                     }
                 }

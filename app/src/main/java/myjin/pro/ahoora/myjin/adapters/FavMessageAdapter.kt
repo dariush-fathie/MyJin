@@ -15,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
@@ -34,6 +35,8 @@ class FavMessageAdapter(private val context: Context,
     private var converter: DateConverter? = null
 
     val requestCode = 1025
+    val realm = Realm.getDefaultInstance()
+    val idM = ArrayList<Int>()
 
     init {
         converter = DateConverter(context)
@@ -45,37 +48,24 @@ class FavMessageAdapter(private val context: Context,
     }
 
 
-    fun deleteItem(id: Int) {
-        /*val realm = Realm.getDefaultInstance()
-        realm.executeTransaction { db ->
-            val item = db.where(KotlinMessagesModel::class.java)
-                    .equalTo("messageId", id)
-                    .findFirst()!!
-            item.saved = false
-        }*/
-    }
-
-    fun getModelByCenterId(id: Int): KotlinMessagesModel? {
-        /*val realm = Realm.getDefaultInstance()
-        var item = KotlinMessagesModel()
-        realm.executeTransaction { db ->
-            item = db.where(KotlinMessagesModel::class.java)
-                    .equalTo("messageId", id)
-                    .findFirst()!!
-        }
-        return item*/
-        return null
-    }
-
     override fun getItemCount(): Int {
-        return list.size
+        var h = 0
+        idM.clear()
+        list.forEach { j ->
+
+            if (j.saved == true) {
+                idM.add(h)
+            }
+            h++
+        }
+        return idM.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder as MessageHolder
         try {
             Glide.with(context)
-                    .load(list[position].imageUrl)
+                    .load(list[idM.get(position)].imageUrl)
                     .apply(RequestOptions()
                             .fitCenter()
                             .placeholder(R.color.colorAccent))
@@ -84,7 +74,7 @@ class FavMessageAdapter(private val context: Context,
             Log.e("glideErr", e.message + " ")
         }
 
-        val messageItem = list[position]
+        val messageItem = list[idM.get(position)]
         holder.title.text = messageItem.title
         holder.date.text = converter?.convert2(messageItem.regDate)
         holder.type.text = messageItem.type
@@ -98,20 +88,25 @@ class FavMessageAdapter(private val context: Context,
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.iv_save_message -> {
-                    i.onDeleteClick(list[adapterPosition])
+
+                    deleteItem(adapterPosition)
+
+
                 }
                 R.id.message_cl -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as AppCompatActivity),
                                 image, "transition_name")
                         val i = Intent(context, DetailMessagesActivity::class.java)
-                        i.putExtra("messageId", list.get(adapterPosition).messageId)
+                        i.putExtra("messageId", list[idM.get(adapterPosition)].messageId)
                         i.putExtra("position", adapterPosition)
+                        i.putExtra("tf",true)
                         iSend.send(i, options.toBundle(), requestCode)
                     } else {
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("position", adapterPosition)
-                        i.putExtra("messageId", list[adapterPosition].messageId)
+                        i.putExtra("messageId", list[idM.get(adapterPosition)].messageId)
+                        i.putExtra("tf",true)
                         iSend.send(i, null, requestCode)
                     }
                 }
@@ -132,6 +127,24 @@ class FavMessageAdapter(private val context: Context,
             messageCl.setOnClickListener(this)
             ivStar.setOnClickListener(this)
         }
+    }
+
+    fun deleteItem(adapterPosition: Int) {
+        var t= false
+        realm.executeTransaction { db ->
+            val item = db.where(KotlinMessagesModel::class.java)
+                    .equalTo("messageId", list[idM.get(adapterPosition)].messageId)
+                    .findFirst()!!
+            item.saved = false
+        }
+        list[idM.get(adapterPosition)].saved = false
+        notifyItemRemoved(adapterPosition)
+
+
+        if (adapterPosition == 0)
+            t = true
+
+        i.onDeleteClick(t)
     }
 
 

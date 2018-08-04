@@ -3,6 +3,7 @@ package myjin.pro.ahoora.myjin.activitys
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -366,7 +367,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             val title: AppCompatTextView = itemView.findViewById(R.id.tv_title)
             val subTitle: AppCompatTextView = itemView.findViewById(R.id.tv_subTitle)
             val tv_addr: AppCompatTextView = itemView.findViewById(R.id.tv_addr)
-            val item: RelativeLayout = itemView.findViewById(R.id.rl_item)
+            val item: ConstraintLayout = itemView.findViewById(R.id.cl_item)
             val ivStar: AppCompatImageView = itemView.findViewById(R.id.iv_starLike)
             val image: CircleImageView = itemView.findViewById(R.id.iv_itemImage)
 

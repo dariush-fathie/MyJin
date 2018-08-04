@@ -86,7 +86,11 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onBackPressed() {
         if (change) {
-            val resultPayload = Intent(this@DetailMessagesActivity, MainActivity2::class.java)
+
+            var resultPayload = Intent(this@DetailMessagesActivity, MainActivity2::class.java)
+            if (tf){
+                resultPayload = Intent(this@DetailMessagesActivity, FavMessageActivity::class.java)
+            }
             resultPayload.putExtra("save", isSaved)
             resultPayload.putExtra("messageId", messageId)
             resultPayload.putExtra("position", position)
@@ -98,13 +102,16 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private var position: Int = 0
+    private var tf =false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_messages)
         if (intent != null) {
+
             messageId = intent.getIntExtra("messageId", 1)
             position = intent.getIntExtra("position", 1)
+            tf=intent.getBooleanExtra("tf",false)
         }
         converter = DateConverter(this@DetailMessagesActivity)
 

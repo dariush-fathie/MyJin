@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.activitys
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -19,7 +20,6 @@ import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 
 class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
-
     private var sources = ArrayList<Pair<String, Int>>()
     private var types = ArrayList<Pair<String, Int>>()
 
@@ -27,6 +27,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
     private var typeId = -1
 
     private var realm = Realm.getDefaultInstance()
+    var first = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,10 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun findDistinctTypesAndSources() {
+
+        sources.clear()
+        types.clear()
+
         realm.executeTransactionAsync(Realm.Transaction { db ->
 
             val distinctSources = db.where(KotlinMessagesModel::class.java)
@@ -64,7 +69,10 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
             types.add(0, Pair("همه", -1))
 
         }, Realm.Transaction.OnSuccess {
-            querying(-1, -1)
+            if (first) {
+                first=false
+                querying(-1, -1)
+            }
         })
     }
 
@@ -108,7 +116,6 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
                 i.typeId = item.typeId
 
                 itemsList.add(i)
-                Log.e("items", item.toString())
 
             }
 
@@ -144,16 +151,15 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }, object : IDeleteClick {
-            override fun onDeleteClick(item: KotlinMessagesModel) {
-                performDelete(item)
+            override fun onDeleteClick(t:Boolean) {
+                first=t
+                findDistinctTypesAndSources()
+
             }
         })
     }
 
 
-    fun performDelete(item: KotlinMessagesModel) {
-
-    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -233,8 +239,22 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.e("messages", "onResult")
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == (rv_favMessages.adapter as FavMessageAdapter).requestCode) {
+                data ?: return
+                val p = data.getIntExtra("position", 0)
+                val mark = data.getBooleanExtra("save", false)
+                if (!mark){
+                    (rv_favMessages.adapter as FavMessageAdapter).deleteItem(p)
+                }
+
+            }
+        }
     }
+
 
 }
