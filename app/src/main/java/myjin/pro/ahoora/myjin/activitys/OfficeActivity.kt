@@ -598,7 +598,9 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             }
 
             if (requestCode == settingRequest) {
-                notifyAdapter()
+                if (data?.getBooleanExtra(getString(R.string.centersClean), false)!!) {
+                    notifyAdapter()
+                }
             }
 
         }

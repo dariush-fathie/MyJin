@@ -497,10 +497,11 @@ class MainActivity2 : AppCompatActivity(),
             Log.e("mainActivity2", "onresult")
             if (requestCode == settingRequest) {
                 Log.e("mainActivity2", "onresult")
-                Handler().postDelayed({
-                    EventBus.getDefault().post(TestEvent())
-                },100)
-
+                if (data?.getBooleanExtra(getString(R.string.messagesClean) , false)!!){
+                    Handler().postDelayed({
+                        EventBus.getDefault().post(TestEvent())
+                    },100)
+                }
             }
         }
     }
