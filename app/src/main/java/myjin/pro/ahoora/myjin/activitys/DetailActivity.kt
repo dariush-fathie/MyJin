@@ -113,6 +113,10 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private val updateInterval: Long = 15000
     private val fastestUpdateInterval: Long = updateInterval / 2
 
+    private var latitudeC :Double=0.0
+    private var longitudeC:Double =0.0
+
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv_save -> {
@@ -281,14 +285,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     private fun share() {
-        //val imageUri: Uri = Uri.parse("android.resource://$packageName/drawable/ic_jin")
+
         val shareIntent = Intent()
 
         var str = ""
 
         str = "${tv_title.text}\n\n"
         str += "${tv_subTitle.text}\n\n"
-        str += " آدرس : " + "${tv_addr.text}\n\n"
+
         str += "لینک دانلود ژین من \n"
 
         if (realm.isInTransaction) realm.commitTransaction()
@@ -299,23 +303,27 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         val res = realm.where(KotlinAboutContactModel::class.java)
                 .equalTo("id", id)
                 .findFirst()!!
-        str += res.tKafeh.toString()
+        str += res.tKafeh.toString()+"\n"
         realm.commitTransaction()
+        str += " آدرس : " + "${tv_addr.text}\n"
         shareIntent.action = Intent.ACTION_SEND
+        val uri = "http://maps.google.com/maps?saddr=$longitudeC,$latitudeC"
         shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_TEXT, str)
-        var url = ""
-        if (sendImage) {
-            if (checkStoragePermissions()) {
-                url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
-                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
-                shareIntent.type = "image/*"
-            } else {
-                Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
-            }
-        }
 
-        startActivity(Intent.createChooser(shareIntent, "send"))
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, uri)
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
+     //   var url = ""
+       // if (sendImage) {
+        //    if (checkStoragePermissions()) {
+          //      url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
+             //   shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
+            //    shareIntent.type = "image/*"
+            //} else {
+          //      Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
+           // }
+       // }
+
+        startActivity(Intent.createChooser(shareIntent, "Share via"))
 
 
     }
@@ -742,6 +750,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         tv_incurance.text = str
         tv_website.text = item.addressList!![0]?.site
         tv_mail.text = item.addressList!![0]?.mail
+
+        latitudeC= item.addressList!![0]?.longitude?.toDouble()!!
+        longitudeC=item.addressList!![0]?.latitude?.toDouble()!!
 
         str = ""
 
