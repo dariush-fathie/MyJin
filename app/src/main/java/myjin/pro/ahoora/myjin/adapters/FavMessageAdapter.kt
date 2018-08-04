@@ -2,6 +2,7 @@ package myjin.pro.ahoora.myjin.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityOptionsCompat
@@ -80,6 +81,9 @@ class FavMessageAdapter(private val context: Context,
         holder.type.text = messageItem.type
         holder.source.text = messageItem.groupName
 
+        val bg="#ff"+messageItem.bgColor
+        holder.messageCl.setBackgroundColor(Color.parseColor(bg))
+
     }
 
 
@@ -119,7 +123,7 @@ class FavMessageAdapter(private val context: Context,
         val date: AppCompatTextView = itemView.findViewById(R.id.tv_messageDate)
         val type: AppCompatTextView = itemView.findViewById(R.id.tv_messageType)
         val source: AppCompatTextView = itemView.findViewById(R.id.tv_messageSource)
-        private val messageCl: ConstraintLayout = itemView.findViewById(R.id.message_cl)
+         val messageCl: ConstraintLayout = itemView.findViewById(R.id.message_cl)
 
         init {
             ivStar.setImageResource(R.drawable.ic_trash)

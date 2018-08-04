@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.activitys
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
@@ -7,10 +8,12 @@ import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.PorterDuff
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.provider.MediaStore
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
@@ -79,10 +82,12 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private var g_url = ""
     private var n = 0
     private var forward = true
+    private var sendImage = false
 
     private lateinit var polyline: Polyline
 
     private var theBitmap: Bitmap? = null
+
     // if model save or delete form realm -> change = true  else change = false
     var change = false
     private var isSaved = false
@@ -276,7 +281,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     private fun share() {
-        val imageUri: Uri = Uri.parse("android.resource://$packageName/drawable/ic_jin")
+        //val imageUri: Uri = Uri.parse("android.resource://$packageName/drawable/ic_jin")
         val shareIntent = Intent()
 
         var str = ""
@@ -296,15 +301,22 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 .findFirst()!!
         str += res.tKafeh.toString()
         realm.commitTransaction()
-
-/*String url= MediaStore.Images.Media.insertImage(this.getContentResolver(), theBitmap, "title", "description");
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url));*/
-
         shareIntent.action = Intent.ACTION_SEND
-        shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+        shareIntent.type = "text/plain"
         shareIntent.putExtra(Intent.EXTRA_TEXT, str)
-        shareIntent.type = "image/*"
+        var url = ""
+        if (sendImage) {
+            if (checkStoragePermissions()) {
+                url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
+                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
+                shareIntent.type = "image/*"
+            } else {
+                Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
+            }
+        }
+
         startActivity(Intent.createChooser(shareIntent, "send"))
+
 
     }
 
@@ -766,7 +778,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         if (item.logoImg.equals("")) {
             if (item.gen?.equals("0")!!) {
 
-                aiv_logoImg.background=ContextCompat.getDrawable(this@DetailActivity,R.drawable.t2)
+                aiv_logoImg.background = ContextCompat.getDrawable(this@DetailActivity, R.drawable.t2)
                 url = g_url
             } else if (item.gen?.equals("1")!!) {
                 url = this@DetailActivity.getString(R.string.ic_doctor_f)
@@ -777,6 +789,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         } else {
             aiv_logoImg.colorFilter = null
             url = item.logoImg!!
+            sendImage = true
         }
 
         Glide.with(this@DetailActivity)
@@ -789,7 +802,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                             .skipMemoryCache(true)
                 }
                 .into(aiv_logoImg)
-        // theBitmap = (aiv_logoImg.drawable as BitmapDrawable).bitmap
+        theBitmap = (aiv_logoImg.drawable as BitmapDrawable).bitmap
     }
 
     override fun onBackPressed() {
@@ -888,6 +901,30 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                     fab_direction.visibility = View.GONE
                 }
             }
+        }
+    }
+
+    private val rwRequest = 1080
+    private val rwPermissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE
+            , Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+    private fun checkStoragePermissions(): Boolean {
+        val write = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val read = ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (write == PackageManager.PERMISSION_GRANTED && read == PackageManager.PERMISSION_GRANTED) {
+                true
+            } else {
+                ActivityCompat.requestPermissions(
+                        this,
+                        rwPermissions,
+                        rwRequest
+                )
+                false
+            }
+        } else {
+            // API < 23
+            true
         }
     }
 

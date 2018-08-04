@@ -3,6 +3,7 @@ package myjin.pro.ahoora.myjin.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -137,7 +138,8 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         } else {
             holder.ivStar.setImageResource(R.drawable.ic_bookmark_empty_msg)
         }
-
+        val bg="#ff"+messageItem.bgColor
+        holder.message_cl.setBackgroundColor(Color.parseColor(bg))
     }
 
     fun mark(position: Int, mark: Boolean) {

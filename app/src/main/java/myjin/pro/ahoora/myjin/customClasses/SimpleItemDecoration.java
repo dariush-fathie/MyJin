@@ -18,6 +18,8 @@ public class SimpleItemDecoration extends RecyclerView.ItemDecoration {
     public SimpleItemDecoration(Context context, int gridSpacingDp) {
         mSizeGridSpacingPx = (int) Utils.INSTANCE.pxFromDp(context, gridSpacingDp);
         this.context = context;
+
+
     }
 
 
