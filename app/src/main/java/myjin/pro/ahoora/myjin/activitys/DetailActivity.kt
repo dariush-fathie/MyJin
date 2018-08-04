@@ -303,25 +303,24 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         val res = realm.where(KotlinAboutContactModel::class.java)
                 .equalTo("id", id)
                 .findFirst()!!
-        str += res.tKafeh.toString()+"\n"
+        str += res.tKafeh.toString()+"\n\n"
         realm.commitTransaction()
-        str += " آدرس : " + "${tv_addr.text}\n"
+        str += " آدرس : " + "${tv_addr.text}"
         shareIntent.action = Intent.ACTION_SEND
         val uri = "http://maps.google.com/maps?saddr=$longitudeC,$latitudeC"
         shareIntent.type = "text/plain"
-
-        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, uri)
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
-     //   var url = ""
-       // if (sendImage) {
-        //    if (checkStoragePermissions()) {
-          //      url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
-             //   shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
-            //    shareIntent.type = "image/*"
-            //} else {
-          //      Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
-           // }
-       // }
+        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, uri)
+        var url = ""
+        if (sendImage) {
+           if (checkStoragePermissions()) {
+                url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
+                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
+               shareIntent.type = "image/*"
+            } else {
+               Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
+            }
+        }
 
         startActivity(Intent.createChooser(shareIntent, "Share via"))
 
