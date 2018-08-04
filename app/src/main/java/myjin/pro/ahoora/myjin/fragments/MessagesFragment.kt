@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
@@ -14,7 +15,6 @@ import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
 import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
-import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_messages.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
@@ -24,9 +24,11 @@ import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
+import myjin.pro.ahoora.myjin.models.events.TestEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.NetworkUtil
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call
@@ -85,10 +87,12 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
     override fun onStart() {
         super.onStart()
+        Log.e("messages", "onstart")
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
+        Log.e("messages", "onstop")
         EventBus.getDefault().unregister(this)
         super.onStop()
     }
@@ -116,10 +120,53 @@ class MessagesFragment : Fragment(), View.OnClickListener {
                 val p = data.getIntExtra("position", 0)
                 val mark = data.getBooleanExtra("save", false)
                 (rv_messages.adapter as MessagesAdapter).mark(p, mark)
-            } else {
-
             }
         }
+    }
+
+    @Subscribe
+    fun notifyAdapter(t: TestEvent) {
+        Log.e("messsages", "notifyAdapter")
+        if (realm.isClosed) {
+            realm = Realm.getDefaultInstance()
+        }
+        Handler().postDelayed({
+            realm.executeTransactionAsync { db ->
+                val query = db.where(KotlinMessagesModel::class.java)
+                if (posS > 0) {
+                    query.equalTo("groupId", posS)
+                }
+                if (posT > 0) {
+                    query.equalTo("typeId", posT)
+                }
+                val res = query.findAll()
+
+                val itemsList = ArrayList<KotlinMessagesModel>()
+                res.forEach { item ->
+                    val i = KotlinMessagesModel()
+                    i.title = item.title
+                    i.imageUrl = item.imageUrl
+                    i.regDate = item.regDate
+                    i.bgColor = item.bgColor
+                    i.priority = item.priority
+                    i.content = item.content
+                    i.shortDescription = item.shortDescription
+                    i.groupName = item.groupName
+                    i.groupId = item.groupId
+                    i.messageId = item.messageId
+                    i.saved = item.saved
+                    i.type = item.type
+                    i.typeId = item.typeId
+                    itemsList.add(i)
+                }
+
+                activity?.runOnUiThread {
+                    loadAdapter(itemsList)
+                }
+
+            }
+        }, 200)
+
     }
 
 
@@ -266,8 +313,10 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
                     sourceArray.add("همه")
                     typesArray.add("همه")
+
                     idT.add(0)
                     idS.add(0)
+
                     val list = ArrayList<KotlinMessagesModel>()
                     result.forEach { item: KotlinMessagesModel ->
                         list.add(item)
@@ -330,6 +379,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     private fun hideCPV() {
         cpv_messages.visibility = View.GONE
     }
+
 
     private fun loadAdapter(list: List<KotlinMessagesModel>) {
         if (list.isEmpty()) {

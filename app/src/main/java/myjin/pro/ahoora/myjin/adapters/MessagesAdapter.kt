@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
-import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
@@ -54,13 +53,16 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
             markedItem = BooleanArray(list.size)
             val s = ArrayList<Int>() // to hold saved item centerId
             savedItems.forEach { model: KotlinMessagesModel? ->
-                s.add(model?.messageId!!)
+                val a = model?.messageId
+                s.add(a!!)
             }
 
             for (i in 0 until list.size) {
-                markedItem[i] = s.contains(list[i].messageId) // if item is saved put true in markedItem else put false
+                val f = s.contains(list[i].messageId)
+                markedItem[i] = f // if item is saved put true in markedItem else put false
             }
         }
+        realm.close()
         converter = DateConverter(context)
     }
 
@@ -138,7 +140,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         } else {
             holder.ivStar.setImageResource(R.drawable.ic_bookmark_empty_msg)
         }
-        val bg="#ff"+messageItem.bgColor
+        val bg = "#ff" + messageItem.bgColor
         holder.message_cl.setBackgroundColor(Color.parseColor(bg))
     }
 
@@ -172,13 +174,13 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
                         i.putExtra("position", adapterPosition)
-                        i.putExtra("tf",false)
+                        i.putExtra("tf", false)
                         iSend.send(i, options.toBundle(), requestCode)
                     } else {
                         val i = Intent(context, DetailMessagesActivity::class.java)
                         i.putExtra("position", adapterPosition)
                         i.putExtra("messageId", list.get(adapterPosition).messageId)
-                        i.putExtra("tf",false)
+                        i.putExtra("tf", false)
                         iSend.send(i, null, requestCode)
                     }
                 }

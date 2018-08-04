@@ -6,8 +6,8 @@ import android.net.ConnectivityManager.CONNECTIVITY_ACTION
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import ir.paad.audiobook.utils.NetworkUtil
 import myjin.pro.ahoora.myjin.utils.NetworkStateReceiver
+import myjin.pro.ahoora.myjin.utils.NetworkUtil
 
 class App : Application() {
 

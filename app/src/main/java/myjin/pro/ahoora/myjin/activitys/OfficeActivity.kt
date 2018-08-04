@@ -28,7 +28,6 @@ import android.widget.Toast
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
-import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.activity_office.*
 import kotlinx.android.synthetic.main.bottom_sheet_layout.*
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -40,10 +39,7 @@ import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.customClasses.TabLayoutInterface
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
-import myjin.pro.ahoora.myjin.utils.ApiInterface
-import myjin.pro.ahoora.myjin.utils.KotlinApiClient
-import myjin.pro.ahoora.myjin.utils.StaticValues
-import myjin.pro.ahoora.myjin.utils.Utils
+import myjin.pro.ahoora.myjin.utils.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -65,7 +61,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     private lateinit var adapter: GroupItemAdapter
     var idArray = ArrayList<Int>()
     var filterArray = ArrayList<Int>()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -249,6 +244,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
                         val query = realm?.where(KotlinItemModel::class.java)
                                 ?.equalTo("groupId", groupId)
+
                         if (cityId != 0) {
                             query?.equalTo("addressList.cityId", cityId)
                         }
@@ -317,7 +313,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         return bottomSheetCallback
     }
 
-
     public override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
@@ -327,7 +322,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         super.onStop()
         EventBus.getDefault().unregister(this)
     }
-
 
     private fun sort(sort: Sort) {
         // todo add filters
@@ -417,12 +411,12 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
-            R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString(),4)
-            R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString(),5)
-            R.id.rl_ict_services -> goToServicesActivity(tv_ict_services.text.toString(),6)
-            R.id.rl_pishkhan_services -> goToServicesActivity(tv_pishkhan_services.text.toString(),7)
-            R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(),8)
-            R.id.rl_setting-> startActivity(Intent(this,SettingActivity::class.java))
+            R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString(), 4)
+            R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString(), 5)
+            R.id.rl_ict_services -> goToServicesActivity(tv_ict_services.text.toString(), 6)
+            R.id.rl_pishkhan_services -> goToServicesActivity(tv_pishkhan_services.text.toString(), 7)
+            R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(), 8)
+            R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
             R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
 
         }
@@ -595,13 +589,52 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.e("Office", "onResult")
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == StaticValues.requestCodeOfficeDetail) {
                 val id = data?.getIntExtra("centerId", -1)
                 val savedOrDelete = data?.getBooleanExtra("save", false)
                 adapter.onItemMarkedEvent(id!!, savedOrDelete!!)
             }
+
+            if (requestCode == settingRequest) {
+                notifyAdapter()
+            }
+
         }
+    }
+
+    private fun notifyAdapter() {
+        val realm = Realm.getDefaultInstance()
+        realm.beginTransaction()
+        val query = realm.where(KotlinItemModel::class.java)
+                .equalTo("groupId", groupId)
+        if (cityId != 0) {
+            query?.equalTo("addressList.cityId", cityId)
+        }
+        query?.equalTo("addressList.provId", provId)
+        if (filterFlag) {
+            query.`in`("specialityList.specialtyId", filterArray.toTypedArray())
+        }
+
+        if (ascSort) {
+            query.sort("firstName", Sort.ASCENDING)
+        } else {
+            query.sort("firstName", Sort.DESCENDING)
+
+        }
+        val result = query.findAll()
+        realm.commitTransaction()
+        idArray.clear()
+        result.forEach { item: KotlinItemModel ->
+            idArray.add(item.centerId)
+        }
+        initList(idArray)
+    }
+
+
+    companion object {
+        const val settingRequest = 1047
     }
 
 }

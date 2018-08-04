@@ -13,7 +13,6 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import io.realm.Realm
-import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.activity_splash.*
 import myjin.pro.ahoora.myjin.BuildConfig
 import myjin.pro.ahoora.myjin.R
@@ -23,6 +22,7 @@ import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.NetworkUtil
 import myjin.pro.ahoora.myjin.utils.SharedPer
 import retrofit2.Call
 import retrofit2.Callback

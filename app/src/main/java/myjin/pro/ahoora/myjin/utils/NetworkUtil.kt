@@ -1,4 +1,4 @@
-package ir.paad.audiobook.utils
+package myjin.pro.ahoora.myjin.utils
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ class NetworkUtil {
 
     fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        var activeNetworkInfo: NetworkInfo? = null
+        val activeNetworkInfo: NetworkInfo?
         activeNetworkInfo = connectivityManager.activeNetworkInfo
         return activeNetworkInfo != null && activeNetworkInfo.isConnected
     }

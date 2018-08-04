@@ -41,6 +41,8 @@
     <string name="msgRestore">بازگردانی موفقیت آمیز بود</string>
     <string name="msgNotRestore">بازگردانی نشد</string>
     <string name="clean">پاک کردن</string>
+    <string name="messagesClean">messagesClean</string>
+    <string name="centersClean">centersClean</string>
 
     <string-array name="provArray2">
         <item> آذربایجان شرقی</item>

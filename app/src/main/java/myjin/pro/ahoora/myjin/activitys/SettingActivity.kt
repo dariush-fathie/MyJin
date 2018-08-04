@@ -1,6 +1,8 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.Manifest
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -30,6 +32,8 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
     lateinit var rbr: RealmBackupRestore
     private var backup = true
 
+    private var centersCleanFlag = false
+    private var messagesCleanFlag = false
 
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         when (buttonView?.id) {
@@ -100,12 +104,20 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
             if (tf) {
                 val item = db.where(KotlinItemModel::class.java)
                         .findAll()!!
+                if (item.size > 0) {
+                    centersCleanFlag = true
+                }
                 item.forEach { ii ->
                     ii.saved = false
                 }
+
             } else {
                 val item = db.where(KotlinMessagesModel::class.java)
                         .findAll()!!
+                Log.e("item.size","${item.size}")
+                if (item.size > 0) {
+                    messagesCleanFlag = true
+                }
                 item.forEach { ii ->
                     ii.saved = false
                 }
@@ -227,5 +239,14 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
         }
     }
 
+    override fun onBackPressed() {
+        if (messagesCleanFlag || centersCleanFlag) {
+            val resIntent = Intent()
+            resIntent.putExtra(getString(R.string.messagesClean), messagesCleanFlag)
+            resIntent.putExtra(getString(R.string.centersClean), centersCleanFlag)
+            setResult(Activity.RESULT_OK, resIntent)
+        }
+        super.onBackPressed()
+    }
 
 }

@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
-import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.fragment_health_bank.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
@@ -25,10 +24,7 @@ import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
 import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
-import myjin.pro.ahoora.myjin.utils.ApiInterface
-import myjin.pro.ahoora.myjin.utils.KotlinApiClient
-import myjin.pro.ahoora.myjin.utils.SharedPer
-import myjin.pro.ahoora.myjin.utils.StaticValues
+import myjin.pro.ahoora.myjin.utils.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call

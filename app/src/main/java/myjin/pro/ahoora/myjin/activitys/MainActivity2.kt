@@ -2,6 +2,7 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -20,7 +21,6 @@ import android.view.View
 import android.widget.Toast
 import io.realm.Realm
 import ir.paad.audiobook.utils.Converter
-import ir.paad.audiobook.utils.NetworkUtil
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.drawer_layout.*
 import myjin.pro.ahoora.myjin.R
@@ -30,10 +30,12 @@ import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
+import myjin.pro.ahoora.myjin.models.events.TestEvent
 import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
+import myjin.pro.ahoora.myjin.utils.NetworkUtil
 import myjin.pro.ahoora.myjin.utils.SharedPer
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -47,6 +49,9 @@ class MainActivity2 : AppCompatActivity(),
         AppBarLayout.OnOffsetChangedListener,
         View.OnClickListener, View.OnLongClickListener {
 
+    companion object {
+        const val settingRequest = 1564
+    }
 
     override fun onLongClick(v: View?): Boolean {
         when (v?.id) {
@@ -76,7 +81,7 @@ class MainActivity2 : AppCompatActivity(),
             R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
             R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
-            R.id.rl_setting -> startActivity(Intent(this, SettingActivity::class.java))
+            R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
         }
     }
 
@@ -488,6 +493,16 @@ class MainActivity2 : AppCompatActivity(),
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Log.e("mainActivity2", "onresult")
+        if (resultCode == Activity.RESULT_OK) {
+            Log.e("mainActivity2", "onresult")
+            if (requestCode == settingRequest) {
+                Log.e("mainActivity2", "onresult")
+                Handler().postDelayed({
+                    EventBus.getDefault().post(TestEvent())
+                },100)
+
+            }
+        }
     }
 
 }
