@@ -97,7 +97,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activitys.DetailMessagesActivity" />
         <activity android:name=".activitys.SettingActivity" />
-        <activity android:name=".activitys.FavMessageActivity"></activity>
+        <activity android:name=".activitys.FavMessageActivity" />
+        <activity android:name=".activitys.RulesActivity"></activity>
     </application>
 
 </manifest>

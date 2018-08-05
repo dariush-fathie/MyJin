@@ -27,6 +27,7 @@
 
     <style name="CustomTabTextFont" parent="TextAppearance.Design.Tab">
         <item name="fontFamily">@font/yekan</item>
+
     </style>
 
     <style name="button" parent="@android:style/Widget.Button">

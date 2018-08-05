@@ -1,16 +1,14 @@
-package myjin.pro.ahoora.myjin.activitys;
+package myjin.pro.ahoora.myjin.activitys
 
-import android.annotation.SuppressLint
-import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
 import io.realm.Realm
-import kotlinx.android.synthetic.main.activity_contact_us.*
+import kotlinx.android.synthetic.main.activity_rules.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 
-class ContactUs : AppCompatActivity() {
+class RulesActivity : AppCompatActivity() {
 
-    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rules)
@@ -21,12 +19,12 @@ class ContactUs : AppCompatActivity() {
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         val res = realm.where(KotlinAboutContactModel::class.java).equalTo("id", id).findFirst()!!
-        html = res.tRule.toString()
+        html = res.tContact.toString()
         realm.commitTransaction()
 
-        wv_contactus.settings.javaScriptEnabled = true
-        wv_contactus.settings.builtInZoomControls = true
-        wv_contactus.loadData(html, "text/html; charset=utf-8", "UTF-8")
+        wv_rules_us.settings.javaScriptEnabled = true
+        wv_rules_us.settings.builtInZoomControls = true
+        wv_rules_us.loadData(html, "text/html; charset=utf-8", "UTF-8")
 
         iv_goback.setOnClickListener({
             finish()

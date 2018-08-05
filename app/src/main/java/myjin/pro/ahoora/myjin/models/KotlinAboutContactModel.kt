@@ -20,6 +20,10 @@ open class KotlinAboutContactModel : RealmObject() {
     @SerializedName("tKafeh")
     @Expose
     open var tKafeh: String? = ""
+
+    @SerializedName("tRule")
+    @Expose
+    open var tRule: String? = ""
     @SerializedName("version")
     @Expose
     open var version: Int? = 1

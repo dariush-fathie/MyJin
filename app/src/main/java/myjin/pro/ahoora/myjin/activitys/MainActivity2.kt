@@ -82,6 +82,7 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
             R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
+           R.id.rl_rules->startActivity(Intent(this, RulesActivity::class.java))
         }
     }
 
@@ -119,6 +120,7 @@ class MainActivity2 : AppCompatActivity(),
         rl_setting.setOnClickListener(this)
         tv_login_outsign.setOnClickListener(this)
         btn_exit.setOnClickListener(this)
+        rl_rules.setOnClickListener(this)
     }
 
 

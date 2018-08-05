@@ -58,18 +58,6 @@
                     app:cpv_animAutostart="true"
                     app:cpv_indeterminate="true" />
 
-                <android.support.design.widget.TabLayout
-                    android:id="@+id/tbl_main"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="194dp"
-                    android:background="@color/white"
-                    app:tabIndicatorColor="@color/colorAccent"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="#000"
-                    app:tabTextAppearance="@style/CustomTabTextFont"
-                    app:tabTextColor="@color/androidTextColor" />
-
                 <RelativeLayout
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -139,6 +127,19 @@
                         app:fontFamily="@font/yekan" />
 
                 </RelativeLayout>
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tbl_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="194dp"
+                    android:background="@color/white"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabMode="fixed"
+                    
+                    app:tabSelectedTextColor="@color/green"
+                    app:tabTextAppearance="@style/CustomTabTextFont"
+                    app:tabTextColor="@color/androidTextColor" />
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
