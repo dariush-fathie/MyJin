@@ -222,7 +222,7 @@ class MainActivity2 : AppCompatActivity(),
         setListener()
         checkNetState()
 
-        val tf = SharedPer(this@MainActivity2).getBoolean(getString(R.string.introductionFlag2))
+        val tf = SharedPer(this@MainActivity2).getIntro(getString(R.string.introductionFlag2))
         SharedPer(this).setBoolean(getString(R.string.introductionFlag), tf)
     }
 

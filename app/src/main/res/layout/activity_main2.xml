@@ -136,7 +136,7 @@
                     android:background="@color/white"
                     app:tabIndicatorColor="@color/colorAccent"
                     app:tabMode="fixed"
-                    
+
                     app:tabSelectedTextColor="@color/green"
                     app:tabTextAppearance="@style/CustomTabTextFont"
                     app:tabTextColor="@color/androidTextColor" />
@@ -180,7 +180,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/icon_search_white"
             android:translationY="86dp"
-            app:backgroundTint="@color/niceBlue"
+            app:backgroundTint="@color/colorAccent"
             app:fabSize="normal" />
 
     </android.support.design.widget.CoordinatorLayout>

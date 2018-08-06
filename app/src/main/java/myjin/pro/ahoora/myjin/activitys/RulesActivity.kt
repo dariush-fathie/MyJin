@@ -19,7 +19,7 @@ class RulesActivity : AppCompatActivity() {
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         val res = realm.where(KotlinAboutContactModel::class.java).equalTo("id", id).findFirst()!!
-        html = res.tContact.toString()
+        html = res.tRule.toString()
         realm.commitTransaction()
 
         wv_rules_us.settings.javaScriptEnabled = true

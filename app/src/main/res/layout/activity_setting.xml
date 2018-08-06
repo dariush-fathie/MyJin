@@ -216,7 +216,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/yekan"
                     android:padding="10dp"
-                    android:text="عدم نمایش"
+                    android:text="نمایش"
                     android:textColor="@color/title"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -224,6 +224,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/fav_intro" />
 
                 <android.support.v7.widget.SwitchCompat
+                    android:checked="true"
                     android:id="@+id/sc_intro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

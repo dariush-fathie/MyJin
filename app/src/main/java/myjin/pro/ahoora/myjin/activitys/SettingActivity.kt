@@ -38,8 +38,8 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
     override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
         when (buttonView?.id) {
             R.id.sc_intro -> {
-                SharedPer(this).setIntro(getString(R.string.introductionFlag2), isChecked)
-                SharedPer(this).setBoolean(getString(R.string.introductionFlag), isChecked)
+                SharedPer(this).setIntro(getString(R.string.introductionFlag2), !isChecked)
+                SharedPer(this).setBoolean(getString(R.string.introductionFlag), !isChecked)
             }
             R.id.rb_centers -> {
                 SharedPer(this).setDefTab(getString(R.string.defTab), isChecked)
@@ -61,7 +61,7 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
 
     private fun init_() {
         rbr = RealmBackupRestore(this@SettingActivity)
-        sc_intro.isChecked = SharedPer(this).getIntro(getString(R.string.introductionFlag2))
+        sc_intro.isChecked = !SharedPer(this).getIntro(getString(R.string.introductionFlag2))
 
         if (SharedPer(this).getDefTab(getString(R.string.defTab)))
             rb_centers.isChecked = SharedPer(this).getDefTab(getString(R.string.defTab))

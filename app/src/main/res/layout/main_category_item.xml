@@ -50,7 +50,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
             android:text="15 مورد"
-            android:textColor="@color/yellow1"
+            android:textColor="@color/yellow"
             android:textSize="14sp"
             android:textStyle="bold"
             app:fontFamily="@font/yekan"
