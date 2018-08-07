@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import co.ronash.pushe.Pushe
 import com.bumptech.glide.Glide
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -45,6 +47,10 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        Pushe.initialize(this@SplashScreen,true)
+        Pushe.initialize(this, true)
+
+
         btn_splashTryAgain.setOnClickListener(this)
         btn_splashFav.setOnClickListener(this)
 

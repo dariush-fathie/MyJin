@@ -209,7 +209,7 @@ class MainActivity2 : AppCompatActivity(),
         tbl_main.setupWithViewPager(vp_mainContainer)
 
 
-        Handler().postDelayed({
+        Handler().postDelayed({1
             ipi_main.attachToViewPager(vp_mainContainer)
             if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
                 vp_mainContainer.currentItem = 1
