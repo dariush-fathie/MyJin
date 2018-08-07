@@ -47,9 +47,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        Pushe.initialize(this@SplashScreen,true)
-        Pushe.initialize(this, true)
-
 
         btn_splashTryAgain.setOnClickListener(this)
         btn_splashFav.setOnClickListener(this)
