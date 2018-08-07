@@ -8,6 +8,8 @@ import android.util.Log;
 public class NotifBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
+
+
         if(intent.getAction().equals(context.getPackageName()+"co.ronash.pushe.NOTIF_CLICKED")){
             Log.e("Pushe", "Broadcast co.ronash.pushe.NOTIF_CLICKED received");
             //add your logic here

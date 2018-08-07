@@ -41,7 +41,47 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
+        <receiver android:name=".utils.NotifBroadcastReceiver">
+            <intent-filter>
+                <action android:name="${applicationId}.co.ronash.pushe.NOTIF_CLICKED"/>
+                <action android:name="${applicationId}.co.ronash.pushe.NOTIF_DISMISSED" />
+                <action android:name="${applicationId}.co.ronash.pushe.NOTIF_BTN_CLICKED" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".utils.MyJinListener"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="co.ronash.pushe.RECEIVE" />
+            </intent-filter>
+        </service>
 
+
+        <receiver android:name="co.ronash.pushe.receiver.UpdateReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+
+                <data
+                    android:path="myjin.pro.ahoora.myjin"
+                    android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="myjin.pro.ahoora.myjin" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data android:name="co.ronash.pushe.token" android:value="PUSHE_39402818281"/>
+        <meta-data android:name="co.ronash.pushe.cr" android:value="Tm9uZQ=="/>
         <activity
             android:name=".activitys.MainActivity2"
             android:configChanges="orientation"
@@ -119,47 +159,7 @@
         <activity android:name=".activitys.RulesActivity"></activity>
 
 
-        <receiver android:name=".utils.NotifBroadcastReceiver">
-            <intent-filter>
-                <action android:name="${applicationId}.co.ronash.pushe.NOTIF_CLICKED"/>
-                <action android:name="${applicationId}.co.ronash.pushe.NOTIF_DISMISSED" />
-                <action android:name="${applicationId}.co.ronash.pushe.NOTIF_BTN_CLICKED" />
-            </intent-filter>
-        </receiver>
-        <service
-            android:name=".utils.MyJinListener"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="co.ronash.pushe.RECEIVE" />
-            </intent-filter>
-        </service>
 
-
-        <receiver android:name="co.ronash.pushe.receiver.UpdateReceiver" >
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-
-                <data
-                    android:path="myjin.pro.ahoora.myjin"
-                    android:scheme="package" />
-            </intent-filter>
-        </receiver>
-
-        <receiver
-            android:name="com.google.android.gms.gcm.GcmReceiver"
-            android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <category android:name="myjin.pro.ahoora.myjin" />
-            </intent-filter>
-        </receiver>
-
-        <meta-data android:name="co.ronash.pushe.token" android:value="PUSHE_39402818281"/>
-        <meta-data android:name="co.ronash.pushe.cr" android:value="Tm9uZQ=="/>
 
     </application>
 
