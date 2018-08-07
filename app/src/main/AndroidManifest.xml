@@ -41,6 +41,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
+
         <receiver android:name=".utils.NotifBroadcastReceiver">
             <intent-filter>
                 <action android:name="${applicationId}.co.ronash.pushe.NOTIF_CLICKED"/>
@@ -82,6 +83,9 @@
 
         <meta-data android:name="co.ronash.pushe.token" android:value="PUSHE_39402818281"/>
         <meta-data android:name="co.ronash.pushe.cr" android:value="Tm9uZQ=="/>
+
+
+
         <activity
             android:name=".activitys.MainActivity2"
             android:configChanges="orientation"
