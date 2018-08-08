@@ -97,12 +97,13 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                     val uniqueIds = ArrayList<Int>()
 
                     resultList.forEach { model: KotlinItemModel ->
-                        Log.e("name ", model.firstName + " " + model.lastName)
+
                         //collect all ids for cound later
                         idsArray.add(model.groupId)
                         // adding unique id to list
                         if (!uniqueIds.contains(model.groupId)) {
                             uniqueIds.add(model.groupId)
+
                         }
                     }
 

@@ -27,7 +27,7 @@ public interface ApiInterface {
     @GET("getSpList/")
     Call<List<KotlinSpecialityModel>> getSpList();
 
-    @GET("search/{someThing}")
+    @GET("search2/{someThing}")
     Call<List<KotlinItemModel>> search(@Path("someThing") String searchedText);
 
     @GET("login/{user}/{pass}/{yekta}")
