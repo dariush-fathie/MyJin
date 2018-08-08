@@ -97,7 +97,7 @@
             android:id="@+id/fab_closeMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete"
+            android:src="@drawable/ic_close"
             android:tint="@color/white"
             app:backgroundTint="@color/green"
             app:fabSize="normal" />

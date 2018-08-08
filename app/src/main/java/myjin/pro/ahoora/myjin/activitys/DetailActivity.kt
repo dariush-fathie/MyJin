@@ -208,6 +208,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                     realm.commitTransaction()
                 } else {
                     item = SearchActivity.tempModel
+
+                    Log.e("dddd", item.slideList!![0]!!.fileUrl)
+
                 }
 
                 loadDetails()
@@ -846,7 +849,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 Glide.with(this@DetailActivity)
                         .load(item.slideList!![position]?.fileUrl)
                         .apply(RequestOptions()
-                                .fitCenter()
+
                                 .placeholder(R.color.colorAccent))
                         .into((holder as ImageHolder)
                                 .ivImage)

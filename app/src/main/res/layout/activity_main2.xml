@@ -135,9 +135,9 @@
                     android:layout_marginTop="194dp"
                     android:background="@color/white"
                     app:tabBackground="@drawable/tab_selector"
-                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabIndicatorColor="@color/white"
                     app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/colorAccent"
+                    app:tabSelectedTextColor="@color/white"
                     app:tabTextAppearance="@style/CustomTabTextFont"
                     app:tabTextColor="@color/androidTextColor" />
 

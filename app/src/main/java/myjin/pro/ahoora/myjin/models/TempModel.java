@@ -4,10 +4,10 @@ package myjin.pro.ahoora.myjin.models;
 import com.google.gson.annotations.SerializedName;
 
 public class TempModel {
-	
+
     @SerializedName("x")
     String val;
-	
+
     public String getVal() {
         return val;
     }
