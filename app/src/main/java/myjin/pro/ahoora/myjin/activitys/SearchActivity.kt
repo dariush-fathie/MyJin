@@ -37,7 +37,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
 
     private var g_url = ""
     private var g_name = ""
-
+    private var active2 = 1;
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.fab_goUp -> rv_search.smoothScrollToPosition(0)
@@ -346,22 +346,30 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             override fun onClick(v: View?) {
                 val realPosition = findRealItemPosition(adapterPosition)
                 tempModel = dataSet[realPosition]
+                getG_name(tempModel .groupId)
+                active2= tempModel.active2
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@SearchActivity, image, "transition_name")
+                if (active2!=0) {
 
-                    val i = Intent(this@SearchActivity, DetailActivity::class.java)
-                    i.putExtra(StaticValues.MODEL, 2)
-                    i.putExtra(StaticValues.ID, tempModel.centerId)
-                    i.putExtra("g_url", g_url)
-                    startActivity(i,options.toBundle())
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@SearchActivity, image, "transition_name")
 
+                        val i = Intent(this@SearchActivity, DetailActivity::class.java)
+                        i.putExtra(StaticValues.MODEL, 2)
+                        i.putExtra(StaticValues.ID, tempModel.centerId)
+                        i.putExtra("g_url", g_url)
+                        startActivity(i, options.toBundle())
+
+                    } else {
+                        val i = Intent(this@SearchActivity, DetailActivity::class.java)
+                        i.putExtra(StaticValues.MODEL, 2)
+                        i.putExtra(StaticValues.ID, tempModel.centerId)
+                        i.putExtra("g_url", g_url)
+                        startActivity(i)
+                    }
                 }else{
-                    val i = Intent(this@SearchActivity, DetailActivity::class.java)
-                    i.putExtra(StaticValues.MODEL, 2)
-                    i.putExtra(StaticValues.ID, tempModel.centerId)
-                    i.putExtra("g_url", g_url)
-                    startActivity(i)
+                    val j = Intent(this@SearchActivity, NoDetailActivity::class.java)
+                    startActivity(j)
                 }
             }
 

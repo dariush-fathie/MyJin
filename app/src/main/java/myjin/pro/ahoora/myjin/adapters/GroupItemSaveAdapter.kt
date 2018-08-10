@@ -15,13 +15,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailActivity
+import myjin.pro.ahoora.myjin.activitys.NoDetailActivity
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.StaticValues
@@ -33,6 +33,7 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
     private var realm: Realm = Realm.getDefaultInstance()
     private var g_url = ""
     private var g_name = ""
+    private var active2 = 1;
 
     private fun getModelByCenterId(centerId: Int): KotlinItemModel {
         var item = KotlinItemModel()
@@ -89,18 +90,18 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
                 // holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
 
                 if (item.gen?.equals("0")!!) {
-                    holder.image.background=ContextCompat.getDrawable(context,R.drawable.t2)
+                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t2)
                     url = g_url
                 } else if (item.gen?.equals("1")!!) {
-                    holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
+                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
                     url = context.getString(R.string.ic_doctor_f)
                 } else if (item.gen?.equals("2")!!) {
-                    holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
+                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
                     url = context.getString(R.string.ic_doctor_m)
                 }
 
             } else {
-                holder.image.background=ContextCompat.getDrawable(context,R.drawable.t)
+                holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
                 url = item.logoImg!!
             }
 
@@ -149,7 +150,7 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
         val item = realm.where(KotlinItemModel::class.java)
                 .equalTo("centerId", i)
                 .findFirst()!!
-
+        active2 = item.active2
         g_name = realm.where(KotlinGroupModel::class.java).equalTo("groupId", item.groupId).findFirst()?.name!!
         g_url = realm.where(KotlinGroupModel::class.java).equalTo("groupId", item.groupId).findFirst()?.g_url!!
         realm.commitTransaction()
@@ -159,19 +160,27 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
         override fun onClick(v: View?) {
             when (v?.id) {
                 R.id.cl_item -> {
+
                     getG_name(ids?.get(adapterPosition)!!)
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as AppCompatActivity), image, "transition_name")
-                        val i = Intent(context, DetailActivity::class.java)
-                        i.putExtra(StaticValues.MODEL, 1)
-                        i.putExtra(StaticValues.ID, ids.get(adapterPosition))
-                        i.putExtra("g_url", g_url)
-                        context.startActivity(i, options.toBundle())
-                    } else {
-                        val i = Intent(context, DetailActivity::class.java)
-                        i.putExtra(StaticValues.MODEL, 1)
-                        i.putExtra(StaticValues.ID, ids.get(adapterPosition))
-                        i.putExtra("g_url", g_url)
+
+                    if (active2!=0) {
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as AppCompatActivity), image, "transition_name")
+                            val i = Intent(context, DetailActivity::class.java)
+                            i.putExtra(StaticValues.MODEL, 1)
+                            i.putExtra(StaticValues.ID, ids.get(adapterPosition))
+                            i.putExtra("g_url", g_url)
+                            context.startActivity(i, options.toBundle())
+                        } else {
+                            val i = Intent(context, DetailActivity::class.java)
+                            i.putExtra(StaticValues.MODEL, 1)
+                            i.putExtra(StaticValues.ID, ids.get(adapterPosition))
+                            i.putExtra("g_url", g_url)
+                            context.startActivity(i)
+                        }
+                    }else{
+                        val i = Intent(context, NoDetailActivity::class.java)
                         context.startActivity(i)
                     }
                 }

@@ -289,6 +289,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     private fun share() {
 
+        theBitmap = (aiv_logoImg.drawable as BitmapDrawable).bitmap
+
         val shareIntent = Intent()
 
         var str = ""
@@ -314,16 +316,16 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         shareIntent.type = "text/plain"
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, uri)
-        var url = ""
-        if (sendImage) {
-           if (checkStoragePermissions()) {
-                url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
-                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
-               shareIntent.type = "image/*"
-            } else {
-               Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
-            }
-        }
+      //  var url = ""
+       // if (sendImage) {
+        //   if (checkStoragePermissions()) {
+          //      url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
+          //      shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
+          //     shareIntent.type = "image/*"
+           // } else {
+          //     Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
+          //  }
+       // }
 
         startActivity(Intent.createChooser(shareIntent, "Share via"))
 
@@ -815,7 +817,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                             .skipMemoryCache(true)
                 }
                 .into(aiv_logoImg)
-        theBitmap = (aiv_logoImg.drawable as BitmapDrawable).bitmap
+
     }
 
     override fun onBackPressed() {

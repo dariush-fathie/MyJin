@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    tools:context=".activitys.NoDetailActivity">
     <RelativeLayout
         android:id="@+id/rl_toolbar"
         android:layout_width="match_parent"
@@ -12,14 +13,13 @@
         android:clickable="true"
         android:focusable="true">
 
+
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_officeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:text="پیغام"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -31,28 +31,26 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_alignParentStart="true"
-            android:onClick="finishAct"
             android:padding="12dp"
             android:src="@drawable/ic_back"
             app:tint="@color/white" />
     </RelativeLayout>
 
-
-    <WebView
-
-        android:id="@+id/wv_notificationData"
+    <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:padding="15dp"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="vertical"
-        android:verticalScrollbarPosition="left"
+        android:fontFamily="yekan"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/noDetail"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rl_toolbar" />
+
 </android.support.constraint.ConstraintLayout>

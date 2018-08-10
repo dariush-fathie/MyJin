@@ -32,6 +32,9 @@ open class KotlinItemModel : RealmObject() {
     @SerializedName("active")
     @Expose
     open var active: Int = -1
+    @SerializedName("active2")
+    @Expose
+    open var active2: Int = 1
     @SerializedName("logo_img")
     @Expose
     open var logoImg: String? = ""

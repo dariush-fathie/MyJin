@@ -70,10 +70,9 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
         var str = ""
 
-        str = "${tv_title.text}\n\n"
-        str += "${tv_group.text}\n\n"
+        str += "${tv_group.text}\n"
         str += "${tv_time.text}\n\n"
-        str += "${tv_content.text}\n\n"
+        str += "${tv_title.text}...\n\n"
         str += "لینک دانلود ژین من \n"
 
         if (realm.isInTransaction) realm.commitTransaction()
@@ -90,20 +89,20 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
         shareIntent.action = Intent.ACTION_SEND
         shareIntent.type = "text/plain"
-        shareIntent.putExtra(Intent.EXTRA_TEXT, str)
-        var url = ""
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, str)
+      //  var url = ""
 
-            if (checkStoragePermissions()) {
-                theBitmap = (iv_messageImage.drawable as BitmapDrawable).bitmap
-                url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
-                shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
-                shareIntent.type = "image/*"
-            } else {
-                Toast.makeText(this@DetailMessagesActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
-            }
+        //    if (checkStoragePermissions()) {
+          //      theBitmap = (iv_messageImage.drawable as BitmapDrawable).bitmap
+            //    url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
+              //  shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
+                //shareIntent.type = "image/*"
+            //} else {
+              //  Toast.makeText(this@DetailMessagesActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
+            //}
 
 
-        startActivity(Intent.createChooser(shareIntent, "send"))
+        startActivity(Intent.createChooser(shareIntent, "Share via"))
 
     }
 

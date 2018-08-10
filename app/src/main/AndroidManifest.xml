@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="myjin.pro.ahoora.myjin">
 
+    <uses-sdk tools:overrideLibrary="co.ronash.pushe" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -12,22 +14,16 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
-
-    <uses-sdk
-        tools:overrideLibrary="co.ronash.pushe" />
     <permission
         android:name="myjin.pro.ahoora.myjin.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission
-        android:name="myjin.pro.ahoora.myjin.permission.C2D_MESSAGE" />
-    <uses-permission
-        android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-permission android:name="myjin.pro.ahoora.myjin.permission.C2D_MESSAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- Optional permissions -->
-    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".App"
@@ -37,14 +33,14 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
-
         <receiver android:name=".utils.NotifBroadcastReceiver">
             <intent-filter>
-                <action android:name="${applicationId}.co.ronash.pushe.NOTIF_CLICKED"/>
+                <action android:name="${applicationId}.co.ronash.pushe.NOTIF_CLICKED" />
                 <action android:name="${applicationId}.co.ronash.pushe.NOTIF_DISMISSED" />
                 <action android:name="${applicationId}.co.ronash.pushe.NOTIF_BTN_CLICKED" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".utils.MyJinListener"
             android:exported="false">
@@ -53,8 +49,7 @@
             </intent-filter>
         </service>
 
-
-        <receiver android:name="co.ronash.pushe.receiver.UpdateReceiver" >
+        <receiver android:name="co.ronash.pushe.receiver.UpdateReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_REPLACED" />
 
@@ -63,24 +58,24 @@
                     android:scheme="package" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name="com.google.android.gms.gcm.GcmReceiver"
             android:exported="true"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
                 <category android:name="myjin.pro.ahoora.myjin" />
             </intent-filter>
         </receiver>
 
-        <meta-data android:name="co.ronash.pushe.token" android:value="PUSHE_39402818281"/>
-        <meta-data android:name="co.ronash.pushe.cr" android:value="Tm9uZQ=="/>
-
-
+        <meta-data
+            android:name="co.ronash.pushe.token"
+            android:value="PUSHE_39402818281" />
+        <meta-data
+            android:name="co.ronash.pushe.cr"
+            android:value="Tm9uZQ==" />
 
         <activity
             android:name=".activitys.MainActivity2"
@@ -90,10 +85,7 @@
             android:name=".activitys.AppIntro"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activitys.HeaIncServiceActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activitys.OfficeActivity"
             android:configChanges="orientation"
@@ -156,11 +148,8 @@
         <activity android:name=".activitys.DetailMessagesActivity" />
         <activity android:name=".activitys.SettingActivity" />
         <activity android:name=".activitys.FavMessageActivity" />
-        <activity android:name=".activitys.RulesActivity"></activity>
-
-
-
-
+        <activity android:name=".activitys.RulesActivity" />
+        <activity android:name=".activitys.NoDetailActivity"></activity>
     </application>
 
 </manifest>

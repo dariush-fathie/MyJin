@@ -29,6 +29,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailActivity
+import myjin.pro.ahoora.myjin.activitys.NoDetailActivity
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.StaticValues
@@ -206,26 +207,33 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
             when (v?.id) {
                 R.id.cl_item -> {
 
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as OfficeActivity),
-                                image, "transition_name")
+                    val item = getModelByCenterId(ids.get(adapterPosition))
 
-                        val i = Intent(context, DetailActivity::class.java)
-                        i.putExtra(StaticValues.MODEL, 0)
-                        i.putExtra(StaticValues.ID, ids.get(adapterPosition))
-                        i.putExtra("g_url", g_url)
-                        clickedItemPosition = adapterPosition
-                        (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail, options.toBundle())
+                    if (item.active2 != 0) {
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as OfficeActivity),
+                                    image, "transition_name")
+
+                            val i = Intent(context, DetailActivity::class.java)
+                            i.putExtra(StaticValues.MODEL, 0)
+                            i.putExtra(StaticValues.ID, ids.get(adapterPosition))
+                            i.putExtra("g_url", g_url)
+                            clickedItemPosition = adapterPosition
+                            (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail, options.toBundle())
 
 
-                    } else {
-                        val i = Intent(context, DetailActivity::class.java)
-                        i.putExtra(StaticValues.MODEL, 0)
-                        i.putExtra(StaticValues.ID, ids.get(adapterPosition))
-                        i.putExtra("g_url", g_url)
-                        clickedItemPosition = adapterPosition
-                        (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail)
+                        } else {
+                            val i = Intent(context, DetailActivity::class.java)
+                            i.putExtra(StaticValues.MODEL, 0)
+                            i.putExtra(StaticValues.ID, ids.get(adapterPosition))
+                            i.putExtra("g_url", g_url)
+                            clickedItemPosition = adapterPosition
+                            (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail)
 
+                        }
+                    }else{
+                        val j = Intent(context, NoDetailActivity::class.java)
+                        (context as OfficeActivity).startActivity(j)
                     }
 
                     return
