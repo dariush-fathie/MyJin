@@ -1,5 +1,7 @@
 package myjin.pro.ahoora.myjin.utils
 
+import io.realm.Realm
+
 
 object StaticValues {
     const val CATEGORY = "category"

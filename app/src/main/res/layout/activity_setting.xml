@@ -235,7 +235,6 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="16dp">
@@ -276,7 +275,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
                     android:drawableEnd="@drawable/ic_restore"
-                    android:text="@string/restore"
+                    android:text="@string/restoreTitle"
                     app:layout_constraintEnd_toStartOf="@+id/btn_backup"
                     app:layout_constraintTop_toBottomOf="@+id/backup_title" />
 

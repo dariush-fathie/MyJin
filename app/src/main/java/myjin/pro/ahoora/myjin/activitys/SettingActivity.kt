@@ -10,6 +10,7 @@ import android.os.Environment
 import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatButton
 import android.util.Log
 import android.view.View
 import android.widget.CompoundButton
@@ -28,10 +29,14 @@ import java.io.File
 class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
 
+    var isKim = false
+    var isKmm = false
     val realmDatabase = Realm.getDefaultInstance()
     lateinit var rbr: RealmBackupRestore
     private var backup = true
-
+    private val EXPORT_REALM_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+    val path1 = EXPORT_REALM_PATH.toString() + "/" + "kim.json"
+    val path2 = EXPORT_REALM_PATH.toString() + "/" + "kmm.json"
     private var centersCleanFlag = false
     private var messagesCleanFlag = false
 
@@ -54,19 +59,19 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
         onClick_()
         init_()
 
-        if (!checkIfThereIsRestoreFile()) {
-            btn_restore.isEnabled = false
-        }
     }
 
     private fun init_() {
         rbr = RealmBackupRestore(this@SettingActivity)
+        checkIfThereIsRestoreFile()
         sc_intro.isChecked = !SharedPer(this).getIntro(getString(R.string.introductionFlag2))
 
         if (SharedPer(this).getDefTab(getString(R.string.defTab)))
             rb_centers.isChecked = SharedPer(this).getDefTab(getString(R.string.defTab))
         else
             rb_messages.isChecked = !SharedPer(this).getDefTab(getString(R.string.defTab))
+
+
     }
 
     private fun onClick_() {
@@ -79,11 +84,6 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
         btn_restore.setOnClickListener(this)
     }
 
-    private fun checkIfThereIsRestoreFile(): Boolean {
-        val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString() + "/" + "backup.realm"
-        val restoreFile = File(path)
-        return restoreFile.exists()
-    }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == rwRequest) {
@@ -114,7 +114,7 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
             } else {
                 val item = db.where(KotlinMessagesModel::class.java)
                         .findAll()!!
-                Log.e("item.size","${item.size}")
+                Log.e("item.size", "${item.size}")
                 if (item.size > 0) {
                     messagesCleanFlag = true
                 }
@@ -123,6 +123,20 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
                 }
                 EventBus.getDefault().post(DeleteFavEvent())
             }
+        }
+    }
+
+    private fun checkIfThereIsRestoreFile() {
+
+        val restoreFile1 = File(path1)
+        val restoreFile2 = File(path2)
+        isKim = restoreFile1.exists()
+        isKmm = restoreFile2.exists()
+
+        if (!(isKim && isKmm)) {
+            btn_restore.isEnabled = false
+        }else{
+            btn_restore.isEnabled = true
         }
     }
 
@@ -149,12 +163,20 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
     private fun performBackup() {
         if (checkStoragePermissions()) {
             showWaitDialog()
-            rbr.backup(object : RealmBackupRestore.IRealmBackup {
+            rbr.Backup(object : RealmBackupRestore.IRealmBackup {
+
                 override fun onBackup() {
                     closeWaitDialog()
                     showSuccessBackupDialog()
                 }
+
+                override fun onErrorb() {
+                    closeWaitDialog()
+                    Toast.makeText(this@SettingActivity, "خطای غیرمنتظره", Toast.LENGTH_LONG).show()
+                }
+
             })
+
         }
     }
 
@@ -167,25 +189,18 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
                     showCloseDialog()
                 }
 
-                override fun onError() {
+                override fun onErrorr() {
                     closeWaitDialog()
                     Toast.makeText(this@SettingActivity, "خطای غیرمنتظره", Toast.LENGTH_LONG).show()
                 }
+
             })
         }
     }
 
     private lateinit var alertDialog: AlertDialog
 
-    private fun showSuccessBackupDialog() {
-        val alertBuilder = AlertDialog.Builder(this)
-        alertBuilder.setTitle("پشتیبان گیری با موفقیت انجام شد")
-        alertBuilder.setMessage("در صورت نصب مجدد ژین من میتوانید اطلاعات قبلی خود را بازیابی کنید")
-        alertBuilder.setPositiveButton("باشه") { dialog, _ ->
-            dialog.dismiss()
-        }
-        alertBuilder.show()
-    }
+
 
     private fun showWaitDialog() {
         val alertBuilder = AlertDialog.Builder(this)
@@ -203,16 +218,28 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
     }
 
     private fun showCloseDialog() {
-        val alertBuilder = AlertDialog.Builder(this)
-        alertBuilder.setTitle("بازگردانی با موفقیت انجام شد")
-        alertBuilder.setMessage("برای اعمال تغییرات از برنامه خارج شوید و دوباره اجرا کنید")
-        alertBuilder.setCancelable(false)
-        alertBuilder.setPositiveButton("باشه") { _, _ ->
-            Log.e("realm count", "${Realm.getGlobalInstanceCount(Realm.getDefaultConfiguration()!!)}")
-            realmDatabase.close()
-            finish()
+
+        val builder = AlertDialog.Builder(this@SettingActivity)
+        val dialog: AlertDialog
+        val view = View.inflate(this@SettingActivity, R.layout.restore_layout, null)
+        val btn_ok: AppCompatButton = view.findViewById(R.id.btn_ok)
+        builder.setView(view)
+        dialog = builder.create()
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+        val listener = View.OnClickListener { v ->
+            when (v.id) {
+                R.id.btn_ok -> {
+                    dialog.dismiss()
+                    centersCleanFlag = true
+                    messagesCleanFlag=true
+                    realmDatabase.close()
+                    onBackPressed()
+                }
+
+            }
         }
-        alertBuilder.show()
+        btn_ok.setOnClickListener(listener)
     }
 
     private val rwRequest = 1080
@@ -247,6 +274,29 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
             setResult(Activity.RESULT_OK, resIntent)
         }
         super.onBackPressed()
+    }
+
+
+    private fun showSuccessBackupDialog() {
+
+        val builder = AlertDialog.Builder(this@SettingActivity)
+        val dialog: AlertDialog
+        val view = View.inflate(this@SettingActivity, R.layout.backup_layout, null)
+        val btn_ok: AppCompatButton = view.findViewById(R.id.btn_ok)
+        builder.setView(view)
+        dialog = builder.create()
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
+        val listener = View.OnClickListener { v ->
+            when (v.id) {
+                R.id.btn_ok -> {
+                    checkIfThereIsRestoreFile()
+                    dialog.dismiss()
+                }
+
+            }
+        }
+        btn_ok.setOnClickListener(listener)
     }
 
 }

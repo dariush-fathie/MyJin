@@ -15,8 +15,10 @@ public class DateConverter {
     private static int[] buf2 = new int[12];
     private Context context;
 
+
     public DateConverter(Context c) {
         context =c;
+
     }
 
     private int[] getCurrentDate() {
@@ -148,6 +150,8 @@ public class DateConverter {
             default:
                 return "چند ساعت پیش";
         }
+
+
     }
 
     private String nDaysAgo(int day,int y, int m, int d) {
@@ -461,6 +465,9 @@ public class DateConverter {
             this.day = day;
         }
     }
+
+
+
 }
 
 

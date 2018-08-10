@@ -16,12 +16,7 @@ open class KotlinItemModel : RealmObject() {
 
     open var saved: Boolean = false
 
-  /*  @SerializedName("naCode")
-    @Expose
-    open var naCode: String? = ""
-    @SerializedName("system_num")
-    @Expose
-    open var systemNum: Int = -1*/
+
     @SerializedName("firstName")
     @Expose
     open var firstName: String? = ""
