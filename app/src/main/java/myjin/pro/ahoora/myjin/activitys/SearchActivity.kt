@@ -7,13 +7,15 @@ import android.support.constraint.ConstraintLayout
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.*
+import android.support.v7.widget.AppCompatImageView
+import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.RelativeLayout
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -24,10 +26,7 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
-import myjin.pro.ahoora.myjin.utils.ApiInterface
-import myjin.pro.ahoora.myjin.utils.KotlinApiClient
-import myjin.pro.ahoora.myjin.utils.StaticValues
-import myjin.pro.ahoora.myjin.utils.Utils
+import myjin.pro.ahoora.myjin.utils.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -83,8 +82,13 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun downloadItem() {
+
+        val sp = SharedPer(this@SearchActivity)
+        val provId = sp.getInteger(getString(R.string.provId))
+        val cityId = sp.getInteger(getString(R.string.cityId))
+
         cpv_progress.visibility = View.VISIBLE
-        KotlinApiClient.client.create(ApiInterface::class.java).search(et_search.text.toString()).enqueue(object : Callback<List<KotlinItemModel>> {
+        KotlinApiClient.client.create(ApiInterface::class.java).search(et_search.text.toString(),cityId,provId).enqueue(object : Callback<List<KotlinItemModel>> {
             override fun onResponse(call: Call<List<KotlinItemModel>>?, response: Response<List<KotlinItemModel>>?) {
                 val resultList = response?.body()
                 if (resultList?.size!! > 0) {
@@ -309,18 +313,18 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                     //  holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
 
                     if (dataSet[realPosition].gen?.equals("0")!!) {
-                        holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t2)
+                        holder.image.background = ContextCompat.getDrawable(this@SearchActivity, R.drawable.t2)
                         url = g_url
                     } else if (dataSet[realPosition].gen?.equals("1")!!) {
-                        holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t)
+                        holder.image.background = ContextCompat.getDrawable(this@SearchActivity, R.drawable.t)
                         url = this@SearchActivity.getString(R.string.ic_doctor_f)
                     } else if (dataSet[realPosition].gen?.equals("2")!!) {
-                        holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t)
+                        holder.image.background = ContextCompat.getDrawable(this@SearchActivity, R.drawable.t)
                         url = this@SearchActivity.getString(R.string.ic_doctor_m)
                     }
 
                 } else {
-                    holder.image.background=ContextCompat.getDrawable(this@SearchActivity,R.drawable.t)
+                    holder.image.background = ContextCompat.getDrawable(this@SearchActivity, R.drawable.t)
                     url = dataSet[realPosition].logoImg!!
                 }
 
@@ -346,10 +350,10 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             override fun onClick(v: View?) {
                 val realPosition = findRealItemPosition(adapterPosition)
                 tempModel = dataSet[realPosition]
-                getG_name(tempModel .groupId)
-                active2= tempModel.active2
+                getG_name(tempModel.groupId)
+                active2 = tempModel.active2
 
-                if (active2!=0) {
+                if (active2 != 0) {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@SearchActivity, image, "transition_name")
@@ -367,7 +371,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                         i.putExtra("g_url", g_url)
                         startActivity(i)
                     }
-                }else{
+                } else {
                     val j = Intent(this@SearchActivity, NoDetailActivity::class.java)
                     startActivity(j)
                 }
