@@ -53,7 +53,7 @@ object Utils {
     }
 
     fun setYekta() {
-        VarableValues.yekta = "1";
+        VarableValues.yekta = DeviceId.deviceBuildInfo;
     }
 
 }

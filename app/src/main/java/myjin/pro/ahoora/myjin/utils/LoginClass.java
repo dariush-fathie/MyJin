@@ -60,7 +60,7 @@ public class LoginClass {
     private void callBachServer() {
         Utils.INSTANCE.setYekta();
         yekta = VarableValues.INSTANCE.getYekta();
-
+        Log.e("DeviceId", yekta);
         try {
             KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class).login(user, pass, yekta).enqueue(new Callback<TempModel>() {
                 @Override
