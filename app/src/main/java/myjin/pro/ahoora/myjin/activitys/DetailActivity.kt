@@ -13,7 +13,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.provider.MediaStore
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
@@ -113,8 +112,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private val updateInterval: Long = 15000
     private val fastestUpdateInterval: Long = updateInterval / 2
 
-    private var latitudeC :Double=0.0
-    private var longitudeC:Double =0.0
+    private var latitudeC: Double = 0.0
+    private var longitudeC: Double = 0.0
 
 
     override fun onClick(v: View?) {
@@ -308,7 +307,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         val res = realm.where(KotlinAboutContactModel::class.java)
                 .equalTo("id", id)
                 .findFirst()!!
-        str += res.tKafeh.toString()+"\n\n"
+        str += res.tKafeh.toString() + "\n\n"
         realm.commitTransaction()
         str += " آدرس : " + "${tv_addr.text}"
         shareIntent.action = Intent.ACTION_SEND
@@ -316,16 +315,16 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         shareIntent.type = "text/plain"
         shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, uri)
-      //  var url = ""
-       // if (sendImage) {
+        //  var url = ""
+        // if (sendImage) {
         //   if (checkStoragePermissions()) {
-          //      url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
-          //      shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
-          //     shareIntent.type = "image/*"
-           // } else {
-          //     Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
-          //  }
-       // }
+        //      url = MediaStore.Images.Media.insertImage(this.contentResolver, theBitmap, "title", "description")
+        //      shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(url))
+        //     shareIntent.type = "image/*"
+        // } else {
+        //     Toast.makeText(this@DetailActivity, "جهت پیوست کردن عکس با متن اجازه دستیابی به حافظه دستگاه را بدهید", Toast.LENGTH_LONG).show()
+        //  }
+        // }
 
         startActivity(Intent.createChooser(shareIntent, "Share via"))
 
@@ -755,8 +754,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         tv_website.text = item.addressList!![0]?.site
         tv_mail.text = item.addressList!![0]?.mail
 
-        latitudeC= item.addressList!![0]?.longitude?.toDouble()!!
-        longitudeC=item.addressList!![0]?.latitude?.toDouble()!!
+        latitudeC = item.addressList!![0]?.longitude?.toDouble()!!
+        longitudeC = item.addressList!![0]?.latitude?.toDouble()!!
 
         str = ""
 
@@ -782,8 +781,9 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
             str += "جمعه - "
         }
-
-        str = str.trim().substring(0, str.length - 2)
+        if (str.length > 1) {
+            str = str.trim().substring(0, str.length - 2)
+        }
         tv_attend.text = str
 
 
