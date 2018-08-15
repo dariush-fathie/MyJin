@@ -785,7 +785,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             str = str.trim().substring(0, str.length - 2)
         }
         tv_attend.text = str
-
+//SELECT * FROM `Work_address` WHERE `center_id` not in(SELECT `center_id` FROM `Work_address` WHERE `tel1` like '09%')
 
         val drawable = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_jin)
         var url = ""
