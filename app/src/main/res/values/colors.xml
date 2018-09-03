@@ -3,11 +3,11 @@
     <color name="colorPrimary">#2e7d32</color>
     <color name="colorPrimaryDark">#2e7d32</color>
     <color name="colorAccent">#e19a0c</color>
+    <color name="white">#ffffff</color>
     <color name="blue">#188ab9</color>
     <color name="green">#00a851</color>
     <color name="green2">#31fc92</color>
     <color name="dark">#2e4765</color>
-    <color name="white">#ffffff</color>
     <color name="tabTextDef">#BDC2C5</color>
     <color name="back">#f7f8f9</color>
     <color name="back0">#B72D7F</color>
@@ -31,7 +31,7 @@
 
     <color name="red1">#ff6978</color>
     <color name="red2">#b93848</color>
-    <color name="red3">#ff0505</color>
+    <color name="red3">#d9332a</color>
 
     <color name="semiTransparent">#d63d3a56</color>
     <color name="blackTransparent">#62000000</color>

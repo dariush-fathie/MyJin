@@ -67,7 +67,7 @@ class MainActivity2 : AppCompatActivity(),
         when (v?.id) {
             R.id.fab_search -> search()
             R.id.iv_menu -> openDrawerLayout()
-            R.id.tv_login_outsign -> Toast.makeText(this, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
+            R.id.tv_login_outsign -> startActivity(Intent(this, Login2Activity::class.java))
             R.id.btn_exit -> showExitDialog()
             R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
@@ -170,8 +170,10 @@ class MainActivity2 : AppCompatActivity(),
                      tv_mainTitle.text = "نشان شده ها"
                  }*/
             }
+            tv_test.visibility=View.GONE
         } else {
             tv_mainTitle.text = getString(R.string.myJin)
+            tv_test.visibility=View.VISIBLE
         }
     }
 

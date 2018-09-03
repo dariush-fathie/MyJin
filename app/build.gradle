@@ -13,12 +13,12 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
 
-    dependencies {
+   /* dependencies {
         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.11.0, 0.99.99]'
-    }
+    }*/
 
 }
-apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+//apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 android {
     compileSdkVersion 27
@@ -27,13 +27,13 @@ android {
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
-        versionName "1.0.4"
+        versionName "1.0.5"
         vectorDrawables.useSupportLibrary = true
-        manifestPlaceholders = [
+       /* manifestPlaceholders = [
                 onesignal_app_id               : '8abb71d6-2fbb-40fa-9f46-634c93f0abec',
                 // Project number pulled from dashboard, local value is ignored.
                 onesignal_google_project_number: 'REMOTE'
-        ]
+        ]*/
         multiDexEnabled true
     }
 
@@ -89,6 +89,5 @@ dependencies {
     implementation 'com.github.florent37:arclayout:1.0.3'
     implementation 'com.caverock:androidsvg:1.2.1'
     implementation 'co.ronash.android:pushe-base:1.4.0'
-   // implementation 'com.android.tools.lint:lint-checks:26.1.4'
 }
 apply plugin: 'com.google.gms.google-services'

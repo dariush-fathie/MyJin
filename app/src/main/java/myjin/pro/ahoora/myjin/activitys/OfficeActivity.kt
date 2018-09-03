@@ -397,8 +397,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_tryAgain -> tryAgain()
-            R.id.tv_login_outsign -> Toast.makeText(this@OfficeActivity, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
-
+            R.id.tv_login_outsign -> startActivity(Intent(this, Login2Activity::class.java))
             R.id.rl_filter -> onFilterClick()
             R.id.rl_sort -> onSortClick()
             R.id.iv_goback -> onBackPressed()

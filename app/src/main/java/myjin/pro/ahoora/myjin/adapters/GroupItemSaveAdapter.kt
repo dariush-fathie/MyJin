@@ -90,18 +90,18 @@ class GroupItemSaveAdapter(ctx: Context, idList: ArrayList<Int>?) : RecyclerView
                 // holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
 
                 if (item.gen?.equals("0")!!) {
-                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t2)
+
                     url = g_url
                 } else if (item.gen?.equals("1")!!) {
-                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
+
                     url = context.getString(R.string.ic_doctor_f)
                 } else if (item.gen?.equals("2")!!) {
-                    holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
+
                     url = context.getString(R.string.ic_doctor_m)
                 }
 
             } else {
-                holder.image.background = ContextCompat.getDrawable(context, R.drawable.t)
+
                 url = item.logoImg!!
             }
 
