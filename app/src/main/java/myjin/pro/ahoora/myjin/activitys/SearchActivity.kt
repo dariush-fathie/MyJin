@@ -1,9 +1,11 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
+import android.support.design.widget.TabLayout
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
@@ -21,7 +23,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
 import io.realm.Realm
-import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.activity_search.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
@@ -32,15 +34,51 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class SearchActivity : AppCompatActivity(), View.OnClickListener {
+class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSelectedListener {
 
     private var g_url = ""
     private var g_name = ""
-    private var active2 = 1;
+    private var active2 = 1
+
+    // holding the pair of <groupId,count> for use in adapter
+    private val gIdCountPair = ArrayList<Pair<Int, Int>>()
+    // list of all ids in result
+    private val idsArray = ArrayList<Int>()
+    // list of unique id in result file
+    private val uniqueIds = ArrayList<Int>()
+
+    private var resultList: List<KotlinItemModel>? = null
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.fab_goUp -> rv_search.smoothScrollToPosition(0)
             R.id.iv_search -> search()
+        }
+    }
+
+    override fun onTabReselected(tab: TabLayout.Tab?) {
+
+    }
+
+    override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+    }
+
+    override fun onTabSelected(tab: TabLayout.Tab?) {
+        if (tab?.position == 0) {
+            loadAdapter(resultList!!)
+            Toast.makeText(this@SearchActivity,"${resultList!!.size} مورد یافت شد .",Toast.LENGTH_LONG).show()
+
+        } else {
+            val tempRes= ArrayList<KotlinItemModel>()
+            resultList?.forEach {item:KotlinItemModel->
+                if (item.groupId==uniqueIds.get((tab?.position!!)-1)){
+                    tempRes.add(item)
+                }
+            }
+            loadAdapter(tempRes)
+            Toast.makeText(this@SearchActivity,"${tempRes.size} مورد یافت شد .",Toast.LENGTH_LONG).show()
+
         }
     }
 
@@ -53,9 +91,31 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    private fun addTab() {
+        val drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_all)
+        drawable?.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.green), PorterDuff.Mode.SRC_IN)
+        ctb.addTab(ctb.newTab().setText("همه").setIcon(drawable))
+
+        uniqueIds.forEach { groupId: Int ->
+
+            ctb.addTab(ctb.newTab().setText(getTitleFromDb(groupId)))
+
+
+        }
+    }
+
+    private fun getTitleFromDb(groupId: Int): String {
+        var name = ""
+        val realm = Realm.getDefaultInstance()
+        realm.executeTransaction { realmDatabase: Realm? ->
+            name = realmDatabase?.where(KotlinGroupModel::class.java)?.equalTo("groupId", groupId)?.findFirst()?.name!!
+        }
+        return name
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_search)
+        setContentView(R.layout.activity_search)
         et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 if (et_search.text.toString() != "") {
@@ -69,6 +129,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         }
         fab_goUp.setOnClickListener(this)
         iv_search.setOnClickListener(this)
+        ctb.addOnTabSelectedListener(this)
     }
 
 
@@ -76,7 +137,8 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         if (Utils.isNetworkAvailable(this@SearchActivity)) {
             downloadItem()
         } else {
-            tv_itemNums.text = "به اینترنت متصل نیستید"
+            Toast.makeText(this@SearchActivity,"به اینترنت متصل نیستید",Toast.LENGTH_LONG).show()
+
         }
 
     }
@@ -88,19 +150,18 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         val cityId = sp.getInteger(getString(R.string.cityId))
 
         cpv_progress.visibility = View.VISIBLE
-        KotlinApiClient.client.create(ApiInterface::class.java).search(et_search.text.toString(),cityId,provId).enqueue(object : Callback<List<KotlinItemModel>> {
+        KotlinApiClient.client.create(ApiInterface::class.java).search(et_search.text.toString(), cityId, provId).enqueue(object : Callback<List<KotlinItemModel>> {
             override fun onResponse(call: Call<List<KotlinItemModel>>?, response: Response<List<KotlinItemModel>>?) {
-                val resultList = response?.body()
+                resultList = response?.body()
+                ctb?.removeAllTabs()
                 if (resultList?.size!! > 0) {
-                    tv_itemNums.text = "${resultList.size} مورد یافت شد ."
-                    // holding the pair of <groupId,count> for use in adapter
-                    val gIdCountPair = ArrayList<Pair<Int, Int>>()
-                    // list of all ids in result
-                    val idsArray = ArrayList<Int>()
-                    // list of unique id in result file
-                    val uniqueIds = ArrayList<Int>()
 
-                    resultList.forEach { model: KotlinItemModel ->
+                    Toast.makeText(this@SearchActivity,"${resultList!!.size} مورد یافت شد .",Toast.LENGTH_LONG).show()
+                    gIdCountPair.clear()
+                    idsArray.clear()
+                    uniqueIds.clear()
+
+                    resultList!!.forEach { model: KotlinItemModel ->
 
                         //collect all ids for cound later
                         idsArray.add(model.groupId)
@@ -127,14 +188,19 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                         Log.e("gid: ${pair.first}", "count ${pair.second}")
                     }
 
-                    loadAdapter(gIdCountPair, resultList)
+                    addTab()
+                    /* loadAdapter(resultList!!)*/
                 } else {
-                    tv_itemNums.text = "متاسفانه گزینه ای یافت نشد "
+
+                    Toast.makeText(this@SearchActivity, "متاسفانه گزینه ای یافت نشد ",Toast.LENGTH_LONG).show()
+
                     rv_search.adapter = null
 
                 }
                 cpv_progress.visibility = View.GONE
                 view_shadow.visibility = View.VISIBLE
+
+
             }
 
             override fun onFailure(call: Call<List<KotlinItemModel>>?, t: Throwable?) {
@@ -149,14 +215,14 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    fun loadAdapter(pairList: ArrayList<Pair<Int, Int>>, data: List<KotlinItemModel>) {
+    fun loadAdapter(data: List<KotlinItemModel>) {
         rv_search.layoutManager = LinearLayoutManager(this)
         while (rv_search.itemDecorationCount > 0) {
             rv_search.removeItemDecorationAt(0)
         }
         val decor = SimpleItemDecoration(this, 10)
         rv_search.addItemDecoration(decor)
-        rv_search.adapter = SearchAdapterWithHeader(pairList, data)
+        rv_search.adapter = SearchAdapterWithHeader(data)
 
         rv_search.clearOnScrollListeners()
         rv_search.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -185,170 +251,81 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         realm.commitTransaction()
     }
 
-    inner class SearchAdapterWithHeader(pairList: ArrayList<Pair<Int, Int>>, data: List<KotlinItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        /**
-         * @param dataSet contain all kotlinRealmModel
-         */
+
+    inner class SearchAdapterWithHeader(data: List<KotlinItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+
         private val dataSet = data
-        private val gIdCountPairList = pairList
-        private var totalCount = 0
-        private val headerPosition = ArrayList<Int>();
-
-        init {
-            val headerCount = gIdCountPairList.size
-            val itemCount = data.size
-            totalCount = headerCount + itemCount
-            placeHeadersItem()
-        }
-
-        // find headers places in recyclerView
-        private fun placeHeadersItem() {
-            headerPosition.add(0)
-            for (i in 1..(gIdCountPairList.size - 1)) {
-                val next = getPreviousCount(i - 1)
-                headerPosition.add(next + 1 + headerPosition[i - 1])
-            }
-        }
-
-        // find header index in gIdCountPairList
-        private fun findHeaderItemIndex(position: Int): Int {
-            for (i in 0 until headerPosition.size) {
-                if (headerPosition[i] == position) {
-                    return i
-                }
-            }
-            return -1
-        }
-
-        // convert groupId to title
-        private fun getTitleFromDb(groupId: Int): String {
-            var name = ""
-            val realm = Realm.getDefaultInstance()
-            realm.executeTransaction({ realmDatabase: Realm? ->
-                name = realmDatabase?.where(KotlinGroupModel::class.java)?.equalTo("groupId", groupId)?.findFirst()?.name!!
-            })
-            return name
-        }
-
-        // find real position of items (the default position is not true because some headers injected to recyclerView)
-        private fun findRealItemPosition(position: Int): Int {
-            var p = position
-            for (i in 0 until headerPosition.size) {
-                if (position > headerPosition[i]) {
-                    p--
-                } else {
-                    break
-                }
-            }
-            return p
-        }
-
-        // return the count of previous gId count
-        private fun getPreviousCount(index: Int): Int {
-            return gIdCountPairList[index].second
-        }
-
-        // if the position is in the headerPosition we most return true to add header item to recylcerView
-        private fun isHeaderItem(position: Int): Boolean {
-            if (headerPosition.contains(position))
-                return true
-            return false
+        override fun getItemCount(): Int {
+            return dataSet.size
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-            return when (viewType) {
-                0 -> HeaderItemHolder(LayoutInflater.from(this@SearchActivity).inflate(R.layout.header_layout, parent, false))
-                else -> ItemHolder(LayoutInflater.from(this@SearchActivity).inflate(R.layout.group_item, parent, false))
-            }
-        }
 
-        override fun getItemCount(): Int {
-            // return total of headers + items
-            return totalCount
-        }
+            return ItemHolder(LayoutInflater.from(this@SearchActivity).inflate(R.layout.group_item, parent, false))
 
-        /**
-         * viewType = 0 -> header Item
-         * viewType = 1 -> normal item
-         */
-        override fun getItemViewType(position: Int): Int {
-            if (isHeaderItem(position)) {
-                return 0
-            }
-            return 1
         }
 
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            if (holder is HeaderItemHolder) {
-                val pair = gIdCountPairList[findHeaderItemIndex(position)]
-                holder.headerTitle.text = getTitleFromDb(pair.first)
-                holder.headerItemCount.text = "${pair.second} مورد"
-            } else {
-                holder as ItemHolder
-                val realPosition = findRealItemPosition(position)
-                holder.title.text = dataSet[realPosition].firstName + " " + dataSet[realPosition].lastName
 
-                getG_name(dataSet[realPosition].groupId)
-                var str = ""
-                if (!dataSet[realPosition].gen.equals("0")!!) {
-                    if (dataSet[realPosition].groupId == 1) {
-                        str = dataSet[realPosition].levelList!![0]?.name + " _ " + dataSet[realPosition].specialityList!![0]?.name
-                    } else {
-                        str = g_name
-                    }
+            holder as ItemHolder
 
+            holder.title.text = dataSet[position].firstName + " " + dataSet[position].lastName
+
+            getG_name(dataSet[position].groupId)
+            var str = ""
+            if (!dataSet[position].gen.equals("0")!!) {
+                if (dataSet[position].groupId == 1) {
+                    str = dataSet[position].levelList!![0]?.name + " _ " + dataSet[position].specialityList!![0]?.name
                 } else {
                     str = g_name
                 }
 
-                holder.subTitle.text = str
-                holder.tv_addr.text = dataSet[realPosition].addressList!![0]?.locTitle
-
-
-                var drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_jin)
-                var url = ""
-
-                if (dataSet[realPosition].logoImg.equals("")) {
-                    //  holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
-
-                    if (dataSet[realPosition].gen?.equals("0")!!) {
-                        url = g_url
-                    } else if (dataSet[realPosition].gen?.equals("1")!!) {
-
-                        url = this@SearchActivity.getString(R.string.ic_doctor_f)
-                    } else if (dataSet[realPosition].gen?.equals("2")!!) {
-//                        holder.image.background = ContextCompat.getDrawable(this@SearchActivity, R.drawable.t)
-                        url = this@SearchActivity.getString(R.string.ic_doctor_m)
-                    }
-
-                } else {
-
-                    url = dataSet[realPosition].logoImg!!
-                }
-
-                Glide.with(this@SearchActivity)
-                        .load(url)
-                        .apply {
-                            RequestOptions()
-
-                                    .placeholder(drawable)
-                        }
-                        .into(holder.image)
-
+            } else {
+                str = g_name
             }
 
+            holder.subTitle.text = str
+            holder.tv_addr.text = dataSet[position].addressList!![0]?.locTitle
+
+
+            var drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_jin)
+            var url = ""
+
+            if (dataSet[position].logoImg.equals("")) {
+                //  holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
+
+                if (dataSet[position].gen?.equals("0")!!) {
+                    url = g_url
+                } else if (dataSet[position].gen?.equals("1")!!) {
+
+                    url = this@SearchActivity.getString(R.string.ic_doctor_f)
+                } else if (dataSet[position].gen?.equals("2")!!) {
+//                        holder.image.background = ContextCompat.getDrawable(this@SearchActivity, R.drawable.t)
+                    url = this@SearchActivity.getString(R.string.ic_doctor_m)
+                }
+
+            } else {
+
+                url = dataSet[position].logoImg!!
+            }
+
+            Glide.with(this@SearchActivity)
+                    .load(url)
+                    .apply {
+                        RequestOptions()
+
+                                .placeholder(drawable)
+                    }
+                    .into(holder.image)
+
         }
 
-        inner class HeaderItemHolder(headerView: View) : RecyclerView.ViewHolder(headerView) {
-            val headerTitle: AppCompatTextView = headerView.findViewById(R.id.tv_header)
-            val headerItemCount: AppCompatTextView = headerView.findViewById(R.id.tv_headerItemCount)
-        }
 
         inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
             override fun onClick(v: View?) {
-                val realPosition = findRealItemPosition(adapterPosition)
-                tempModel = dataSet[realPosition]
+                tempModel = dataSet[adapterPosition]
                 getG_name(tempModel.groupId)
                 active2 = tempModel.active2
 

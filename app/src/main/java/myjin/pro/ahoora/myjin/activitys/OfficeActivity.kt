@@ -3,6 +3,7 @@ package myjin.pro.ahoora.myjin.activitys
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -39,6 +40,8 @@ import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.customClasses.TabLayoutInterface
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
+import myjin.pro.ahoora.myjin.models.events.NearestEvent
+import myjin.pro.ahoora.myjin.models.events.NearestEvent2
 import myjin.pro.ahoora.myjin.utils.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -61,6 +64,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     private lateinit var adapter: GroupItemAdapter
     var idArray = ArrayList<Int>()
     var filterArray = ArrayList<Int>()
+    private val requestLocationSetting = 1055
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -604,10 +608,27 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                     notifyAdapter()
                 }
             }
+            if (requestCode == requestLocationSetting) {
+                Log.e("resultCode", "$resultCode")
+                EventBus.getDefault().post(NearestEvent(0))
+            }
 
         }
-    }
 
+    }
+    private val requestPermission = 1054
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == requestPermission) {
+            if (permissions[0] == android.Manifest.permission.ACCESS_FINE_LOCATION) {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e("granted", "success")
+                    EventBus.getDefault().post(NearestEvent2(0))
+                } else {
+
+                }
+            }
+        }
+    }
     private fun notifyAdapter() {
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()

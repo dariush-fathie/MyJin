@@ -58,6 +58,7 @@ object Utils {
 
     //Email Validation pattern
     val regEx = "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b"
+    val regPhone="(0|\\+98)?([ ]|-|[()]){0,2}9[1|2|3|4]([ ]|-|[()]){0,2}(?:[0-9]([ ]|-|[()]){0,2}){8}"
 
     //Fragments Tags
     val Login_Fragment = "Login_Fragment"

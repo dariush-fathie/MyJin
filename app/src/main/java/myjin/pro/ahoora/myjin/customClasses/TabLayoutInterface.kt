@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.LinearLayout
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.fragments.MapFragment
+import myjin.pro.ahoora.myjin.fragments.NearestFragment
 import myjin.pro.ahoora.myjin.fragments.SearchFragment
 
 class TabLayoutInterface(ctx: Context, fm: FragmentManager, behavior: BottomSheetBehavior<ConstraintLayout>, progressLayout: LinearLayout) : TabLayout.OnTabSelectedListener {
@@ -54,8 +55,10 @@ class TabLayoutInterface(ctx: Context, fm: FragmentManager, behavior: BottomShee
     private fun loadFragment(i: Int) {
         if (i == 0) {
             fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, MapFragment()).commit()
-        } else {
+        } else  if (i == 1){
             fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, SearchFragment()).commit()
+        }else{
+            fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, NearestFragment()).commit()
         }
     }
 

@@ -168,6 +168,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         animation.duration = 400
         animation.repeatMode = Animation.REVERSE
         view.startAnimation(animation)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
