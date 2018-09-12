@@ -40,7 +40,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
 
 
     private var mapType = 0
-    var mMap: GoogleMap? = null
+    lateinit var mMap: GoogleMap
     lateinit var realm: Realm
 
     private var g_url = ""
@@ -133,24 +133,24 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         popupMenu.show()
     }
 
-    override fun onMapReady(googleMap: GoogleMap?) {
+    override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
         when (mapType) {
             0 -> {
-                googleMap?.mapType = GoogleMap.MAP_TYPE_NORMAL
+                googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
             }
             1 -> {
-                googleMap?.mapType = GoogleMap.MAP_TYPE_SATELLITE
+                googleMap.mapType = GoogleMap.MAP_TYPE_SATELLITE
             }
             2 -> {
-                googleMap?.mapType = GoogleMap.MAP_TYPE_TERRAIN
+                googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
             }
         }
 
         checkLocationPermissions()
 
-        val p = LatLng(35.27029,46.999)
+        val p = LatLng(35.311339, 46.995957)
         mMap?.addMarker(MarkerOptions().title("sanandaj").position(p))?.showInfoWindow()
         mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(p, 16f))
     }
@@ -228,6 +228,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
     @Subscribe
     fun crLoRes(e: NearestEvent2){
         createLocationRequest()
+        Log.e("createLocationRequest()","createLocationRequest()")
     }
 
     private fun checkLocationSetting() {
