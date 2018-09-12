@@ -28,8 +28,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
-import myjin.pro.ahoora.myjin.models.KotlinGroupModel
-import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.events.NearestEvent
 import myjin.pro.ahoora.myjin.models.events.NearestEvent2
 import org.greenrobot.eventbus.EventBus
@@ -72,7 +70,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
     private var longitudeC: Double = 0.0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.nearest_map, container, false)
+        val view = inflater.inflate(R.layout.fragment_nearest, container, false)
         initViews(view)
         try {
             groupId = (activity as OfficeActivity).groupId
