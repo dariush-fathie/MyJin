@@ -79,7 +79,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         } catch (e: Exception) {
             Log.e("ERR_GID", e.message + "")
         }
-
+        initMap()
         return view
     }
 
@@ -106,6 +106,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         if (nearestFragment != null) {
             nearestFragment.getMapAsync(this)
         }
+
     }
 
     private fun selectModeLevel() {
@@ -290,7 +291,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initMap()
+
     }
 
     override fun onClick(v: View) {
