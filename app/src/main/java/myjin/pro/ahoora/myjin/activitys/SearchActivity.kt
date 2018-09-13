@@ -153,8 +153,6 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
             provId=19
         }
 
-        Log.e("city11",provId.toString()+"***"+cityId)
-
         cpv_progress.visibility = View.VISIBLE
         KotlinApiClient.client.create(ApiInterface::class.java).search(et_search.text.toString(), provId, cityId).enqueue(object : Callback<List<KotlinItemModel>> {
             override fun onResponse(call: Call<List<KotlinItemModel>>?, response: Response<List<KotlinItemModel>>?) {

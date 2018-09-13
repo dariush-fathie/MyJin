@@ -152,10 +152,6 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         Handler().postDelayed({ EventBus.getDefault().post("loaded") }, 150)
         checkLocationPermissions()
 
-        /* val p = LatLng(35.311339, 46.995957)
-         mMap?.addMarker(MarkerOptions().title("sanandaj").position(p))?.showInfoWindow()
-         mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(p, 16f))
-         addMarkers()*/
         setUpClusterer()
     }
 
