@@ -3,7 +3,6 @@ package myjin.pro.ahoora.myjin
 import android.app.Application
 import android.content.IntentFilter
 import android.net.ConnectivityManager.CONNECTIVITY_ACTION
-import co.ronash.pushe.Pushe
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -26,7 +25,7 @@ class App : Application() {
                 //.migration(new MyMigration())
                 .build()
 
-        Pushe.initialize(this,true)
+
 
 
         /*OneSignal.startInit(this)

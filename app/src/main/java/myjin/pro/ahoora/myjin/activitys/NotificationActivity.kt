@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import myjin.pro.ahoora.myjin.R
-import co.ronash.pushe.Pushe
 
 
 

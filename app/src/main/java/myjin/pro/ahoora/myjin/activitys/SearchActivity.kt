@@ -146,11 +146,17 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
     private fun downloadItem() {
 
         val sp = SharedPer(this@SearchActivity)
-        val provId = sp.getInteger(getString(R.string.provId))
+        var provId = sp.getInteger(getString(R.string.provId))
         val cityId = sp.getInteger(getString(R.string.cityId))
 
+        if (provId==0){
+            provId=19
+        }
+
+        Log.e("city11",provId.toString()+"***"+cityId)
+
         cpv_progress.visibility = View.VISIBLE
-        KotlinApiClient.client.create(ApiInterface::class.java).search(et_search.text.toString(), cityId, provId).enqueue(object : Callback<List<KotlinItemModel>> {
+        KotlinApiClient.client.create(ApiInterface::class.java).search(et_search.text.toString(), provId, cityId).enqueue(object : Callback<List<KotlinItemModel>> {
             override fun onResponse(call: Call<List<KotlinItemModel>>?, response: Response<List<KotlinItemModel>>?) {
                 resultList = response?.body()
                 ctb?.removeAllTabs()

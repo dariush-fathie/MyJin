@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import co.ronash.pushe.Pushe
 import com.bumptech.glide.Glide
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -66,12 +65,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
         clearServices()
     }
 
-    /**
-     * @param i:
-     * 0 - > try again
-     * 1 ->  try again - fav
-     * 2 -> server in repair - if there is some fav show
-     */
+
 
     private fun showNetErrLayout(i: Int) {
         hideCpv()

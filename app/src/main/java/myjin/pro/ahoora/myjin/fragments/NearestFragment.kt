@@ -5,6 +5,7 @@ import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
@@ -16,7 +17,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,10 +24,12 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.maps.android.clustering.ClusterManager
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
+import myjin.pro.ahoora.myjin.customClasses.Clusters
+import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.events.NearestEvent
 import myjin.pro.ahoora.myjin.models.events.NearestEvent2
 import org.greenrobot.eventbus.EventBus
@@ -68,6 +70,8 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
     private val requestLocationSetting = 1055
     private var latitudeC: Double = 0.0
     private var longitudeC: Double = 0.0
+    lateinit var idArray: ArrayList<Int>
+    private var mClusterManager: ClusterManager<Clusters>? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_nearest, container, false)
@@ -77,6 +81,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         } catch (e: Exception) {
             Log.e("ERR_GID", e.message + "")
         }
+        idArray = (activity as OfficeActivity).idArray
         initMap()
         return view
     }
@@ -84,10 +89,9 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
     private fun initViews(view: View) {
 
         cv_level = view.findViewById(R.id.cv_level)
-        fab_closeMap = view.findViewById(R.id.fab_closeMap)
+
 
         cv_level.setOnClickListener(this)
-        fab_closeMap.setOnClickListener(this)
     }
 
     private fun initMap() {
@@ -145,12 +149,39 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
                 googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
             }
         }
-
+        Handler().postDelayed({ EventBus.getDefault().post("loaded") }, 150)
         checkLocationPermissions()
 
-        val p = LatLng(35.311339, 46.995957)
-        mMap?.addMarker(MarkerOptions().title("sanandaj").position(p))?.showInfoWindow()
-        mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(p, 16f))
+        /* val p = LatLng(35.311339, 46.995957)
+         mMap?.addMarker(MarkerOptions().title("sanandaj").position(p))?.showInfoWindow()
+         mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(p, 16f))
+         addMarkers()*/
+        setUpClusterer()
+    }
+
+
+    private fun setUpClusterer() {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(35.311339, 46.995957), 16f))
+        mClusterManager = ClusterManager((activity as OfficeActivity), mMap)
+        mMap.setOnCameraIdleListener(mClusterManager)
+        mMap.setOnMarkerClickListener(mClusterManager)
+        addMarkers()
+    }
+
+
+    private fun addMarkers() {
+
+        realm = Realm.getDefaultInstance()
+        realm.executeTransaction { db ->
+            val item = db.where(KotlinItemModel::class.java).`in`("centerId", idArray.toTypedArray()).findAll()
+            item.forEach { mItem ->
+
+                val offsetItem = Clusters(mItem.addressList!![0]?.latitude?.toDouble()!!, mItem.addressList!![0]?.longitude?.toDouble()!!)
+                mClusterManager!!.addItem(offsetItem)
+
+            }
+        }
+
     }
 
     // return true if app has location permission
@@ -168,7 +199,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         mSettingsClient = LocationServices.getSettingsClient((activity as OfficeActivity))
         // get last saved location
         mFusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            //mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 17f))
+
             try {
                 currentPoint = LatLng(location.latitude, location.longitude)
             } catch (e: Exception) {
@@ -188,6 +219,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         checkLocationSetting()
     }
 
+    var first = true
     private fun createLocationCallback() {
         Log.e("loc", "1")
         mLocationCallback = object : LocationCallback() {
@@ -197,7 +229,11 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
                 locationResult ?: return
                 val x = LatLng(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude)
                 currentPoint = x
-                //mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(x, 18f))
+
+                if (first) {
+                    first=false
+                    mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(x, 16f))
+                }
                 Log.e("Location Update", "location updated!")
             }
         }
@@ -219,15 +255,18 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null)
         }
     }
+
     @Subscribe
-    fun chLoSet(e:NearestEvent){
+    fun chLoSet(e: NearestEvent) {
         checkLocationSetting()
     }
+
     @Subscribe
-    fun crLoRes(e: NearestEvent2){
+    fun crLoRes(e: NearestEvent2) {
         createLocationRequest()
-        Log.e("createLocationRequest()","createLocationRequest()")
+
     }
+
 
     private fun checkLocationSetting() {
         mLocationSettingsRequest = LocationSettingsRequest.Builder().setAlwaysShow(true).addLocationRequest(mLocationRequest).build()
@@ -260,8 +299,6 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (hasLocationPermission()) {
                 createLocationRequest()
-                // access location
-                Toast.makeText((activity as OfficeActivity), "location permissions granted", Toast.LENGTH_SHORT).show()
             } else {
                 ActivityCompat.requestPermissions((activity as OfficeActivity)
                         , arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -272,21 +309,6 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         }
     }
 
-  /*  private fun dataBaseSearch(searchedText: String) {
-        var addres = ""
-
-        realm = Realm.getDefaultInstance()
-        realm.beginTransaction()
-
-        val result = realm.where(KotlinItemModel::class.java).equalTo("groupId", groupId).findAll()
-        g_name = realm.where(KotlinGroupModel::class.java).equalTo("groupId", groupId).findFirst()?.name!!
-        g_url = realm.where(KotlinGroupModel::class.java).equalTo("groupId", groupId).findFirst()?.g_url!!
-
-        realm.commitTransaction()
-
-    }*/
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -296,16 +318,21 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.cv_level -> selectModeLevel()
+
         }
     }
 
+    private fun closeMapSheet() {
 
-   override fun onStart() {
+    }
+
+
+    override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)
     }
 
- override fun onStop() {
+    override fun onStop() {
         super.onStop()
         EventBus.getDefault().unregister(this)
     }
