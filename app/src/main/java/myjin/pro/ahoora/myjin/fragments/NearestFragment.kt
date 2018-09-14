@@ -29,6 +29,7 @@ import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.customClasses.Clusters
+import myjin.pro.ahoora.myjin.customClasses.OwnIconRendered
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.events.NearestEvent
 import myjin.pro.ahoora.myjin.models.events.NearestEvent2
@@ -175,7 +176,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
                 val offsetItem = Clusters((activity as OfficeActivity), mItem.addressList!![0]?.latitude?.toDouble()!!, mItem.addressList!![0]?.longitude?.toDouble()!!,
                         mItem.firstName + " " + mItem.lastName, "قطعه")
                 mClusterManager!!.addItem(offsetItem)
-
+                mClusterManager!!.setRenderer(OwnIconRendered((activity as OfficeActivity), mMap, mClusterManager))
 
             }
         }

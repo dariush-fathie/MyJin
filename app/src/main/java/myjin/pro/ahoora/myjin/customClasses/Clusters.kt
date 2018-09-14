@@ -15,8 +15,9 @@ import myjin.pro.ahoora.myjin.R
 
 class Clusters : ClusterItem {
     private val mPosition: LatLng
-    private var mTitle: String = ""
-    private var mSnippet: String = ""
+     var mTitle: String = ""
+     var mSnippet: String = ""
+    lateinit var icon:Bitmap
     private lateinit var mContext: Context
 
     constructor(context: Context,lat: Double, lng: Double) {
@@ -29,6 +30,10 @@ class Clusters : ClusterItem {
         mContext=context
         mTitle = title
         mSnippet = snippet
+
+        var markerView = View.inflate(context, R.layout.map_marker, null)
+
+        icon=createDrawableFromView(markerView)
     }
 
 
@@ -38,5 +43,22 @@ class Clusters : ClusterItem {
         return mPosition
     }
 
+    private fun createDrawableFromView(view: View): Bitmap {
+        val displayMetrics = DisplayMetrics()
+        (mContext as Activity).windowManager.defaultDisplay
+                .getMetrics(displayMetrics)
+        view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT)
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
+        view.layout(0, 0, displayMetrics.widthPixels,
+                displayMetrics.heightPixels)
+        view.buildDrawingCache()
+        val bitmap = Bitmap.createBitmap(view.measuredWidth,
+                view.measuredHeight, Bitmap.Config.ARGB_8888)
 
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+
+        return bitmap
+    }
 }
