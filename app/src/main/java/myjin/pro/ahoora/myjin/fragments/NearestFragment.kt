@@ -207,6 +207,17 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         }
     }
 
+    private fun stopLocationUpdate() {
+        if (hasLocationPermission()) {
+            if (this::mFusedLocationClient.isInitialized && this::mLocationCallback.isInitialized) {
+                mFusedLocationClient.removeLocationUpdates(mLocationCallback)
+            }
+        }
+    }
+
+
+
+
     private fun createLocationRequest() {
         initLocationApi()
         mLocationRequest = LocationRequest.create()
@@ -321,9 +332,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
         }
     }
 
-    private fun closeMapSheet() {
 
-    }
 
 
     override fun onStart() {
@@ -333,6 +342,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
 
     override fun onStop() {
         super.onStop()
+        stopLocationUpdate()
         EventBus.getDefault().unregister(this)
     }
 }
