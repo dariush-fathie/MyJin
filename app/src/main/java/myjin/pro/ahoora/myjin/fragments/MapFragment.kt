@@ -126,6 +126,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     }
 
     private fun addMarker(firstPosition: Boolean) {
+
         var i = 0
         if (!firstPosition) {
             i = currentSnapPosition
@@ -133,6 +134,10 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         val realm = Realm.getDefaultInstance()
         var latlng = LatLng(-1.0, -1.0)
         var name = ""
+
+
+
+
         realm.executeTransaction({ db: Realm? ->
             val item = db?.where(KotlinItemModel::class.java)?.equalTo("centerId", idArray[i])?.findFirst()
             name = item?.firstName + " " + item?.lastName

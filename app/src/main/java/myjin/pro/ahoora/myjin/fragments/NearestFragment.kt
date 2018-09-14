@@ -172,8 +172,10 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
             val item = db.where(KotlinItemModel::class.java).`in`("centerId", idArray.toTypedArray()).findAll()
             item.forEach { mItem ->
 
-                val offsetItem = Clusters(mItem.addressList!![0]?.latitude?.toDouble()!!, mItem.addressList!![0]?.longitude?.toDouble()!!)
+                val offsetItem = Clusters((activity as OfficeActivity), mItem.addressList!![0]?.latitude?.toDouble()!!, mItem.addressList!![0]?.longitude?.toDouble()!!,
+                        mItem.firstName + " " + mItem.lastName, "قطعه")
                 mClusterManager!!.addItem(offsetItem)
+
 
             }
         }
@@ -227,7 +229,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
                 currentPoint = x
 
                 if (first) {
-                    first=false
+                    first = false
                     mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(x, 16f))
                 }
                 Log.e("Location Update", "location updated!")
