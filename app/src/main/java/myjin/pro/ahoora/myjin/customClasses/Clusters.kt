@@ -23,16 +23,12 @@ class Clusters : ClusterItem {
         mPosition = LatLng(lat, lng)
 
     }
-
-
     constructor(context: Context, lat: Double, lng: Double, title: String, snippet: String) {
 
         mPosition = LatLng(lat, lng)
         mContext=context
         mTitle = title
         mSnippet = snippet
-
-
     }
 
 
