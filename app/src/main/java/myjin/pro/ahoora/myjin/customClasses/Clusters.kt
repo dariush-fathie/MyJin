@@ -7,11 +7,12 @@ import android.graphics.Canvas
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.LinearLayout
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterItem
 import myjin.pro.ahoora.myjin.R
+import android.media.ThumbnailUtils
+
+
 
 class Clusters : ClusterItem {
     private val mPosition: LatLng
@@ -59,6 +60,10 @@ class Clusters : ClusterItem {
         val canvas = Canvas(bitmap)
         view.draw(canvas)
 
-        return bitmap
+
+        val THUMBSIZE = 64
+
+        return ThumbnailUtils.extractThumbnail(bitmap,
+                THUMBSIZE, THUMBSIZE)
     }
 }
