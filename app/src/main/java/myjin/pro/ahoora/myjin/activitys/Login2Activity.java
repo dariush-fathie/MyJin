@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
@@ -19,7 +20,6 @@ import myjin.pro.ahoora.myjin.utils.Utils;
 
 public class Login2Activity extends AppCompatActivity {
 	private static FragmentManager fragmentManager;
-
 	private AppCompatTextView setTile;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

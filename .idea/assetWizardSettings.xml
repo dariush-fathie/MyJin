@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Android/Android.Studio.3.0.1.0.Pack.x64/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_close_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Android/Android.Studio.3.0.1.0.Pack.x64/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_send_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -44,7 +44,7 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_close_map" />
+                                      <entry key="outputName" value="ic_send_chat" />
                                       <entry key="themeColor" value="111111" />
                                     </map>
                                   </option>

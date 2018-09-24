@@ -243,6 +243,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
                 if (first) {
                     first = false
                     mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(x, 16f))
+                    addMarkers()
                 }
                 Log.e("Location Update", "location updated!")
             }

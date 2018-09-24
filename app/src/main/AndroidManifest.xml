@@ -33,16 +33,22 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:replace="android:supportsRtl">
-
-
-
+        <service android:name=".Services.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <meta-data
-            android:name="co.ronash.pushe.token"
-            android:value="PUSHE_39402818281" />
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_jin" />
+        <!--
+             Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more.
+        -->
         <meta-data
-            android:name="co.ronash.pushe.cr"
-            android:value="Tm9uZQ==" />
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
 
         <activity
             android:name=".activitys.MainActivity2"
@@ -121,7 +127,8 @@
         <activity android:name=".activitys.FavMessageActivity" />
         <activity android:name=".activitys.RulesActivity" />
         <activity android:name=".activitys.NoDetailActivity" />
-
+        <activity android:name=".activitys.ChatActivity" />
+        <activity android:name=".activitys.ChannelActivity"></activity>
     </application>
 
 </manifest>

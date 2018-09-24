@@ -2,7 +2,6 @@
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,19 +17,39 @@
             android:clickable="true"
             android:focusable="true">
 
+
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_channel"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_landing_page"
+                app:tint="@color/white" />
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_chat"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/iv_channel"
+                android:padding="8dp"
+                android:src="@drawable/ic_chat"
+                app:tint="@color/white" />
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_share"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:layout_alignParentEnd="true"
-                android:padding="12dp"
+                android:layout_toStartOf="@+id/iv_chat"
+                android:padding="8dp"
                 android:src="@drawable/ic_share"
                 app:tint="@color/white" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_goback"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_alignParentStart="true"
                 android:padding="7dp"
                 android:src="@drawable/ic_back_test"

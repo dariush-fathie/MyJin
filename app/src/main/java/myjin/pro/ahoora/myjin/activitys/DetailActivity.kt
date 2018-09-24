@@ -154,10 +154,20 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             R.id.cv_direction -> selectModeDir()
             R.id.cv_level -> selectModeLevel()
             R.id.iv_share -> share()
+            R.id.iv_chat -> gotoChat()
+            R.id.iv_channel -> gotoChannel()
 
             R.id.tv_website -> goToWebSite()
             R.id.tv_telephone -> call()
         }
+    }
+
+    private fun gotoChannel() {
+        startActivity(Intent(this@DetailActivity,ChannelActivity::class.java))
+    }
+
+    private fun gotoChat() {
+        startActivity(Intent(this@DetailActivity,ChatActivity::class.java))
     }
 
 
@@ -231,6 +241,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         fab_direction.setOnClickListener(this)
         iv_goback.setOnClickListener(this)
         iv_share.setOnClickListener(this)
+        iv_chat.setOnClickListener(this)
+        iv_channel.setOnClickListener(this)
         cv_direction.setOnClickListener(this)
         cv_level.setOnClickListener(this)
         tv_website.setOnClickListener(this)

@@ -1,6 +1,5 @@
 package myjin.pro.ahoora.myjin.fragments.loginAndSign;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

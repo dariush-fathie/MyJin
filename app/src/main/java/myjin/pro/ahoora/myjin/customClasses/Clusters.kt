@@ -4,37 +4,49 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.media.ThumbnailUtils
+import android.support.v4.content.ContextCompat
+import android.support.v7.widget.AppCompatImageView
+import android.transition.Transition
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.LinearLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 import myjin.pro.ahoora.myjin.R
-import android.media.ThumbnailUtils
-
+import myjin.pro.ahoora.myjin.customClasses.SVGLoader.GlideApp
 
 
 class Clusters : ClusterItem {
     private val mPosition: LatLng
-     var mTitle: String = ""
-     var mSnippet: String = ""
-    lateinit var icon:Bitmap
+    var mTitle: String = ""
+    var mSnippet: String = ""
+    lateinit var icon: Bitmap
     private lateinit var mContext: Context
 
-    constructor(context: Context,lat: Double, lng: Double) {
+    constructor(context: Context, lat: Double, lng: Double) {
         mPosition = LatLng(lat, lng)
 
     }
+
     constructor(context: Context, lat: Double, lng: Double, title: String, snippet: String) {
 
         mPosition = LatLng(lat, lng)
-        mContext=context
+        mContext = context
         mTitle = title
         mSnippet = snippet
 
         var markerView = View.inflate(context, R.layout.map_marker, null)
+        var ivm = markerView.findViewById<AppCompatImageView>(R.id.iv_marker)
+       // ivm.setImageBitmap(getBitmap("http://myjin.ir/photos/ic_28.png"))
 
-        icon=createDrawableFromView(markerView)
+        icon = createDrawableFromView(markerView)
     }
 
 
@@ -61,9 +73,33 @@ class Clusters : ClusterItem {
         view.draw(canvas)
 
 
-        val THUMBSIZE = 64
+        val THUMBSIZE = 96
 
         return ThumbnailUtils.extractThumbnail(bitmap,
                 THUMBSIZE, THUMBSIZE)
+
+        return bitmap
+    }
+
+
+
+    private fun getBitmap(url: String): Bitmap {
+        var b: Bitmap? = null
+        GlideApp.with(mContext)
+                .asBitmap()
+                .load(url)
+                .priority(Priority.HIGH)
+                .timeout(5000)
+                .into(object : SimpleTarget<Bitmap>() {
+                    override fun onResourceReady(resource: Bitmap, transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?) {
+                        b=resource
+                    }
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        b = (ContextCompat.getDrawable(mContext, R.drawable.ic_marker) as BitmapDrawable).bitmap
+                    }
+
+                })
+
+        return b!!
     }
 }

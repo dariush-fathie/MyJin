@@ -118,7 +118,7 @@ class MainActivity2 : AppCompatActivity(),
         rl_post_services.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
         rl_setting.setOnClickListener(this)
-        tv_login_outsign.setOnClickListener(this)
+        //tv_login_outsign.setOnClickListener(this)
         btn_exit.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
     }

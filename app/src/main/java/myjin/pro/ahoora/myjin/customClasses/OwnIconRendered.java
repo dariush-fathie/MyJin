@@ -27,5 +27,8 @@ public class OwnIconRendered extends DefaultClusterRenderer<Clusters> {
         markerOptions.snippet(item.getMSnippet());
         markerOptions.title(item.getMTitle());
         super.onBeforeClusterItemRendered(item, markerOptions);
+
+
+
     }
 }
