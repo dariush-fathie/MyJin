@@ -163,7 +163,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rl_pishkhan_services.setOnClickListener(this)
         rl_post_services.setOnClickListener(this)
         rl_salamat.setOnClickListener(this)
-       // tv_login_outsign.setOnClickListener(this)
+        tv_login_outsign.setOnClickListener(this)
         rl_setting.setOnClickListener(this)
         tv_healthCenters.setOnClickListener(this)
         tv_messages.setOnClickListener(this)
