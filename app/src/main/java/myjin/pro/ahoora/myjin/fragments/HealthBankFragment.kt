@@ -14,7 +14,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
-import ir.paad.audiobook.utils.Converter
+import myjin.pro.ahoora.myjin.utils.Converter
 import kotlinx.android.synthetic.main.fragment_health_bank.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2

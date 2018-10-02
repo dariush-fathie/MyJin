@@ -28,7 +28,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
 
     private var realm = Realm.getDefaultInstance()
     var first = true
-
+    var messagesCleanFlag = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fav_message)
@@ -70,7 +70,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
 
         }, Realm.Transaction.OnSuccess {
             if (first) {
-                first=false
+                first = false
                 querying(-1, -1)
             }
         })
@@ -151,8 +151,8 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }, object : IDeleteClick {
-            override fun onDeleteClick(t:Boolean) {
-                first=t
+            override fun onDeleteClick(t: Boolean) {
+                first = t
                 findDistinctTypesAndSources()
 
             }
@@ -160,14 +160,12 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_sources -> openSourceDialog()
             R.id.tv_types -> openTypeDialog()
             R.id.iv_goback -> {
-                //todo setResult()
-                finish()
+                onBackPressed()
             }
         }
     }
@@ -239,6 +237,16 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    override fun onBackPressed() {
+        if (messagesCleanFlag) {
+            val resIntent = Intent()
+
+            resIntent.putExtra(getString(R.string.messagesClean), messagesCleanFlag)
+            setResult(Activity.RESULT_OK, resIntent)
+        }
+
+        super.onBackPressed()
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -248,7 +256,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
                 data ?: return
                 val p = data.getIntExtra("position", 0)
                 val mark = data.getBooleanExtra("save", false)
-                if (!mark){
+                if (!mark) {
                     (rv_favMessages.adapter as FavMessageAdapter).deleteItem(p)
                 }
 

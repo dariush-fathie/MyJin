@@ -1,142 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back">
+    android:background="@color/back1">
 
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cv_login"
-        android:layout_width="match_parent"
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        app:cardBackgroundColor="@color/white">
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:padding="5dp"
+        android:fontFamily="@font/yekan"
+        android:lineSpacingExtra="2.5dp"
+        android:text="@string/lshhkhrtevk"
+        android:textColor="@color/title"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/layout_chatbox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginStart="25dp"
+        android:minHeight="48dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:paddingBottom="30dp"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="30dp">
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/yekan"
+            android:padding="8dp"
+            android:text="+98"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:drawableTint="@color/c1"/>
 
-
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/login_emailid"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/rounded_edittext_states"
-                    android:fontFamily="@font/yekan"
-                    android:hint="ایمیل"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
-                    android:textColor="@color/title"
-                    android:textColorHint="@color/c1"
-                    android:textSize="18sp" />
-
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/login_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:gravity="end|center"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/rounded_edittext_states"
-                    android:fontFamily="@font/yekan"
-                    android:hint="رمز عبور"
-                    android:imeOptions="actionDone"
-                    android:inputType="textPassword"
-                    android:maxLines="1"
-                    android:paddingEnd="16dp"
-                    android:paddingStart="16dp"
-                    android:textColor="@color/title"
-                    android:textColorHint="@color/c1" />
-<!--
-                <CheckBox
-                    android:id="@+id/show_hide_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/yekan"
-                    android:text="@string/show_pwd"
-                    android:textColor="@color/textColor"
-                    android:textDirection="rtl"
-                    android:textSize="14sp" />-->
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/loginBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@drawable/btn_tag"
-                    android:fontFamily="@font/yekan"
-                    android:gravity="center"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:text="ورود"
-                    android:textColor="#fff"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/tv_loginWithG"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/yekan"
-                    android:background="@drawable/btn_tag_google"
-                    android:gravity="center"
-                    android:text="ورود با حساب گوگل "
-                    android:textColor="@color/white"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/forgot_password"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/yekan"
-                        android:gravity="center"
-                        android:text="بازیابی رمز عبور"
-                        android:textColor="@color/title" />
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/createAccount"
-                        android:layout_width="0dp"
-                        android:layout_height="30dp"
-
-                        android:layout_weight="1"
-                        android:fontFamily="@font/yekan"
-                        android:gravity="center"
-                        android:text="ثبت نام"
-                        android:textColor="@color/title"
-                        android:textSize="17sp" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </ScrollView>
-    </android.support.v7.widget.CardView>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_phonebox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:hint="9180003382"
+            android:fontFamily="@font/yekan"
+            android:maxLines="1"
+            android:gravity="center|start"
+            android:textDirection="rtl"
+            android:textSize="18sp" />
 
 
-</RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#dfdfdf"
+        android:focusable="true"
+        app:layout_constraintBottom_toTopOf="@+id/cl_continue" />
+
+    <android.support.constraint.ConstraintLayout
+
+        android:id="@+id/cl_continue"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_continue"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/yekan"
+            android:gravity="center|end"
+            android:text="@string/continue_"
+            android:drawableEnd="@drawable/ic_next"
+            android:textColor="@color/green"
+            android:textDirection="rtl"
+            android:textSize="18sp"
+            android:paddingEnd="15dp"
+            android:textStyle="bold"
+            android:drawableTint="@color/green"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>
 

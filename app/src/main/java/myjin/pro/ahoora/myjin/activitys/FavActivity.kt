@@ -1,6 +1,10 @@
 package myjin.pro.ahoora.myjin.activitys
 
+import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.design.widget.TabLayout
@@ -14,21 +18,18 @@ import android.widget.Toast
 import io.realm.Realm
 import io.realm.RealmResults
 import kotlinx.android.synthetic.main.activity_fav.*
-
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.GroupItemSaveAdapter
 import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.IntentFilter
 
 
 class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSelectedListener, View.OnLongClickListener {
 
     val tabListId = ArrayList<Int>()
     var Receiver: BroadcastReceiver? = null
+    var centersCleanFlag = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,30 +77,42 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
         }
         ctb.addOnTabSelectedListener(this)
         iv_goback.setOnClickListener(this)
-       // iv_menu.setOnClickListener(this)
+        // iv_menu.setOnClickListener(this)
 
     }
+
     override fun onClick(p0: View?) {
 
         when (p0?.getId()) {
-            R.id.tv_login_outsign->Toast.makeText(this@FavActivity,"این قسمت در نسخه جدید ارائه شده است",Toast.LENGTH_LONG).show()
+            R.id.tv_login_outsign -> Toast.makeText(this@FavActivity, "این قسمت در نسخه جدید ارائه شده است", Toast.LENGTH_LONG).show()
 
             R.id.iv_menu -> openDrawerLayout()
-            R.id.iv_goback -> finish()
+            R.id.iv_goback -> onBackPressed()
 
             R.id.tv_healthCenters -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
-            R.id.rl_setting-> startActivity(Intent(this,SettingActivity::class.java))
+            R.id.rl_setting -> startActivity(Intent(this, SettingActivity::class.java))
         }
     }
-    private fun goToServicesActivity(title:String,i:Int){
-        val intentF=Intent(this@FavActivity, ServicesActivity::class.java)
-        intentF.putExtra("ServiceTitle",title)
-        intentF.putExtra("groupId",i)
+
+    private fun goToServicesActivity(title: String, i: Int) {
+        val intentF = Intent(this@FavActivity, ServicesActivity::class.java)
+        intentF.putExtra("ServiceTitle", title)
+        intentF.putExtra("groupId", i)
         startActivity(intentF)
 
+    }
+
+    override fun onBackPressed() {
+        if (centersCleanFlag) {
+            val resIntent = Intent()
+
+            resIntent.putExtra(getString(R.string.centersClean), centersCleanFlag)
+            setResult(Activity.RESULT_OK, resIntent)
+        }
+        super.onBackPressed()
     }
 
     override fun onLongClick(v: View?): Boolean {
@@ -117,7 +130,7 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
     private fun drawerClick(position: Int) {
         when (position) {
 
-            1-> closeDrawerLayout()
+            1 -> closeDrawerLayout()
             2 -> {
                 startActivity(Intent(this@FavActivity, AboutUs::class.java))
 
@@ -131,9 +144,6 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
 
     }
 
-    fun early_Mth() {
-        Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
-    }
 
     private fun openDrawerLayout() {
         drawerLayout.openDrawer(GravityCompat.END)
@@ -173,8 +183,6 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
             filter(tabListId.get(pos!!))
         }
     }
-
-
 
 
     fun filter(id: Int) {
@@ -231,7 +239,7 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
                 override fun onReceive(context: Context, intent: Intent) {
 
                     ctb?.removeAllTabs()
-                        addTabs()
+                    addTabs()
 
 
                 }

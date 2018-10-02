@@ -17,18 +17,28 @@
             android:clickable="true"
             android:focusable="true">
 
-
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_share"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:padding="8dp"
+                android:src="@drawable/ic_share"
+                app:tint="@color/white" />
 
             <android.support.v7.widget.AppCompatImageView
+                android:visibility="gone"
                 android:id="@+id/iv_channel"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
+                android:layout_toStartOf="@+id/iv_share"
                 android:padding="8dp"
                 android:src="@drawable/ic_landing_page"
                 app:tint="@color/white" />
+
             <android.support.v7.widget.AppCompatImageView
+                android:visibility="gone"
                 android:id="@+id/iv_chat"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
@@ -37,14 +47,7 @@
                 android:padding="8dp"
                 android:src="@drawable/ic_chat"
                 app:tint="@color/white" />
-            <android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_share"
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:layout_toStartOf="@+id/iv_chat"
-                android:padding="8dp"
-                android:src="@drawable/ic_share"
-                app:tint="@color/white" />
+
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_goback"
@@ -411,17 +414,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
                             android:background="@color/back1"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_weekdays"
-                             />
+                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_weekdays" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv_attend"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
                             android:paddingBottom="8dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
-                            android:layout_marginTop="15dp"
                             android:textSize="13sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView"
@@ -467,19 +469,20 @@
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_cv"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
                         <View
                             android:id="@+id/v_cv"
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
                             android:background="@color/back1"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_cv"
-                            />
+                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_cv" />
+
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv_cv"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="8dp"
                             android:layout_marginTop="15dp"
+                            android:paddingBottom="8dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
                             android:textSize="13sp"
@@ -528,19 +531,20 @@
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_service"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
                         <View
                             android:id="@+id/v_service"
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
                             android:background="@color/back1"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_service"
-                            />
+                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_service" />
+
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv_service"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="8dp"
                             android:layout_marginTop="15dp"
+                            android:paddingBottom="8dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
                             android:textSize="13sp"
@@ -595,14 +599,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
                             android:background="@color/back1"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_incurance"
-                            />
+                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_incurance" />
+
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv_incurance"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="8dp"
                             android:layout_marginTop="15dp"
+                            android:paddingBottom="8dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
                             android:textSize="13sp"

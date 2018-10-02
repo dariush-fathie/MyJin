@@ -73,14 +73,15 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
     }
 
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         try {
             holder as ItemHolder
             val item = getModelByCenterId(ids[position])
             // todo use placeholders
-            holder.title.text = "${item.firstName} ${item?.lastName}"
+            holder.title.text = "${item.firstName} ${item.lastName}"
 
-            var str = "";
+            var str = ""
             if (!item.gen.equals("0")) {
                 if (item.groupId == 1) {
                     str = item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name

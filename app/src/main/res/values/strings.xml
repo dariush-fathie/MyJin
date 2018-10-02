@@ -8,11 +8,11 @@
     <string name="dnj">دریافت نسخه جدید</string>
     <string name="hbnjbrvsh">به دلیل تغییرات ساختاری، لازم است نسخه جدید را حتما دانلود کنید. </string>
     <string name="addarabdk">اگر تمایل دارید آن را دریافت کنید .</string>
-    <string name="continue_">ادامه</string>
+    <string name="continue_"> ادامه</string>
     <string name="app_intro_skip">Skip</string>
     <string name="takapoo">تکاپو</string>
     <string name="noDetail">به دلیل اتمام زمان قرارداد، این بخش فعلا قابل مشاهده نیست . البته واحد پشتیبانی ما این مورد را پیگیری خواهد کرد.</string>
-    <string name="version">نسخه 1.0.5 \n 1397 / 5 / 25</string>
+    <string name="version">نسخه 1.0.6 \n 1397 / 7 / 2</string>
     <string name="lorem">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</string>
     <string name="myJin">ژین من</string>
     <string name="backupContext"> \nدر صورت نصب مجدد ژین من میتوانید اطلاعات قبلی خود را بازیابی کنید</string>
@@ -35,7 +35,7 @@
     <string name="etlaeieh">پیام و اطلاعیه</string>
     <string name="provCityPair">provCityPair</string>
     <string name="permission">اجازه دستیابی به حافظه خارجی را صادر کرده و دوباره سعی کنید</string>
-    <string name="skip">بگذر</string>
+    <string name="skip">ورود</string>
     <string name="exieMsg">خارج میشوید ؟</string>
     <string name="baleh">بله</string>
     <string name="no">نه</string>
@@ -47,41 +47,6 @@
     <string name="clean">پاک کردن</string>
     <string name="messagesClean">messagesClean</string>
     <string name="centersClean">centersClean</string>
-
-    <string-array name="provArray2">
-        <item> آذربایجان شرقی</item>
-        <item> آذربایجان غربی</item>
-        <item>اردبیل</item>
-        <item> اصفهان</item>
-        <item>البرز</item>
-        <item>ایلام</item>
-        <item>بوشهر</item>
-        <item>تهران</item>
-        <item>چهار محال و بختیاری</item>
-        <item>خراسان جنوبی</item>
-        <item>خراسان رضوی</item>
-        <item>خراسان شمالی</item>
-        <item>خوزستان</item>
-        <item>زنجان</item>
-        <item>سمنان</item>
-        <item>سیستان و بلوچستان</item>
-        <item>فارس</item>
-        <item>قزوین</item>
-        <item>قم</item>
-        <item>کردستان</item>
-        <item>کرمان</item>
-        <item>کرمانشاه</item>
-        <item>کهگیلویه و بویر احمد</item>
-        <item>گلستان</item>
-        <item>گیلان</item>
-        <item>لرستان</item>
-        <item>مازندران</item>
-        <item>مرکزی</item>
-        <item>هرمزگان</item>
-        <item>همدان</item>
-        <item>یزد</item>
-    </string-array>
-
 
     <string-array name="cityArray">
         <item>سنندج</item>
@@ -141,7 +106,13 @@
 
     <string name="already_user">از قبل حساب دارید؟ از اینجا وارد شوید.</string>
     <string name="registered_emailid">لطفا ایمیل ثبت شده را وارد کنید :</string>
-
+    <string name="send">ارسال</string>
+    <string name="ktrvk">کد تایید را وارد کنید</string>
+    <string name="vshhvsh">ویرایش شماره همراه وارد شده</string>
+    <string name="cotekh">ما یک کد تایید را برای شما ارسال خواهیم کرد\nآن را در محل مربوطه وارد کنید</string>
+    <string name="lshhkhrtevk">لطفا شماره همراه خود را طبق الگو وارد کرده دکمه ادامه را بزنید و منتظر کد تایید بمانید.</string>
+    <string name="default_notification_channel_id">ژین من</string>
+    <string name="early">بزودی</string>
 
 </resources>
 

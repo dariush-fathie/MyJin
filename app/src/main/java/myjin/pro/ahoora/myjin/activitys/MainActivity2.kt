@@ -20,12 +20,12 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import io.realm.Realm
-import ir.paad.audiobook.utils.Converter
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.drawer_layout.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
+import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
@@ -33,10 +33,7 @@ import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.TestEvent
 import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
-import myjin.pro.ahoora.myjin.utils.ApiInterface
-import myjin.pro.ahoora.myjin.utils.KotlinApiClient
-import myjin.pro.ahoora.myjin.utils.NetworkUtil
-import myjin.pro.ahoora.myjin.utils.SharedPer
+import myjin.pro.ahoora.myjin.utils.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import retrofit2.Call
@@ -67,7 +64,11 @@ class MainActivity2 : AppCompatActivity(),
         when (v?.id) {
             R.id.fab_search -> search()
             R.id.iv_menu -> openDrawerLayout()
-            R.id.tv_login_outsign -> startActivity(Intent(this, Login2Activity::class.java))
+            R.id.tv_login_outsign -> {
+                Toast.makeText(this@MainActivity2,
+                        getString(R.string.early),Toast.LENGTH_SHORT).show()
+                //startActivity(Intent(this, Login2Activity::class.java))
+            }
             R.id.btn_exit -> showExitDialog()
             R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
@@ -78,11 +79,11 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(), 8)
             R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString(), 4)
             R.id.tv_healthCenters -> startActivity(Intent(this, FavActivity::class.java))
-            R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
+            R.id.tv_messages -> startActivityForResult(Intent(this, FavMessageActivity::class.java), settingRequest)
             R.id.rl_drawer3 -> startActivity(Intent(this, AboutUs::class.java))
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
             R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
-           R.id.rl_rules->startActivity(Intent(this, RulesActivity::class.java))
+            R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
         }
     }
 
@@ -161,19 +162,19 @@ class MainActivity2 : AppCompatActivity(),
         if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
             when (currentPage) {
                 0 -> {
-                    tv_mainTitle.text = "پیام و اطلاعیه"
+                    tv_mainTitle.text = getString(R.string.etlaeieh)
                 }
                 1 -> {
-                    tv_mainTitle.text = "بانک سلامت"
+                    tv_mainTitle.text = getString(R.string.healthCenters)
                 }
                 /* 2 -> {
                      tv_mainTitle.text = "نشان شده ها"
                  }*/
             }
-            tv_test.visibility=View.GONE
+            tv_test.visibility = View.GONE
         } else {
             tv_mainTitle.text = getString(R.string.myJin)
-            tv_test.visibility=View.VISIBLE
+            tv_test.visibility = View.VISIBLE
         }
     }
 
@@ -189,6 +190,9 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (intent.getBooleanExtra("EXIT", false)) {
+            finish()
+        }
         NetworkUtil().updateNetFlag(this)
         netAvailability = NetworkUtil().isNetworkAvailable(this)
         setContentView(R.layout.activity_main2)
@@ -197,9 +201,9 @@ class MainActivity2 : AppCompatActivity(),
         fabH = Converter.pxFromDp(this, 16f + 50f + 20)
 
 /*        tbl_main?.addTab(tbl_main.newTab()
-                .setText("بانک سلامت"), false)
+                .setText(getString(R.string.etlaeieh)), false)
         tbl_main?.addTab(tbl_main.newTab()
-                .setText("پیغام ها"), false)
+                .setText(getString(R.string.healthCenters)), false)
         tbl_main?.addTab(tbl_main.newTab()
                 .setText("نشان شده ها"), false)*/
 
@@ -211,7 +215,8 @@ class MainActivity2 : AppCompatActivity(),
         tbl_main.setupWithViewPager(vp_mainContainer)
 
 
-        Handler().postDelayed({1
+        Handler().postDelayed({
+            1
             ipi_main.attachToViewPager(vp_mainContainer)
             if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
                 vp_mainContainer.currentItem = 1
@@ -501,10 +506,10 @@ class MainActivity2 : AppCompatActivity(),
             Log.e("mainActivity2", "onresult")
             if (requestCode == settingRequest) {
                 Log.e("mainActivity2", "onresult")
-                if (data?.getBooleanExtra(getString(R.string.messagesClean) , false)!!){
+                if (data?.getBooleanExtra(getString(R.string.messagesClean), false)!!) {
                     Handler().postDelayed({
                         EventBus.getDefault().post(TestEvent())
-                    },100)
+                    }, 100)
                 }
             }
         }

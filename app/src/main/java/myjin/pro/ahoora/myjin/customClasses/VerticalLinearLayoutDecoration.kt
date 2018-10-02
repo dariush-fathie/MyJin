@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import ir.paad.audiobook.utils.Converter
+import myjin.pro.ahoora.myjin.utils.Converter
 
 
 class VerticalLinearLayoutDecoration(private val context: Context, dpPaddingLeft: Int, dpPaddingTop: Int, dpPaddingRight: Int, dpPaddingBottom: Int) : RecyclerView.ItemDecoration() {

@@ -1,9 +1,11 @@
 package myjin.pro.ahoora.myjin.adapters;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +55,20 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+       /* val bg = "#ff" + messageItem.bgColor
+        try {
+            ((ViewHolder) holder).tv_service_title.setBackgroundColor(Color.parseColor(bg))
+        }catch (e:Exception){
+            holder.message_cl.setBackgroundColor(Color.WHITE)
+        }*/
+
+        String bg="#ff"+buffer.get(position).getColor_();
+        try{
+            ((ViewHolder) holder).tv_service_title.setTextColor(Color.parseColor(bg));
+        }catch (Exception e){
+            ((ViewHolder) holder).tv_service_title.setTextColor(Color.WHITE);
+        }
+
         ((ViewHolder) holder).tv_service_title.setText(buffer.get(position).getTitle());
         ((ViewHolder) holder).tv_service_context.setText(buffer.get(position).getContext());
         expansionsCollection.add(((ViewHolder) holder).expansionLayout);

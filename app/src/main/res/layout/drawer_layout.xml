@@ -131,6 +131,7 @@
             </RelativeLayout>
 
             <View
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginBottom="7dp"
@@ -140,6 +141,7 @@
 
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_takapoo_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -179,6 +181,7 @@
             </RelativeLayout>
 
             <View
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginBottom="7dp"
@@ -187,6 +190,7 @@
                 android:background="@color/split" />
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_university_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -194,6 +198,7 @@
                 android:background="@drawable/item_selector">
 
                 <View
+
                     android:id="@+id/vs4"
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
@@ -225,6 +230,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_salamat"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -264,6 +270,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_tamin_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -303,6 +310,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_ict_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -344,7 +352,7 @@
 
             <RelativeLayout
                 android:id="@+id/rl_pishkhan_services"
-
+android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
@@ -383,6 +391,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_post_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"

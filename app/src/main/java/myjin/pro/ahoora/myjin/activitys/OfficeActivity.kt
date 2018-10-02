@@ -14,10 +14,7 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatRadioButton
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -168,6 +165,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         tv_healthCenters.setOnClickListener(this)
         tv_messages.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
+        btn_exit.setOnClickListener(this)
     }
 
     private fun initList(list: ArrayList<Int>) {
@@ -401,13 +399,17 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_tryAgain -> tryAgain()
-            R.id.tv_login_outsign -> startActivity(Intent(this, Login2Activity::class.java))
+            R.id.tv_login_outsign -> {
+                Toast.makeText(this@OfficeActivity,
+                        getString(R.string.early),Toast.LENGTH_SHORT).show()
+                //startActivity(Intent(this, Login2Activity::class.java))
+            }
             R.id.rl_filter -> onFilterClick()
             R.id.rl_sort -> onSortClick()
             R.id.iv_goback -> onBackPressed()
             R.id.iv_menu -> openDrawerLayout()
             R.id.fab_goUp -> rv_items.smoothScrollToPosition(0)
-
+            R.id.btn_exit -> showExitDialog()
             R.id.tv_healthCenters -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
@@ -452,7 +454,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         when (position) {
 
             1 -> {
-                startActivity(Intent(this@OfficeActivity, FavActivity::class.java))
+                startActivityForResult(Intent(this@OfficeActivity, FavActivity::class.java),settingRequest)
 
             }
             2 -> {
@@ -469,9 +471,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     }
 
-    fun early_Mth() {
-        Toast.makeText(this, "بزودی", Toast.LENGTH_LONG).show()
-    }
+
 
     private fun openDrawerLayout() {
         drawerLayout.openDrawer(GravityCompat.END)
@@ -641,12 +641,10 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         if (filterFlag) {
             query.`in`("specialityList.specialtyId", filterArray.toTypedArray())
         }
-
         if (ascSort) {
             query.sort("firstName", Sort.ASCENDING)
         } else {
             query.sort("firstName", Sort.DESCENDING)
-
         }
         val result = query.findAll()
         realm.commitTransaction()
@@ -660,6 +658,35 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     companion object {
         const val settingRequest = 1047
+    }
+
+    private fun showExitDialog() {
+
+        val builder = AlertDialog.Builder(this@OfficeActivity)
+        val dialog: AlertDialog
+        val view = View.inflate(this@OfficeActivity, R.layout.exit_layout, null)
+        val btn_ok: AppCompatButton = view.findViewById(R.id.btn_ok)
+        val btn_no: AppCompatButton = view.findViewById(R.id.btn_no)
+        builder.setView(view)
+        dialog = builder.create()
+        dialog.show()
+        val listener = View.OnClickListener { v ->
+            when (v.id) {
+                R.id.btn_ok -> {
+                    dialog.dismiss()
+                    val intent = Intent(applicationContext, MainActivity2::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    intent.putExtra("EXIT", true)
+                    startActivity(intent)
+                    finish()
+                }
+                R.id.btn_no -> {
+                    dialog.dismiss()
+                }
+            }
+        }
+        btn_ok.setOnClickListener(listener)
+        btn_no.setOnClickListener(listener)
     }
 
 }

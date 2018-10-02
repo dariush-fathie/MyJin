@@ -265,9 +265,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
             return ItemHolder(LayoutInflater.from(this@SearchActivity).inflate(R.layout.group_item, parent, false))
-
         }
 
 

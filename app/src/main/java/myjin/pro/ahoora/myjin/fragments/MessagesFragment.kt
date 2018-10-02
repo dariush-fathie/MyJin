@@ -126,7 +126,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
     @Subscribe
     fun notifyAdapter(t: TestEvent) {
-        Log.e("messsages", "notifyAdapter")
+
         if (realm.isClosed) {
             realm = Realm.getDefaultInstance()
         }

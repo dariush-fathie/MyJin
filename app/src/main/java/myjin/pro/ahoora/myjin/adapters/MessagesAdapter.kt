@@ -25,12 +25,12 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
-import ir.paad.audiobook.utils.Converter
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
+import myjin.pro.ahoora.myjin.utils.Converter
 import myjin.pro.ahoora.myjin.utils.DateConverter
 
 
@@ -141,7 +141,12 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
             holder.ivStar.setImageResource(R.drawable.ic_bookmark_empty_msg)
         }
         val bg = "#ff" + messageItem.bgColor
-        holder.message_cl.setBackgroundColor(Color.parseColor(bg))
+        try {
+            holder.message_cl.setBackgroundColor(Color.parseColor(bg))
+        }catch (e:Exception){
+            holder.message_cl.setBackgroundColor(Color.WHITE)
+        }
+
     }
 
     fun mark(position: Int, mark: Boolean) {

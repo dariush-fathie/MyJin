@@ -16,6 +16,7 @@ import android.os.Handler
 import android.support.constraint.ConstraintLayout
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
@@ -71,7 +72,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     //var receiver: BroadcastReceiver? = null
     private val requestPermission = 1052
     private val requestLocationSetting = 1053
-
+    private var url = ""
     private val realm = Realm.getDefaultInstance()!!
 
     private var id = 0
@@ -163,11 +164,31 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     private fun gotoChannel() {
-        startActivity(Intent(this@DetailActivity,ChannelActivity::class.java))
+
+        val ii=Intent(this@DetailActivity,ChannelActivity::class.java)
+        putExtraAndStartActivity(ii)
     }
 
     private fun gotoChat() {
-        startActivity(Intent(this@DetailActivity,ChatActivity::class.java))
+        val ii=Intent(this@DetailActivity,ChatActivity::class.java)
+       putExtraAndStartActivity(ii)
+    }
+
+
+    private fun putExtraAndStartActivity(ii:Intent){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@DetailActivity,
+                    aiv_logoImg, "transition_name")
+
+            ii.putExtra("title", tv_title.text.toString())
+            ii.putExtra("url", url)
+            startActivity(ii,options.toBundle())
+        }else{
+
+            ii.putExtra("title", tv_title.text.toString())
+            ii.putExtra("url", url)
+            startActivity(ii)
+        }
     }
 
 
@@ -801,7 +822,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
 
         val drawable = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_jin)
-        var url = ""
+
 
         if (item.logoImg.equals("")) {
             if (item.gen?.equals("0")!!) {

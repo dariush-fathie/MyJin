@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back1"
+    android:background="@drawable/background_chat"
     tools:context=".activitys.ChatActivity">
 
     <RelativeLayout
@@ -26,23 +26,23 @@
             app:tint="@color/white" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image_message_profile"
+            android:id="@+id/civMessageProfile"
+            android:transitionName="transition_name"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:padding="3dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="4dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/iv_goback"
             android:src="@drawable/doctor" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/tv_bimar"
+            android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
-            android:layout_toEndOf="@+id/image_message_profile"
+            android:layout_toEndOf="@+id/civMessageProfile"
             android:text="دکتر فرید رحمانی"
             android:textColor="@color/white"
             android:textSize="16sp"

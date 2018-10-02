@@ -176,7 +176,7 @@ class NearestFragment : Fragment(), View.OnClickListener, OnMapReadyCallback {
                 val offsetItem = Clusters((activity as OfficeActivity), mItem.addressList!![0]?.latitude?.toDouble()!!, mItem.addressList!![0]?.longitude?.toDouble()!!,
                         mItem.firstName + " " + mItem.lastName, "قطعه")
                 mClusterManager!!.addItem(offsetItem)
-                mClusterManager!!.setRenderer(OwnIconRendered((activity as OfficeActivity), mMap, mClusterManager))
+               // mClusterManager!!.setRenderer(OwnIconRendered((activity as OfficeActivity), mMap, mClusterManager))
 
             }
         }
