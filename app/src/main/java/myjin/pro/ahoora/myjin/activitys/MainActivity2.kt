@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.drawer_layout.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
-import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
@@ -48,6 +47,7 @@ class MainActivity2 : AppCompatActivity(),
 
     companion object {
         const val settingRequest = 1564
+        var active = false
     }
 
     override fun onLongClick(v: View?): Boolean {
@@ -66,12 +66,12 @@ class MainActivity2 : AppCompatActivity(),
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> {
                 Toast.makeText(this@MainActivity2,
-                        getString(R.string.early),Toast.LENGTH_SHORT).show()
+                        getString(R.string.early), Toast.LENGTH_SHORT).show()
                 //startActivity(Intent(this, Login2Activity::class.java))
             }
             R.id.btn_exit -> showExitDialog()
-            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
-            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
+            R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khjvns), 1)
+            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.mnvfs), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
             R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString(), 5)
             R.id.rl_ict_services -> goToServicesActivity(tv_ict_services.text.toString(), 6)
@@ -144,9 +144,10 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onStart() {
         super.onStart()
+        active = true
         EventBus.getDefault().register(this)
         abp_main.addOnOffsetChangedListener(this)
-        Log.e("sdklfjslf", "ffsdklfjsdlf")
+
     }
 
     override fun onStop() {
@@ -154,6 +155,12 @@ class MainActivity2 : AppCompatActivity(),
         EventBus.getDefault().unregister(this)
         super.onStop()
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        active = false
     }
 
     override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {

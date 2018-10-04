@@ -21,6 +21,7 @@
             android:paddingRight="16dp">
 
             <TextView
+
                 android:id="@+id/tv_service_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -29,8 +30,8 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/yekan"
                 android:text="عنوان"
-                android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:textColor="@color/title"
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <android.support.v7.widget.AppCompatImageView
@@ -40,7 +41,7 @@
             android:layout_gravity="center_vertical|left"
             android:layout_marginLeft="16dp"
             android:adjustViewBounds="true"
-            android:tint="@color/white"
+            android:tint="@color/title"
             app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
 
 
@@ -60,13 +61,17 @@
             android:background="@color/back">
 
             <TextView
+                android:padding="8dp"
                 android:textColorLink="@color/subTitle"
                 android:id="@+id/tv_service_context"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="web"
+                android:textSize="15sp"
+                android:lineSpacingExtra="5sp"
                 android:fontFamily="@font/yekan"
-                android:gravity="center"
+                android:gravity="start"
+                android:textDirection="anyRtl"
                 android:text="content" />
 
         </LinearLayout>

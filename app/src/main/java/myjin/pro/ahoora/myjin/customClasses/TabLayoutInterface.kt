@@ -37,13 +37,17 @@ class TabLayoutInterface(ctx: Context, fm: FragmentManager, behavior: BottomShee
     }
 
     private fun openBottomLayout(tab: Int) {
-        if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        if(tab==2) {
+            if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+            showProgress()
+            Handler().postDelayed({
+
+                loadFragment(tab)
+            }, 450)
+
         }
-        showProgress()
-        Handler().postDelayed({
-            loadFragment(tab)
-        }, 450)
     }
 
     fun closeBottomLayout(tab: Int) {
@@ -55,7 +59,7 @@ class TabLayoutInterface(ctx: Context, fm: FragmentManager, behavior: BottomShee
     private fun loadFragment(i: Int) {
         if (i == 0) {
             fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, MapFragment()).commit()
-        } else  if (i == 1){
+        } else  if (i == 2){
             fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, SearchFragment()).commit()
         }else{
             fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, NearestFragment()).commit()

@@ -92,7 +92,7 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
             R.id.tv_healthCenters -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
-            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
+            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.mnvfs), 2)
             R.id.rl_setting -> startActivity(Intent(this, SettingActivity::class.java))
         }
     }

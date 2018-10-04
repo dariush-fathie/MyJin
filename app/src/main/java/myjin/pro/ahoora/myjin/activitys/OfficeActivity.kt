@@ -414,8 +414,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
 
-            R.id.rl_myjin_services -> goToServicesActivity(tv_myjin_services_Title1.text.toString(), 1)
-            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.takapoo), 2)
+            R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khjvns), 1)
+            R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.mnvfs), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
             R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString(), 4)
             R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString(), 5)

@@ -68,22 +68,24 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
 
         val shareIntent = Intent()
 
-        var str = ""
 
+        var str = "ژین من (www.MyJin.ir):"
+        str += "\n\n"
         str += "${tv_group.text}\n"
         str += "${tv_time.text}\n\n"
-        str += "${tv_title.text}...\n\n"
-        str += "لینک دانلود ژین من \n"
+        str += "${tv_title.text}... "
+
+        str+="\uD83D\uDC47\n"
 
         if (realm.isInTransaction) realm.commitTransaction()
 
-        val id = 1
+
 
         realm.beginTransaction()
-        val res = realm.where(KotlinAboutContactModel::class.java)
-                .equalTo("id", id)
+        val res = realm.where(KotlinMessagesModel::class.java)
+                .equalTo("messageId", messageId)
                 .findFirst()!!
-        str += res.tKafeh.toString()
+        str += res.mainUrl.toString()
         realm.commitTransaction()
 
 
@@ -189,7 +191,7 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
         realm.executeTransaction { db ->
             val Items = db.where(KotlinMessagesModel::class.java).equalTo("messageId", messageId).findFirst()
             tv_title.text = Items?.title
-            tv_group.text ="منبع : "+ Items?.groupName + " ، " + Items?.type
+            tv_group.text =Items?.groupName + " ، " + Items?.type
             tv_content.text = Items?.content
             tv_time.text=converter?.convert2(Items?.regDate)
 

@@ -54,7 +54,6 @@ import kotlinx.android.synthetic.main.detail_map.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior
 import myjin.pro.ahoora.myjin.interfaces.ServerStatusResponse
-import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.SimpleResponseModel
@@ -165,25 +164,25 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     private fun gotoChannel() {
 
-        val ii=Intent(this@DetailActivity,ChannelActivity::class.java)
+        val ii = Intent(this@DetailActivity, ChannelActivity::class.java)
         putExtraAndStartActivity(ii)
     }
 
     private fun gotoChat() {
-        val ii=Intent(this@DetailActivity,ChatActivity::class.java)
-       putExtraAndStartActivity(ii)
+        val ii = Intent(this@DetailActivity, ChatActivity::class.java)
+        putExtraAndStartActivity(ii)
     }
 
 
-    private fun putExtraAndStartActivity(ii:Intent){
+    private fun putExtraAndStartActivity(ii: Intent) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@DetailActivity,
                     aiv_logoImg, "transition_name")
 
             ii.putExtra("title", tv_title.text.toString())
             ii.putExtra("url", url)
-            startActivity(ii,options.toBundle())
-        }else{
+            startActivity(ii, options.toBundle())
+        } else {
 
             ii.putExtra("title", tv_title.text.toString())
             ii.putExtra("url", url)
@@ -240,7 +239,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 } else {
                     item = SearchActivity.tempModel
 
-                    Log.e("dddd", item.slideList!![0]!!.fileUrl)
 
                 }
 
@@ -326,24 +324,15 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         val shareIntent = Intent()
 
-        var str = ""
+        var str = "ژین من (www.MyJin.ir):"
+        str += "\n\n"
+        str += "مشخصات مرکز : " + "${tv_title.text}  "
+        str += "${tv_subTitle.text}\n"
 
-        str = "${tv_title.text}\n\n"
-        str += "${tv_subTitle.text}\n\n"
 
-        str += "لینک دانلود ژین من \n"
+        str += " آدرس : " + "${tv_addr.text}\n"
+        str += " تلفن : " + "${tv_telephone.text}\n"
 
-        if (realm.isInTransaction) realm.commitTransaction()
-
-        val id = 1
-
-        realm.beginTransaction()
-        val res = realm.where(KotlinAboutContactModel::class.java)
-                .equalTo("id", id)
-                .findFirst()!!
-        str += res.tKafeh.toString() + "\n\n"
-        realm.commitTransaction()
-        str += " آدرس : " + "${tv_addr.text}"
         shareIntent.action = Intent.ACTION_SEND
         val uri = "http://maps.google.com/maps?saddr=$longitudeC,$latitudeC"
         shareIntent.type = "text/plain"
@@ -409,7 +398,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 override fun onFailure(e: Throwable?) {
                     runOnUiThread {
                         alert.dismiss()
-                        Log.e("direction error", e?.message + " ")
+
                         Toast.makeText(this@DetailActivity, "خطایی رخ داد", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -440,11 +429,11 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         val decodedPath = results.routes[0].overviewPolyline.decodePath()
         val paths = ArrayList<com.google.android.gms.maps.model.LatLng>()
-        Log.e("path", "${decodedPath.size}$decodedPath")
+
         decodedPath.forEach { path: com.google.maps.model.LatLng ->
             paths.add(com.google.android.gms.maps.model.LatLng(path.lat, path.lng))
         }
-        Log.e("paths", "${paths.size}$paths")
+
         polyline = mMap.addPolyline(PolylineOptions().addAll(paths).color(ContextCompat.getColor(this, R.color.green)))
     }
 
@@ -459,7 +448,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             try {
                 currentPoint = LatLng(location.latitude, location.longitude)
             } catch (e: Exception) {
-                Log.e("loc", "error")
+
             }
         }
     }
@@ -477,7 +466,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == requestLocationSetting) {
-            Log.e("resultCode", "$resultCode")
+
             checkLocationSetting()
         }
     }
@@ -491,22 +480,19 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                     createLocationCallback()
                 }.addOnFailureListener { exception ->
                     if (exception is ResolvableApiException) {
-                        // Location settings are not satisfied, but this can be fixed
-                        // by showing the user a dialog.
+
                         try {
-                            // Show the dialog by calling startResolutionForResult(),
-                            // and check the result in onActivityResult().
                             exception.startResolutionForResult(this@DetailActivity,
                                     requestLocationSetting)
                         } catch (sendEx: IntentSender.SendIntentException) {
-                            // Ignore the error.
+
                         }
                     }
-                    Log.e("Location", "failure ${exception.message}")
+
                     //locationSettingDialog()
                     // location setting not enabled
                 }.addOnCanceledListener {
-                    Log.e("Location", "onCanecl")
+
                 }
 
     }
@@ -518,16 +504,16 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     private fun createLocationCallback() {
-        Log.e("loc", "1")
+
         mLocationCallback = object : LocationCallback() {
 
             override fun onLocationResult(locationResult: LocationResult?) {
-                Log.e("loc", "2")
+
                 locationResult ?: return
                 val x = LatLng(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude)
                 currentPoint = x
                 //mMap?.animateCamera(CameraUpdateFactory.newLatLngZoom(x, 18f))
-                Log.e("Location Update", "location updated!")
+
             }
         }
 
@@ -537,7 +523,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
     @SuppressLint("MissingPermission")
     private fun startLocationUpdate() {
-        Log.e("loc", "3")
+
         if (hasLocationPermission()) {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null)
         }
@@ -563,7 +549,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         val b = AlertDialog.Builder(this)
         b.setMessage("توجه فرمایید که نقطه مشخص شده در مرکز نقشه در بانک اطلاعاتی این مرکز ذخیره می شود")
         b.setPositiveButton("متوجه هستم، ادامه بده") { dialog, which ->
-            Log.e("autoId", "${item.addressList!![0]?.autoId}")
+
             val builder = AlertDialog.Builder(this)
             builder.setView(R.layout.progress_dialog)
             builder.setCancelable(false)
@@ -670,7 +656,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private fun getBottomSheetCallback(): BottomSheetBehavior.BottomSheetCallback {
         bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                Log.e("slide", "$slideOffset")
+
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -889,7 +875,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                         .into((holder as ImageHolder)
                                 .ivImage)
             } catch (e: Exception) {
-                Log.e("glideErr", e.message + " ")
+
             }
         }
 
@@ -942,10 +928,10 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         if (requestCode == requestPermission) {
             if (permissions[0] == android.Manifest.permission.ACCESS_FINE_LOCATION) {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Log.e("granted", "success")
+
                     createLocationRequest()
                 } else {
-                    Log.e("granted", "failed")
+
                     fab_direction.visibility = View.GONE
                 }
             }

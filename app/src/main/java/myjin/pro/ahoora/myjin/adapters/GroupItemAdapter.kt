@@ -220,7 +220,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
                             i.putExtra(StaticValues.ID, ids.get(adapterPosition))
                             i.putExtra("g_url", g_url)
                             clickedItemPosition = adapterPosition
-                            (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail, options.toBundle())
+                            context.startActivityForResult(i, StaticValues.requestCodeOfficeDetail, options.toBundle())
 
 
                         } else {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2e7d32</color>
-    <color name="colorPrimaryDark">#2e7d32</color>
+    <color name="colorPrimary">#00a851</color>
+    <color name="colorPrimaryDark">#00a851</color>
     <color name="colorAccent">#e19a0c</color>
     <color name="white">#ffffff</color>
     <color name="blue">#188ab9</color>
@@ -44,6 +44,7 @@
 
     <color name="senderT">#eefbdd</color>
     <color name="senderTT">#6cc164</color>
+    <color name="manba">#939393</color>
 
 
 </resources>

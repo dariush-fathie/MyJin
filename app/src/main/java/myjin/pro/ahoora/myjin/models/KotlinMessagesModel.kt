@@ -56,6 +56,10 @@ open class KotlinMessagesModel : RealmObject() {
     @Expose
     open var imageUrl: String = ""
 
+    @SerializedName("mainUrl")
+    @Expose
+    open var mainUrl: String = ""
+
     @SerializedName("regDate")
     @Expose
     open var regDate: String = ""

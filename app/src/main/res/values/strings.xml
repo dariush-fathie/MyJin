@@ -10,9 +10,9 @@
     <string name="addarabdk">اگر تمایل دارید آن را دریافت کنید .</string>
     <string name="continue_"> ادامه</string>
     <string name="app_intro_skip">Skip</string>
-    <string name="takapoo">تکاپو</string>
+    <string name="mnvfs">مرکز نوآوری و فناوری سلامت</string>
     <string name="noDetail">به دلیل اتمام زمان قرارداد، این بخش فعلا قابل مشاهده نیست . البته واحد پشتیبانی ما این مورد را پیگیری خواهد کرد.</string>
-    <string name="version">نسخه 1.0.6 \n 1397 / 7 / 2</string>
+    <string name="version">نسخه 1.0.6 \n 1397 / 7 / 11</string>
     <string name="lorem">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.</string>
     <string name="myJin">ژین من</string>
     <string name="backupContext"> \nدر صورت نصب مجدد ژین من میتوانید اطلاعات قبلی خود را بازیابی کنید</string>
@@ -31,8 +31,8 @@
     <string name="defTab">defTab</string>
     <string name="provId">provId</string>
     <string name="cityId">cityId</string>
-    <string name="healthCenters">مراکز سلامت</string>
-    <string name="etlaeieh">پیام و اطلاعیه</string>
+    <string name="healthCenters">بانک مراکز سلامت</string>
+    <string name="etlaeieh">پیام ، توصیه ، اخبار</string>
     <string name="provCityPair">provCityPair</string>
     <string name="permission">اجازه دستیابی به حافظه خارجی را صادر کرده و دوباره سعی کنید</string>
     <string name="skip">ورود</string>
@@ -111,8 +111,11 @@
     <string name="vshhvsh">ویرایش شماره همراه وارد شده</string>
     <string name="cotekh">ما یک کد تایید را برای شما ارسال خواهیم کرد\nآن را در محل مربوطه وارد کنید</string>
     <string name="lshhkhrtevk">لطفا شماره همراه خود را طبق الگو وارد کرده دکمه ادامه را بزنید و منتظر کد تایید بمانید.</string>
-    <string name="default_notification_channel_id">ژین من</string>
-    <string name="early">بزودی</string>
+    <string name="default_notification_channel_id">MyJin</string>
+    <string name="early">این امکان به زودی در نسخه جدید اضافه می شود</string>
+    <string name="gmdepakmbzemrbkhkmnshrb">گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد. می توانید نشان شده ها را ببینید</string>
+    <string name="gmdepakmbzemrbkhk">گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد!</string>
+    <string name="khjvns">خدمات ژین و نهاد سلامت</string>
 
 </resources>
 

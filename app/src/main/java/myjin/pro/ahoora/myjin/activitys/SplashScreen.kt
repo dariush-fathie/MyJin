@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -36,6 +35,8 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     val realm = Realm.getDefaultInstance()
     private var netAvailability: Boolean = false
 
+
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_splashTryAgain -> tryAgain()
@@ -50,7 +51,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
 
         btn_splashTryAgain.setOnClickListener(this)
         btn_splashFav.setOnClickListener(this)
-
         netAvailability = NetworkUtil().isNetworkAvailable(this)
         clearGlideCache()
 
@@ -64,6 +64,9 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
             }
         }
         clearServices()
+
+
+
     }
 
 
@@ -86,10 +89,10 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
             2 -> {
                 iv_splashImage.setImageResource(R.drawable.ic_repair)
                 if (isThereAnyCity() && isThereAnyFav()) {
-                    tv_splashContent.text = "گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد. می توانید نشان شده ها را ببینید"
+                    tv_splashContent.text = getString(R.string.gmdepakmbzemrbkhkmnshrb)
                 } else {
                     // todo : change back to repair
-                    tv_splashContent.text = "گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد!"
+                    tv_splashContent.text = getString(R.string.gmdepakmbzemrbkhk)
                 }
             }
         }
@@ -197,7 +200,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
                         onFailure(call, Throwable("null city list"))
                         return
                     }
-                    hideCpv()
+
                     hideNetErrLayout()
                     lock = false
 
@@ -205,9 +208,15 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
                         newVersion(statusItem?.version!!.toString(), statusItem?.force!!)
                     } else {
                         if (!SharedPer(this@SplashScreen).getBoolean(getString(R.string.introductionFlag))) {
+                            hideCpv()
                             gotoIntro()
+
                         } else {
-                            gotoHome1()
+
+                            Handler().postDelayed({
+                                hideCpv()
+                                gotoHome1()
+                            }, 1500)
                         }
                     }
                 }
@@ -304,6 +313,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun gotoHome1() {
+
         startActivity(Intent(this, MainActivity2::class.java))
         finish()
     }
@@ -316,5 +326,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     private fun gotoIntro() {
         startActivity(Intent(this, AppIntro::class.java))
         finish()
+
+
     }
 }

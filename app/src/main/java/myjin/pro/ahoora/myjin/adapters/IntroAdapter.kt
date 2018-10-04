@@ -11,20 +11,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.customClasses.SVGLoader.GlideApp
-import myjin.pro.ahoora.myjin.customClasses.SVGLoader.SvgSoftwareLayerSetter
 import myjin.pro.ahoora.myjin.models.KotlinSlideModel
 
 
 class IntroAdapter(private val context: Context, private val list: Array<KotlinSlideModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val requestBuilder: RequestBuilder<PictureDrawable> = GlideApp.with(context)
+   /* private val requestBuilder: RequestBuilder<PictureDrawable> = GlideApp.with(context)
             .`as`(PictureDrawable::class.java)
             .transition(DrawableTransitionOptions.withCrossFade())
-            .listener(SvgSoftwareLayerSetter())
+            .listener(SvgSoftwareLayerSetter())*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.image_big_item_intro, parent, false)
@@ -38,16 +38,15 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder as ImageHolder
         try {
-            /*Glide.with(mContext)
-                    .load(item.get(position))
+            Glide.with(context)
+                    .load(list[position].fileUrl)
                     .apply(RequestOptions()
-                            .placeholder(R.color.colorAccent))
+                            .placeholder(R.color.green))
                     .into((holder as ImageHolder)
                             .ivImage)
 
-            */
 
-            requestBuilder.load(list[position].fileUrl).into(holder.ivImage)
+           // requestBuilder.load(list[position].fileUrl).into(holder.ivImage)
             holder.tvDescription.text = list[position].description
             val bg="#ff"+list[position].arrange
             holder.rootLayout.setBackgroundColor(Color.parseColor(bg))

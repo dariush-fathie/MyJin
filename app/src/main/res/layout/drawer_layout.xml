@@ -124,14 +124,13 @@
                     android:layout_toStartOf="@+id/iv1"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="خدمات ژین من"
+                    android:text="@string/khjvns"
                     android:textColor="@color/green"
                     android:textSize="17sp"
                     app:fontFamily="@font/yekan" />
             </RelativeLayout>
 
             <View
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginBottom="7dp"
@@ -141,7 +140,6 @@
 
 
             <RelativeLayout
-                android:visibility="gone"
                 android:id="@+id/rl_takapoo_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -163,7 +161,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vs3"
-                    android:padding="5dp"
+                    android:padding="7dp"
                     android:src="@drawable/ic_takapo"
                     android:tint="@color/green" />
 
@@ -174,7 +172,7 @@
                     android:layout_toStartOf="@+id/ivs3"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="خدمات مرکز نوآوری و فناوری سلامت(تکاپو)"
+                    android:text="@string/mnvfs"
                     android:textColor="@color/subTitle"
                     android:textSize="16sp"
                     app:fontFamily="@font/yekan" />
@@ -637,6 +635,7 @@ android:visibility="gone"
             </RelativeLayout>
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_rules"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
