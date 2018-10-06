@@ -721,14 +721,26 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     private fun goToWebSite() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tv_website.text.toString().trim()))
-        startActivity(intent)
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(tv_website.text.toString().trim()))
+            startActivity(intent)
+        } catch (e: Exception) {
+
+        }
+
     }
 
     private fun call() {
-        val phone = tv_telephone.text.toString().trim()
-        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
-        startActivity(intent)
+        if (tv_telephone.text.toString().trim() != "") {
+            try {
+                val phone = tv_telephone.text.toString().trim()
+                val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+                startActivity(intent)
+            } catch (e: Exception) {
+
+            }
+
+        }
     }
 
     private fun loadDetails() {

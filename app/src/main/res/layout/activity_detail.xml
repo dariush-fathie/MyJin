@@ -28,17 +28,16 @@
                 app:tint="@color/white" />
 
             <android.support.v7.widget.AppCompatImageView
-                android:visibility="gone"
                 android:id="@+id/iv_channel"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
                 android:layout_toStartOf="@+id/iv_share"
                 android:padding="8dp"
                 android:src="@drawable/ic_landing_page"
+                android:visibility="gone"
                 app:tint="@color/white" />
 
             <android.support.v7.widget.AppCompatImageView
-                android:visibility="gone"
                 android:id="@+id/iv_chat"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
@@ -46,6 +45,7 @@
                 android:layout_toStartOf="@+id/iv_channel"
                 android:padding="8dp"
                 android:src="@drawable/ic_chat"
+                android:visibility="gone"
                 app:tint="@color/white" />
 
 
@@ -81,7 +81,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="160dp">
+                        android:layout_height="180dp">
 
                         <android.support.v7.widget.RecyclerView
                             android:id="@+id/rv_imageListBig"
@@ -198,14 +198,27 @@
 
                 </android.support.v7.widget.CardView>
 
-                <android.support.v7.widget.AppCompatButton
+                <android.support.v7.widget.CardView
                     android:id="@+id/btn_showMap"
+                    android:layout_margin="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="روی نقشه نشان بده"
-                    android:textColor="@color/white"
-                    app:backgroundTint="@color/colorAccent"
-                    app:fontFamily="@font/yekan" />
+                    android:layout_height="45dp"
+                    app:cardBackgroundColor="@color/green"
+                    app:cardCornerRadius="20dp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:drawableStart="@drawable/ic_marker_24"
+                        android:drawableTint="@color/white"
+                        android:gravity="center"
+                        android:text="@string/rnnb"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/yekan" />
+                </android.support.v7.widget.CardView>
+
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/cv_row2"
@@ -225,10 +238,10 @@
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/appCompatTextView1"
                             android:layout_width="match_parent"
-                            android:layout_height="36dp"
+                            android:layout_height="30dp"
                             android:layout_marginEnd="16dp"
                             android:gravity="center_vertical"
-                            android:text="مسیرهای ارتباطی"
+                            android:text="@string/mher"
                             android:textColor="@color/title"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -250,7 +263,7 @@
                             android:layout_marginTop="8dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_tele"
-                            android:tint="@color/blue"
+                            android:tint="@color/subTitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/v_tel" />
 
@@ -259,8 +272,8 @@
                             android:layout_width="60dp"
                             android:layout_height="36dp"
                             android:layout_marginTop="8dp"
-                            android:gravity="center"
-                            android:padding="6dp"
+                            android:gravity="center_vertical"
+                            android:padding="4dp"
                             android:text="تلفن"
                             android:tint="@color/blue"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_tel"
@@ -268,64 +281,89 @@
                             app:layout_constraintWidth_min="40dp" />
 
 
-                        <android.support.v7.widget.AppCompatButton
-                            android:id="@+id/tv_telephone"
+                        <android.support.v7.widget.CardView
+
+                            android:id="@+id/cv_telephone"
                             android:layout_width="0dp"
-                            android:layout_height="36dp"
+                            android:layout_height="34dp"
                             android:layout_marginEnd="8dp"
+                            android:layout_marginStart="3dp"
                             android:layout_marginTop="8dp"
-                            android:text="09180143382"
-                            android:textColor="@color/title"
-                            app:backgroundTint="@color/green2"
-                            app:fontFamily="@font/yekan"
+                            app:cardBackgroundColor="@color/back"
+                            app:cardCornerRadius="17dp"
                             app:layout_constraintEnd_toStartOf="@+id/tv1"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView1" />
+                            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView1">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/tv_telephone"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:gravity="center"
+                                android:textColor="@color/title"
+                                app:fontFamily="@font/yekan" />
+                        </android.support.v7.widget.CardView>
+
 
                         <android.support.v7.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_web"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:layout_marginBottom="4dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_website"
-                            android:tint="@color/blue"
+                            android:tint="@color/subTitle"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_tel" />
+                            app:layout_constraintTop_toTopOf="@+id/tv2" />
 
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv2"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
-                            android:layout_marginBottom="4dp"
-                            android:gravity="center"
-                            android:padding="6dp"
-                            android:text="وبسایت"
-                            android:tint="@color/blue"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center_vertical"
+                            android:padding="4dp"
+                            android:text="@string/website"
+                            android:tint="@color/subTitle"
+                            app:layout_constraintBottom_toTopOf="@+id/cv_mail"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_web"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_tel"
+                            app:layout_constraintTop_toTopOf="@+id/cv_website"
                             app:layout_constraintWidth_max="60dp"
                             app:layout_constraintWidth_min="40dp" />
 
-                        <android.support.v7.widget.AppCompatButton
-                            android:id="@+id/tv_website"
+                        <android.support.v7.widget.CardView
+
+                            android:id="@+id/cv_website"
                             android:layout_width="0dp"
-                            android:layout_height="36dp"
+                            android:layout_height="34dp"
                             android:layout_marginEnd="8dp"
-                            android:autoLink="web"
-                            android:lines="1"
-                            android:text="www.MyJin.ir"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textColorLink="@color/title"
-                            app:backgroundTint="@color/green2"
-                            app:fontFamily="@font/yekan"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="8dp"
+                            app:cardBackgroundColor="@color/back"
+                            app:cardCornerRadius="17dp"
                             app:layout_constraintEnd_toStartOf="@+id/tv2"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_telephone" />
+                            app:layout_constraintTop_toBottomOf="@+id/cv_telephone">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/tv_website"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:autoLink="web"
+                                android:gravity="center"
+
+                                android:lines="1"
+                                android:textAllCaps="false"
+                                android:textColor="@color/title"
+                                android:textColorLink="@color/title"
+                                app:fontFamily="@font/yekan" />
+                        </android.support.v7.widget.CardView>
+
 
                         <android.support.v7.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_mail"
@@ -333,40 +371,53 @@
                             android:layout_height="36dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_mail"
-                            android:tint="@color/blue"
+                            android:tint="@color/subTitle"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_web" />
+                            app:layout_constraintTop_toTopOf="@+id/tv3" />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/tv3"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
-                            android:layout_marginBottom="4dp"
-                            android:gravity="center"
-                            android:padding="6dp"
-                            android:text="ایمیل"
+                            android:gravity="center_vertical"
+                            android:padding="4dp"
+                            android:text="@string/email"
                             android:tint="@color/blue"
+                            app:layout_constraintBottom_toBottomOf="@+id/cv_mail"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_web"
-                            app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_web"
+                            app:layout_constraintTop_toTopOf="@+id/cv_mail"
                             app:layout_constraintWidth_max="60dp"
                             app:layout_constraintWidth_min="40dp" />
 
-                        <android.support.v7.widget.AppCompatButton
-                            android:id="@+id/tv_mail"
+                        <android.support.v7.widget.CardView
+
+                            android:id="@+id/cv_mail"
                             android:layout_width="0dp"
-                            android:layout_height="36dp"
+                            android:layout_height="34dp"
                             android:layout_marginEnd="8dp"
-                            android:autoLink="email"
-                            android:lines="1"
-                            android:text="ahoora1389iran@gmail.com"
-                            android:textAllCaps="false"
-                            android:textColor="@color/title"
-                            android:textColorLink="@color/title"
-                            app:backgroundTint="@color/green2"
+                            android:layout_marginStart="3dp"
+                            android:layout_marginTop="8dp"
+                            app:cardBackgroundColor="@color/back"
+                            app:cardCornerRadius="17dp"
                             app:layout_constraintEnd_toStartOf="@+id/tv3"
                             app:layout_constraintHorizontal_bias="0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tv_website" />
+                            app:layout_constraintTop_toBottomOf="@+id/cv_website">
+
+                            <android.support.v7.widget.AppCompatTextView
+                                android:id="@+id/tv_mail"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:autoLink="email"
+                                android:gravity="center"
+                                android:lines="1"
+                                android:text="ahoora1389iran@gmail.com"
+                                android:textAllCaps="false"
+                                android:textColor="@color/title"
+                                android:textColorLink="@color/title" />
+                        </android.support.v7.widget.CardView>
+
 
                     </android.support.constraint.ConstraintLayout>
 
@@ -381,16 +432,15 @@
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_weekdays"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
-                            android:padding="6dp"
+                            android:padding="7dp"
                             android:src="@drawable/ic_weekdays"
-                            android:tint="@color/blue"
+                            android:tint="@color/subTitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -398,7 +448,6 @@
                             android:id="@+id/appCompatTextView"
                             android:layout_width="0dp"
                             android:layout_height="36dp"
-                            android:layout_marginEnd="16dp"
                             android:gravity="center_vertical"
                             android:text="روزهای کاری"
                             android:textColor="@color/title"
@@ -422,6 +471,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:paddingBottom="8dp"
+                            android:paddingStart="5dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
                             android:textSize="13sp"
@@ -442,8 +492,7 @@
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_cv"
@@ -451,7 +500,7 @@
                             android:layout_height="36dp"
                             android:padding="5dp"
                             android:src="@drawable/ic_bio"
-                            android:tint="@color/blue"
+                            android:tint="@color/subTitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -459,7 +508,6 @@
                             android:id="@+id/appCompatTextView2"
                             android:layout_width="0dp"
                             android:layout_height="36dp"
-                            android:layout_marginEnd="16dp"
                             android:gravity="center_vertical"
                             android:text="معرفی"
                             android:textColor="@color/title"
@@ -483,6 +531,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:paddingBottom="8dp"
+                            android:paddingStart="5dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
                             android:textSize="13sp"
@@ -502,8 +551,7 @@
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_service"
@@ -511,7 +559,7 @@
                             android:layout_height="36dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_service"
-                            android:tint="@color/blue"
+                            android:tint="@color/subTitle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -519,7 +567,6 @@
                             android:id="@+id/appCompatTextView3"
                             android:layout_width="0dp"
                             android:layout_height="36dp"
-                            android:layout_marginEnd="16dp"
                             android:layout_marginStart="8dp"
                             android:layout_toStartOf="@+id/aiv_logoImg_service"
                             android:gravity="center_vertical"
@@ -545,6 +592,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:paddingBottom="8dp"
+                            android:paddingStart="5dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
                             android:textSize="13sp"
@@ -565,8 +613,7 @@
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:orientation="vertical">
 
                         <android.support.v7.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_incurance"
@@ -582,10 +629,9 @@
                             android:id="@+id/appCompatTextView5"
                             android:layout_width="0dp"
                             android:layout_height="36dp"
-                            android:layout_marginEnd="16dp"
                             android:layout_toStartOf="@+id/aiv_logoImg_incurance"
                             android:gravity="center_vertical"
-                            android:text="بیمه های طرف قرار داد"
+                            android:text="بیمه های طرف قرارداد"
                             android:textColor="@color/title"
                             android:textSize="14sp"
                             android:textStyle="bold"
@@ -607,6 +653,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="15dp"
                             android:paddingBottom="8dp"
+                            android:paddingStart="5dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
                             android:textSize="13sp"

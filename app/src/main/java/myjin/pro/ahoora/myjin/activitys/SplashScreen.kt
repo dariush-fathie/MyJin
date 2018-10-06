@@ -288,9 +288,13 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
         if (force != 1) {
             builder.setNegativeButton(R.string.continue_) { _, _ ->
                 if (!SharedPer(this@SplashScreen).getBoolean(getString(R.string.introductionFlag))) {
+                    hideCpv()
                     gotoIntro()
                 } else {
-                    gotoHome1()
+                    Handler().postDelayed({
+                        hideCpv()
+                        gotoHome1()
+                    }, 1500)
                 }
             }
             builder.setMessage(R.string.addarabdk)

@@ -116,6 +116,12 @@
     <string name="gmdepakmbzemrbkhkmnshrb">گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد. می توانید نشان شده ها را ببینید</string>
     <string name="gmdepakmbzemrbkhk">گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد!</string>
     <string name="khjvns">خدمات ژین و نهاد سلامت</string>
+    <string name="nemayesh">نمایش</string>
+    <string name="mher">مسیرهای ارتباطی</string>
+    <string name="email">ایمیل</string>
+    <string name="website">وبسایت</string>
+    <string name="rnnb">روی نقشه نشان بده</string>
+    <string name="notification">اعلان ها</string>
 
 </resources>
 

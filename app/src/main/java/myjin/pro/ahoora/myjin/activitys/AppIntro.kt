@@ -8,6 +8,7 @@ import android.support.v7.widget.PagerSnapHelper
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+import android.widget.CompoundButton
 import kotlinx.android.synthetic.main.activity_app_intro.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.IntroAdapter
@@ -21,7 +22,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class AppIntro : AppCompatActivity(), View.OnClickListener {
+class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+    override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+        SharedPer(this).setIntro(getString(R.string.introductionFlag2), !isChecked)
+    }
 
     private fun introUrls() {
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
@@ -69,6 +73,7 @@ class AppIntro : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun goToSplash() {
+
         SharedPer(this).setBoolean(getString(R.string.introductionFlag), true)
         startActivity(Intent(this, SplashScreen::class.java))
         finish()
@@ -100,6 +105,8 @@ class AppIntro : AppCompatActivity(), View.OnClickListener {
                 }
             }
         })
+
+        cb_display.setOnCheckedChangeListener(this)
 
         introUrls()
     }

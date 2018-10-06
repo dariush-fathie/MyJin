@@ -84,6 +84,7 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
             R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
+            R.id.rl_notifi->startActivity(Intent(this, NotificationActivity::class.java))
         }
     }
 
@@ -100,6 +101,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private fun setListener() {
+        rl_notifi.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         iv_jinDrawer.setOnLongClickListener(this)
         fab_search.setOnClickListener(this)
@@ -122,6 +124,7 @@ class MainActivity2 : AppCompatActivity(),
         tv_login_outsign.setOnClickListener(this)
         btn_exit.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
+        rl_notifi.setOnClickListener(this)
     }
 
 
@@ -216,7 +219,7 @@ class MainActivity2 : AppCompatActivity(),
 
         tbl_main.addOnTabSelectedListener(this)
 
-        vp_mainContainer.adapter = PagerAdapter(supportFragmentManager)
+        vp_mainContainer.adapter = PagerAdapter(supportFragmentManager,this)
         vp_mainContainer.addOnPageChangeListener(this)
         vp_mainContainer.offscreenPageLimit = 2
         tbl_main.setupWithViewPager(vp_mainContainer)

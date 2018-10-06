@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import myjin.pro.ahoora.myjin.R;
+import myjin.pro.ahoora.myjin.models.KotlinNotificationModel;
 import myjin.pro.ahoora.myjin.utils.LoginClass;
 import myjin.pro.ahoora.myjin.utils.ServerStatus;
 

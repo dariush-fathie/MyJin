@@ -166,6 +166,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         tv_messages.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
         btn_exit.setOnClickListener(this)
+        rl_notifi.setOnClickListener(this)
     }
 
     private fun initList(list: ArrayList<Int>) {
@@ -424,7 +425,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(), 8)
             R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
             R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
-
+            R.id.rl_notifi->startActivity(Intent(this, NotificationActivity::class.java))
             R.id.rl_rules->startActivity(Intent(this, RulesActivity::class.java))
 
         }
