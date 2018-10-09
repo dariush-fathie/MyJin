@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.DetailActivity
+import myjin.pro.ahoora.myjin.activitys.NoDetailActivity
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.SharedPer
@@ -30,6 +31,7 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
     private var g_url=g_url
     private var g_name=g_name
     private lateinit var shp: SharedPer
+    private var active2 = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.group_item, parent, false)
@@ -98,22 +100,30 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
         @SuppressLint("RestrictedApi")
         override fun onClick(v: View?) {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as OfficeActivity), image, "transition_name")
+            if (dataSet[adapterPosition].active2 != 0) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    val options = ActivityOptionsCompat.makeSceneTransitionAnimation((context as OfficeActivity), image, "transition_name")
 
-                val i = Intent(context, DetailActivity::class.java)
-                i.putExtra("id", dataSet[adapterPosition].centerId)
-                i.putExtra(StaticValues.MODEL, 0)
-                i.putExtra("g_url", g_url)
-                (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail, options.toBundle())
+                    val i = Intent(context, DetailActivity::class.java)
+                    i.putExtra(StaticValues.ID, dataSet[adapterPosition].centerId)
+                    i.putExtra(StaticValues.MODEL, 0)
+                    i.putExtra("g_url", g_url)
+                    (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail, options.toBundle())
 
+                } else {
+                    val i = Intent(context, DetailActivity::class.java)
+                    i.putExtra(StaticValues.ID, dataSet[adapterPosition].centerId)
+                    i.putExtra(StaticValues.MODEL, 0)
+                    i.putExtra("g_url", g_url)
+                    context.startActivity(i)
+                }
             }else{
-                val i = Intent(context, DetailActivity::class.java)
-                i.putExtra("id", dataSet[adapterPosition].centerId)
-                i.putExtra(StaticValues.MODEL, 0)
-                i.putExtra("g_url", g_url)
-                context.startActivity(i)
+                val j = Intent(context, NoDetailActivity::class.java)
+                (context as OfficeActivity).startActivity(j)
             }
+
+
+
         }
 
         val title: AppCompatTextView = itemView.findViewById(R.id.tv_title)

@@ -87,6 +87,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             iv_delete.setOnClickListener(this);
 
 
+
+
         }
 
         @Override
@@ -107,6 +109,8 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
         }
+
+
     }
 
 

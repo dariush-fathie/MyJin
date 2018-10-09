@@ -36,7 +36,13 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
 
 
                 rv_services.layoutManager = LinearLayoutManager(this@NotificationActivity, LinearLayoutManager.VERTICAL, false)
+
+
                 rv_services.adapter = NotificationAdapter(this@NotificationActivity,res,realm)
+
+
+
+
             }
         }catch (e:Exception){
 
@@ -44,7 +50,6 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
         setListner()
 
     }
-
     private fun setListner() {
         iv_goback.setOnClickListener(this)
     }

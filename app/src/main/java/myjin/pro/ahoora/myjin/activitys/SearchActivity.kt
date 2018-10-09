@@ -66,21 +66,24 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
         if (tab?.position == 0) {
+
             loadAdapter(resultList!!)
-            Toast.makeText(this@SearchActivity,"${resultList!!.size} مورد یافت شد .",Toast.LENGTH_LONG).show()
+            Toast.makeText(this@SearchActivity, "${resultList!!.size} مورد یافت شد .", Toast.LENGTH_LONG).show()
 
         } else {
-            val tempRes= ArrayList<KotlinItemModel>()
-            resultList?.forEach {item:KotlinItemModel->
-                if (item.groupId==uniqueIds.get((tab?.position!!)-1)){
+            val tempRes = ArrayList<KotlinItemModel>()
+            resultList?.forEach { item: KotlinItemModel ->
+                if (item.groupId == uniqueIds.get((tab?.position!!) - 1)) {
                     tempRes.add(item)
                 }
             }
             loadAdapter(tempRes)
-            Toast.makeText(this@SearchActivity,"${tempRes.size} مورد یافت شد .",Toast.LENGTH_LONG).show()
+            Toast.makeText(this@SearchActivity, "${tempRes.size} مورد یافت شد .", Toast.LENGTH_LONG).show()
 
         }
     }
+
+
 
     private fun search() {
         if (et_search.text.toString() != "") {
@@ -137,7 +140,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
         if (Utils.isNetworkAvailable(this@SearchActivity)) {
             downloadItem()
         } else {
-            Toast.makeText(this@SearchActivity,"به اینترنت متصل نیستید",Toast.LENGTH_LONG).show()
+            Toast.makeText(this@SearchActivity, "به اینترنت متصل نیستید", Toast.LENGTH_LONG).show()
 
         }
 
@@ -149,8 +152,8 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
         var provId = sp.getInteger(getString(R.string.provId))
         val cityId = sp.getInteger(getString(R.string.cityId))
 
-        if (provId==0){
-            provId=19
+        if (provId == 0) {
+            provId = 19
         }
 
         cpv_progress.visibility = View.VISIBLE
@@ -160,7 +163,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
                 ctb?.removeAllTabs()
                 if (resultList?.size!! > 0) {
 
-                    Toast.makeText(this@SearchActivity,"${resultList!!.size} مورد یافت شد .",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SearchActivity, "${resultList!!.size} مورد یافت شد .", Toast.LENGTH_LONG).show()
                     gIdCountPair.clear()
                     idsArray.clear()
                     uniqueIds.clear()
@@ -196,7 +199,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
                     /* loadAdapter(resultList!!)*/
                 } else {
 
-                    Toast.makeText(this@SearchActivity, "متاسفانه گزینه ای یافت نشد ",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@SearchActivity, "متاسفانه گزینه ای یافت نشد ", Toast.LENGTH_LONG).show()
 
                     rv_search.adapter = null
 
@@ -258,9 +261,9 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
 
     inner class SearchAdapterWithHeader(data: List<KotlinItemModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
-        private val dataSet = data
+        private val dataSet = data.sortedWith(compareBy { it.firstName })
         override fun getItemCount(): Int {
+
             return dataSet.size
         }
 
