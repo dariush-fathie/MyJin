@@ -32,7 +32,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.buffer = buffer;
         this.realm = realm;
         converter = new DateConverter(context);
-
     }
 
     @NonNull

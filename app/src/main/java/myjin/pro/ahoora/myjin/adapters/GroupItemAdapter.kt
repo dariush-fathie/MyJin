@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.adapters
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -13,6 +14,7 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,21 +35,21 @@ import myjin.pro.ahoora.myjin.activitys.NoDetailActivity
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.StaticValues
+import java.util.*
 
 
-class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, title: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, gUrl: String, titleA: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val context = ctx
     private val ids = idList
-    private val g_url = g_url
-    private val title = title
+    private val g_url = gUrl
+    private val title = titleA
     private var realm: Realm = Realm.getDefaultInstance()
     lateinit var markedItem: BooleanArray
     var filedStarDrawable: Drawable
 
-    private var int = 0
 
     init {
-        Clear_GlideCaches()
+        clearGlideCaches()
 
         realm.executeTransaction { db ->
             val savedItems = db.where(KotlinItemModel::class.java).equalTo("saved", true).findAll()
@@ -63,7 +65,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
 
         }
         filedStarDrawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
-        filedStarDrawable.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
+        filedStarDrawable.setColorFilter(ContextCompat.getColor(context, R.color.green), PorterDuff.Mode.SRC_IN)
 
     }
 
@@ -72,6 +74,16 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
         return ItemHolder(v)
     }
 
+    private fun setAnimation(viewToAnimate: View) {
+
+        val r = Random()
+        val i1 = r.nextInt(200) + 250
+
+        val a = ObjectAnimator.ofFloat(viewToAnimate, "translationX", -300f, 0f)
+        a.duration = i1.toLong()
+        a.start()
+
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -82,30 +94,30 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
             holder.title.text = "${item.firstName} ${item.lastName}"
 
             var str = ""
-            if (!item.gen.equals("0")) {
+            str = if (!item.gen.equals("0")) {
                 if (item.groupId == 1) {
-                    str = item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
+                    item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
                 } else {
-                    str = title
+                    title
                 }
 
             } else {
-                str = title
+                title
             }
 
             holder.subTitle.text = str
             holder.tv_addr.text = item.addressList!![0]?.locTitle
 
+            setAnimation(holder.cv_gi)
 
-            var drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
+            val drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
             var url = ""
-
+            holder.image.colorFilter = null
             if (item.logoImg.equals("")) {
 
 
-                // holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
-
                 if (item.gen?.equals("0")!!) {
+                    holder.image.setColorFilter(ContextCompat.getColor(context, R.color.mc_icon_color), android.graphics.PorterDuff.Mode.SRC_IN)
 
                     url = g_url
                 } else if (item.gen?.equals("1")!!) {
@@ -141,10 +153,10 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
         }
     }
 
-    fun Clear_GlideCaches() {
-        Handler().postDelayed(Runnable { Glide.get(context).clearMemory() }, 0)
+    private fun clearGlideCaches() {
+        Handler().postDelayed({ Glide.get(context).clearMemory() }, 0)
 
-        AsyncTask.execute(Runnable { Glide.get(context).clearDiskCache() })
+        AsyncTask.execute({ Glide.get(context).clearDiskCache() })
     }
 
     override fun getItemCount(): Int {
@@ -232,7 +244,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
                             (context as OfficeActivity).startActivityForResult(i, StaticValues.requestCodeOfficeDetail)
 
                         }
-                    }else{
+                    } else {
                         val j = Intent(context, NoDetailActivity::class.java)
                         (context as OfficeActivity).startActivity(j)
                     }
@@ -262,6 +274,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, g_url: String, titl
         val ivStar: AppCompatImageView = itemView.findViewById(R.id.iv_starLike)
         val item: ConstraintLayout = itemView.findViewById(R.id.cl_item)
         val image: CircleImageView = itemView.findViewById(R.id.iv_itemImage)
+        val cv_gi: CardView = itemView.findViewById(R.id.cv_gi)
 
         init {
             item.setOnClickListener(this)

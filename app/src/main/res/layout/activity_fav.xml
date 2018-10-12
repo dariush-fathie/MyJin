@@ -37,9 +37,9 @@
                 android:focusableInTouchMode="true"
                 android:text="نشان شده ها"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                app:fontFamily="@font/yekan" />
+                app:fontFamily="@font/samim" />
 
 
             <android.support.v7.widget.AppCompatImageView
@@ -93,7 +93,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/white"
-            android:fontFamily="@font/yekan"
+            android:fontFamily="@font/samim"
             android:gravity="center"
             android:padding="30dp"
             android:text="هیچ موردی تا کنون نشان نشده است !"

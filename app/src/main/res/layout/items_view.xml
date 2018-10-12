@@ -8,11 +8,11 @@
         android:id="@+id/text1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="@font/yekan"
+        android:fontFamily="@font/samim"
         android:gravity="center|start"
         android:padding="10dp"
         android:text="@string/lorem"
-        android:textSize="16sp">
+        android:textSize="14sp">
 
     </TextView>
 

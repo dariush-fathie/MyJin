@@ -3,7 +3,7 @@
     android:id="@+id/text1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fontFamily="@font/yekan"
+    android:fontFamily="@font/samim"
     android:gravity="right"
     android:paddingBottom="10dp"
     android:paddingEnd="8dp"

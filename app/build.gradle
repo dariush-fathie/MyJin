@@ -91,5 +91,7 @@ dependencies {
     implementation 'com.google.maps.android:android-maps-utils:0.4.4'
     implementation 'com.google.firebase:firebase-messaging:17.3.2'
     implementation 'com.github.lguipeng:BubbleView:1.0.1'
+    implementation 'com.facebook.shimmer:shimmer:0.3.0'
 }
+
 apply plugin: 'com.google.gms.google-services'

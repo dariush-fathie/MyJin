@@ -69,6 +69,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <android.support.v7.widget.AppCompatImageView
+                    android:foreground="#35000000"
                     android:id="@+id/iv_messageImage"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
@@ -92,9 +93,9 @@
                 android:paddingTop="8dp"
                 android:text="@string/lorem"
                 android:textColor="@color/subTitle"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                app:fontFamily="@font/yekan"
+                app:fontFamily="@font/samim"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView" />
@@ -124,8 +125,8 @@
                         android:maxLines="1"
                         android:text="دانشگاه علوم پزشکی کردستان ، خبری"
                         android:textColor="@color/manba"
-                        android:textSize="14sp"
-                        app:fontFamily="@font/yekan" />
+                        android:textSize="12sp"
+                        app:fontFamily="@font/samim" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_time"
@@ -138,7 +139,7 @@
                         android:textAlignment="textEnd"
                         android:textColor="@color/manba"
                         android:textSize="12sp"
-                        app:fontFamily="@font/yekan" />
+                        app:fontFamily="@font/samim" />
                 </LinearLayout>
 
 
@@ -157,8 +158,8 @@
                 android:paddingStart="16dp"
                 android:text="@string/lorem"
                 android:textColor="@color/title"
-                android:textSize="16sp"
-                app:fontFamily="@font/yekan"
+                android:textSize="14sp"
+                app:fontFamily="@font/samim"
                 android:autoLink="web"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

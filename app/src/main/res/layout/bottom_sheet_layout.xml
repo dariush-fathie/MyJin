@@ -7,7 +7,6 @@
     android:background="@color/white"
     app:behavior_hideable="false"
     app:behavior_peekHeight="48dp"
-    android:visibility="gone"
     app:layout_behavior="myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior">
 
     <FrameLayout
@@ -35,29 +34,31 @@
     </LinearLayout>
 
     <android.support.design.widget.TabLayout
-        android:background="@color/white"
         android:id="@+id/ctbl"
-        app:tabSelectedTextColor="@color/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorHeight="0dp">
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="@color/title">
 
-        <android.support.design.widget.TabItem
-
+        <!--     <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-             />
-        <android.support.design.widget.TabItem
+            android:icon="@drawable/ic_map" />
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
         <android.support.design.widget.TabItem
-            android:icon="@drawable/ic_search"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_nearest_b" />-->
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/ic_search" />
 
 
     </android.support.design.widget.TabLayout>

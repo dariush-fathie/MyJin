@@ -34,7 +34,7 @@
     <color name="red3">#d9332a</color>
 
     <color name="semiTransparent">#d63d3a56</color>
-    <color name="blackTransparent">#62000000</color>
+    <color name="blackTransparent">#fafafa</color>
     <color name="orange1">#fc7753</color>
 
     <color name="yellow">#ffffff00</color>
@@ -45,6 +45,10 @@
     <color name="senderT">#eefbdd</color>
     <color name="senderTT">#6cc164</color>
     <color name="manba">#939393</color>
-
+    <color name="mc_icon_color">#95a5a6</color>
+    <color name="mc_title_color">#c78500</color>
+    <color name="gray5">#ebedef</color>
+    <color name="dynamicAndTitleTextColor">#3c4758</color>
+    <color name="gray58">#D1D9DD</color>
 
 </resources>

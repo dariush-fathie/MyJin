@@ -13,11 +13,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
         android:padding="5dp"
-        android:fontFamily="@font/yekan"
+        android:fontFamily="@font/samim"
         android:lineSpacingExtra="2.5dp"
         android:text="@string/lshhkhrtevk"
         android:textColor="@color/title"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,10 +40,10 @@
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:gravity="center"
-            android:fontFamily="@font/yekan"
+            android:fontFamily="@font/samim"
             android:padding="8dp"
             android:text="+98"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:drawableTint="@color/c1"/>
 
@@ -54,11 +54,11 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:hint="9180003382"
-            android:fontFamily="@font/yekan"
+            android:fontFamily="@font/samim"
             android:maxLines="1"
             android:gravity="center|start"
             android:textDirection="rtl"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
 
     </LinearLayout>
@@ -88,13 +88,13 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
-            android:fontFamily="@font/yekan"
+            android:fontFamily="@font/samim"
             android:gravity="center|end"
             android:text="@string/continue_"
             android:drawableEnd="@drawable/ic_next"
             android:textColor="@color/green"
             android:textDirection="rtl"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:paddingEnd="15dp"
             android:textStyle="bold"
             android:drawableTint="@color/green"

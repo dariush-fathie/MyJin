@@ -36,8 +36,8 @@
             android:paddingStart="4dp"
             android:paddingTop="8dp"
             android:textColor="@color/title"
-            android:textSize="15sp"
-            app:fontFamily="@font/yekan" />
+            android:textSize="14sp"
+            app:fontFamily="@font/samim" />
 
 
 
@@ -51,8 +51,8 @@
             android:paddingEnd="8dp"
             android:paddingStart="4dp"
             android:textColor="@color/subTitle"
-            android:textSize="13sp"
-            app:fontFamily="@font/yekan" />
+            android:textSize="12sp"
+            app:fontFamily="@font/samim" />
     </RelativeLayout>
 
 

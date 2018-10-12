@@ -16,6 +16,6 @@
         android:text="tab"
         android:textColor="@color/title"
         android:textSize="12sp"
-        app:fontFamily="@font/yekan" />
+        app:fontFamily="@font/samim" />
 
 </LinearLayout>

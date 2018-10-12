@@ -9,4 +9,4 @@
     android:padding="16dp"
     android:layout_height="wrap_content"
     android:textStyle="bold"
-    android:fontFamily="@font/yekan"/>
+    android:fontFamily="@font/samim"/>

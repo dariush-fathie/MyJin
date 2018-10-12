@@ -20,9 +20,9 @@
             android:focusableInTouchMode="true"
             android:text="ورود"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            app:fontFamily="@font/yekan" />
+            app:fontFamily="@font/samim" />
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_goback"
             android:layout_width="44dp"

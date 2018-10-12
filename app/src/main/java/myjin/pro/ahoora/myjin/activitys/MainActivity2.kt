@@ -69,8 +69,8 @@ class MainActivity2 : AppCompatActivity(),
                         getString(R.string.early), Toast.LENGTH_SHORT).show()
                 //startActivity(Intent(this, Login2Activity::class.java))
             }
-            R.id.btn_exit -> showExitDialog()
-            R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khjvns), 1)
+            R.id.rl_exit -> showExitDialog()
+            R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khj), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.mnvfs), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
             R.id.rl_tamin_services -> goToServicesActivity(tv_tamin_services.text.toString(), 5)
@@ -122,7 +122,7 @@ class MainActivity2 : AppCompatActivity(),
         rl_salamat.setOnClickListener(this)
         rl_setting.setOnClickListener(this)
         tv_login_outsign.setOnClickListener(this)
-        btn_exit.setOnClickListener(this)
+        rl_exit.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
         rl_notifi.setOnClickListener(this)
     }

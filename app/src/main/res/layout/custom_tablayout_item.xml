@@ -26,8 +26,8 @@
             android:paddingStart="16dp"
             android:text="جدیدترین"
             android:textColor="@color/title"
-            android:textSize="13sp"
-            app:fontFamily="@font/yekan" />
+            android:textSize="12sp"
+            app:fontFamily="@font/samim" />
 
     </android.support.v7.widget.CardView>
 

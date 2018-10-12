@@ -165,7 +165,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         tv_healthCenters.setOnClickListener(this)
         tv_messages.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
-        btn_exit.setOnClickListener(this)
+        rl_exit.setOnClickListener(this)
         rl_notifi.setOnClickListener(this)
     }
 
@@ -253,7 +253,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                             query?.equalTo("addressList.cityId", cityId)
                         }
                         query?.equalTo("addressList.provId", provId)
-                                ?.sort("firstName", Sort.ASCENDING)
+                        query?.sort("firstName", Sort.ASCENDING)
 
                         val result1 = query?.findAll()
 
@@ -410,12 +410,12 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.iv_goback -> onBackPressed()
             R.id.iv_menu -> openDrawerLayout()
             R.id.fab_goUp -> rv_items.smoothScrollToPosition(0)
-            R.id.btn_exit -> showExitDialog()
+            R.id.rl_exit -> showExitDialog()
             R.id.tv_healthCenters -> drawerClick(1)
             R.id.rl_drawer3 -> drawerClick(2)
             R.id.rl_drawer4 -> drawerClick(3)
 
-            R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khjvns), 1)
+            R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khj), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.mnvfs), 2)
             R.id.rl_university_services -> goToServicesActivity(tv_university_services_Title1.text.toString(), 3)
             R.id.rl_salamat -> goToServicesActivity(tv_drawerTitlesalamat.text.toString(), 4)

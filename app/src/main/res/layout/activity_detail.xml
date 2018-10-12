@@ -144,9 +144,9 @@
                             android:paddingTop="4dp"
                             android:text="نام"
                             android:textColor="@color/title"
-                            android:textSize="15sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
-                            app:fontFamily="@font/yekan"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg"
                             app:layout_constraintStart_toEndOf="@+id/iv_save"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -162,8 +162,8 @@
                             android:paddingBottom="4dp"
                             android:text="متخصص"
                             android:textColor="@color/subTitle"
-                            android:textSize="13sp"
-                            app:fontFamily="@font/yekan"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
@@ -179,7 +179,8 @@
                             android:maxLines="1"
                             android:text="آدرس"
                             android:textColor="@color/c1"
-                            android:textSize="13sp"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_subTitle" />
@@ -200,9 +201,9 @@
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/btn_showMap"
-                    android:layout_margin="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
+                    android:layout_margin="8dp"
                     app:cardBackgroundColor="@color/green"
                     app:cardCornerRadius="20dp">
 
@@ -215,8 +216,8 @@
                         android:gravity="center"
                         android:text="@string/rnnb"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
-                        app:fontFamily="@font/yekan" />
+                        android:textSize="14sp"
+                        app:fontFamily="@font/samim" />
                 </android.support.v7.widget.CardView>
 
 
@@ -243,9 +244,9 @@
                             android:gravity="center_vertical"
                             android:text="@string/mher"
                             android:textColor="@color/title"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:textStyle="bold"
-                            app:fontFamily="@font/yekan"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -276,6 +277,9 @@
                             android:padding="4dp"
                             android:text="تلفن"
                             android:tint="@color/blue"
+                            app:fontFamily="@font/samim"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/cv_telephone"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_tel"
                             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView1"
                             app:layout_constraintWidth_min="40dp" />
@@ -302,8 +306,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="4dp"
                                 android:gravity="center"
+                                android:fontFamily="@font/samim"
+                                android:textSize="12sp"
                                 android:textColor="@color/title"
-                                app:fontFamily="@font/yekan" />
+                                app:fontFamily="@font/samim" />
                         </android.support.v7.widget.CardView>
 
 
@@ -322,13 +328,14 @@
                             android:id="@+id/tv2"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
-                            android:layout_marginBottom="8dp"
                             android:layout_marginTop="8dp"
                             android:gravity="center_vertical"
                             android:padding="4dp"
                             android:text="@string/website"
                             android:tint="@color/subTitle"
-                            app:layout_constraintBottom_toTopOf="@+id/cv_mail"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/samim"
+                            app:layout_constraintBottom_toBottomOf="@+id/cv_website"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_web"
                             app:layout_constraintTop_toTopOf="@+id/cv_website"
                             app:layout_constraintWidth_max="60dp"
@@ -356,12 +363,13 @@
                                 android:layout_margin="4dp"
                                 android:autoLink="web"
                                 android:gravity="center"
-
                                 android:lines="1"
+                                android:fontFamily="@font/samim"
+                                android:textSize="12sp"
                                 android:textAllCaps="false"
                                 android:textColor="@color/title"
                                 android:textColorLink="@color/title"
-                                app:fontFamily="@font/yekan" />
+                                app:fontFamily="@font/samim" />
                         </android.support.v7.widget.CardView>
 
 
@@ -383,6 +391,8 @@
                             android:padding="4dp"
                             android:text="@string/email"
                             android:tint="@color/blue"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintBottom_toBottomOf="@+id/cv_mail"
                             app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_web"
                             app:layout_constraintTop_toTopOf="@+id/cv_mail"
@@ -415,7 +425,8 @@
                                 android:text="ahoora1389iran@gmail.com"
                                 android:textAllCaps="false"
                                 android:textColor="@color/title"
-                                android:textColorLink="@color/title" />
+                                android:textColorLink="@color/title"
+                                app:fontFamily="@font/samim" />
                         </android.support.v7.widget.CardView>
 
 
@@ -451,9 +462,9 @@
                             android:gravity="center_vertical"
                             android:text="روزهای کاری"
                             android:textColor="@color/title"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:textStyle="bold"
-                            app:fontFamily="@font/yekan"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_weekdays"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -474,7 +485,8 @@
                             android:paddingStart="5dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView"
                             app:layout_constraintStart_toStartOf="parent"
@@ -511,9 +523,9 @@
                             android:gravity="center_vertical"
                             android:text="معرفی"
                             android:textColor="@color/title"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:textStyle="bold"
-                            app:fontFamily="@font/yekan"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_cv"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -534,7 +546,8 @@
                             android:paddingStart="5dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView2"
                             app:layout_constraintStart_toStartOf="parent"
@@ -572,9 +585,9 @@
                             android:gravity="center_vertical"
                             android:text="خدمات"
                             android:textColor="@color/title"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:textStyle="bold"
-                            app:fontFamily="@font/yekan"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_service"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -595,7 +608,8 @@
                             android:paddingStart="5dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView3"
                             app:layout_constraintStart_toStartOf="parent"
@@ -633,9 +647,9 @@
                             android:gravity="center_vertical"
                             android:text="بیمه های طرف قرارداد"
                             android:textColor="@color/title"
-                            android:textSize="14sp"
+                            android:textSize="13sp"
                             android:textStyle="bold"
-                            app:fontFamily="@font/yekan"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_incurance"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -656,7 +670,8 @@
                             android:paddingStart="5dp"
                             android:text="@string/lorem"
                             android:textColor="@color/c1"
-                            android:textSize="13sp"
+                            android:textSize="12sp"
+                            app:fontFamily="@font/samim"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView5"
                             app:layout_constraintStart_toStartOf="parent"

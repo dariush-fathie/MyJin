@@ -11,4 +11,4 @@
     android:textColor="@color/white"
     android:textSize="17sp"
     android:textStyle="bold"
-    app:fontFamily="@font/yekan" />
+    app:fontFamily="@font/samim" />

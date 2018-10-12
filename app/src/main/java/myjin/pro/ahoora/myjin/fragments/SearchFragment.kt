@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
@@ -10,10 +11,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import com.github.rahatarmanahmed.cpv.CircularProgressView
 import io.realm.Realm
-import org.greenrobot.eventbus.EventBus
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.adapters.SearchAdapter
@@ -21,6 +22,7 @@ import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.Utils
+import org.greenrobot.eventbus.EventBus
 import java.util.*
 
 class SearchFragment : Fragment(), View.OnClickListener {
@@ -32,6 +34,7 @@ class SearchFragment : Fragment(), View.OnClickListener {
     private var fabGoUp: FloatingActionButton? = null
     private var adapter: SearchAdapter? = null
     private var progressView: CircularProgressView? = null
+    private var Shimmer: LinearLayout? = null
     private var groupId = 1
     lateinit var realm: Realm
 
@@ -52,7 +55,9 @@ class SearchFragment : Fragment(), View.OnClickListener {
         return view
     }
 
+
     private fun initViews(view: View) {
+        Shimmer = view.findViewById(R.id.ll_shimmer)
         progressView = view.findViewById(R.id.cpv_progress)
         rvSearch = view.findViewById(R.id.rv_search)
         tvItemNum = view.findViewById(R.id.tv_itemNums)
@@ -134,8 +139,9 @@ class SearchFragment : Fragment(), View.OnClickListener {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun initList(dataSet: List<KotlinItemModel>) {
-        adapter = SearchAdapter(activity!!, dataSet,g_url,g_name)
+        adapter = SearchAdapter(activity!!, dataSet, g_url, g_name)
 
         while (rvSearch?.itemDecorationCount!! > 0) {
             rvSearch?.removeItemDecorationAt(0)
@@ -159,6 +165,8 @@ class SearchFragment : Fragment(), View.OnClickListener {
                 }
             }
         })
+
+        Shimmer?.visibility=View.GONE
 
         tvItemNum!!.text = dataSet.size.toString() + " مورد پیدا شد ."
     }

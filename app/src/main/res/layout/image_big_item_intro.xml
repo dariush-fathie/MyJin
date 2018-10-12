@@ -19,18 +19,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatTextView
-        android:fontFamily="@font/yekan"
+        android:fontFamily="@font/samim"
         android:id="@+id/tv_slides_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:lineSpacingExtra="5dp"
-        android:lineSpacingMultiplier="1.2"
+        android:lineSpacingMultiplier="1"
         android:paddingBottom="16dp"
         android:paddingEnd="24dp"
         android:paddingStart="24dp"
         android:text="@string/lorem"
         android:textColor="@color/white"
-        android:textSize="15sp"
+        android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline1" />

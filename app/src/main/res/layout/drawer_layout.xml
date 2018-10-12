@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="end"
@@ -7,31 +8,15 @@
     android:clickable="true"
     android:focusable="true">
 
-    <com.github.florent37.arclayout.ArcLayout
-        android:id="@+id/arc1"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/transparent"
-        app:arc_cropDirection="cropOutside"
-        app:arc_height="15dp"
-        app:arc_position="top">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/green" />
-
-    </com.github.florent37.arclayout.ArcLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="48dp">
+        android:layout_above="@id/rl_exit">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatImageView
@@ -54,19 +39,19 @@
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/ivs2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vs2"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="15dp"
                     android:padding="6dp"
                     android:src="@drawable/ic_password"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_login_outsign"
@@ -77,9 +62,9 @@
                     android:paddingEnd="17dp"
                     android:text="ورود / عضویت"
                     android:textColor="@color/title"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <View
@@ -103,10 +88,10 @@
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/mc_icon_color"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -115,7 +100,7 @@
                     android:layout_toStartOf="@+id/v1"
                     android:padding="6dp"
                     android:src="@drawable/ic_jin"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_myjin_services_Title1"
@@ -124,15 +109,15 @@
                     android:layout_toStartOf="@+id/iv1"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="@string/khjvns"
-                    android:textColor="@color/green"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/yekan" />
+                    android:text="@string/khj"
+                    android:textColor="@color/title"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginBottom="7dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
@@ -151,10 +136,10 @@
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivs3"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -163,7 +148,7 @@
                     android:layout_toStartOf="@+id/vs3"
                     android:padding="7dp"
                     android:src="@drawable/ic_takapo"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_takapoo_services_Title1"
@@ -173,27 +158,27 @@
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
                     android:text="@string/mnvfs"
-                    android:textColor="@color/subTitle"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    android:textColor="@color/title"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <View
-                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginBottom="7dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/split" />
+                android:background="@color/split"
+                android:visibility="gone" />
 
             <RelativeLayout
-                android:visibility="gone"
                 android:id="@+id/rl_university_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:visibility="gone">
 
                 <View
 
@@ -201,10 +186,10 @@
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivs4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -213,7 +198,7 @@
                     android:layout_toStartOf="@+id/vs4"
                     android:padding="7dp"
                     android:src="@drawable/ic_opk"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_university_services_Title1"
@@ -224,16 +209,16 @@
                     android:paddingEnd="17dp"
                     android:text="خدمات دانشکاه علوم پزشکی"
                     android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="gone"
                 android:id="@+id/rl_salamat"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:visibility="gone">
 
 
                 <View
@@ -241,10 +226,10 @@
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivs"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -253,7 +238,7 @@
                     android:layout_toStartOf="@+id/vs"
                     android:padding="8dp"
                     android:src="@drawable/ic_salamat"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitlesalamat"
@@ -264,16 +249,16 @@
                     android:paddingEnd="17dp"
                     android:text="خدمات بیمه سلامت"
                     android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="gone"
                 android:id="@+id/rl_tamin_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:visibility="gone">
 
 
                 <View
@@ -281,10 +266,10 @@
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivs5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -293,7 +278,7 @@
                     android:layout_toStartOf="@+id/vs5"
                     android:padding="6dp"
                     android:src="@drawable/ic_kste"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_tamin_services"
@@ -304,7 +289,7 @@
                     android:paddingEnd="17dp"
                     android:text="خدمات سازمان تامین اجتماعی"
                     android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -321,10 +306,10 @@
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
 
                     android:id="@+id/ivs7"
                     android:layout_width="40dp"
@@ -334,7 +319,7 @@
                     android:layout_toStartOf="@+id/vs7"
                     android:padding="5dp"
                     android:src="@drawable/ic_ict"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_ict_services"
@@ -345,16 +330,16 @@
                     android:paddingEnd="17dp"
                     android:text="خدمات دفاتر ICT"
                     android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rl_pishkhan_services"
-android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:visibility="gone">
 
 
                 <View
@@ -362,7 +347,7 @@ android:visibility="gone"
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
                 <ImageView
@@ -374,7 +359,7 @@ android:visibility="gone"
                     android:layout_toStartOf="@+id/vs8"
                     android:padding="5dp"
                     android:src="@drawable/ic_dp_"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_pishkhan_services"
@@ -385,7 +370,7 @@ android:visibility="gone"
                     android:paddingEnd="17dp"
                     android:text="خدمات دفاتر پیشخوان"
                     android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -402,10 +387,10 @@ android:visibility="gone"
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivs9"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -414,7 +399,7 @@ android:visibility="gone"
                     android:layout_toStartOf="@+id/vs9"
                     android:padding="6dp"
                     android:src="@drawable/ic_post"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_post_services"
@@ -425,12 +410,12 @@ android:visibility="gone"
                     android:paddingEnd="17dp"
                     android:text="خدمات نوین پستی"
                     android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginBottom="7dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
@@ -460,7 +445,7 @@ android:visibility="gone"
                         android:layout_width="4dp"
                         android:layout_height="match_parent"
                         android:layout_alignParentEnd="true"
-                        android:background="@color/green"
+                        android:background="@color/title"
                         android:visibility="invisible" />
 
                     <android.support.v7.widget.AppCompatImageView
@@ -472,7 +457,7 @@ android:visibility="gone"
                         android:layout_toStartOf="@+id/vs_fav"
                         android:padding="7dp"
                         android:src="@drawable/ic_bookmark_m"
-                        android:tint="@color/green" />
+                        android:tint="@color/mc_icon_color" />
 
 
                     <android.support.v7.widget.AppCompatTextView
@@ -482,9 +467,9 @@ android:visibility="gone"
                         android:layout_marginEnd="17dp"
                         android:layout_toStartOf="@+id/iv2"
                         android:text="نشان شده ها"
-                        android:textColor="@color/green"
-                        android:textSize="16sp"
-                        app:fontFamily="@font/yekan" />
+                        android:textColor="@color/title"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/samim" />
 
 
                     <android.support.v7.widget.AppCompatImageView
@@ -520,13 +505,13 @@ android:visibility="gone"
                         android:background="@drawable/item_selector"
                         android:gravity="right"
                         android:paddingBottom="8dp"
-                        android:paddingStart="8dp"
                         android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
                         android:paddingTop="8dp"
                         android:text="@string/healthCenters"
                         android:textColor="@color/title"
                         android:textSize="14sp"
-                        app:fontFamily="@font/yekan" />
+                        app:fontFamily="@font/samim" />
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/tv_messages"
@@ -536,13 +521,13 @@ android:visibility="gone"
                         android:background="@drawable/item_selector"
                         android:gravity="right"
                         android:paddingBottom="8dp"
-                        android:paddingStart="8dp"
                         android:paddingEnd="8dp"
+                        android:paddingStart="8dp"
                         android:paddingTop="8dp"
                         android:text="@string/etlaeieh"
                         android:textColor="@color/title"
                         android:textSize="14sp"
-                        app:fontFamily="@font/yekan" />
+                        app:fontFamily="@font/samim" />
 
                 </LinearLayout>
             </com.github.florent37.expansionpanel.ExpansionLayout>
@@ -581,7 +566,7 @@ android:visibility="gone"
                     android:layout_toStartOf="@+id/v3"
                     android:padding="8dp"
                     android:src="@drawable/ic_about"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitle3"
@@ -591,9 +576,9 @@ android:visibility="gone"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
                     android:text="درباره ما"
-                    android:textColor="@color/green"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    android:textColor="@color/title"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -619,7 +604,7 @@ android:visibility="gone"
                     android:layout_toStartOf="@+id/v4"
                     android:padding="4dp"
                     android:src="@drawable/ic_contact"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitle4"
@@ -629,18 +614,18 @@ android:visibility="gone"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
                     android:text="تماس با ما"
-                    android:textColor="@color/green"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    android:textColor="@color/title"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:visibility="gone"
                 android:id="@+id/rl_rules"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:visibility="gone">
 
 
                 <View
@@ -648,10 +633,10 @@ android:visibility="gone"
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivs1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -660,7 +645,7 @@ android:visibility="gone"
                     android:layout_toStartOf="@+id/vs1"
                     android:padding="6dp"
                     android:src="@drawable/ic_rules"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -669,16 +654,16 @@ android:visibility="gone"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
                     android:text="قوانین و مقررات"
-                    android:textColor="@color/green"
+                    android:textColor="@color/title"
                     android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
 
 
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
@@ -697,19 +682,19 @@ android:visibility="gone"
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivnotifi"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
-                    android:padding="6dp"
                     android:layout_toStartOf="@+id/vnotifi"
+                    android:padding="6dp"
                     android:src="@drawable/ic_notification"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -719,14 +704,15 @@ android:visibility="gone"
                     android:paddingEnd="17dp"
                     android:text="@string/notification"
                     android:textColor="@color/title"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    android:textSize="15sp"
+                    app:fontFamily="@font/samim" />
 
 
             </RelativeLayout>
+
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
@@ -745,10 +731,10 @@ android:visibility="gone"
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/green"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivsetting"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -756,9 +742,10 @@ android:visibility="gone"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vset"
                     android:src="@drawable/ic_setting"
-                    android:tint="@color/green" />
+                    android:tint="@color/mc_icon_color" />
 
                 <android.support.v7.widget.AppCompatTextView
+
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toStartOf="@+id/ivsetting"
@@ -766,15 +753,15 @@ android:visibility="gone"
                     android:paddingEnd="17dp"
                     android:text="تنظیمات"
                     android:textColor="@color/title"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/yekan" />
+                    android:textSize="15sp"
+                    app:fontFamily="@font/samim" />
 
 
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
+                android:layout_height="1dp"
                 android:layout_marginBottom="4dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
@@ -795,21 +782,50 @@ android:visibility="gone"
                     android:lineSpacingExtra="5dp"
                     android:paddingEnd="17dp"
                     android:text="@string/version"
-                    android:textSize="12sp"
-                    app:fontFamily="@font/yekan" />
+                    android:textSize="11sp"
+                    app:fontFamily="@font/samim" />
             </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <RelativeLayout
+
+        android:id="@+id/rl_exit"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:text="@string/exit"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/red1" />
+        android:background="#afeeeeee">
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/ivexit"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/vexit"
+            android:padding="7dp"
+            android:src="@drawable/ic_exit"
+            android:tint="@color/mc_icon_color" />
+        <View
+            android:id="@+id/vexit"
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:background="@color/title"
+            android:visibility="invisible" />
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_marginEnd="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_exit"
+            android:gravity="start|center"
+            android:layout_toStartOf="@+id/ivexit"
+            android:text="خروج"
+            android:textSize="16sp"
+            android:textColor="@color/title"
+            app:fontFamily="@font/samim"
+            tools:ignore="SmallSp" />
+    </RelativeLayout>
 
 </RelativeLayout>

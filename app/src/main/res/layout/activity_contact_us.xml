@@ -21,7 +21,7 @@
             android:textColor="@color/white"
             android:textSize="17sp"
             android:textStyle="bold"
-            app:fontFamily="@font/yekan" />
+            app:fontFamily="@font/samim" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_goback"

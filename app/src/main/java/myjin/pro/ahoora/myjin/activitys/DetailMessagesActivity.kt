@@ -43,13 +43,17 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
             R.id.iv_save -> {
                 change = true
                 if (isSaved) {
+
                     val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.ic_bookmark_empty_msg)
+                    draw?.setColorFilter(ContextCompat.getColor(this@DetailMessagesActivity, R.color.white), PorterDuff.Mode.SRC_IN)
+
                     iv_save.setImageDrawable(draw)
                     deleteItem()
                     isSaved = false
 
                 } else {
                     val draw = ContextCompat.getDrawable(this@DetailMessagesActivity, R.drawable.ic_bookmark_fill_msg)
+                    draw?.setColorFilter(ContextCompat.getColor(this@DetailMessagesActivity, R.color.white), PorterDuff.Mode.SRC_IN)
                     iv_save.setImageDrawable(draw)
                     saveItem()
                     isSaved = true

@@ -55,7 +55,7 @@
                     android:text="@string/lorem"
                     android:textColor="@color/title"
                     android:textSize="14sp"
-                    app:fontFamily="@font/yekan"
+                    app:fontFamily="@font/samim"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/iv_delete"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -82,9 +82,9 @@
                     android:padding="5dp"
 
                     android:text="27 اردیبهشت 1397"
-                    android:textColor="@color/c1"
+                    android:textColor="@color/mc_title_color"
                     android:textSize="12sp"
-                    app:fontFamily="@font/yekan"
+                    app:fontFamily="@font/samim"
                     app:layout_constraintEnd_toEndOf="@+id/tv_messageTitle"
                     app:layout_constraintTop_toBottomOf="@+id/tv_messageTitle" />
 
@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="web"
-                    android:fontFamily="@font/yekan"
+                    android:fontFamily="@font/samim"
                     android:gravity="start"
                     android:lineSpacingExtra="5sp"
                     android:padding="8dp"

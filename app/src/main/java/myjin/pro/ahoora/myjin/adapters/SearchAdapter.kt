@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.adapters
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -9,11 +10,11 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.AppCompatTextView
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
@@ -24,12 +25,13 @@ import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.SharedPer
 import myjin.pro.ahoora.myjin.utils.StaticValues
+import java.util.*
 
-class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_name: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, gUrl: String, gName: String) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val context = ctx
     private val dataSet = data
-    private var g_url=g_url
-    private var g_name=g_name
+    private var g_url=gUrl
+    private var g_name=gName
     private lateinit var shp: SharedPer
     private var active2 = 1
 
@@ -38,8 +40,18 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
         return ItemHolder(v)
     }
 
+    private fun setAnimation(viewToAnimate: View) {
 
+        val r = Random()
+        val i1 = r.nextInt(200) + 250
 
+        val a = ObjectAnimator.ofFloat(viewToAnimate, "translationX", -300f, 0f)
+        a.duration = i1.toLong()
+        a.start()
+
+    }
+
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder as ItemHolder
         holder.title.text = dataSet.get(position).firstName + " " + dataSet.get(position).lastName
@@ -58,15 +70,17 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
 
         holder.subTitle.text = str
         holder.tv_addr.text = dataSet.get(position).addressList!![0]?.locTitle
+        setAnimation(holder.cv_gi)
 
-
-        var drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
+        val drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
         var url = ""
 
+        holder.image.colorFilter = null
         if (dataSet.get(position).logoImg.equals("")) {
 
 
             if (dataSet.get(position).gen?.equals("0")!!) {
+                holder.image.setColorFilter(ContextCompat.getColor(context, R.color.mc_icon_color),android.graphics.PorterDuff.Mode.SRC_IN)
 
                 url = g_url
             } else if (dataSet.get(position).gen?.equals("1")!!) {
@@ -132,7 +146,7 @@ class SearchAdapter(ctx: Context, data: List<KotlinItemModel>, g_url: String, g_
         val item: ConstraintLayout = itemView.findViewById(R.id.cl_item)
         val image: CircleImageView = itemView.findViewById(R.id.iv_itemImage)
         val ivStar: AppCompatImageView = itemView.findViewById(R.id.iv_starLike)
-
+        val cv_gi: CardView = itemView.findViewById(R.id.cv_gi)
         init {
             item.setOnClickListener(this)
             ivStar.visibility = View.GONE

@@ -39,7 +39,7 @@
                 android:paddingEnd="0dp"
                 android:paddingStart="20dp"
                 android:textColorHint="@color/tabTextDef"
-                app:fontFamily="@font/yekan" />
+                app:fontFamily="@font/samim" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_search"
@@ -62,12 +62,26 @@
         app:tabMode="scrollable"
         app:tabSelectedTextColor="@color/colorAccent" />
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_search"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ctb" />
+
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer"
+        app:shimmer_duration="2000"
+        app:shimmer_repeat_delay="300"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_base_alpha="0.5">
+
+
+        <include layout="@layout/shimmer_items" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <View
         android:id="@+id/view_shadow"
@@ -89,15 +103,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.design.widget.FloatingActionButton
-        android:visibility="gone"
         android:id="@+id/fab_goUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
         android:src="@drawable/ic_up_arrow"
+        android:visibility="gone"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

@@ -35,16 +35,19 @@ public class TwoColGridDecoration extends RecyclerView.ItemDecoration {
         /*if (itemPosition == 0 || itemPosition == 1) {
             outRect.top = (int) Utils.INSTANCE.pxFromDp(context, 56);
         }*/
-        if (itemPosition == 0 || itemPosition == 1) {
+        if (itemPosition == 0 || itemPosition == 1|| itemPosition == 2) {
             outRect.top = mSizeGridSpacingPx;
         }
 
-        if (itemPosition % 2 == 0) {
+        if (itemPosition % 3 == 0) {
             outRect.left = mSizeGridSpacingPx;
             outRect.right = mSizeGridSpacingPx / 2;
-        } else if (itemPosition % 2 == 1) {
-            outRect.right = mSizeGridSpacingPx;
+        } else if (itemPosition % 3 == 1) {
+            outRect.right = mSizeGridSpacingPx/ 2;
             outRect.left = mSizeGridSpacingPx / 2;
+        }else if (itemPosition % 3 == 2) {
+            outRect.right = mSizeGridSpacingPx;
+            outRect.left = mSizeGridSpacingPx/ 2 ;
         }
 
         outRect.bottom = mSizeGridSpacingPx / 2;

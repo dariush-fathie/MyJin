@@ -39,7 +39,7 @@
                 android:paddingEnd="0dp"
                 android:paddingStart="20dp"
                 android:textColorHint="@color/tabTextDef"
-                app:fontFamily="@font/yekan" />
+                app:fontFamily="@font/samim" />
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_search"
@@ -72,6 +72,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_itemNums" />
 
+    <LinearLayout
+        android:id="@+id/ll_shimmer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include layout="@layout/shimmer_items" />
+    </LinearLayout>
     <View
         android:id="@+id/view_shadow"
         android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.adapters
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -32,6 +33,7 @@ import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.utils.Converter
 import myjin.pro.ahoora.myjin.utils.DateConverter
+import java.util.*
 
 
 class MessagesAdapter(private val context: Context, private val list: List<KotlinMessagesModel>, private val iSend: SendIntentForResult) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -39,14 +41,14 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     private var onlyForFirstTime = true
     lateinit var markedItem: BooleanArray
     val width = Converter.getScreenWidthPx(context)
-    private var filledStarDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark_fill_msg)!!
+    private var filledStarDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
+    private var emptedStarDrawable: Drawable = ContextCompat.getDrawable(context, R.drawable.icons_bookmark_1)!!
     private var converter: DateConverter? = null
 
 
     val requestCode = 1025
 
     init {
-        filledStarDrawable.setColorFilter(ContextCompat.getColor(context, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
         val realm = Realm.getDefaultInstance()
         realm.executeTransaction { db ->
             val savedItems = db.where(KotlinMessagesModel::class.java).equalTo("saved", true).findAll()
@@ -114,6 +116,16 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     override fun getItemCount(): Int {
         return list.size
     }
+    private fun setAnimation(viewToAnimate: View) {
+
+        val r = Random()
+        val i1 = r.nextInt(200) + 250
+
+        var a = ObjectAnimator.ofFloat(viewToAnimate, "translationX", -300f, 0f)
+        a.duration = i1.toLong()
+        a.start()
+
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         holder as MessageHolder
@@ -136,9 +148,13 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         holder.source.text = messageItem.groupName
 
         if (markedItem[position]) {
+            filledStarDrawable= ContextCompat.getDrawable(context, R.drawable.ic_bookmark)!!
+            filledStarDrawable.setColorFilter(ContextCompat.getColor(context, R.color.green), PorterDuff.Mode.SRC_IN)
             holder.ivStar.setImageDrawable(filledStarDrawable)
         } else {
-            holder.ivStar.setImageResource(R.drawable.ic_bookmark_empty_msg)
+            emptedStarDrawable= ContextCompat.getDrawable(context, R.drawable.icons_bookmark_1)!!
+            emptedStarDrawable.setColorFilter(ContextCompat.getColor(context, R.color.green), PorterDuff.Mode.SRC_IN)
+            holder.ivStar.setImageDrawable(emptedStarDrawable)
         }
         val bg = "#ff" + messageItem.bgColor
         try {
@@ -146,6 +162,8 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
         }catch (e:Exception){
             holder.message_cl.setBackgroundColor(Color.WHITE)
         }
+
+        setAnimation(holder.message_cl)
 
     }
 
@@ -163,7 +181,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                     val item = getModelByCenterId(list.get(adapterPosition).messageId)
                     if (item.saved) {
                         deleteItem(item.messageId) // set saved flag to false
-                        ivStar.setImageResource(R.drawable.ic_bookmark_empty_msg)
+                        ivStar.setImageDrawable(emptedStarDrawable)
                         markedItem[adapterPosition] = false
                     } else {
                         saveItem(item.messageId) // set save flag to ture

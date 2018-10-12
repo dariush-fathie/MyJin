@@ -4,9 +4,9 @@
     android:id="@+id/tv_customTitle"
     android:text="مرتب سازی"
     android:gravity="center_vertical"
-    android:padding="16dp"
+    android:padding="15dp"
     android:textSize="17sp"
     android:textColor="@color/title"
     android:layout_height="wrap_content"
     android:textStyle="bold"
-    android:fontFamily="@font/yekan"/>
+    android:fontFamily="@font/samim"/>

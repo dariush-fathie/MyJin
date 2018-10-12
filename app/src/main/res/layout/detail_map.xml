@@ -71,7 +71,7 @@
         android:layout_marginBottom="8dp"
         android:padding="8dp"
         android:text="ذخیره نقطه در اطلاعات مرکز"
-        app:fontFamily="@font/yekan"
+        app:fontFamily="@font/samim"
         app:layout_constraintTop_toBottomOf="@+id/tv_point" />
 
     <LinearLayout

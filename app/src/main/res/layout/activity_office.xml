@@ -35,7 +35,7 @@
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    app:fontFamily="@font/yekan" />
+                    app:fontFamily="@font/samim" />
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/iv_menu"
@@ -88,7 +88,7 @@
                         android:paddingStart="8dp"
                         android:text="مرتب سازی"
                         android:textSize="15sp"
-                        app:fontFamily="@font/yekan" />
+                        app:fontFamily="@font/samim" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/iv_sort"
@@ -130,7 +130,7 @@
                         android:paddingStart="8dp"
                         android:text="فیلتر کردن"
                         android:textSize="15sp"
-                        app:fontFamily="@font/yekan" />
+                        app:fontFamily="@font/samim" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/iv_category"
@@ -189,7 +189,7 @@
                 android:text="@string/checkConnectionAndTryAgain"
                 android:textColor="@color/title"
                 android:visibility="gone"
-                app:fontFamily="@font/yekan"
+                app:fontFamily="@font/samim"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -200,7 +200,7 @@
                 android:drawableEnd="@drawable/ic_refresh_test"
                 android:text="@string/tryAgain"
                 android:visibility="gone"
-                app:fontFamily="@font/yekan"
+                app:fontFamily="@font/samim"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_netErrText"

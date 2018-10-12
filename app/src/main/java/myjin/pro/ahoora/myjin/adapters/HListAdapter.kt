@@ -67,12 +67,12 @@ class HListAdapter(ctx: Context, array: ArrayList<Int>) : RecyclerView.Adapter<R
 
         var drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
         var url = ""
+        holder.image.colorFilter = null
 
         if (item.logoImg.equals("")) {
-            // holder.image.setColorFilter(ContextCompat.getColor(context, R.color.logoColor),android.graphics.PorterDuff.Mode.SRC_IN)
 
             if (item.gen?.equals("0")!!) {
-
+                holder.image.setColorFilter(ContextCompat.getColor(context, R.color.mc_icon_color),android.graphics.PorterDuff.Mode.SRC_IN)
                 url = g_url
             } else if (item.gen?.equals("1")!!) {
 

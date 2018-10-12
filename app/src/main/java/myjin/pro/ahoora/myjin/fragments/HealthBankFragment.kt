@@ -1,6 +1,7 @@
 package myjin.pro.ahoora.myjin.fragments
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,8 @@ import android.support.v7.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
+import android.widget.RelativeLayout
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -155,7 +158,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                         c += item.counter
                     }
 
-                    (activity as MainActivity2).tvLocation.append(" (" + "$c" + " مرکز" + ")")
+                    (activity as MainActivity2).tvLocation.append(" ($c مرکز)")
                     val realm = Realm.getDefaultInstance()
                     realm.executeTransactionAsync { db: Realm? ->
                         db?.where(KotlinGroupModel::class.java)?.findAll()?.deleteAllFromRealm()
@@ -169,10 +172,10 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     // todo : control
                     //AllCentars.text = "$c مرکز "
 
-                    loadAdapter(list!!)
+                    loadAdapter(list)
                     lock = false
 
-                    hideCPV()
+
 
                 }
 
@@ -193,10 +196,10 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     private fun loadAdapter(list: List<KotlinGroupModel>) {
         // one second delay to see animation
         Handler().postDelayed({
-            hideCPV()
+
             activity as Context
             adapter = CategoryAdapter(activity!!, list)
-            mainList.layoutManager = GridLayoutManager(activity, 2)
+            mainList.layoutManager = GridLayoutManager(activity, 3)
 
             while (mainList.itemDecorationCount > 0) {
                 mainList.removeItemDecorationAt(0)
@@ -204,11 +207,13 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
             val itemDecoration = TwoColGridDecoration(activity, 8)
             mainList.addItemDecoration(itemDecoration)
-            mainList.adapter = adapter
+
 
             Handler().postDelayed({
+                hideCPV()
                 (activity as MainActivity2).showSearchFab()
-            }, 500)
+                mainList.adapter = adapter
+            }, 400)
 
         }, 500)
 
@@ -275,6 +280,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         val width = Converter.getScreenWidthPx(context) / 2
         val height = Converter.pxFromDp(context, 80f).toInt()
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: ItemHolder, position: Int) {
             if (groupsList.size > position) {
                 holder.subTitle.text = "${groupsList.get(position).counter}  مرکز"
@@ -288,17 +294,17 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     .load(groupsList[position].g_url)
                     .apply(RequestOptions()
                             .override(width, height)
-                            .centerCrop())
+                            .centerInside())
                     .into(holder.imageView)
         }
 
         private fun setAnimation(viewToAnimate: View) {
-            var a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", 200f, 0f)
+            var a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", 300f, 0f)
             if (!scrollToBottom) {
-                a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", -200f, 0f)
+                a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", -300f, 0f)
             }
             val r = Random()
-            val i1 = r.nextInt(200) + 50
+            val i1 = r.nextInt(200)+250
             a.duration = i1.toLong()
             a.start()
 
@@ -314,7 +320,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     i.putExtra(StaticValues.CITYID, cityId)
                     startActivity(i)
                 } else {
-                    Toast.makeText(activity, "پایگاه داده ژین در حال تکمیل شدن اطلاعات است ...", Toast.LENGTH_SHORT).show()
+                    popupToast(container)
                 }
             }
 
@@ -326,6 +332,17 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
             init {
                 container.setOnClickListener(this)
             }
+        }
+
+        @SuppressLint("InflateParams")
+        private fun popupToast(container: CardView) {
+
+            val inflater=context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+            val view =inflater.inflate(R.layout.pop_win_for_g,null)
+            val myPW=PopupWindow(view,600,RelativeLayout.LayoutParams.WRAP_CONTENT,true)
+            myPW.isOutsideTouchable=true
+            myPW.showAsDropDown(container,0,0)
         }
 
     }

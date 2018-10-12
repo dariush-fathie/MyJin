@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.activitys
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Build
@@ -62,6 +63,12 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
 
     override fun onTabUnselected(tab: TabLayout.Tab?) {
 
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+       showShimmer()
     }
 
     override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -222,7 +229,21 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
     }
 
 
+    private fun showShimmer(){
+        shimmer.startShimmer()
+        shimmer.visibility=View.VISIBLE
+    }
+
+    private fun stopShimmer(){
+        shimmer.stopShimmer()
+        shimmer.visibility=View.GONE
+
+    }
+
     fun loadAdapter(data: List<KotlinItemModel>) {
+
+        stopShimmer()
+
         rv_search.layoutManager = LinearLayoutManager(this)
         while (rv_search.itemDecorationCount > 0) {
             rv_search.removeItemDecorationAt(0)
@@ -272,6 +293,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
         }
 
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
             holder as ItemHolder
@@ -280,7 +302,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
 
             getG_name(dataSet[position].groupId)
             var str = ""
-            if (!dataSet[position].gen.equals("0")!!) {
+            if (!dataSet[position].gen.equals("0")) {
                 if (dataSet[position].groupId == 1) {
                     str = dataSet[position].levelList!![0]?.name + " _ " + dataSet[position].specialityList!![0]?.name
                 } else {
@@ -297,11 +319,12 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
 
             var drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_jin)
             var url = ""
+            holder.image.setColorFilter(null)
 
             if (dataSet[position].logoImg.equals("")) {
-                //  holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.logoColor), android.graphics.PorterDuff.Mode.SRC_IN)
 
                 if (dataSet[position].gen?.equals("0")!!) {
+                    holder.image.setColorFilter(ContextCompat.getColor(this@SearchActivity, R.color.mc_icon_color), android.graphics.PorterDuff.Mode.SRC_IN)
                     url = g_url
                 } else if (dataSet[position].gen?.equals("1")!!) {
 

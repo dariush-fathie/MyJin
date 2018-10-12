@@ -23,7 +23,7 @@
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:fontFamily="@font/yekan" />
+            app:fontFamily="@font/samim" />
 
 
         <android.support.v7.widget.AppCompatImageView
@@ -43,12 +43,12 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:fontFamily="@font/yekan"
+        android:fontFamily="@font/samim"
         android:gravity="center_vertical"
         android:padding="10dp"
         android:text="@string/noDetail"
-        android:textSize="16sp"
-        android:lineSpacingExtra="4dp"
+        android:textSize="15sp"
+        android:lineSpacingExtra="3dp"
         android:textColor="@color/title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -122,14 +122,14 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 change = true
                 if (isSaved) {
                     val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.icons_bookmark_1)
-                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
+                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), PorterDuff.Mode.SRC_IN)
                     iv_save.setImageDrawable(draw)
                     deleteItem(id)
                     isSaved = false
 
                 } else {
                     val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_bookmark)
-                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
+                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), PorterDuff.Mode.SRC_IN)
                     iv_save.setImageDrawable(draw)
                     saveItem(id)
                     isSaved = true
@@ -213,11 +213,11 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 isSaved = checkItemIsSaved()
                 if (isSaved) {
                     val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.ic_bookmark)
-                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
+                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), PorterDuff.Mode.SRC_IN)
                     iv_save.setImageDrawable(draw)
                 } else {
                     val draw = ContextCompat.getDrawable(this@DetailActivity, R.drawable.icons_bookmark_1)
-                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
+                    draw?.setColorFilter(ContextCompat.getColor(this@DetailActivity, R.color.green), PorterDuff.Mode.SRC_IN)
                     iv_save.setImageDrawable(draw)
                 }
 
@@ -882,7 +882,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 Glide.with(this@DetailActivity)
                         .load(item.slideList!![position]?.fileUrl)
                         .apply(RequestOptions()
-
                                 .placeholder(R.color.colorAccent))
                         .into((holder as ImageHolder)
                                 .ivImage)
@@ -898,8 +897,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 sendBroadcast(i)
             }
 
-            val cvImage: CardView = itemView.findViewById<CardView>(R.id.cv_bigItem)
-            val ivImage: AppCompatImageView = itemView.findViewById<AppCompatImageView>(R.id.iv_imageBig)
+            val ivImage: AppCompatImageView = itemView.findViewById(R.id.iv_imageBig)
 
             init {
                 itemView.setOnClickListener(this)

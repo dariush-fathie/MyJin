@@ -23,14 +23,18 @@
         android:paddingStart="8dp">
 
         <TextView
+            android:fontFamily="@font/samim"
             android:id="@+id/tv_small_notification_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
+            android:textSize="14sp"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.Compat.Notification.Title" />
 
         <TextView
+            android:textSize="13sp"
+            android:fontFamily="@font/samim"
             android:id="@+id/tv__small_notification_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
