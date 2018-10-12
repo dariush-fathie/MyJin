@@ -14,12 +14,12 @@ import android.view.ViewGroup
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
-import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
 import kotlinx.android.synthetic.main.fragment_messages.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.adapters.MessagesAdapter
 import myjin.pro.ahoora.myjin.customClasses.MsgSpinnerDialog
+import myjin.pro.ahoora.myjin.customClasses.VerticalLinearLayoutDecoration
 import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
@@ -305,7 +305,6 @@ class MessagesFragment : Fragment(), View.OnClickListener {
                         }
                     }
 
-
                     sourceArray.clear()
                     typesArray.clear()
                     idS.clear()
@@ -405,7 +404,5 @@ class MessagesFragment : Fragment(), View.OnClickListener {
                 }
             }
         })
-
     }
-
 }

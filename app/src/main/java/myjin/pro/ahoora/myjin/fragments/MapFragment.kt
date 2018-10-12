@@ -86,9 +86,9 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
         mapList.addItemDecoration(CustomMapListDecoration())
         val snapHelper = LinearSnapHelper()
         mapList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView?.layoutManager as LinearLayoutManager
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
                 val fvi = layoutManager.findFirstVisibleItemPosition()
                 val lvi = layoutManager.findLastVisibleItemPosition()
                 val fcvi = layoutManager.findFirstCompletelyVisibleItemPosition()
@@ -101,7 +101,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
                 }
             }
 
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState == 0) // if list stop moving
                     onListSnaped()
@@ -193,20 +193,20 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
             itemPadding = Utils.pxFromDp(activity as Context, 16f).toInt()
         }
 
-        override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
-            val itemPosition = (view?.getLayoutParams() as RecyclerView.LayoutParams).viewAdapterPosition
-            val itemCount = parent?.adapter?.itemCount
+        override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+            val itemPosition = (view.getLayoutParams() as RecyclerView.LayoutParams).viewAdapterPosition
+            val itemCount = parent.adapter?.itemCount
             val itemWidth = view.layoutParams.width
-            outRect?.top = itemPadding
-            outRect?.bottom = itemPadding
-            outRect?.left = itemPadding
-            outRect?.right = itemPadding
+            outRect.top = itemPadding
+            outRect.bottom = itemPadding
+            outRect.left = itemPadding
+            outRect.right = itemPadding
             if (itemPosition == 0) {
-                outRect?.left = (screenWidthPx - itemWidth) / 2
+                outRect.left = (screenWidthPx - itemWidth) / 2
             }
 
             if (itemPosition == itemCount?.minus(1)) {
-                outRect?.right = (screenWidthPx - itemWidth) / 2
+                outRect.right = (screenWidthPx - itemWidth) / 2
             }
         }
     }

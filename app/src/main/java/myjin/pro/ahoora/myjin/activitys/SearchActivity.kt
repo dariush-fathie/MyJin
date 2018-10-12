@@ -254,9 +254,9 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
 
         rv_search.clearOnScrollListeners()
         rv_search.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val i = (recyclerView?.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val i = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 if (i > 8) {
                     fab_goUp.visibility = View.VISIBLE
                 } else {

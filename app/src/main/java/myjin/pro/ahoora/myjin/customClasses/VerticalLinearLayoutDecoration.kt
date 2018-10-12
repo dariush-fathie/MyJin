@@ -1,4 +1,4 @@
-package ir.paad.audiobook.decoration
+package myjin.pro.ahoora.myjin.customClasses
 
 import android.content.Context
 import android.graphics.Rect
@@ -33,28 +33,28 @@ class VerticalLinearLayoutDecoration(private val context: Context, dpPaddingLeft
         lastItemPadding = Converter.pxFromDp(context, dpPadding.toFloat()).toInt()
     }
 
-    override fun getItemOffsets(outRect: Rect?, view: View?, parent: RecyclerView?, state: RecyclerView.State?) {
-        val itemPosition = (view?.layoutParams as RecyclerView.LayoutParams).viewAdapterPosition
-        val itemCount = parent?.adapter?.itemCount
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+        val itemPosition = (view.layoutParams as RecyclerView.LayoutParams).viewAdapterPosition
+        val itemCount = parent.adapter?.itemCount
 
-        outRect?.top = paddingTop / 2
-        outRect?.bottom = paddingBottom / 2
-        outRect?.left = paddingLeft
-        outRect?.right = paddingRight
+        outRect.top = paddingTop / 2
+        outRect.bottom = paddingBottom / 2
+        outRect.left = paddingLeft
+        outRect.right = paddingRight
 
         // first item
         if (itemPosition == 0) {
-            outRect?.top = paddingTop
+            outRect.top = paddingTop
             if (firstItemPadding != 0) {
-                outRect?.top = firstItemPadding
+                outRect.top = firstItemPadding
             }
         }
 
         // last item
         if (itemPosition == itemCount?.minus(1)) {
-            outRect?.bottom = paddingBottom
+            outRect.bottom = paddingBottom
             if (lastItemPadding != 0) {
-                outRect?.bottom = lastItemPadding
+                outRect.bottom = lastItemPadding
             }
         }
 

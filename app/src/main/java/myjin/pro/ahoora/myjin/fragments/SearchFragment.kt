@@ -154,9 +154,9 @@ class SearchFragment : Fragment(), View.OnClickListener {
 
         rvSearch?.clearOnScrollListeners()
         rvSearch?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val i = (recyclerView?.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val i = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 Log.e("sfdskfls", "flkdsjflkf")
                 if (i > 8) {
                     fabGoUp?.visibility = View.VISIBLE

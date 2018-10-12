@@ -27,7 +27,7 @@ class CustomBottomSheetBehavior<V : View> : BottomSheetBehavior<V> {
         mAllowUserDragging = allowUserDragging
     }
 
-    override fun onInterceptTouchEvent(parent: CoordinatorLayout?, child: V, event: MotionEvent?): Boolean {
+    override fun onInterceptTouchEvent(parent: CoordinatorLayout, child: V, event: MotionEvent): Boolean {
         return if (!mAllowUserDragging) {
             false
         } else super.onInterceptTouchEvent(parent, child, event)

@@ -20,7 +20,6 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.customClasses.SVGLoader.GlideApp
 
 
 class Clusters : ClusterItem {
@@ -42,7 +41,7 @@ class Clusters : ClusterItem {
         mTitle = title
         mSnippet = snippet
 
-        var markerView = View.inflate(context, R.layout.map_marker, null)
+        val markerView = View.inflate(context, R.layout.map_marker, null)
         var ivm = markerView.findViewById<AppCompatImageView>(R.id.iv_marker)
        // ivm.setImageBitmap(getBitmap("http://myjin.ir/photos/ic_28.png"))
 
@@ -65,7 +64,6 @@ class Clusters : ClusterItem {
         view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
         view.layout(0, 0, displayMetrics.widthPixels,
                 displayMetrics.heightPixels)
-        view.buildDrawingCache()
         val bitmap = Bitmap.createBitmap(view.measuredWidth,
                 view.measuredHeight, Bitmap.Config.ARGB_8888)
 
@@ -82,24 +80,4 @@ class Clusters : ClusterItem {
     }
 
 
-
-    private fun getBitmap(url: String): Bitmap {
-        var b: Bitmap? = null
-        GlideApp.with(mContext)
-                .asBitmap()
-                .load(url)
-                .priority(Priority.HIGH)
-                .timeout(5000)
-                .into(object : SimpleTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap, transition: com.bumptech.glide.request.transition.Transition<in Bitmap>?) {
-                        b=resource
-                    }
-                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                        b = (ContextCompat.getDrawable(mContext, R.drawable.ic_marker) as BitmapDrawable).bitmap
-                    }
-
-                })
-
-        return b!!
-    }
 }

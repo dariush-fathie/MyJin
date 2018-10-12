@@ -1,5 +1,4 @@
-package myjin.pro.ahoora.myjin.Services
-
+package myjin.pro.ahoora.myjin.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.support.v4.app.NotificationCompat
 import android.support.v4.content.ContextCompat
@@ -20,10 +20,9 @@ import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.NotificationActivity
 import myjin.pro.ahoora.myjin.models.KotlinNotificationModel
-import android.net.Uri
 
 
-class MyFirebaseMessagingServicse() : FirebaseMessagingService() {
+class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private val mNotification = KotlinNotificationModel()
 
@@ -33,7 +32,7 @@ class MyFirebaseMessagingServicse() : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
 
-        try{
+        try {
 
 
             if (remoteMessage!!.data.isNotEmpty()) {
@@ -48,14 +47,14 @@ class MyFirebaseMessagingServicse() : FirebaseMessagingService() {
                 mNotification.vibrate = remoteMessage.data["vibrate"]?.toBoolean()!!
                 mNotification.showToUser = remoteMessage.data["showToUser"]?.toBoolean()!!
                 mNotification.ledColor = remoteMessage.data["ledColor"]?.toInt()
-                mNotification.regDate=remoteMessage.data["sendTime"]!!
+                mNotification.regDate = remoteMessage.data["sendTime"]!!
 
                 realm.executeTransaction { db ->
                     val maxId = db.where(KotlinNotificationModel::class.java).max("messageId")
 
                     val nextId = if (maxId == null) 1 else maxId.toInt() + 1
 
-                    mNotification.messageId=nextId
+                    mNotification.messageId = nextId
                     realm.copyToRealmOrUpdate(mNotification)
 
                     if (mNotification.showToUser) {
@@ -65,12 +64,11 @@ class MyFirebaseMessagingServicse() : FirebaseMessagingService() {
 
 
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
-            Log.e(TAG,e.toString())
+            Log.e(TAG, e.toString())
         }
     }
-
 
 
     override fun onNewToken(token: String?) {
@@ -98,11 +96,9 @@ class MyFirebaseMessagingServicse() : FirebaseMessagingService() {
     }
 
 
-
-
     private fun sendNotification() {
 
-        try{
+        try {
 
             val intent = Intent(this, NotificationActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -118,7 +114,7 @@ class MyFirebaseMessagingServicse() : FirebaseMessagingService() {
 
             val channelId = getString(R.string.default_notification_channel_id)
 
-            val uri = Uri.parse("android.resource://" + packageName + "/" +R.raw.notification)
+            val uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.notification)
             val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
             val notificationBuilder = NotificationCompat.Builder(this, channelId)
                     .setSmallIcon(R.mipmap.ic_launcher)
@@ -150,13 +146,12 @@ class MyFirebaseMessagingServicse() : FirebaseMessagingService() {
 
             notificationBuilder.setCustomContentView(smallView)
 
-            notificationManager.notify(0 , notificationBuilder.build())
-        }catch (e:Exception){
-            Log.e(TAG,e.toString())
+            notificationManager.notify(0, notificationBuilder.build())
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
         }
 
     }
-
 
 
 }

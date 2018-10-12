@@ -9,11 +9,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import io.realm.Realm
-import ir.paad.audiobook.decoration.VerticalLinearLayoutDecoration
 import kotlinx.android.synthetic.main.activity_fav_message.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.FavMessageAdapter
 import myjin.pro.ahoora.myjin.customClasses.MsgSpinnerDialog
+import myjin.pro.ahoora.myjin.customClasses.VerticalLinearLayoutDecoration
 import myjin.pro.ahoora.myjin.interfaces.IDeleteClick
 import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
@@ -156,7 +156,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
                 findDistinctTypesAndSources()
 
             }
-        })
+        })/**/
     }
 
 

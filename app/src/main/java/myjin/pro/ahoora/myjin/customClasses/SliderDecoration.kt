@@ -16,10 +16,10 @@ class SliderDecoration
 
     private val mSizeGridSpacingPx: Int = Utils.pxFromDp(context, gridSpacingDp.toFloat()).toInt()
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
 
         val itemPosition = (view.layoutParams as RecyclerView.LayoutParams).viewAdapterPosition
-        val itemCount = parent.adapter.itemCount
+        val itemCount = parent.adapter!!.itemCount
 
         outRect.top = mSizeGridSpacingPx
         outRect.bottom = mSizeGridSpacingPx

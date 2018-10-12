@@ -26,8 +26,8 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.O
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.iv_send -> if (!et_chatbox.text.isEmpty()) {
-                var cm = ChatModel()
+            R.id.iv_send -> if (et_chatbox.text?.isEmpty()!!) {
+                val cm = ChatModel()
                 cm.contextMsg = et_chatbox.text.toString()
                 cm.modeMsg = mode
 
@@ -36,7 +36,7 @@ class ChatActivity : AppCompatActivity(), View.OnClickListener, CompoundButton.O
                 adapter.notifyItemInserted(dataSet.size - 1)
                 rv_chat.scrollToPosition(dataSet.size - 1)
 
-                et_chatbox.text.clear()
+                et_chatbox.text!!.clear()
             }
         }
     }

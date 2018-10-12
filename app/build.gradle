@@ -21,14 +21,14 @@ buildscript {
 //apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "myjin.pro.ahoora.myjin"
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0.6"
-        vectorDrawables.useSupportLibrary = true
+        //vectorDrawables.useSupportLibrary = true
         /* manifestPlaceholders = [
                 onesignal_app_id               : '8abb71d6-2fbb-40fa-9f46-634c93f0abec',
                 // Project number pulled from dashboard, local value is ignored.
@@ -41,7 +41,6 @@ android {
         ndk {
             abiFilters "armeabi-v7a"
         }
-
     }
 
     buildTypes {
@@ -60,38 +59,38 @@ repositories {
 }
 
 dependencies {
-
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support:cardview-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.google.firebase:firebase-core:16.0.3'
-    implementation 'com.google.android:flexbox:1.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.google.firebase:firebase-core:16.0.4'
+    //implementation 'com.google.android:flexbox:1.1.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.google.android.gms:play-services-maps:15.0.1'
-    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
     implementation 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.google.maps:google-maps-services:0.2.7'
     implementation 'org.slf4j:slf4j-nop:1.7.25'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.5'
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
-    kapt 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    kapt 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.8'
-    implementation 'com.github.chrisbanes:PhotoView:2.1.3'
-    implementation 'com.github.apl-devs:appintro:v4.2.3'
+    //implementation 'com.github.chrisbanes:PhotoView:2.1.3'
+    //implementation 'com.github.apl-devs:appintro:v4.2.3'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.florent37:expansionpanel:1.1.2'
     implementation 'com.github.florent37:arclayout:1.0.3'
-    implementation 'com.caverock:androidsvg:1.2.1'
+    //implementation 'com.caverock:androidsvg:1.2.1'
     implementation 'com.google.maps.android:android-maps-utils:0.4.4'
-    implementation 'com.google.firebase:firebase-messaging:17.3.2'
+    implementation 'com.google.firebase:firebase-messaging:17.3.3'
     implementation 'com.github.lguipeng:BubbleView:1.0.1'
     implementation 'com.facebook.shimmer:shimmer:0.3.0'
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
 apply plugin: 'com.google.gms.google-services'

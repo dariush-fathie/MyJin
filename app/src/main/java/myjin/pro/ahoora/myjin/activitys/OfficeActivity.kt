@@ -176,9 +176,9 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         }
         rv_items.clearOnScrollListeners()
         rv_items.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                val p = (recyclerView?.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val p = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 flagScrollGoesDown = p > 8
                 controlFabVisibility()
             }

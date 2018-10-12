@@ -55,7 +55,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
     private var scrollToBottom = true
     private var scrollListener = object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             scrollToBottom = dy > 0
         }
     }

@@ -1,10 +1,8 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View
 import io.realm.Realm
 import io.realm.Sort
@@ -22,7 +20,7 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_services)
 
-        tv_ServicesTitle.text=getString(R.string.notification)
+        tv_ServicesTitle.text = getString(R.string.notification)
         converter = DateConverter(this@NotificationActivity)
         try {
             val realm = Realm.getDefaultInstance()
@@ -32,24 +30,23 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
             realm.executeTransaction { db ->
 
                 var res = db.where(KotlinNotificationModel::class.java).findAll()!!
-                res = res.sort("messageId",Sort.DESCENDING)
+                res = res.sort("messageId", Sort.DESCENDING)
 
 
                 rv_services.layoutManager = LinearLayoutManager(this@NotificationActivity, LinearLayoutManager.VERTICAL, false)
 
 
-                rv_services.adapter = NotificationAdapter(this@NotificationActivity,res,realm)
-
-
+                rv_services.adapter = NotificationAdapter(this@NotificationActivity, res, realm)
 
 
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
         }
         setListner()
 
     }
+
     private fun setListner() {
         iv_goback.setOnClickListener(this)
     }
@@ -66,9 +63,9 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-       /* if (!MainActivity2.active) {
-            startActivity(Intent(this@NotificationActivity, SplashScreen::class.java))
-        }*/
+        /* if (!MainActivity2.active) {
+             startActivity(Intent(this@NotificationActivity, SplashScreen::class.java))
+         }*/
         finish()
     }
 

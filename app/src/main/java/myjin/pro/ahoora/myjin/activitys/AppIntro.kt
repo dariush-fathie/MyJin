@@ -90,12 +90,12 @@ class AppIntro : AppCompatActivity(), View.OnClickListener, CompoundButton.OnChe
         tv_skip.setOnClickListener(this)
 
         rv_intro.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 currentPosition = (rv_intro.layoutManager as LinearLayoutManager).findFirstCompletelyVisibleItemPosition()
                 Log.e("p", "$currentPosition")
                 if (currentPosition >= 0) {
-                    if (currentPosition == rv_intro.adapter.itemCount - 1) {
+                    if (currentPosition == rv_intro.adapter!!.itemCount - 1) {
                         iv_next.setImageResource(R.drawable.ic_ok)
                     } else {
                         iv_next.setImageResource(R.drawable.ic_next_arrow)

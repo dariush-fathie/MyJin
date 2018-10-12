@@ -1,15 +1,15 @@
 package myjin.pro.ahoora.myjin
 
-import android.app.Application
 import android.content.IntentFilter
 import android.net.ConnectivityManager.CONNECTIVITY_ACTION
+import android.support.multidex.MultiDexApplication
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import myjin.pro.ahoora.myjin.utils.NetworkStateReceiver
 import myjin.pro.ahoora.myjin.utils.NetworkUtil
 
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
@@ -24,8 +24,6 @@ class App : Application() {
                 //.modules(new MySchemaModule())
                 //.migration(new MyMigration())
                 .build()
-
-
 
 
         /*OneSignal.startInit(this)
