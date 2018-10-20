@@ -108,7 +108,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, gUrl: String, title
             holder.subTitle.text = str
             holder.tv_addr.text = item.addressList!![0]?.locTitle
 
-            setAnimation(holder.cv_gi)
+            setAnimation(holder.cvGi)
 
             val drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
             var url = ""
@@ -218,7 +218,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, gUrl: String, title
         @SuppressLint("RestrictedApi")
         override fun onClick(v: View?) {
             when (v?.id) {
-                R.id.cl_item -> {
+                R.id.cv_gi -> {
 
                     val item = getModelByCenterId(ids.get(adapterPosition))
 
@@ -274,10 +274,10 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, gUrl: String, title
         val ivStar: AppCompatImageView = itemView.findViewById(R.id.iv_starLike)
         val item: ConstraintLayout = itemView.findViewById(R.id.cl_item)
         val image: CircleImageView = itemView.findViewById(R.id.iv_itemImage)
-        val cv_gi: CardView = itemView.findViewById(R.id.cv_gi)
+        val cvGi: CardView = itemView.findViewById(R.id.cv_gi)
 
         init {
-            item.setOnClickListener(this)
+            cvGi.setOnClickListener(this)
             ivStar.setOnClickListener(this)
         }
     }

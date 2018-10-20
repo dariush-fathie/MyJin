@@ -11,13 +11,12 @@
         android:layout_height="match_parent">
 
 
-
         <android.support.constraint.ConstraintLayout
             android:id="@+id/cl_netErrLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:background="#24060606"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,8 +38,8 @@
                 android:id="@+id/tv_splashContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:gravity="center"
                 android:lineSpacingExtra="5dp"
                 android:lineSpacingMultiplier="1"
@@ -64,9 +63,9 @@
                     android:id="@+id/btn_splashFav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:foreground="?selectableItemBackgroundBorderless"
                     android:layout_marginEnd="8dp"
                     android:drawableEnd="@drawable/ic_mark_tes"
+                    android:foreground="?selectableItemBackgroundBorderless"
                     android:text="@string/fav"
                     app:backgroundTint="@color/white" />
 
@@ -74,9 +73,9 @@
                     android:id="@+id/btn_splashTryAgain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:foreground="?selectableItemBackgroundBorderless"
                     android:layout_marginStart="8dp"
                     android:drawableEnd="@drawable/ic_refresh_test"
+                    android:foreground="?selectableItemBackgroundBorderless"
                     android:text="@string/tryAgain"
                     app:backgroundTint="@color/white"
                     app:layout_constraintStart_toEndOf="@id/guideline1"
@@ -84,18 +83,34 @@
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
 
-        <com.github.rahatarmanahmed.cpv.CircularProgressView
-            android:id="@+id/cpv_splash"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="8dp"
+        <RelativeLayout
+            android:id="@+id/rl_splash"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_marginStart="8dp"
-            app:cpv_animAutostart="true"
-            app:cpv_indeterminate="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="5dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_jin_pro" />
+
+            <com.github.rahatarmanahmed.cpv.CircularProgressView
+                android:id="@+id/cpv_splash"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                app:cpv_animAutostart="true"
+                app:cpv_color="@color/green"
+                app:cpv_indeterminate="true" />
+        </RelativeLayout>
+
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline"

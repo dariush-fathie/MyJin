@@ -253,11 +253,11 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun showCpv() {
-        cpv_splash.visibility = View.VISIBLE
+        rl_splash.visibility = View.VISIBLE
     }
 
     private fun hideCpv() {
-        cpv_splash.visibility = View.GONE
+        rl_splash.visibility = View.GONE
     }
 
     private fun clearGlideCache() {

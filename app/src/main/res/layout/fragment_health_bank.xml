@@ -14,21 +14,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
 
-    <com.github.rahatarmanahmed.cpv.CircularProgressView
-        android:id="@+id/cpv_hbf"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+    <RelativeLayout
+        android:id="@+id/rl_hbf"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        app:cpv_animAutostart="true"
-        app:cpv_indeterminate="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintVertical_bias="0.2">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:padding="5dp"
+            android:src="@drawable/ic_jin_pro" />
+
+        <com.github.rahatarmanahmed.cpv.CircularProgressView
+            android:id="@+id/cpv_hbf"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            app:cpv_animAutostart="true"
+            app:cpv_color="@color/green"
+            app:cpv_indeterminate="true" />
+    </RelativeLayout>
 
 
     <android.support.v7.widget.AppCompatTextView
@@ -43,7 +58,7 @@
         android:textColor="@color/title"
         android:visibility="gone"
         app:fontFamily="@font/samim"
-        app:layout_constraintBottom_toTopOf="@+id/cpv_hbf" />
+        app:layout_constraintBottom_toTopOf="@+id/rl_hbf" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_healthBankTryAgain"

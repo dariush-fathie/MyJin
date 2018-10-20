@@ -372,11 +372,11 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showCPV() {
-        cpv_messages.visibility = View.VISIBLE
+        rl_messages.visibility = View.VISIBLE
     }
 
     private fun hideCPV() {
-        cpv_messages.visibility = View.GONE
+        rl_messages.visibility = View.GONE
     }
 
 

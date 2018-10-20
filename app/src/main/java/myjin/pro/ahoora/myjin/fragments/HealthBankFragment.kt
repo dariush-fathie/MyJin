@@ -221,11 +221,11 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showCPV() {
-        cpv_hbf.visibility = View.VISIBLE
+        rl_hbf.visibility = View.VISIBLE
     }
 
     private fun hideCPV() {
-        cpv_hbf.visibility = View.GONE
+        rl_hbf.visibility = View.GONE
     }
 
     private fun openProvAndCityDialog() {
