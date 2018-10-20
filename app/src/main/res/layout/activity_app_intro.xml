@@ -47,6 +47,7 @@
         android:padding="8dp"
         android:text="@string/skip"
         android:textColor="@color/white"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:textSize="15sp"
         android:textStyle="bold"
         app:fontFamily="@font/samim"

@@ -18,40 +18,40 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
-    @GET("getMainGroupList/{provId}/{cityId}")
+    @GET("service/getMainGroupList/{provId}/{cityId}")
     Call<List<KotlinGroupModel>> getGroupCount(@Path("provId") int provId, @Path("cityId") int cityId);
 
-    @GET("getItems/{gId}/{provId}/{cityId}")
+    @GET("service/getItems/{gId}/{provId}/{cityId}")
     Call<List<KotlinItemModel>> getItems(@Path("gId") int groupId, @Path("provId") int provId, @Path("cityId") int cityId);
 
-    @GET("getSpList/")
+    @GET("service/getSpList/")
     Call<List<KotlinSpecialityModel>> getSpList();
 
-    @GET("search2/{someThing}/{provId}/{cityId}")
+    @GET("service/search2/{someThing}/{provId}/{cityId}")
     Call<List<KotlinItemModel>> search(@Path("someThing") String searchedText, @Path("provId") int provId, @Path("cityId") int cityId);
 
-    @GET("login/{user}/{pass}/{yekta}")
+    @GET("service/login/{user}/{pass}/{yekta}")
     Call<TempModel> login(@Path("user") String user, @Path("pass") String pass, @Path("yekta") String yekta);
 
-    @GET("ac/")
+    @GET("service/ac/")
     Call<KotlinAboutContactModel> getAc();
 
-    @GET("update/{id}/{lat}/{lng}")
+    @GET("service/update/{id}/{lat}/{lng}")
     Call<SimpleResponseModel> updateGeoLocation(@Path("id") int autoId, @Path("lat") double lat, @Path("lng") double lng);
 
-    @GET("IsOkServerStatus/")
+    @GET("service/IsOkServerStatus/")
     Call<TempModel> IsOkServer();
 
-    @GET("sliderMain/{slide}")
+    @GET("service/sliderMain/{slide}")
     Call<List<KotlinSlideMainModel>> sliderMain(@Path("slide") int slide);
 
-    @GET("getServicesList/")
+    @GET("service/getServicesList/")
     Call<List<KotlinServicesModel>> getServicesList();
 
-    @GET("getProvinceAndCitiesList/{cityCount}")
+    @GET("service/getProvinceAndCitiesList/{cityCount}")
     Call<List<KotlinProvCityModel>> getProvinceAndCitiesList(@Path("cityCount") int cityCount);
 
-    @GET("getMessagesList/")
+    @GET("service/getMessagesList/")
     Call<List<KotlinMessagesModel>> getMessages();
 
 }

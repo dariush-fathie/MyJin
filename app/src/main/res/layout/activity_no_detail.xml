@@ -30,6 +30,7 @@
             android:id="@+id/iv_goback"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:layout_alignParentStart="true"
             android:padding="12dp"
             android:src="@drawable/ic_back"

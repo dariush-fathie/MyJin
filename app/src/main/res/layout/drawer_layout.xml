@@ -27,6 +27,7 @@
                 android:background="@drawable/menu_title" />
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_login_outsign"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -42,7 +43,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivs2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -76,6 +77,7 @@
                 android:background="#333" />
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_myjin_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -125,6 +127,7 @@
 
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_takapoo_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -173,6 +176,7 @@
                 android:visibility="gone" />
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_university_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -213,6 +217,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_salamat"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -253,6 +258,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_tamin_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -293,6 +299,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:visibility="gone"
                 android:id="@+id/rl_ict_services"
                 android:layout_width="match_parent"
@@ -334,6 +341,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_pishkhan_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -350,7 +358,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <ImageView
+                <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/ivs8"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -374,6 +382,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:visibility="gone"
                 android:id="@+id/rl_post_services"
                 android:layout_width="match_parent"
@@ -429,6 +438,7 @@
 
 
             <com.github.florent37.expansionpanel.ExpansionHeader
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/item_selector"
@@ -544,6 +554,7 @@
             <!--</RelativeLayout>-->
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_drawer3"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -582,6 +593,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_drawer4"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -620,6 +632,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_rules"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -670,6 +683,7 @@
                 android:background="@color/split" />
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_notifi"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -719,6 +733,7 @@
                 android:background="@color/split" />
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_setting"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -768,6 +783,7 @@
                 android:background="@color/split" />
 
             <RelativeLayout
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_version"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -796,6 +812,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:background="#afeeeeee">
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/ivexit"

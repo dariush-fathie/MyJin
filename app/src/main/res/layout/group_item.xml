@@ -57,7 +57,7 @@
             android:layout_marginTop="4dp"
             android:maxLines="1"
             android:text="متخصص"
-            android:textColor="@color/subTitle"
+            android:textColor="@color/mc_title_color"
             android:textSize="12sp"
             app:fontFamily="@font/samim"
             app:layout_constraintEnd_toStartOf="@+id/iv_itemImage"

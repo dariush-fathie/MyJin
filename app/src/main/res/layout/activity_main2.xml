@@ -101,7 +101,8 @@
                         android:textSize="11sp"
                         android:gravity="center"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/samim"/>
+                        android:fontFamily="@font/samim"
+                        tools:ignore="SmallSp" />
 
                     <android.support.v7.widget.AppCompatImageView
                         android:id="@+id/iv_locationArrrow"
@@ -121,6 +122,7 @@
                         android:gravity="center"
                         android:padding="4dp"
                         android:text="در تهران"
+                        android:foreground="?selectableItemBackgroundBorderless"
                         android:textSize="14sp"
                         android:textColor="@color/white"
                         app:fontFamily="@font/samim"

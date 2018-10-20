@@ -118,6 +118,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:padding="12dp"
             android:src="@drawable/ic_walking"
             android:tint="#d1625c5c" />
@@ -140,6 +141,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:background="#00ffffff"
             android:padding="12dp"
             android:src="@drawable/ic_layer"

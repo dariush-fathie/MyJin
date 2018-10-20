@@ -31,6 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.AppCompatButton
+        android:foreground="?selectableItemBackgroundBorderless"
         android:id="@+id/btn_ok"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -38,13 +39,14 @@
         android:layout_marginTop="16dp"
         android:text="بله"
         android:textStyle="bold"
-        android:textColor="@color/white"
-        app:backgroundTint="@color/red1"
+        android:backgroundTint="#d5d6d6"
+        android:textColor="@color/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_no"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
 
     <android.support.v7.widget.AppCompatButton
+        android:foreground="?selectableItemBackgroundBorderless"
         android:id="@+id/btn_no"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
