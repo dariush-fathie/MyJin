@@ -99,7 +99,7 @@
             android:padding="5dp"
             android:layout_gravity="center"
             android:checked="true"
-            android:background="@drawable/bg_test"
+            android:background="@drawable/bg_green"
             android:textSize="12sp"
             android:text="راست"
             android:textColor="@color/title" />

@@ -124,6 +124,8 @@
     <string name="notification">اعلان ها</string>
     <string name="bjemlm">به محض جستجو اطلاعات مراکز لیست می شود</string>
     <string name="pdjdhtshea">پایگاه داده ژین در حال تکمیل شدن اطلاعات است ...</string>
+    <string name="tha_n">به ترتیب حروف الفبا - نزولی</string>
+    <string name="tha_s">به ترتیب حروف الفبا - صعودی</string>
 
 </resources>
 

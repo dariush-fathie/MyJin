@@ -39,7 +39,7 @@
         android:layout_marginTop="16dp"
         android:text="بله"
         android:textStyle="bold"
-        android:backgroundTint="#d5d6d6"
+        android:backgroundTint="@color/gray"
         android:textColor="@color/title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_no"

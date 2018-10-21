@@ -90,7 +90,7 @@
                         app:fontFamily="@font/samim"
                         tools:ignore="RelativeOverlap" />
                     <android.support.v7.widget.AppCompatTextView
-                        android:background="@drawable/bg_test"
+                        android:background="@drawable/bg_green"
                         android:padding="2dp"
                         android:id="@+id/tv_test"
                         android:layout_toStartOf="@+id/tv_mainTitle"

@@ -44,8 +44,14 @@
         <item name="android:clickable">true</item>
         <item name="android:fontFamily">@font/samim</item>
     </style>
-        <style name="MyJinTheme" parent="android:style/Theme.NoTitleBar">
-            <item name="android:buttonStyle">@style/button</item>
-        </style>
+
+    <style name="MyJinTheme" parent="android:style/Theme.NoTitleBar">
+        <item name="android:buttonStyle">@style/button</item>
+    </style>
+
+    <style name="RadioButtonStyle" parent="Theme.Design.Light">
+        <item name="colorAccent">@color/green</item>
+        <item name="android:textColorSecondary">@color/mc_icon_color</item>
+    </style>
 
 </resources>

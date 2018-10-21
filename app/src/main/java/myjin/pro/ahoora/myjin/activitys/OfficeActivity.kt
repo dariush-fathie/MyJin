@@ -193,12 +193,12 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     private fun controlFabVisibility() {
         if (bottomSheetExpanded) {
-            fab_goUp.visibility = View.GONE
+            (fab_goUp as View).visibility = View.GONE
         } else {
             if (flagScrollGoesDown) {
-                fab_goUp.visibility = View.VISIBLE
+                (fab_goUp as View).visibility = View.VISIBLE
             } else {
-                fab_goUp.visibility = View.GONE
+                (fab_goUp as View).visibility = View.GONE
             }
         }
     }
@@ -402,7 +402,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.btn_tryAgain -> tryAgain()
             R.id.tv_login_outsign -> {
                 Toast.makeText(this@OfficeActivity,
-                        getString(R.string.early),Toast.LENGTH_SHORT).show()
+                        getString(R.string.early), Toast.LENGTH_SHORT).show()
                 //startActivity(Intent(this, Login2Activity::class.java))
             }
             R.id.rl_filter -> onFilterClick()
@@ -425,8 +425,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.rl_post_services -> goToServicesActivity(tv_post_services.text.toString(), 8)
             R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
             R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
-            R.id.rl_notifi->startActivity(Intent(this, NotificationActivity::class.java))
-            R.id.rl_rules->startActivity(Intent(this, RulesActivity::class.java))
+            R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
+            R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
 
         }
     }
@@ -455,7 +455,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         when (position) {
 
             1 -> {
-                startActivityForResult(Intent(this@OfficeActivity, FavActivity::class.java),settingRequest)
+                startActivityForResult(Intent(this@OfficeActivity, FavActivity::class.java), settingRequest)
 
             }
             2 -> {
@@ -471,7 +471,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
 
     }
-
 
 
     private fun openDrawerLayout() {
@@ -507,37 +506,105 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
     private fun onFilterClick() {
-        val filterView: View = LayoutInflater.from(this@OfficeActivity).inflate(R.layout.filter, null, false)
-        val tList: RecyclerView = filterView.findViewById(R.id.rv_tList)
+        val builder = AlertDialog.Builder(this@OfficeActivity)
+        val dialog: AlertDialog
+        val view = View.inflate(this@OfficeActivity, R.layout.filter, null)
+
+        val tvAction: AppCompatTextView = view.findViewById(R.id.tv_action)
+        val tvClose: AppCompatTextView = view.findViewById(R.id.tv_close)
+        val tvClearSlecteds: AppCompatTextView = view.findViewById(R.id.tv_clearSlecteds)
+        val tList: RecyclerView = view.findViewById(R.id.rv_tList)
+
         val adapter = TAdapter(this@OfficeActivity, filterArray)
         tList.layoutManager = RtlGridLayoutManager(this@OfficeActivity, 3)
         tList.adapter = adapter
 
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setCustomTitle(LayoutInflater.from(this@OfficeActivity).inflate(R.layout.filter_title, null, false))
-        builder.setPositiveButton("اعمال شود") { _, _ ->
-            if (adapter.idsArray.size > 0) {
-                filterArray = adapter.idsArray
-                Log.e("size", "${filterArray.size}")
-                filter1(filterArray)
-            } else {
-                clearFilter()
+
+        builder.setView(view)
+        dialog = builder.create()
+        dialog.show()
+
+        val listener = View.OnClickListener { v ->
+            when (v.id) {
+                R.id.tv_action -> {
+                    dialog.dismiss()
+                    if (adapter.idsArray.size > 0) {
+                        filterArray = adapter.idsArray
+                        Log.e("size", "${filterArray.size}")
+                        filter1(filterArray)
+                    } else {
+                        clearFilter()
+                    }
+                }
+                R.id.tv_close -> {
+                    dialog.dismiss()
+                }
+                R.id.tv_clearSlecteds -> {
+                    clearFilter()
+                    adapter.clearSelections()
+                }
             }
-
-        }.setNegativeButton("بستن") { _, _ ->
-
-        }.setNeutralButton("پاک کردن گزینه ها") { _, _ ->
-            clearFilter()
         }
-        builder.setView(filterView)
-        val alertDialog = builder.create()
-        alertDialog.show()
-        alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener {
-            adapter.clearSelections()
-        }
+        tvAction.setOnClickListener(listener)
+        tvClose.setOnClickListener(listener)
+        tvClearSlecteds.setOnClickListener(listener)
     }
 
     private fun onSortClick() {
+        val builder = AlertDialog.Builder(this@OfficeActivity)
+        val dialog: AlertDialog
+        val view = View.inflate(this@OfficeActivity, R.layout.sort, null)
+
+        val tvAction: AppCompatTextView = view.findViewById(R.id.tv_action)
+        val tvClose: AppCompatTextView = view.findViewById(R.id.tv_close)
+        val rb1: AppCompatRadioButton = view.findViewById(R.id.rb1)
+        val rb2: AppCompatRadioButton = view.findViewById(R.id.rb2)
+
+        rb1.isClickable = false
+        rb2.isClickable = false
+
+        if (ascSort) {
+            rb1.isChecked = true
+        } else {
+            rb2.isChecked = true
+        }
+
+
+        builder.setView(view)
+        dialog = builder.create()
+        dialog.show()
+
+        val listener = View.OnClickListener { v ->
+            when (v.id) {
+                R.id.tv_action -> {
+                    dialog.dismiss()
+                    if (rb1.isChecked) {
+                        sort(Sort.ASCENDING)
+                        ascSort = true
+                    } else {
+                        sort(Sort.DESCENDING)
+                        ascSort = false
+                    }
+                }
+                R.id.tv_close -> {
+                    dialog.dismiss()
+                }
+                R.id.rb1 -> {
+
+                }
+                R.id.rb2 -> {
+
+                }
+            }
+        }
+        tvAction.setOnClickListener(listener)
+        tvClose.setOnClickListener(listener)
+        rb1.setOnClickListener(listener)
+        rb2.setOnClickListener(listener)
+    }
+
+
+ /*   private fun onSortClick2() {
         val sortView: View = LayoutInflater.from(this@OfficeActivity).inflate(R.layout.sort, null, false)
         val rl1: RelativeLayout = sortView.findViewById(R.id.rl_sort1)
         val rl2: RelativeLayout = sortView.findViewById(R.id.rl_sort2)
@@ -577,7 +644,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         }
         val alertDialog = builder.create()
         alertDialog.show()
-    }
+    }*/
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(e: String) {
@@ -617,6 +684,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         }
 
     }
+
     private val requestPermission = 1054
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         if (requestCode == requestPermission) {
@@ -630,6 +698,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             }
         }
     }
+
     private fun notifyAdapter() {
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
@@ -666,8 +735,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         val builder = AlertDialog.Builder(this@OfficeActivity)
         val dialog: AlertDialog
         val view = View.inflate(this@OfficeActivity, R.layout.exit_layout, null)
-        val btn_ok: AppCompatButton = view.findViewById(R.id.btn_ok)
-        val btn_no: AppCompatButton = view.findViewById(R.id.btn_no)
+        val btnOk: AppCompatButton = view.findViewById(R.id.btn_ok)
+        val btnNo: AppCompatButton = view.findViewById(R.id.btn_no)
         builder.setView(view)
         dialog = builder.create()
         dialog.show()
@@ -686,8 +755,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                 }
             }
         }
-        btn_ok.setOnClickListener(listener)
-        btn_no.setOnClickListener(listener)
+        btnOk.setOnClickListener(listener)
+        btnNo.setOnClickListener(listener)
     }
 
 }

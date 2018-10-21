@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.*
 import android.view.LayoutInflater
 import android.view.View
@@ -320,7 +321,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     i.putExtra(StaticValues.CITYID, cityId)
                     startActivity(i)
                 } else {
-                    popupToast(container)
+                    popupToast()
                 }
             }
 
@@ -334,15 +335,14 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
             }
         }
 
-        @SuppressLint("InflateParams")
-        private fun popupToast(container: CardView) {
+        private fun popupToast() {
 
-            val inflater=context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
-            val view =inflater.inflate(R.layout.pop_win_for_g,null)
-            val myPW=PopupWindow(view,600,RelativeLayout.LayoutParams.WRAP_CONTENT,true)
-            myPW.isOutsideTouchable=true
-            myPW.showAsDropDown(container,0,0)
+            val builder = AlertDialog.Builder(context)
+            val dialog: AlertDialog
+            val view = View.inflate(context, R.layout.pop_win_for_g, null)
+            builder.setView(view)
+            dialog = builder.create()
+            dialog.show()
         }
 
     }

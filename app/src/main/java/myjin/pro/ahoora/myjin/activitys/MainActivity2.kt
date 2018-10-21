@@ -481,8 +481,8 @@ class MainActivity2 : AppCompatActivity(),
         val builder = AlertDialog.Builder(this@MainActivity2)
         val dialog: AlertDialog
         val view = View.inflate(this@MainActivity2, R.layout.exit_layout, null)
-        val btn_ok: AppCompatButton = view.findViewById(R.id.btn_ok)
-        val btn_no: AppCompatButton = view.findViewById(R.id.btn_no)
+        val btnOk: AppCompatButton = view.findViewById(R.id.btn_ok)
+        val btnNo: AppCompatButton = view.findViewById(R.id.btn_no)
         builder.setView(view)
         dialog = builder.create()
         dialog.show()
@@ -497,8 +497,8 @@ class MainActivity2 : AppCompatActivity(),
                 }
             }
         }
-        btn_ok.setOnClickListener(listener)
-        btn_no.setOnClickListener(listener)
+        btnOk.setOnClickListener(listener)
+        btnNo.setOnClickListener(listener)
     }
 
     override fun onBackPressed() {

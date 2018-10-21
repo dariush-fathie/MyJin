@@ -50,5 +50,6 @@
     <color name="gray5">#ebedef</color>
     <color name="dynamicAndTitleTextColor">#3c4758</color>
     <color name="gray58">#D1D9DD</color>
+    <color name="gray">#d5d6d6</color>
 
 </resources>
