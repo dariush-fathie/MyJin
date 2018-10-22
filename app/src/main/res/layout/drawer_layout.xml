@@ -16,15 +16,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_jinDrawer"
                 android:layout_width="match_parent"
+               android:scaleType="fitEnd"
                 android:layout_height="110dp"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/menu_title" />
+                android:background="@drawable/bg_green"
+                android:src="@drawable/menu_title"/>
 
             <RelativeLayout
                 android:foreground="?selectableItemBackgroundBorderless"
@@ -70,11 +71,11 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="3dp"
+                android:layout_height="1.8dp"
                 android:layout_marginBottom="7dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
-                android:background="#333" />
+                android:background="@color/mc_icon_color" />
 
             <RelativeLayout
                 android:foreground="?selectableItemBackgroundBorderless"
@@ -798,8 +799,9 @@
                     android:lineSpacingExtra="5dp"
                     android:paddingEnd="17dp"
                     android:text="@string/version"
-                    android:textSize="11sp"
-                    app:fontFamily="@font/samim" />
+                    android:textSize="12sp"
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -813,7 +815,8 @@
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:foreground="?selectableItemBackgroundBorderless"
-        android:background="#afeeeeee">
+        android:background="#afeeeeee"
+        tools:ignore="TooManyViews">
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/ivexit"
             android:layout_width="40dp"
