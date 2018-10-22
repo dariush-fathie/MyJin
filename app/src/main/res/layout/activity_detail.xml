@@ -2,6 +2,7 @@
 
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -132,7 +133,8 @@
                             app:civ_border_width="1dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:targetApi="lollipop" />
 
 
                         <android.support.v7.widget.AppCompatTextView
@@ -163,7 +165,7 @@
                             android:lines="1"
                             android:paddingBottom="4dp"
                             android:text="متخصص"
-                            android:textColor="@color/subTitle"
+                            android:textColor="@color/mc_title_color"
                             android:textSize="12sp"
                             app:fontFamily="@font/samim"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg"
@@ -208,6 +210,7 @@
                     android:layout_margin="8dp"
                     android:foreground="?selectableItemBackgroundBorderless"
                     app:cardBackgroundColor="@color/green"
+
                     app:cardCornerRadius="20dp">
 
                     <android.support.v7.widget.AppCompatTextView
@@ -215,12 +218,14 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:drawableStart="@drawable/ic_marker_24"
-                        android:drawableTint="@color/white"
+
                         android:gravity="center"
+
                         android:text="@string/rnnb"
                         android:textColor="@color/white"
                         android:textSize="14sp"
-                        app:fontFamily="@font/samim" />
+                        app:fontFamily="@font/samim"
+                        />
                 </android.support.v7.widget.CardView>
 
 
@@ -267,7 +272,7 @@
                             android:layout_marginTop="8dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_tele"
-                            android:tint="@color/subTitle"
+                            android:tint="@color/mc_icon_color"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/v_tel" />
 
@@ -322,7 +327,7 @@
                             android:layout_height="36dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_website"
-                            android:tint="@color/subTitle"
+                            android:tint="@color/mc_icon_color"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/tv2" />
 
@@ -382,7 +387,7 @@
                             android:layout_height="36dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_mail"
-                            android:tint="@color/subTitle"
+                            android:tint="@color/mc_icon_color"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/tv3" />
 
@@ -454,7 +459,7 @@
                             android:layout_height="36dp"
                             android:padding="7dp"
                             android:src="@drawable/ic_weekdays"
-                            android:tint="@color/subTitle"
+                            android:tint="@color/mc_icon_color"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -515,7 +520,7 @@
                             android:layout_height="36dp"
                             android:padding="5dp"
                             android:src="@drawable/ic_bio"
-                            android:tint="@color/subTitle"
+                            android:tint="@color/mc_icon_color"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -575,7 +580,7 @@
                             android:layout_height="36dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_service"
-                            android:tint="@color/subTitle"
+                            android:tint="@color/mc_icon_color"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -638,7 +643,8 @@
                             android:layout_height="36dp"
                             android:padding="6dp"
                             android:src="@drawable/ic_incurance"
-                            android:tint="@color/blue"
+
+                            android:tint="@color/mc_icon_color"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 

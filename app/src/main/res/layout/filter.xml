@@ -39,14 +39,14 @@
     <RelativeLayout
         android:id="@+id/rl_"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
+        android:layout_height="48dp"
+        android:padding="5dp">
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_action"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_margin="5dp"
             android:background="@drawable/bg_green"
             android:gravity="center"
             android:padding="5dp"
@@ -59,11 +59,12 @@
             android:id="@+id/tv_close"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="5dp"
             android:layout_toStartOf="@+id/tv_action"
             android:background="@drawable/bg_gray"
             android:gravity="center"
             android:padding="5dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginStart="2dp"
             android:text="بسته شود"
             android:textColor="@color/title"
             android:textStyle="bold"
@@ -74,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentStart="true"
-            android:layout_margin="5dp"
             android:background="@drawable/bg_gray"
             android:gravity="center"
             android:padding="5dp"
