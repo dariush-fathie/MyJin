@@ -124,9 +124,8 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_margin="5dp"
-                            android:background="@drawable/t"
+                            android:background="@drawable/t2"
                             android:contentDescription="@null"
-
                             android:padding="6dp"
                             android:transitionName="transition_name"
                             app:civ_border_color="@color/transparent"
