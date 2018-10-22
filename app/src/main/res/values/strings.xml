@@ -123,9 +123,17 @@
     <string name="rnnb">روی نقشه نشان بده</string>
     <string name="notification">اعلان ها</string>
     <string name="bjemlm">به محض جستجو اطلاعات مراکز لیست می شود</string>
-    <string name="pdjdhtshea">پایگاه داده ژین در حال تکمیل شدن اطلاعات است ...</string>
+    <string name="pdjdhtshea">پایگاه داده ژین در حال تکمیل شدن اطلاعات است …</string>
     <string name="tha_n">به ترتیب حروف الفبا - نزولی</string>
     <string name="tha_s">به ترتیب حروف الفبا - صعودی</string>
+    <string name="bhtghd">بیمه های طرف قرارداد</string>
+    <string name="khadamat">خدمات</string>
+    <string name="moarefi">معرفی</string>
+    <string name="rozhayekari">روزهای کاری</string>
+    <string name="telephone">تلفن</string>
+    <string name="address">آدرس</string>
+    <string name="motakhases">متخصص</string>
+    <string name="name">نام</string>
 
 </resources>
 
