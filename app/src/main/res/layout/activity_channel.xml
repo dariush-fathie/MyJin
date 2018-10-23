@@ -53,6 +53,7 @@
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_centerVertical="true"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:padding="8dp"
             android:src="@drawable/ic_back_test"
             app:tint="@color/white" />

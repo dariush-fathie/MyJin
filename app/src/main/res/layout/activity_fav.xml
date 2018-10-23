@@ -48,6 +48,7 @@
                 android:layout_height="48dp"
                 android:layout_alignParentStart="true"
                 android:padding="12dp"
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_back"
                 app:tint="@color/white" />
         </RelativeLayout>

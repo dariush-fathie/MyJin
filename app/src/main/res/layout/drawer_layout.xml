@@ -62,11 +62,12 @@
                     android:layout_toStartOf="@+id/ivs2"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="ورود / عضویت"
+                    android:text="@string/vrodvozviat"
                     android:textColor="@color/title"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <View
@@ -115,7 +116,8 @@
                     android:text="@string/khj"
                     android:textColor="@color/title"
                     android:textSize="16sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <View
@@ -164,7 +166,8 @@
                     android:text="@string/mnvfs"
                     android:textColor="@color/title"
                     android:textSize="15sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <View
@@ -212,9 +215,10 @@
                     android:layout_toStartOf="@+id/ivs4"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="خدمات دانشکاه علوم پزشکی"
+                    android:text="@string/khdop"
                     android:textSize="16sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -253,9 +257,10 @@
                     android:layout_toStartOf="@+id/ivs"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="خدمات بیمه سلامت"
+                    android:text="@string/khbs"
                     android:textSize="16sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -294,9 +299,10 @@
                     android:layout_toStartOf="@+id/ivs5"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="خدمات سازمان تامین اجتماعی"
+                    android:text="@string/khste"
                     android:textSize="16sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -336,9 +342,10 @@
                     android:layout_toStartOf="@+id/ivs7"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="خدمات دفاتر ICT"
+                    android:text="@string/khdict"
                     android:textSize="16sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -418,7 +425,7 @@
                     android:layout_toStartOf="@+id/ivs9"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="خدمات نوین پستی"
+                    android:text="@string/khnp"
                     android:textSize="16sp"
                     app:fontFamily="@font/samim" />
             </RelativeLayout>
@@ -477,7 +484,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="17dp"
                         android:layout_toStartOf="@+id/iv2"
-                        android:text="نشان شده ها"
+                        android:text="@string/nshanshodehha"
                         android:textColor="@color/title"
                         android:textSize="15sp"
                         app:fontFamily="@font/samim" />
@@ -544,15 +551,6 @@
             </com.github.florent37.expansionpanel.ExpansionLayout>
 
 
-            <!--<android.support.v7.widget.AppCompatImageView
-                android:id="@+id/iv_drawer_badge"
-                android:layout_width="5dp"
-                android:layout_height="5dp"
-                android:layout_toStartOf="@+id/ll_drawerTitle2"
-                android:background="@drawable/red_circle"
-                android:visibility="gone" />-->
-
-            <!--</RelativeLayout>-->
 
             <RelativeLayout
                 android:foreground="?selectableItemBackgroundBorderless"
@@ -587,10 +585,11 @@
                     android:layout_toStartOf="@+id/iv3"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="درباره ما"
+                    android:text="@string/aboutour"
                     android:textColor="@color/title"
                     android:textSize="15sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -626,10 +625,11 @@
                     android:layout_toStartOf="@+id/iv4"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="تماس با ما"
+                    android:text="@string/tamasbama"
                     android:textColor="@color/title"
                     android:textSize="15sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
             </RelativeLayout>
 
             <RelativeLayout

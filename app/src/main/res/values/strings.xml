@@ -134,6 +134,15 @@
     <string name="address">آدرس</string>
     <string name="motakhases">متخصص</string>
     <string name="name">نام</string>
+    <string name="tamasbama">تماس با ما</string>
+    <string name="aboutour">درباره ما</string>
+    <string name="nshanshodehha">نشان شده ها</string>
+    <string name="khnp">خدمات نوین پستی</string>
+    <string name="khdict">خدمات دفاتر ICT</string>
+    <string name="khste">خدمات سازمان تامین اجتماعی</string>
+    <string name="khbs">خدمات بیمه سلامت</string>
+    <string name="khdop">خدمات دانشکاه علوم پزشکی</string>
+    <string name="vrodvozviat">ورود / عضویت</string>
 
 </resources>
 

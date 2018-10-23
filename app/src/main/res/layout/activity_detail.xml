@@ -313,6 +313,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_margin="4dp"
                                 android:gravity="center"
+                                android:foreground="?selectableItemBackgroundBorderless"
                                 android:fontFamily="@font/samim"
                                 android:textSize="12sp"
                                 android:textColor="@color/title"
@@ -372,6 +373,7 @@
                                 android:gravity="center"
                                 android:lines="1"
                                 android:fontFamily="@font/samim"
+                                android:foreground="?selectableItemBackgroundBorderless"
                                 android:textSize="12sp"
                                 android:textAllCaps="false"
                                 android:textColor="@color/title"
@@ -431,6 +433,7 @@
                                 android:lines="1"
                                 android:text="ahoora1389iran@gmail.com"
                                 android:textAllCaps="false"
+                                android:foreground="?selectableItemBackgroundBorderless"
                                 android:textColor="@color/title"
                                 android:textColorLink="@color/title"
                                 app:fontFamily="@font/samim" />

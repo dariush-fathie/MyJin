@@ -101,6 +101,7 @@
         android:layout_marginTop="8dp"
         android:text="بستن"
         android:fontFamily="@font/samim"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:textSize="13sp"
         android:textColor="@color/white"
         app:backgroundTint="@color/green"

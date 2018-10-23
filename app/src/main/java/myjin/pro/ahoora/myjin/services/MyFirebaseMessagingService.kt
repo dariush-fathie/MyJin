@@ -27,7 +27,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     private val mNotification = KotlinNotificationModel()
 
     companion object {
-        private val TAG = "MyFirebaseMsgService"
+        private const val TAG = "MyFirebaseMsgService"
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {

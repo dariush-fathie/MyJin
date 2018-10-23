@@ -35,6 +35,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
             android:transitionName="transition_name"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:layout_toEndOf="@+id/iv_goback"
             android:src="@drawable/insured" />
 
@@ -54,6 +55,7 @@
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/iv_goback"
             android:layout_width="45dp"
+            android:foreground="?selectableItemBackgroundBorderless"
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:padding="8dp"
