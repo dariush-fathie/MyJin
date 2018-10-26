@@ -63,5 +63,6 @@ object Utils {
     //Fragments Tags
     val Login_Fragment = "Login_Fragment"
     val Verification_Fragment = "Verification_Fragment"
+    val YourName_Fragment = "YourName_Fragment"
 
 }

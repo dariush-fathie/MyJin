@@ -15,6 +15,7 @@ import myjin.pro.ahoora.myjin.utils.Utils;
 public class Login2Activity extends AppCompatActivity {
     private static FragmentManager fragmentManager;
 
+    String vc,number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,10 @@ public class Login2Activity extends AppCompatActivity {
     public void onBackPressed() {
         Fragment SignUp_Fragment = fragmentManager
                 .findFragmentByTag(Utils.INSTANCE.getVerification_Fragment());
+        Fragment YourName_Fragment = fragmentManager
+                .findFragmentByTag(Utils.INSTANCE.getYourName_Fragment());
 
-        if (SignUp_Fragment != null)
+        if (SignUp_Fragment != null|| YourName_Fragment!= null)
             replaceLoginFragment();
 
         else

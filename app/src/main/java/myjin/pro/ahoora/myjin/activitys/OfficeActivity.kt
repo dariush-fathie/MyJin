@@ -604,47 +604,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
 
- /*   private fun onSortClick2() {
-        val sortView: View = LayoutInflater.from(this@OfficeActivity).inflate(R.layout.sort, null, false)
-        val rl1: RelativeLayout = sortView.findViewById(R.id.rl_sort1)
-        val rl2: RelativeLayout = sortView.findViewById(R.id.rl_sort2)
-        val rb1: AppCompatRadioButton = sortView.findViewById(R.id.rb1)
-        val rb2: AppCompatRadioButton = sortView.findViewById(R.id.rb2)
 
-        rb1.isClickable = false
-        rb2.isClickable = false
-
-        if (ascSort) {
-            rb1.isChecked = true
-        } else {
-            rb2.isChecked = true
-        }
-
-        rl1.setOnClickListener {
-            rb2.isChecked = false
-            rb1.isChecked = true
-        }
-        rl2.setOnClickListener {
-            rb1.isChecked = false
-            rb2.isChecked = true
-        }
-
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setCustomTitle(LayoutInflater.from(this@OfficeActivity).inflate(R.layout.sort_title, null, false))
-        builder.setView(sortView)
-        builder.setPositiveButton("باشه") { dialog, which ->
-            if (rb1.isChecked) {
-                sort(Sort.ASCENDING)
-                ascSort = true
-            } else {
-                sort(Sort.DESCENDING)
-                ascSort = false
-            }
-        }.setNegativeButton("نه") { _, _ ->
-        }
-        val alertDialog = builder.create()
-        alertDialog.show()
-    }*/
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(e: String) {

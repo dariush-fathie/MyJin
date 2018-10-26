@@ -65,9 +65,9 @@ class MainActivity2 : AppCompatActivity(),
             R.id.fab_search -> search()
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> {
-                Toast.makeText(this@MainActivity2,
-                        getString(R.string.early), Toast.LENGTH_SHORT).show()
-                //startActivity(Intent(this, Login2Activity::class.java))
+               /* Toast.makeText(this@MainActivity2,
+                        getString(R.string.early), Toast.LENGTH_SHORT).show()*/
+                startActivity(Intent(this, Login2Activity::class.java))
             }
             R.id.rl_exit -> showExitDialog()
             R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khj), 1)

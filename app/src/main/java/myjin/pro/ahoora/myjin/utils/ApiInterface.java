@@ -12,8 +12,13 @@ import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel;
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel;
 import myjin.pro.ahoora.myjin.models.SimpleResponseModel;
 import myjin.pro.ahoora.myjin.models.TempModel;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -53,5 +58,16 @@ public interface ApiInterface {
 
     @GET("service/getMessagesList/")
     Call<List<KotlinMessagesModel>> getMessages();
+
+    @FormUrlEncoded
+    @POST("sms/src/VerifyLookup.php")
+    Call<TempModel>sendSms(@Field("number") String number);
+
+
+
+    @FormUrlEncoded
+    @POST("service/signin/")
+    Call<TempModel>signIn(@Field("p") String number,@Field("f") String fn,@Field("l") String ln,@Field("pr") String pr);
+
 
 }

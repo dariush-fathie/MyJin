@@ -143,6 +143,14 @@
     <string name="khbs">خدمات بیمه سلامت</string>
     <string name="khdop">خدمات دانشکاه علوم پزشکی</string>
     <string name="vrodvozviat">ورود / عضویت</string>
+    <string name="khrda">خطایی رخ داده است</string>
+    <string name="ltmkhshesh">لطفا تمامی موارد خواسته شده ارسال شود</string>
+    <string name="vbkhmsh">ورود با خطا مواجه شد</string>
+    <string name="family">نام خانوادگی</string>
+    <string name="tmpsh">تمامی موارد پر شود</string>
+    <string name="shhkhrvk">شماره همراه خود را وارد کنید</string>
+    <string name="shhen">شماره همراه اعتبار ندارد</string>
+    <string name="shhtovsh">شماره همراه طبق الگو وارد شود</string>
 
 </resources>
 

@@ -78,11 +78,11 @@ class RealmBackupRestore(activity: Activity) {
     fun restore(i: IRealmRestore) {
 
 
-        var str1 = readFile(path1)
+        val str1 = readFile(path1)
         val enums1: Collection<KotlinItemModel>
-        var str2 = readFile(path2)
+        val str2 = readFile(path2)
         val enums2: Collection<KotlinMessagesModel>
-        var str3 = readFile(path3)
+        val str3 = readFile(path3)
         val enums3: Collection<KotlinNotificationModel>
 
         if (!str1.equals("") || !str2.equals("") || !str3.equals("")) {

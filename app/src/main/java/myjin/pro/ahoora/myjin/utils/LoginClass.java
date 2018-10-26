@@ -14,12 +14,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginClass {
-    String user;
-    String pass;
-    String yekta;
+    private String user;
+    private String pass;
     private String val = "";
     private Context mContaxt;
-    boolean ch;
+    private boolean ch;
     private ServerStatusResponse serverStatusResponse;
 
     public LoginClass(Context context, ServerStatusResponse serverStatusResponse) {
@@ -59,7 +58,7 @@ public class LoginClass {
 
     private void callBachServer() {
         Utils.INSTANCE.setYekta();
-        yekta = VarableValues.INSTANCE.getYekta();
+        String yekta = VarableValues.INSTANCE.getYekta();
         Log.e("DeviceId", yekta);
         try {
             KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class).login(user, pass, yekta).enqueue(new Callback<TempModel>() {

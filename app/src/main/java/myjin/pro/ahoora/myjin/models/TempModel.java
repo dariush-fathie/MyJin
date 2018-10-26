@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class TempModel {
 
     @SerializedName("x")
+    private
     String val;
 
     public String getVal() {

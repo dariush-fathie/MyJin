@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
@@ -22,35 +22,34 @@ import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.utils.ApiInterface;
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient;
 import myjin.pro.ahoora.myjin.utils.NetworkUtil;
-import myjin.pro.ahoora.myjin.utils.Utils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Login_Fragment extends Fragment implements OnClickListener {
+public class YourName_Fragment extends Fragment implements OnClickListener {
 
     @SuppressLint("StaticFieldLeak")
     private static View view;
-
     @SuppressLint("StaticFieldLeak")
-    private static AppCompatEditText etPhonebox;
-
-    private static FragmentManager fragmentManager;
+    private static AppCompatEditText etFn, etLn;
     private AppCompatTextView tv_continue;
     private RelativeLayout rl_hbf;
     protected IActivityEnabledListener aeListener;
-
-
-    public Login_Fragment() {
-
-    }
+    private String number, fn, ln;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.login_layout2, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Bundle args = getArguments();
+
+        if (args != null) {
+
+            number = args.getString("number");
+        }
+
+        view = inflater.inflate(R.layout.yourname_layout, container, false);
         initViews();
         setListeners();
+
         return view;
     }
 
@@ -79,65 +78,61 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         }
     }
 
-
     private void initViews() {
+        etFn = view.findViewById(R.id.et_fn);
+        etLn = view.findViewById(R.id.et_ln);
+        tv_continue = view.findViewById(R.id.tv_continue);
+        rl_hbf = view.findViewById(R.id.rl_hbf);
+    }
+
+    private void setListeners() {
+        tv_continue.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_continue:
+                checkValidation();
+                break;
+
+        }
+    }
+
+    private void checkValidation() {
         getAvailableActivity(new IActivityEnabledListener() {
             @Override
             public void onActivityEnabled(FragmentActivity activity) {
-                fragmentManager = activity.getSupportFragmentManager();
-                etPhonebox = view.findViewById(R.id.et_phonebox);
-                tv_continue = view.findViewById(R.id.tv_continue);
-                rl_hbf=view.findViewById(R.id.rl_hbf);
+
+                if (etFn.getText() != null && etLn.getText() != null) {
+                    if (!etFn.getText().toString().trim().equals("") && !etLn.getText().toString().trim().equals("")) {
+                        fn = etFn.getText().toString().trim();
+                        ln = etLn.getText().toString().trim();
+
+                        if ((new NetworkUtil()).isNetworkAvailable(activity)) {
+                            signIn(activity);
+                        } else {
+                            Toast.makeText(activity, "noConnect", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        new CustomToast().Show_Toast(activity, view,
+                                getString(R.string.tmpsh));
+                    }
+                }
             }
         });
 
 
     }
-
-    private void setListeners() {
-        tv_continue.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        checkValidation();
-    }
-
-    private void checkValidation() {
-        final String getPhoneNumber = "0" + etPhonebox.getText();
-
-        if (getPhoneNumber.equals("0")) {
-
-            new CustomToast().Show_Toast(getActivity(), view,
-                    getString(R.string.shhkhrvk));
-
-        } else if (getPhoneNumber.length()!= 11) {
-            new CustomToast().Show_Toast(getActivity(), view,
-                    getString(R.string.shhen));
-        } else if (getPhoneNumber.charAt(1) == '0') {
-            new CustomToast().Show_Toast(getActivity(), view,
-                    getString(R.string.shhtovsh));
-        } else {
-
-            getAvailableActivity(new IActivityEnabledListener() {
-                @Override
-                public void onActivityEnabled(FragmentActivity activity) {
-                    if ((new NetworkUtil()).isNetworkAvailable(activity)) {
-                        sendSms(getPhoneNumber);
-                    } else {
-                        Toast.makeText(activity, "noConnect", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-
-
-        }
-
-
-    }
-
-
 
     private void showCPV() {
         rl_hbf.setVisibility(View.VISIBLE);
@@ -149,12 +144,11 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         tv_continue.setEnabled(true);
     }
 
-    private void sendSms(final String phoneNumber) {
+    private void signIn(final FragmentActivity activity) {
         showCPV();
-
         ApiInterface apiInterface = KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class);
 
-        apiInterface.sendSms(phoneNumber).enqueue(new Callback<TempModel>() {
+        apiInterface.signIn(number, fn, ln, "pr").enqueue(new Callback<TempModel>() {
             @Override
             public void onResponse(@NonNull Call<TempModel> call, @NonNull Response<TempModel> response) {
                 hideCPV();
@@ -164,22 +158,25 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     assert tempModel != null;
                     val = tempModel.getVal();
 
+                    switch (val) {
 
-                    if (val.substring(0, 3).equals("yes")) {
-
-                        Bundle bundle = new Bundle();
-                        bundle.putString("vc", val.substring(3));
-                        bundle.putString("number", phoneNumber);
-
-                        Fragment vfr = new Verification_Fragment();
-                        vfr.setArguments(bundle);
-
-                        fragmentManager
-                                .beginTransaction()
-                                .setCustomAnimations(R.anim.right_enter, R.anim.left_out)
-                                .replace(R.id.frameContainer, vfr,
-                                        Utils.INSTANCE.getVerification_Fragment()).commit();
+                        case "U": {
+                            // TODO: 10/26/2018 goto profile
+                            Toast.makeText(activity, "go to profile", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+                        case "no": {
+                            new CustomToast().Show_Toast(getActivity(), view,
+                                    getString(R.string.vbkhmsh));
+                            break;
+                        }
+                        case "empty": {
+                            new CustomToast().Show_Toast(getActivity(), view,
+                                    getString(R.string.ltmkhshesh));
+                            break;
+                        }
                     }
+
                 }
             }
 
@@ -196,6 +193,6 @@ public class Login_Fragment extends Fragment implements OnClickListener {
             }
         });
     }
-
-
 }
+
+

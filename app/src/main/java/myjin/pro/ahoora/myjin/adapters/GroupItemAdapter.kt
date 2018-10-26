@@ -267,14 +267,14 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, gUrl: String, title
             }
 
         }
-
+        val cvGi: CardView = itemView.findViewById(R.id.cv_gi)
         val title: AppCompatTextView = itemView.findViewById(R.id.tv_title)
         val subTitle: AppCompatTextView = itemView.findViewById(R.id.tv_subTitle)
         val tv_addr: AppCompatTextView = itemView.findViewById(R.id.tv_addr)
         val ivStar: AppCompatImageView = itemView.findViewById(R.id.iv_starLike)
         val item: ConstraintLayout = itemView.findViewById(R.id.cl_item)
         val image: CircleImageView = itemView.findViewById(R.id.iv_itemImage)
-        val cvGi: CardView = itemView.findViewById(R.id.cv_gi)
+
 
         init {
             cvGi.setOnClickListener(this)
