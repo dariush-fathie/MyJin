@@ -1,9 +1,9 @@
 package myjin.pro.ahoora.myjin.customClasses
 
 import android.content.Context
-import android.support.design.widget.TabLayout
-import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.CardView
+import com.google.android.material.tabs.TabLayout
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.cardview.widget.CardView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import myjin.pro.ahoora.myjin.R

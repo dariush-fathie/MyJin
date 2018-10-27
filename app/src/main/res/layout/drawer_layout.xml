@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_jinDrawer"
                 android:layout_width="match_parent"
                android:scaleType="fitEnd"
@@ -44,7 +44,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs2"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -55,7 +55,7 @@
                     android:src="@drawable/ic_password"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_login_outsign"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -95,7 +95,7 @@
                     android:background="@color/mc_icon_color"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -106,7 +106,7 @@
                     android:src="@drawable/ic_jin"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_myjin_services_Title1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -145,7 +145,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs3"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -156,7 +156,7 @@
                     android:src="@drawable/ic_takapo"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_takapoo_services_Title1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -197,7 +197,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -208,7 +208,7 @@
                     android:src="@drawable/ic_opk"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_university_services_Title1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -239,7 +239,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -250,7 +250,7 @@
                     android:src="@drawable/ic_salamat"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitlesalamat"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -281,7 +281,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -292,7 +292,7 @@
                     android:src="@drawable/ic_kste"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_tamin_services"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -323,7 +323,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
 
                     android:id="@+id/ivs7"
                     android:layout_width="40dp"
@@ -335,7 +335,7 @@
                     android:src="@drawable/ic_ict"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_ict_services"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -366,7 +366,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs8"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -377,7 +377,7 @@
                     android:src="@drawable/ic_dp_"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_pishkhan_services"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -407,7 +407,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs9"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -418,7 +418,7 @@
                     android:src="@drawable/ic_post"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_post_services"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -466,7 +466,7 @@
                         android:background="@color/title"
                         android:visibility="invisible" />
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv2"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -478,7 +478,7 @@
                         android:tint="@color/mc_icon_color" />
 
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
@@ -490,7 +490,7 @@
                         app:fontFamily="@font/samim" />
 
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/headerIndicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -515,7 +515,7 @@
                     android:layout_marginEnd="55dp"
                     android:orientation="vertical">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_healthCenters"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -531,7 +531,7 @@
                         android:textSize="14sp"
                         app:fontFamily="@font/samim" />
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_messages"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -567,7 +567,7 @@
                     android:layout_alignParentEnd="true"
                     android:background="@color/white" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv3"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -578,7 +578,7 @@
                     android:src="@drawable/ic_about"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitle3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -607,7 +607,7 @@
                     android:layout_alignParentEnd="true"
                     android:background="@color/white" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -618,7 +618,7 @@
                     android:src="@drawable/ic_contact"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitle4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -650,7 +650,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -661,7 +661,7 @@
                     android:src="@drawable/ic_rules"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toStartOf="@+id/ivs1"
@@ -700,7 +700,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivnotifi"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -711,7 +711,7 @@
                     android:src="@drawable/ic_notification"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_toStartOf="@+id/ivnotifi"
@@ -750,7 +750,7 @@
                     android:background="@color/title"
                     android:visibility="invisible" />
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivsetting"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
@@ -760,7 +760,7 @@
                     android:src="@drawable/ic_setting"
                     android:tint="@color/mc_icon_color" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
 
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -791,7 +791,7 @@
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/item_selector">
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_version_Title1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -817,7 +817,7 @@
         android:foreground="?selectableItemBackgroundBorderless"
         android:background="#afeeeeee"
         tools:ignore="TooManyViews">
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivexit"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -834,7 +834,7 @@
             android:layout_alignParentEnd="true"
             android:background="@color/title"
             android:visibility="invisible" />
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_marginEnd="16dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

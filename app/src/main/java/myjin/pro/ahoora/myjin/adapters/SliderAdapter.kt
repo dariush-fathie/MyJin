@@ -3,9 +3,9 @@ package myjin.pro.ahoora.myjin.adapters
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View

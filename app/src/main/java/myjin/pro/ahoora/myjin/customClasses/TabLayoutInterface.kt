@@ -2,10 +2,10 @@ package myjin.pro.ahoora.myjin.customClasses;
 
 import android.content.Context
 import android.os.Handler
-import android.support.constraint.ConstraintLayout
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.TabLayout
-import android.support.v4.app.FragmentManager
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayout
+import androidx.fragment.app.FragmentManager
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout

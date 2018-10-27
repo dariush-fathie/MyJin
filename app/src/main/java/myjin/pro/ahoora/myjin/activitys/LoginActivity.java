@@ -1,18 +1,15 @@
 package myjin.pro.ahoora.myjin.activitys;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatEditText;
-import android.support.v7.widget.AppCompatTextView;
-import android.view.LayoutInflater;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
+
 import android.view.View;
 import android.widget.ImageView;
 
 import myjin.pro.ahoora.myjin.R;
-import myjin.pro.ahoora.myjin.models.KotlinNotificationModel;
 import myjin.pro.ahoora.myjin.utils.LoginClass;
-import myjin.pro.ahoora.myjin.utils.ServerStatus;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

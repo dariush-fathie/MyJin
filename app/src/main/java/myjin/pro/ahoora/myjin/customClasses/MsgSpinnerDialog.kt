@@ -2,10 +2,10 @@ package myjin.pro.ahoora.myjin.customClasses
 
 
 import android.app.Activity
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.AppCompatButton
-import android.support.v7.widget.AppCompatEditText
-import android.support.v7.widget.AppCompatTextView
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View

@@ -1,15 +1,15 @@
 package myjin.pro.ahoora.myjin.adapters
 
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.fragments.FavFragment
 import myjin.pro.ahoora.myjin.fragments.HealthBankFragment
 import myjin.pro.ahoora.myjin.fragments.MessagesFragment
 
-class PagerAdapter(fm: FragmentManager,context:Context) : FragmentStatePagerAdapter(fm) {
+class PagerAdapter(fm: FragmentManager, context:Context) : FragmentStatePagerAdapter(fm) {
 
     val mContext=context
     override fun getItem(position: Int): Fragment? {

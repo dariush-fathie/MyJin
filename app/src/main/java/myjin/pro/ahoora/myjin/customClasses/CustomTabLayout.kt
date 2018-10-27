@@ -1,10 +1,10 @@
 package myjin.pro.ahoora.myjin.customClasses;
 
 import android.content.Context
-import android.support.design.widget.TabLayout
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.AppCompatTextView
+import com.google.android.material.tabs.TabLayout
+import androidx.core.content.ContextCompat
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.ImageView

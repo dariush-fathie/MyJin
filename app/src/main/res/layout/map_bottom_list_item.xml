@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="150dp"
     android:foreground="?selectableItemBackgroundBorderless"
@@ -27,7 +27,7 @@
             app:civ_border_color="@android:color/transparent"
             app:civ_border_width="1dp"/>
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_below="@id/iv_bottomListImage"
             android:id="@+id/tv_bottomListTitle"
             android:layout_width="match_parent"
@@ -43,7 +43,7 @@
 
 
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_below="@id/tv_bottomListTitle"
             android:id="@+id/tv_bottomListSubTitle"
             android:layout_width="match_parent"
@@ -57,4 +57,4 @@
     </RelativeLayout>
 
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>

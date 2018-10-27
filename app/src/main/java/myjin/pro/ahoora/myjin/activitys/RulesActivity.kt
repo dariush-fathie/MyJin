@@ -1,6 +1,6 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_rules.*

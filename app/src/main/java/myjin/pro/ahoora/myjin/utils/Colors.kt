@@ -1,7 +1,7 @@
 package myjin.pro.ahoora.myjin.utils
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import myjin.pro.ahoora.myjin.R
 
 class Colors(context: Context) {

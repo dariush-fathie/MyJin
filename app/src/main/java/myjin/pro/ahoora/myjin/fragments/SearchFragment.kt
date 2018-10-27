@@ -2,9 +2,9 @@ package myjin.pro.ahoora.myjin.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
-import android.support.v4.app.Fragment
-import android.support.v7.widget.*
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.fragment.app.Fragment
+import androidx.appcompat.widget.*
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -13,6 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.rahatarmanahmed.cpv.CircularProgressView
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R

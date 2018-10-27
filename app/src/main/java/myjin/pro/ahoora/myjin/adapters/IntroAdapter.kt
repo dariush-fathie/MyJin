@@ -3,10 +3,10 @@ package myjin.pro.ahoora.myjin.adapters
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.PictureDrawable
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.AppCompatTextView
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View

@@ -9,12 +9,12 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -26,7 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView5"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -38,7 +38,7 @@
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView6"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -50,7 +50,7 @@
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView7"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -62,15 +62,15 @@
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView5" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:orientation="vertical">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView1"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -82,7 +82,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView51"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -94,7 +94,7 @@
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView61" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView61"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -106,7 +106,7 @@
             app:layout_constraintHeight_percent="0.2"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView71"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -118,9 +118,9 @@
             app:layout_constraintHeight_percent="0.1"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView51" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:textColor="@color/dynamicAndTitleTextColor"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"

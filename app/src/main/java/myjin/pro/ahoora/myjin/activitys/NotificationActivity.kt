@@ -1,8 +1,8 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.View
 import io.realm.Realm
 import io.realm.Sort

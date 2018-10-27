@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     android:background="@color/back">
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/cl_homeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abp_main"
             android:layout_width="match_parent"
             android:background="@color/transparent"
@@ -20,7 +20,7 @@
             app:elevation="0dp"
             app:layout_behavior="myjin.pro.ahoora.myjin.customClasses.FixedAppBarLayoutBehavior">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="88dp"
@@ -42,7 +42,7 @@
 
                 </com.github.florent37.arclayout.ArcLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_mainSlider"
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
@@ -65,7 +65,7 @@
                     android:background="@color/colorPrimaryDark"
                     app:layout_collapseMode="pin">
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_menu"
                         android:layout_width="44dp"
                         android:layout_height="44dp"
@@ -75,7 +75,7 @@
                         android:src="@drawable/ic_menu"
                         app:tint="@color/white" />
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_mainTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                         android:textStyle="bold"
                         app:fontFamily="@font/samim"
                         tools:ignore="RelativeOverlap" />
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:background="@drawable/bg_green"
                         android:padding="2dp"
                         android:id="@+id/tv_test"
@@ -104,7 +104,7 @@
                         android:fontFamily="@font/samim"
                         tools:ignore="SmallSp" />
 
-                    <android.support.v7.widget.AppCompatImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_locationArrrow"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
@@ -113,7 +113,7 @@
                         android:rotation="180"
                         android:src="@drawable/ic_up_arrow" />
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_location"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -128,7 +128,7 @@
                         app:fontFamily="@font/samim"
                         tools:ignore="RelativeOverlap" />
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/AllCentars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
 
                 </RelativeLayout>
 
-                <android.support.design.widget.TabLayout
+                <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tbl_main"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
@@ -157,11 +157,11 @@
                     app:tabTextAppearance="@style/CustomTabTextFont"
                     app:tabTextColor="@color/androidTextColor" />
 
-            </android.support.design.widget.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_mainContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -188,7 +188,7 @@
             app:selectedDotColor="@color/colorPrimaryDark"
             app:selectedDotRadius="4dp" />
 
-        <android.support.design.widget.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -199,8 +199,8 @@
             app:backgroundTint="@color/green"
             app:fabSize="normal" />
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <include layout="@layout/drawer_layout" />
 
-</android.support.v4.widget.DrawerLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

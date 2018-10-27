@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:clickable="true"
             android:focusable="true">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_share"
                 android:layout_width="44dp"
                 android:foreground="?selectableItemBackgroundBorderless"
@@ -29,7 +29,7 @@
                 android:src="@drawable/ic_share"
                 app:tint="@color/white" />
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_channel"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
@@ -39,7 +39,7 @@
                 android:visibility="gone"
                 app:tint="@color/white" />
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_chat"
                 android:layout_width="44dp"
                 android:layout_height="44dp"
@@ -51,7 +51,7 @@
                 app:tint="@color/white" />
 
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_goback"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -76,7 +76,7 @@
                 android:paddingEnd="8dp"
                 android:paddingStart="8dp">
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -86,7 +86,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="180dp">
 
-                        <android.support.v7.widget.RecyclerView
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_imageListBig"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
@@ -104,15 +104,15 @@
                             app:selectedDotColor="@color/green" />
 
                     </RelativeLayout>
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_row1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/rl_item"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
                             tools:targetApi="lollipop" />
 
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_title"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                             app:layout_constraintStart_toEndOf="@+id/iv_save"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_subTitle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_addr"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -188,7 +188,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/tv_subTitle" />
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/iv_save"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
@@ -198,11 +198,11 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/btn_showMap"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -212,7 +212,7 @@
 
                     app:cardCornerRadius="20dp">
 
-                    <android.support.v7.widget.AppCompatTextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
@@ -225,16 +225,16 @@
                         android:textSize="14sp"
                         app:fontFamily="@font/samim"
                         />
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_row2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -243,7 +243,7 @@
                         android:paddingStart="16dp"
                         android:paddingTop="8dp">
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/appCompatTextView1"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
@@ -264,7 +264,7 @@
                             android:background="@color/back1"
                             app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView1" />
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_tel"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
@@ -275,7 +275,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/v_tel" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv1"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
@@ -292,7 +292,7 @@
                             app:layout_constraintWidth_min="40dp" />
 
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
 
                             android:id="@+id/cv_telephone"
                             android:layout_width="0dp"
@@ -307,7 +307,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView1">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tv_telephone"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -318,10 +318,10 @@
                                 android:textSize="12sp"
                                 android:textColor="@color/title"
                                 app:fontFamily="@font/samim" />
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_web"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
@@ -332,7 +332,7 @@
                             app:layout_constraintTop_toTopOf="@+id/tv2" />
 
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv2"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
@@ -349,7 +349,7 @@
                             app:layout_constraintWidth_max="60dp"
                             app:layout_constraintWidth_min="40dp" />
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
 
                             android:id="@+id/cv_website"
                             android:layout_width="0dp"
@@ -364,7 +364,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/cv_telephone">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tv_website"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -379,10 +379,10 @@
                                 android:textColor="@color/title"
                                 android:textColorLink="@color/title"
                                 app:fontFamily="@font/samim" />
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_mail"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
@@ -392,7 +392,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/tv3" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv3"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
@@ -408,7 +408,7 @@
                             app:layout_constraintWidth_max="60dp"
                             app:layout_constraintWidth_min="40dp" />
 
-                        <android.support.v7.widget.CardView
+                        <androidx.cardview.widget.CardView
 
                             android:id="@+id/cv_mail"
                             android:layout_width="0dp"
@@ -423,7 +423,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/cv_website">
 
-                            <android.support.v7.widget.AppCompatTextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/tv_mail"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -437,25 +437,25 @@
                                 android:textColor="@color/title"
                                 android:textColorLink="@color/title"
                                 app:fontFamily="@font/samim" />
-                        </android.support.v7.widget.CardView>
+                        </androidx.cardview.widget.CardView>
 
 
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_row3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_weekdays"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
@@ -465,7 +465,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/appCompatTextView"
                             android:layout_width="0dp"
                             android:layout_height="36dp"
@@ -486,7 +486,7 @@
                             android:background="@color/back1"
                             app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_weekdays" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_attend"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -502,22 +502,22 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/v_days"
                             tools:ignore="RtlSymmetry" />
-                    </android.support.constraint.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_row4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_cv"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
@@ -527,7 +527,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/appCompatTextView2"
                             android:layout_width="0dp"
                             android:layout_height="36dp"
@@ -548,7 +548,7 @@
                             android:background="@color/back1"
                             app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_cv" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_cv"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -564,21 +564,21 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/v_cv"
                             tools:ignore="RtlSymmetry" />
-                    </android.support.constraint.ConstraintLayout>
-                </android.support.v7.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_row5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_service"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
@@ -588,7 +588,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/appCompatTextView3"
                             android:layout_width="0dp"
                             android:layout_height="36dp"
@@ -611,7 +611,7 @@
                             android:background="@color/back1"
                             app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_service" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_service"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -626,22 +626,22 @@
                             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView3"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/v_service" />
-                    </android.support.constraint.ConstraintLayout>
-                </android.support.v7.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
-                <android.support.v7.widget.CardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/cv_row6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp">
 
-                    <android.support.constraint.ConstraintLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <android.support.v7.widget.AppCompatImageView
+                        <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_incurance"
                             android:layout_width="36dp"
                             android:layout_height="36dp"
@@ -652,7 +652,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/appCompatTextView5"
                             android:layout_width="0dp"
                             android:layout_height="36dp"
@@ -674,7 +674,7 @@
                             android:background="@color/back1"
                             app:layout_constraintTop_toBottomOf="@+id/aiv_logoImg_incurance" />
 
-                        <android.support.v7.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_incurance"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -689,8 +689,8 @@
                             app:layout_constraintEnd_toEndOf="@+id/appCompatTextView5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/v_inc" />
-                    </android.support.constraint.ConstraintLayout>
-                </android.support.v7.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
@@ -700,5 +700,5 @@
 
     <include layout="@layout/detail_map" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

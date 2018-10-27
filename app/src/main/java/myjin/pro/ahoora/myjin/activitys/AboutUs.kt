@@ -2,7 +2,7 @@ package myjin.pro.ahoora.myjin.activitys;
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_about_us.*
 import myjin.pro.ahoora.myjin.R

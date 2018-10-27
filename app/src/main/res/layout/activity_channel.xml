@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:clickable="true"
         android:focusable="true">
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_share"
             android:layout_width="44dp"
             android:layout_height="44dp"
@@ -36,7 +36,7 @@
             android:layout_toEndOf="@+id/iv_goback"
             android:src="@drawable/doctor" />
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_goback"
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -74,7 +74,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -83,7 +83,7 @@
                 android:background="@drawable/rounded_rectangle_orange">
 
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_message_body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                     android:textColor="@color/title"
                     android:textDirection="rtl" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_message_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,8 +109,8 @@
                     app:layout_constraintEnd_toEndOf="@+id/text_message_body"
                     app:layout_constraintTop_toBottomOf="@+id/text_message_body" />
 
-            </android.support.constraint.ConstraintLayout>
-            <android.support.constraint.ConstraintLayout
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -119,7 +119,7 @@
                 android:background="@drawable/rounded_rectangle_orange">
 
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_message_body2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -132,7 +132,7 @@
                     android:textColor="@color/title"
                     android:textDirection="rtl" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_message_time2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,8 +145,8 @@
                     app:layout_constraintEnd_toEndOf="@+id/text_message_body2"
                     app:layout_constraintTop_toBottomOf="@+id/text_message_body2" />
 
-            </android.support.constraint.ConstraintLayout>
-            <android.support.constraint.ConstraintLayout
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -154,7 +154,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_rectangle_orange">
 
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv1"
 
                     android:layout_width="240dp"
@@ -168,7 +168,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_message_body3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -183,7 +183,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv1" />
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_message_time3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -197,8 +197,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_message_body3" />
 
 
-            </android.support.constraint.ConstraintLayout>
-            <android.support.constraint.ConstraintLayout
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -206,7 +206,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="15dp"
                 android:background="@drawable/rounded_rectangle_orange">
-                <android.support.v7.widget.AppCompatImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv2"
                     android:layout_width="240dp"
                     android:padding="5dp"
@@ -215,7 +215,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
-                <android.support.v7.widget.AppCompatTextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/text_message_time4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -228,7 +228,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv2" />
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -253,7 +253,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/edittext_chatbox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -274,4 +274,4 @@
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,7 @@
                 android:textSize="16sp" />
         </RelativeLayout>
 
-        <android.support.v7.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/headerIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -2,7 +2,7 @@ package myjin.pro.ahoora.myjin
 
 import android.content.IntentFilter
 import android.net.ConnectivityManager.CONNECTIVITY_ACTION
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.google.firebase.analytics.FirebaseAnalytics
 import io.realm.Realm
 import io.realm.RealmConfiguration
