@@ -151,6 +151,12 @@
     <string name="shhkhrvk">شماره همراه خود را وارد کنید</string>
     <string name="shhen">شماره همراه اعتبار ندارد</string>
     <string name="shhtovsh">شماره همراه طبق الگو وارد شود</string>
+    <string name="lyervk">لطفا یک عبارت را وارد کنید ,</string>
+    <string name="tfknmshdmndbezm">توجه فرمایید که نقطه مشخص شده در مرکز نقشه در بانک اطلاعاتی این مرکز ذخیره می شود</string>
+    <string name="mhebdeh">متوجه هستم، ادامه بده</string>
+    <string name="bdemssh">با موفقیت در اطلاعات مرکز ذخیره شد</string>
+    <string name="khdzke">خطا در ذخیره کردن اطلاعات</string>
+    <string name="enbgard">ادامه نده، برگرد</string>
 
 </resources>
 

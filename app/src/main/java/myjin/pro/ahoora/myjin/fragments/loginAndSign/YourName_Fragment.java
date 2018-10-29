@@ -2,6 +2,7 @@ package myjin.pro.ahoora.myjin.fragments.loginAndSign;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import myjin.pro.ahoora.myjin.R;
+import myjin.pro.ahoora.myjin.activitys.ProfileActivity;
 import myjin.pro.ahoora.myjin.customClasses.CustomToast;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.utils.ApiInterface;
@@ -162,7 +164,8 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
 
                         case "U": {
                             // TODO: 10/26/2018 goto profile
-                            Toast.makeText(activity, "go to profile", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(activity, "go to profile", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(activity,ProfileActivity.class));
                             break;
                         }
                         case "no": {

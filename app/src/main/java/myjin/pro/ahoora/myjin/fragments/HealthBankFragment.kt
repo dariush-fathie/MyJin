@@ -147,7 +147,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
             lock = true
             showCPV()
             hideErrLayout()
-            (activity as MainActivity2).hideSearchFab()
+           // (activity as MainActivity2).hideSearchFab()
 
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
             val response = apiInterface.getGroupCount(provId, cityId)
@@ -215,7 +215,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
             Handler().postDelayed({
                 hideCPV()
-                (activity as MainActivity2).showSearchFab()
+                //(activity as MainActivity2).showSearchFab()
                 mainList.adapter = adapter
             }, 400)
 

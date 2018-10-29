@@ -2,6 +2,7 @@ package myjin.pro.ahoora.myjin.fragments.loginAndSign;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import myjin.pro.ahoora.myjin.R;
 import myjin.pro.ahoora.myjin.activitys.Login2Activity;
+import myjin.pro.ahoora.myjin.activitys.ProfileActivity;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.utils.ApiInterface;
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient;
@@ -169,7 +171,9 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
                             break;
                         }
                         case "U": {
-                            Toast.makeText(activity, "go to profile", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(activity, "go to profile", Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(activity,ProfileActivity.class));
                             // TODO: 10/26/2018 goto profile
                             break;
                         }

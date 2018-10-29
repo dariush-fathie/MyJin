@@ -69,6 +69,7 @@ import retrofit2.Response
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+@Suppress("CAST_NEVER_SUCCEEDS")
 class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCallback, GoogleMap.OnCameraMoveListener {
 
     //var receiver: BroadcastReceiver? = null
@@ -550,8 +551,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     // save map center point in center information
     private fun savePoint() {
         val b = AlertDialog.Builder(this)
-        b.setMessage("توجه فرمایید که نقطه مشخص شده در مرکز نقشه در بانک اطلاعاتی این مرکز ذخیره می شود")
-        b.setPositiveButton("متوجه هستم، ادامه بده") { dialog, which ->
+        b.setMessage(getString(R.string.tfknmshdmndbezm))
+        b.setPositiveButton(getString(R.string.mhebdeh)) { dialog, which ->
 
             val builder = AlertDialog.Builder(this)
             builder.setView(R.layout.progress_dialog)
@@ -566,21 +567,21 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 override fun onResponse(call: Call<SimpleResponseModel>?, response: Response<SimpleResponseModel>?) {
                     val result = response?.body()
                     if (result?.response == "success") {
-                        Toast.makeText(this@DetailActivity, "با موفقیت در اطلاعت مرکز ذخیره شد", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@DetailActivity, getString(R.string.bdemssh), Toast.LENGTH_LONG).show()
                     } else {
-                        Toast.makeText(this@DetailActivity, "خطا در ذخیره کردن اطلاعات", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@DetailActivity, getString(R.string.khdzke), Toast.LENGTH_LONG).show()
                     }
                     alertDialog.dismiss()
                 }
 
                 override fun onFailure(call: Call<SimpleResponseModel>?, t: Throwable?) {
                     alertDialog.dismiss()
-                    Toast.makeText(this@DetailActivity, "خطا در ذخیره کردن اطلاعات", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@DetailActivity, getString(R.string.khdzke), Toast.LENGTH_LONG).show()
                 }
             })
 
         }
-        b.setNegativeButton("ادامه نده، برگرد") { dialog, which ->
+        b.setNegativeButton(getString(R.string.enbgard)) { dialog, which ->
             dialog.dismiss()
         }
         b.show()
@@ -663,22 +664,20 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_HIDDEN -> {
+                if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                }
+                else if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    if (mMap == null) {
+                        val mapFragment = supportFragmentManager
+                                .findFragmentById(R.id.detailMap) as SupportMapFragment
+                        mapFragment.getMapAsync(this@DetailActivity)
                     }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        if (mMap == null) {
-                            val mapFragment = supportFragmentManager
-                                    .findFragmentById(R.id.detailMap) as SupportMapFragment
-                            mapFragment.getMapAsync(this@DetailActivity)
-                        }
-                    }
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                    }
-                    BottomSheetBehavior.STATE_DRAGGING -> {
-                    }
-                    BottomSheetBehavior.STATE_SETTLING -> {
-                    }
+                }
+                else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                }
+                else if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                }
+                else if (newState == BottomSheetBehavior.STATE_SETTLING) {
                 }
             }
         }
@@ -746,6 +745,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun loadDetails() {
         var str = ""
 
@@ -757,7 +757,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         realm.commitTransaction()
 
-        tv_title.text = "${item?.firstName} ${item?.lastName}"
+        tv_title.text = "${item.firstName} ${item.lastName}"
 
         str = when {
             !item.gen.equals("0") -> if (item.groupId == 1) {
@@ -945,7 +945,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                     createLocationRequest()
                 } else {
 
-                    fab_direction.visibility = View.GONE
+                    ( fab_direction as View).visibility = View.GONE
                 }
             }
         }

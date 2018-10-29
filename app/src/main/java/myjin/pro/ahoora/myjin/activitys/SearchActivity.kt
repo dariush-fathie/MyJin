@@ -68,6 +68,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
 
     override fun onStart() {
         super.onStart()
+        if (idsArray.size==0)
        showShimmer()
     }
 
@@ -95,9 +96,14 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
     private fun search() {
         if (et_search.text.toString() != "") {
             getItems()
-            Utils.closeKeyBoard(et_search.windowToken, this@SearchActivity)
+            try {
+                Utils.closeKeyBoard(et_search.windowToken, this@SearchActivity)
+            }catch (e:IllegalStateException){
+
+            }
+
         } else {
-            Toast.makeText(this@SearchActivity, "لطفا یک عبارت را وارد کنید , ", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@SearchActivity, R.string.lyervk, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -126,13 +132,16 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        val value = intent.getStringExtra("sVal")
+
         et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 if (et_search.text.toString() != "") {
                     getItems()
                     Utils.closeKeyBoard(et_search.windowToken, this@SearchActivity)
                 } else {
-                    Toast.makeText(this@SearchActivity, "لطفا یک عبارت را وارد کنید , ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SearchActivity, getString(R.string.lyervk), Toast.LENGTH_SHORT).show()
                 }
             }
             false
@@ -140,6 +149,9 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
         fab_goUp.setOnClickListener(this)
         iv_search.setOnClickListener(this)
         ctb.addOnTabSelectedListener(this)
+
+        et_search.setText(value)
+        search()
     }
 
 
@@ -147,7 +159,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
         if (Utils.isNetworkAvailable(this@SearchActivity)) {
             downloadItem()
         } else {
-            Toast.makeText(this@SearchActivity, "به اینترنت متصل نیستید", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@SearchActivity, getString(R.string.checkYourConnection), Toast.LENGTH_LONG).show()
 
         }
 
@@ -258,9 +270,9 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
                 super.onScrolled(recyclerView, dx, dy)
                 val i = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 if (i > 8) {
-                    fab_goUp.visibility = View.VISIBLE
+                    (fab_goUp as View).visibility = View.VISIBLE
                 } else {
-                    fab_goUp.visibility = View.GONE
+                    (fab_goUp as View).visibility = View.GONE
                 }
             }
         })
@@ -317,7 +329,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
             holder.tv_addr.text = dataSet[position].addressList!![0]?.locTitle
 
 
-            var drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_jin)
+            val drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_jin)
             var url = ""
             holder.image.setColorFilter(null)
 

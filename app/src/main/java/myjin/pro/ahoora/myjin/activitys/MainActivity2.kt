@@ -62,7 +62,8 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.fab_search -> search()
+           /* R.id.fab_search -> search()*/
+            R.id.iv_search->search()
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> {
                /* Toast.makeText(this@MainActivity2,
@@ -104,7 +105,8 @@ class MainActivity2 : AppCompatActivity(),
         rl_notifi.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         iv_jinDrawer.setOnLongClickListener(this)
-        fab_search.setOnClickListener(this)
+       // fab_search.setOnClickListener(this)
+        iv_search.setOnClickListener(this)
         tv_location.setOnClickListener(this)
         rl_myjin_services.setOnClickListener(this)
         tv_healthCenters.setOnClickListener(this)
@@ -305,11 +307,11 @@ class MainActivity2 : AppCompatActivity(),
         if (position != bankPosition) {
             view_gradient.visibility = View.GONE
             hideLocation()
-            hideSearchFab()
+          //  hideSearchFab()
         } else {
             setVisibleShadow(abp_main, appBarOffset)
             showLocation()
-            showSearchFab()
+          //  showSearchFab()
         }
 
         EventBus.getDefault().post(VisibilityEvent(position))
@@ -364,7 +366,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
 
-    fun showSearchFab() {
+   /* fun showSearchFab() {
         if (currentPage == bankPosition) {
             if (fab_search.translationY != 0f) {
                 isSearchVisible = true
@@ -386,10 +388,16 @@ class MainActivity2 : AppCompatActivity(),
             animSet.playTogether(alphaAnimator, transitionAnimator)
             animSet.start()
         }
-    }
+    }*/
 
     private fun search() {
-        startActivity(Intent(this, SearchActivity::class.java))
+        val intentS=Intent(this, SearchActivity::class.java)
+
+        val mBundle = Bundle()
+        mBundle.putString("sVal", et_search.text.toString())
+        intentS.putExtras(mBundle)
+        startActivity(intentS)
+
     }
 
     private var sliderLoadFlag = false

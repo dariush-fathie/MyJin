@@ -23,10 +23,10 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="88dp"
+                android:minHeight="95dp"
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
 
-                <com.github.florent37.arclayout.ArcLayout
+                <!--<com.github.florent37.arclayout.ArcLayout
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     app:arc_cropDirection="cropOutside"
@@ -40,7 +40,7 @@
                         android:layout_height="match_parent"
                         android:background="@color/colorPrimaryDark" />
 
-                </com.github.florent37.arclayout.ArcLayout>
+                </com.github.florent37.arclayout.ArcLayout>-->
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_mainSlider"
@@ -144,18 +144,54 @@
 
                 </RelativeLayout>
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tbl_main"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_se"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="194dp"
-                    android:background="@color/white"
-                    app:tabBackground="@drawable/tab_selector"
-                    app:tabIndicatorColor="@color/white"
-                    app:tabMode="fixed"
-                    app:tabSelectedTextColor="@color/white"
-                    app:tabTextAppearance="@style/CustomTabTextFont"
-                    app:tabTextColor="@color/androidTextColor" />
+                    android:layout_marginBottom="3dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:id="@+id/rl_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/et_search"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="20dp"
+                            android:background="@null"
+                            android:focusable="true"
+                            android:gravity="start|center"
+                            android:hint="جستجو کنید"
+                            android:imeOptions="actionSearch"
+                            android:inputType="text"
+                            android:paddingEnd="0dp"
+                            android:paddingStart="20dp"
+                            android:textColorHint="@color/tabTextDef"
+                            app:fontFamily="@font/samim" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_search"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:padding="9dp"
+                            android:src="@drawable/ic_search"
+                            android:tint="@color/green" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -166,20 +202,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        <View
-            android:id="@+id/view_gradient"
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:background="@drawable/gradient"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
         <com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator
             android:id="@+id/ipi_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="55dp"
             android:layout_marginStart="8dp"
             app:dotColor="@color/title"
             app:dotCount="3"
@@ -187,7 +215,27 @@
             app:dotSeparation="5dp"
             app:selectedDotColor="@color/colorPrimaryDark"
             app:selectedDotRadius="4dp" />
+        <View
+            android:id="@+id/view_gradient"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/back1"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="44dp"/>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tbl_main"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@color/white"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabMode="fixed"
+            android:layout_gravity="bottom|center"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextAppearance="@style/CustomTabTextFont"
+            app:tabTextColor="@color/androidTextColor" />
 
+<!--
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_search"
             android:layout_width="wrap_content"
@@ -197,7 +245,7 @@
             android:src="@drawable/icon_search_white"
             android:translationY="86dp"
             app:backgroundTint="@color/green"
-            app:fabSize="normal" />
+            app:fabSize="normal" />-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
