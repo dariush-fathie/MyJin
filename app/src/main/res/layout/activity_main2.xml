@@ -90,19 +90,17 @@
                         app:fontFamily="@font/samim"
                         tools:ignore="RelativeOverlap" />
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:background="@drawable/bg_green"
                         android:padding="2dp"
                         android:id="@+id/tv_test"
                         android:layout_toStartOf="@+id/tv_mainTitle"
                         android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="بتا"
-                        android:textSize="11sp"
+                        android:text="beta"
+                        android:textSize="12sp"
                         android:gravity="center"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/samim"
-                        tools:ignore="SmallSp" />
+                        android:textColor="#95fcb6"
+                        android:fontFamily="@font/samim" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_locationArrrow"

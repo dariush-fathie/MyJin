@@ -51,9 +51,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="15dp"
-                    android:padding="6dp"
+                    android:padding="3dp"
                     android:src="@drawable/ic_password"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_login_outsign"
@@ -64,7 +64,6 @@
                     android:paddingEnd="17dp"
                     android:text="@string/vrodvozviat"
                     android:textColor="@color/title"
-                    android:textSize="15sp"
                     android:textStyle="bold"
                     app:fontFamily="@font/samim"
                     tools:ignore="RtlSymmetry" />
@@ -76,7 +75,7 @@
                 android:layout_marginBottom="7dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/mc_icon_color" />
+                android:background="@color/title" />
 
             <RelativeLayout
                 android:foreground="?selectableItemBackgroundBorderless"
@@ -92,7 +91,7 @@
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/mc_icon_color"
+                    android:background="@color/title"
                     android:visibility="invisible" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -103,8 +102,8 @@
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/v1"
                     android:padding="6dp"
-                    android:src="@drawable/ic_jin"
-                    android:tint="@color/mc_icon_color" />
+                    android:src="@drawable/ic_jind"
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_myjin_services_Title1"
@@ -115,7 +114,6 @@
                     android:paddingEnd="17dp"
                     android:text="@string/khj"
                     android:textColor="@color/title"
-                    android:textSize="16sp"
                     app:fontFamily="@font/samim"
                     tools:ignore="RtlSymmetry" />
             </RelativeLayout>
@@ -154,7 +152,7 @@
                     android:layout_toStartOf="@+id/vs3"
                     android:padding="7dp"
                     android:src="@drawable/ic_takapo"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_takapoo_services_Title1"
@@ -165,7 +163,6 @@
                     android:paddingEnd="17dp"
                     android:text="@string/mnvfs"
                     android:textColor="@color/title"
-                    android:textSize="15sp"
                     app:fontFamily="@font/samim"
                     tools:ignore="RtlSymmetry" />
             </RelativeLayout>
@@ -206,7 +203,7 @@
                     android:layout_toStartOf="@+id/vs4"
                     android:padding="7dp"
                     android:src="@drawable/ic_opk"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_university_services_Title1"
@@ -248,7 +245,7 @@
                     android:layout_toStartOf="@+id/vs"
                     android:padding="8dp"
                     android:src="@drawable/ic_salamat"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitlesalamat"
@@ -290,7 +287,7 @@
                     android:layout_toStartOf="@+id/vs5"
                     android:padding="6dp"
                     android:src="@drawable/ic_kste"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_tamin_services"
@@ -333,7 +330,7 @@
                     android:layout_toStartOf="@+id/vs7"
                     android:padding="5dp"
                     android:src="@drawable/ic_ict"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_ict_services"
@@ -375,7 +372,7 @@
                     android:layout_toStartOf="@+id/vs8"
                     android:padding="5dp"
                     android:src="@drawable/ic_dp_"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_pishkhan_services"
@@ -416,7 +413,7 @@
                     android:layout_toStartOf="@+id/vs9"
                     android:padding="6dp"
                     android:src="@drawable/ic_post"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_post_services"
@@ -472,10 +469,10 @@
                         android:layout_height="40dp"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="8dp"
+                        android:padding="5dp"
                         android:layout_toStartOf="@+id/vs_fav"
-                        android:padding="7dp"
-                        android:src="@drawable/ic_bookmark_m"
-                        android:tint="@color/mc_icon_color" />
+                        android:src="@drawable/ic_bookmark"
+                        android:tint="@color/title" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -486,7 +483,6 @@
                         android:layout_toStartOf="@+id/iv2"
                         android:text="@string/nshanshodehha"
                         android:textColor="@color/title"
-                        android:textSize="15sp"
                         app:fontFamily="@font/samim" />
 
 
@@ -509,7 +505,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="55dp"
@@ -528,7 +524,6 @@
                         android:paddingTop="8dp"
                         android:text="@string/healthCenters"
                         android:textColor="@color/title"
-                        android:textSize="14sp"
                         app:fontFamily="@font/samim" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -544,10 +539,9 @@
                         android:paddingTop="8dp"
                         android:text="@string/etlaeieh"
                         android:textColor="@color/title"
-                        android:textSize="14sp"
                         app:fontFamily="@font/samim" />
 
-                </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </com.github.florent37.expansionpanel.ExpansionLayout>
 
 
@@ -576,7 +570,7 @@
                     android:layout_toStartOf="@+id/v3"
                     android:padding="8dp"
                     android:src="@drawable/ic_about"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitle3"
@@ -587,7 +581,6 @@
                     android:paddingEnd="17dp"
                     android:text="@string/aboutour"
                     android:textColor="@color/title"
-                    android:textSize="15sp"
                     app:fontFamily="@font/samim"
                     tools:ignore="RtlSymmetry" />
             </RelativeLayout>
@@ -614,9 +607,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="6dp"
                     android:layout_toStartOf="@+id/v4"
-                    android:padding="4dp"
+                    android:padding="3dp"
                     android:src="@drawable/ic_contact"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitle4"
@@ -627,7 +620,6 @@
                     android:paddingEnd="17dp"
                     android:text="@string/tamasbama"
                     android:textColor="@color/title"
-                    android:textSize="15sp"
                     app:fontFamily="@font/samim"
                     tools:ignore="RtlSymmetry" />
             </RelativeLayout>
@@ -659,7 +651,7 @@
                     android:layout_toStartOf="@+id/vs1"
                     android:padding="6dp"
                     android:src="@drawable/ic_rules"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -707,9 +699,9 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vnotifi"
-                    android:padding="6dp"
+                    android:padding="3dp"
                     android:src="@drawable/ic_notification"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -719,7 +711,6 @@
                     android:paddingEnd="17dp"
                     android:text="@string/notification"
                     android:textColor="@color/title"
-                    android:textSize="15sp"
                     app:fontFamily="@font/samim" />
 
 
@@ -758,7 +749,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vset"
                     android:src="@drawable/ic_setting"
-                    android:tint="@color/mc_icon_color" />
+                    android:tint="@color/title" />
 
                 <androidx.appcompat.widget.AppCompatTextView
 
@@ -769,8 +760,8 @@
                     android:paddingEnd="17dp"
                     android:text="تنظیمات"
                     android:textColor="@color/title"
-                    android:textSize="15sp"
-                    app:fontFamily="@font/samim" />
+                    app:fontFamily="@font/samim"
+                    tools:ignore="RtlSymmetry" />
 
 
             </RelativeLayout>
@@ -823,10 +814,10 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
+            android:padding="3dp"
             android:layout_toStartOf="@+id/vexit"
-            android:padding="7dp"
             android:src="@drawable/ic_exit"
-            android:tint="@color/mc_icon_color" />
+            android:tint="@color/title" />
         <View
             android:id="@+id/vexit"
             android:layout_width="4dp"
@@ -840,9 +831,9 @@
             android:layout_height="match_parent"
             android:id="@+id/btn_exit"
             android:gravity="start|center"
+
             android:layout_toStartOf="@+id/ivexit"
             android:text="خروج"
-            android:textSize="16sp"
             android:textColor="@color/title"
             app:fontFamily="@font/samim"
             tools:ignore="SmallSp" />

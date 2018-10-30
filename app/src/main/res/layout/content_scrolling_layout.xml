@@ -1,165 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back1"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="@color/back"
+    android:orientation="vertical"
     tools:showIn="@layout/activity_profile">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
+    <!--<FrameLayout android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@android:color/white"-->
+    <!--android:elevation="2dp"-->
+    <!--android:paddingTop="36dp">-->
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_alias"
-            android:layout_width="match_parent"
+    <!--<ImageView android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:src="@drawable/ic_contact" />-->
+
+    <!--<TextView android:layout_width="match_parent"-->
+    <!--android:layout_height="56dp"-->
+    <!--android:background="?selectableItemBackground"-->
+    <!--android:clickable="true"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:paddingLeft="@dimen/keyline_2"-->
+    <!--android:text="People or something"-->
+    <!--android:textAppearance="@style/TextAppearance.Row" />-->
+    <!--</FrameLayout>-->
+
+    <!--<FrameLayout android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:background="@android:color/white"-->
+    <!--android:elevation="2dp">-->
+
+    <!--<TextView android:id="@+id/stream_detail_media_number"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="56dp"-->
+    <!--android:layout_gravity="end|center_vertical"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:paddingRight="16dp"-->
+    <!--android:text="7"-->
+    <!--android:textAppearance="@style/TextAppearance.Row"-->
+    <!--android:textColor="#9a9a9a" />-->
+
+    <!--<ImageView android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="center_vertical"-->
+    <!--android:layout_marginLeft="16dp"-->
+    <!--android:src="@drawable/ic_media" />-->
+
+    <!--<TextView android:id="@+id/stream_detail_media"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="56dp"-->
+    <!--android:background="?selectableItemBackground"-->
+    <!--android:clickable="true"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:paddingLeft="@dimen/keyline_2"-->
+    <!--android:text="Media stuff"-->
+    <!--android:textAppearance="@style/TextAppearance.Row"-->
+    <!--android:textColor="?android:attr/textColorPrimary" />-->
+    <!--</FrameLayout>-->
+
+    <FrameLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/white"
+        android:elevation="2sp"
+        android:padding="16dp">
+
+        <TextView android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="35dp"
-            android:gravity="center"
-            android:text="beh rah"
-            android:textColor="@color/title"
-            android:textSize="23sp"
-            android:textStyle="bold" />
-
-    
-
-        <View
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/blue1"/>
-
-        <RelativeLayout
-
-            android:id="@+id/rl_tel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_tel_pf"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerVertical="true"
-                android:padding="5dp"
-                android:src="@drawable/ic_back" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_tel_val"
-                android:fontFamily="@font/samim"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/tv_tel_title"
-                android:layout_toRightOf="@+id/iv_tel_pf"
-                android:maxLines="1"
-                android:padding="10dp"
-                android:text="09180143382"
-                android:textColor="@color/blue2"
-                android:textSize="15sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_tel_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:padding="10dp"
-                android:fontFamily="@font/samim"
-                android:text="شماره تلفن"
-                android:textColor="@color/title"
-                android:textSize="15sp" />
-
-        </RelativeLayout>
-        <View
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/blue1"/>
-
-        <RelativeLayout
-
-            android:id="@+id/rl_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_password_pf"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_centerVertical="true"
-                android:padding="5dp"
-                android:src="@drawable/ic_back" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_password_val"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/samim"
-                android:layout_toLeftOf="@+id/tv_password_title"
-                android:layout_toRightOf="@+id/iv_password_pf"
-                android:maxLines="1"
-                android:padding="10dp"
-                android:text="**********"
-                android:textColor="@color/blue2"
-                android:textSize="15sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_password_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:padding="10dp"
-                android:fontFamily="@font/samim"
-                android:text="تغییر رمز عبور"
-                android:textColor="@color/title"
-                android:textSize="15sp" />
-
-        </RelativeLayout>
-        <View
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/blue1"/>
-
-
-        <View
-            android:layout_margin="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/blue1"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/acb_logout"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="20dp"
-            android:fontFamily="@font/samim"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="15sp"
-            android:text="خروج از حساب"
-            android:background="@color/green"
-            android:textColor="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:text="@string/lorem" />
-
-        </androidx.core.widget.NestedScrollView>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-</androidx.core.widget.NestedScrollView>
+            android:lineSpacingExtra="8dp"
+            android:text="@string/lorem"
+            android:textSize="18sp" />
+    </FrameLayout>
+</LinearLayout>

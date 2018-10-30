@@ -30,21 +30,6 @@
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/rb2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="5dp"
-            android:button="@null"
-            android:drawableEnd="?android:listChoiceIndicatorSingle"
-            android:fontFamily="@font/samim"
-            android:padding="5dp"
-            android:text="@string/tha_s"
-            android:theme="@style/RadioButtonStyle" />
-
         <androidx.appcompat.widget.AppCompatRadioButton
             android:id="@+id/rb1"
             android:layout_width="wrap_content"
@@ -56,8 +41,23 @@
 
             android:fontFamily="@font/samim"
             android:padding="5dp"
+            android:text="@string/tha_s"
+            android:theme="@style/RadioButtonStyle" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="5dp"
+            android:button="@null"
+            android:drawableEnd="?android:listChoiceIndicatorSingle"
+            android:fontFamily="@font/samim"
+            android:padding="5dp"
             android:text="@string/tha_n"
             android:theme="@style/RadioButtonStyle" />
+
+
     </RadioGroup>
 
 
@@ -76,10 +76,9 @@
             android:layout_margin="5dp"
             android:background="@drawable/bg_green"
             android:gravity="center"
-            android:padding="5dp"
+            android:padding="7dp"
             android:text="اعمال شود"
             android:textColor="@color/white"
-            android:textStyle="bold"
             app:fontFamily="@font/samim" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -91,10 +90,9 @@
             android:layout_toStartOf="@+id/tv_action"
             android:background="@drawable/bg_gray"
             android:gravity="center"
-            android:padding="5dp"
+            android:padding="7dp"
             android:text="بسته شود"
             android:textColor="@color/title"
-            android:textStyle="bold"
             app:fontFamily="@font/samim" />
 
 

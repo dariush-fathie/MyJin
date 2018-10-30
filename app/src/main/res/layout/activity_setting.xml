@@ -81,7 +81,6 @@
                     android:padding="8dp"
                     android:text="@string/healthCenters"
                     android:textColor="@color/title"
-                    android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_cleanCenters"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/btn_cleanCenters" />
@@ -104,15 +103,14 @@
                     android:id="@+id/tv_title_m"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
                     android:layout_below="@+id/tv_title_c"
+                    android:layout_alignParentEnd="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:fontFamily="@font/samim"
                     android:padding="8dp"
                     android:text="@string/etlaeieh"
                     android:textColor="@color/title"
-                    android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_cleanMessages"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/btn_cleanMessages" />
@@ -147,7 +145,6 @@
                     android:padding="8dp"
                     android:text="زبانه پیش فرض"
                     android:textColor="@color/colorAccent"
-                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -173,8 +170,7 @@
                         android:layoutDirection="rtl"
                         android:padding="8dp"
                         android:text="@string/healthCenters"
-                        android:textColor="@color/title"
-                        android:textSize="13sp" />
+                        android:textColor="@color/title" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb_messages"
@@ -185,8 +181,7 @@
                         android:padding="8dp"
                         android:foreground="?selectableItemBackgroundBorderless"
                         android:text="@string/etlaeieh"
-                        android:textColor="@color/title"
-                        android:textSize="13sp" />
+                        android:textColor="@color/title" />
                 </RadioGroup>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -208,7 +203,6 @@
                     android:padding="8dp"
                     android:text="صفحه معرفی"
                     android:textColor="@color/colorAccent"
-                    android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -225,7 +219,6 @@
                     android:padding="10dp"
                     android:text="نمایش"
                     android:textColor="@color/title"
-                    android:textSize="13sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/fav_intro" />

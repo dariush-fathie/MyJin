@@ -21,7 +21,7 @@
             android:layout_marginEnd="17dp"
             android:text="فیلتر کردن"
             android:textColor="@color/white"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             app:fontFamily="@font/samim" />
 
@@ -50,10 +50,9 @@
             android:background="@drawable/bg_green"
             android:foreground="?selectableItemBackgroundBorderless"
             android:gravity="center"
-            android:padding="5dp"
+            android:padding="7dp"
             android:text="اعمال شود"
             android:textColor="@color/white"
-            android:textStyle="bold"
             app:fontFamily="@font/samim" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -64,12 +63,11 @@
             android:background="@drawable/bg_gray"
             android:foreground="?selectableItemBackgroundBorderless"
             android:gravity="center"
-            android:padding="5dp"
+            android:padding="7dp"
             android:layout_marginEnd="3dp"
             android:layout_marginStart="2dp"
             android:text="بسته شود"
             android:textColor="@color/title"
-            android:textStyle="bold"
             app:fontFamily="@font/samim" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -79,10 +77,9 @@
             android:layout_alignParentStart="true"
             android:background="@drawable/bg_gray"
             android:gravity="center"
-            android:padding="5dp"
-            android:text="پاک کردن انتخاب شده ها"
+            android:padding="7dp"
+            android:text="پاک کردن"
             android:textColor="@color/title"
-            android:textStyle="bold"
             app:fontFamily="@font/samim" />
     </RelativeLayout>
 
