@@ -233,12 +233,12 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openProvAndCityDialog() {
-        val dialog = SpinnerDialog(activity, "ژین من در سایر شهر", "نمیخوام")
+        val dialog = SpinnerDialog(activity, getString(R.string.jmdssh), getString(R.string.nemikham))
         dialog.bindOnSpinerListener(object : OnSpinerItemClick {
             override fun onClick(var1: String, var2: Int, var3: Int) {
                 //initList()
                 if (var2 != 19) {
-                    Toast.makeText(activity, "این برنامه در حال حاضر تنها استان کردستان را پوشش می دهد ..", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, getString(R.string.ebdhhtokpm), Toast.LENGTH_LONG).show()
                 } else {
                     (activity as MainActivity2).tvLocation.text = var1
                     this@HealthBankFragment.provId = var2

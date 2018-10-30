@@ -685,21 +685,33 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     }
 
     private fun saveItem(centerId: Int) {
-        realm.executeTransaction { db ->
-            val item = db.where(KotlinItemModel::class.java)
-                    .equalTo("centerId", centerId)
-                    .findFirst()!!
-            item.saved = true
+        try{
+            realm.executeTransaction { db ->
+                val item = db.where(KotlinItemModel::class.java)
+                        .equalTo("centerId", centerId)
+                        .findFirst()!!
+                item.saved = true
+            }
+        }catch (e:Exception){
+
         }
+
     }
 
     private fun deleteItem(centerId: Int) {
-        realm.executeTransaction { db ->
-            val item = db.where(KotlinItemModel::class.java)
-                    .equalTo("centerId", centerId)
-                    .findFirst()!!
-            item.saved = false
+
+        try{
+            realm.executeTransaction { db ->
+                val item = db.where(KotlinItemModel::class.java)
+                        .equalTo("centerId", centerId)
+                        .findFirst()!!
+                item.saved = false
+            }
+        }catch (e:Exception){
+
         }
+
+
     }
 
     private fun checkItemIsSaved(): Boolean {

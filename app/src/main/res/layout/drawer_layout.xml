@@ -31,7 +31,7 @@
                 android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_login_outsign"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/item_selector">
 
@@ -46,14 +46,14 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs2"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentEnd="true"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginEnd="15dp"
                     android:padding="3dp"
-                    android:src="@drawable/ic_password"
-                    android:tint="@color/title" />
+                    android:src="@drawable/ic_password" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_login_outsign"
@@ -96,14 +96,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv1"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/v1"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_jind"
-                    android:tint="@color/title" />
+                    android:padding="4dp"
+                    android:src="@drawable/ic_jind" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_myjin_services_Title1"
@@ -145,14 +144,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs3"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vs3"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_takapo"
-                    android:tint="@color/title" />
+                    android:padding="5dp"
+                    android:src="@drawable/ic_takapo" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_takapoo_services_Title1"
@@ -465,17 +463,17 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv2"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="8dp"
-                        android:padding="5dp"
+                        android:padding="4dp"
                         android:layout_toStartOf="@+id/vs_fav"
-                        android:src="@drawable/ic_bookmark"
-                        android:tint="@color/title" />
+                        android:src="@drawable/ic_bookmarkm" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_bookmark"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
@@ -483,7 +481,8 @@
                         android:layout_toStartOf="@+id/iv2"
                         android:text="@string/nshanshodehha"
                         android:textColor="@color/title"
-                        app:fontFamily="@font/samim" />
+                        app:fontFamily="@font/samim"
+                        tools:ignore="RelativeOverlap" />
 
 
                     <androidx.appcompat.widget.AppCompatImageView
@@ -563,14 +562,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv3"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/v3"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_about"
-                    android:tint="@color/title" />
+                    android:padding="6dp"
+                    android:src="@drawable/ic_about" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitle3"
@@ -602,14 +600,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv4"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="6dp"
                     android:layout_toStartOf="@+id/v4"
-                    android:padding="3dp"
-                    android:src="@drawable/ic_contact"
-                    android:tint="@color/title" />
+                    android:padding="1dp"
+                    android:src="@drawable/ic_contact" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_drawerTitle4"
@@ -694,14 +691,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivnotifi"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vnotifi"
-                    android:padding="3dp"
-                    android:src="@drawable/ic_notification"
-                    android:tint="@color/title" />
+                    android:padding="2dp"
+                    android:src="@drawable/ic_notification" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -743,13 +739,13 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivsetting"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:padding="3dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vset"
-                    android:src="@drawable/ic_setting"
-                    android:tint="@color/title" />
+                    android:src="@drawable/ic_setting"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
 
@@ -760,8 +756,7 @@
                     android:paddingEnd="17dp"
                     android:text="تنظیمات"
                     android:textColor="@color/title"
-                    app:fontFamily="@font/samim"
-                    tools:ignore="RtlSymmetry" />
+                    app:fontFamily="@font/samim" />
 
 
             </RelativeLayout>
@@ -816,8 +811,7 @@
             android:layout_marginEnd="8dp"
             android:padding="3dp"
             android:layout_toStartOf="@+id/vexit"
-            android:src="@drawable/ic_exit"
-            android:tint="@color/title" />
+            android:src="@drawable/ic_exit" />
         <View
             android:id="@+id/vexit"
             android:layout_width="4dp"

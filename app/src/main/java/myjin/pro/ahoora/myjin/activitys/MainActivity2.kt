@@ -229,7 +229,7 @@ class MainActivity2 : AppCompatActivity(),
 
         Handler().postDelayed({
             1
-            ipi_main.attachToViewPager(vp_mainContainer)
+           // ipi_main.attachToViewPager(vp_mainContainer)
             if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
                 vp_mainContainer.currentItem = 1
                 Log.e("XXX", "ZZZ")
@@ -273,7 +273,7 @@ class MainActivity2 : AppCompatActivity(),
 
     fun showNetErrSnack() {
         hideSliderCPV()
-        Snackbar.make(cl_homeContainer, "خطایی رخ داد دوباره امتحان کنید", Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(cl_homeContainer, R.string.khrda, Snackbar.LENGTH_INDEFINITE)
                 .setAction("تلاش دوباره") {
                     Handler().postDelayed({
                         EventBus.getDefault().post(TryAgainEvent())

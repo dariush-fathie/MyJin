@@ -72,13 +72,14 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:foreground="#35000000"
+                    android:foreground="#3f8cff91"
                     android:id="@+id/iv_messageImage"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:scaleType="centerCrop"
                     android:src="@color/white"
-                    android:transitionName="transition_name" />
+                    android:transitionName="transition_name"
+                    tools:targetApi="lollipop" />
             </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatTextView

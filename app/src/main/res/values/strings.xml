@@ -170,6 +170,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="nemikham">نمیخوام</string>
+    <string name="jmdssh">ژین من در سایر شهرها</string>
+    <string name="ebdhhtokpm">این برنامه در حال حاضر تنها استان کردستان را پوشش می دهد ..</string>
 
 </resources>
 

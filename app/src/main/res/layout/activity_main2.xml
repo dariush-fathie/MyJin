@@ -200,7 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-        <com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator
+       <!-- <com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator
             android:id="@+id/ipi_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -212,7 +212,7 @@
             app:dotRadius="3dp"
             app:dotSeparation="5dp"
             app:selectedDotColor="@color/colorPrimaryDark"
-            app:selectedDotRadius="4dp" />
+            app:selectedDotRadius="4dp" />-->
         <View
             android:id="@+id/view_gradient"
             android:layout_width="match_parent"

@@ -22,7 +22,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
 
                 android:id="@+id/tv_service_title"
                 android:layout_width="wrap_content"
@@ -32,16 +32,16 @@
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/samim"
                 android:text="عنوان"
-                android:textColor="@color/title"
-                android:textSize="16sp" />
+                android:textStyle="bold"
+                android:textColor="@color/title" />
         </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/headerIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left"
-            android:layout_marginLeft="16dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="16dp"
             android:adjustViewBounds="true"
             android:tint="@color/title"
             app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
@@ -50,11 +50,11 @@
     </com.github.florent37.expansionpanel.ExpansionHeader>
 
     <com.github.florent37.expansionpanel.ExpansionLayout
-        android:id="@+id/expansionLayout"
+        android:id="@+id/el_services"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:orientation="vertical"
             android:background="@color/back">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:padding="8dp"
                 android:textColorLink="@color/subTitle"
                 android:id="@+id/tv_service_context"
@@ -76,7 +76,7 @@
                 android:textDirection="anyRtl"
                 android:text="content" />
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </com.github.florent37.expansionpanel.ExpansionLayout>
     <View

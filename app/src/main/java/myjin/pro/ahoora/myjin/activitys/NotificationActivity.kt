@@ -33,7 +33,7 @@ class NotificationActivity : AppCompatActivity(), View.OnClickListener {
                 res = res.sort("messageId", Sort.DESCENDING)
 
 
-                rv_services.layoutManager = LinearLayoutManager(this@NotificationActivity, LinearLayoutManager.VERTICAL, false)
+                rv_services.layoutManager = LinearLayoutManager(this@NotificationActivity)
 
 
                 rv_services.adapter = NotificationAdapter(this@NotificationActivity, res, realm)

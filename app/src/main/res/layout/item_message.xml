@@ -15,7 +15,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:background="@color/colorAccent"
-        android:foreground="#35000000"
+        android:foreground="#3f8cff91"
         android:scaleType="centerCrop"
         android:transitionName="transition_name"
         app:layout_constraintEnd_toEndOf="parent"
