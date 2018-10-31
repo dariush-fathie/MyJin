@@ -40,7 +40,7 @@ class SliderAdapter(context: Context, list: ArrayList<String>) : RecyclerView.Ad
                     .load(item.get(position))
                     .apply(RequestOptions()
                             .fitCenter()
-                            .placeholder(R.color.colorAccent))
+                            .placeholder(R.color.white))
                     .into((holder as ImageHolder)
                             .ivImage)
         } catch (e: Exception) {

@@ -416,7 +416,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private fun getSlides() {
-        Log.e("sdfdsfds", "sdfsfsfsf")
+
         showSliderCPV()
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
         apiInterface.sliderMain(1).enqueue(object : Callback<List<KotlinSlideMainModel>> {

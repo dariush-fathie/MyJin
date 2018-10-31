@@ -179,7 +179,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
 
     private fun openSourceDialog() {
-        val dialog = MsgSpinnerDialog(activity as MainActivity2, sourceArray, "منبع مورد نظر را انتخاب کنید")
+        val dialog = MsgSpinnerDialog(activity as MainActivity2, sourceArray, getString(myjin.pro.ahoora.myjin.R.string.mmnrek))
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
             override fun onClick(name: String, position: Int) {
                 posS = idS[position]
@@ -221,7 +221,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openTypeDialog() {
-        val dialog = MsgSpinnerDialog(activity as MainActivity2, typesArray, "دسته بندی مورد نظر را انتخاب کنید")
+        val dialog = MsgSpinnerDialog(activity as MainActivity2, typesArray, getString(R.string.dbmnrek))
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
             override fun onClick(name: String, position: Int) {
                 posT = idT.get(position)

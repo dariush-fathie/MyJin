@@ -173,6 +173,8 @@
     <string name="nemikham">نمیخوام</string>
     <string name="jmdssh">ژین من در سایر شهرها</string>
     <string name="ebdhhtokpm">این برنامه در حال حاضر تنها استان کردستان را پوشش می دهد ..</string>
+    <string name="mmnrek">منبع مورد نظر را انتخاب کنید</string>
+    <string name="dbmnrek">دسته بندی مورد نظر را انتخاب کنید</string>
 
 </resources>
 
