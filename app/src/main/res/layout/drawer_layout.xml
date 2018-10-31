@@ -516,7 +516,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="27dp"
                         android:background="@drawable/item_selector"
-                        android:gravity="right"
+                        android:gravity="start"
                         android:paddingBottom="8dp"
                         android:paddingEnd="8dp"
                         android:paddingStart="8dp"

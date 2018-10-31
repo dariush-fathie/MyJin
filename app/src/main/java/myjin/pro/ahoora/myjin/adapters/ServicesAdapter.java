@@ -91,7 +91,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             super(itemView);
             tv_service_title = itemView.findViewById(R.id.tv_service_title);
             tv_service_context = itemView.findViewById(R.id.tv_service_context);
-            expansionLayout = itemView.findViewById(R.id.el_services)  ;
+            expansionLayout = itemView.findViewById(R.id.expansionLayout)  ;
         }
 
     }

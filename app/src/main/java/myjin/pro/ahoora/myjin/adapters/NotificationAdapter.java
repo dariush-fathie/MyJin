@@ -81,7 +81,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             tv_messageDate = itemView.findViewById(R.id.tv_messageDate);
             iv_delete = itemView.findViewById(R.id.iv_delete);
             iv_messageImage = itemView.findViewById(R.id.iv_messageImage);
-            expansionLayout = itemView.findViewById(R.id.el_services);
+            expansionLayout = itemView.findViewById(R.id.expansionLayout);
 
             iv_delete.setOnClickListener(this);
 

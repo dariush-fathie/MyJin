@@ -50,7 +50,7 @@
     </com.github.florent37.expansionpanel.ExpansionHeader>
 
     <com.github.florent37.expansionpanel.ExpansionLayout
-        android:id="@+id/el_services"
+        android:id="@+id/expansionLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

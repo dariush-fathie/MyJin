@@ -49,7 +49,7 @@ class ServicesActivity : AppCompatActivity(), View.OnClickListener, GetServicesL
     }
 
     private fun getServicesTitle() {
-        rv_services.layoutManager = LinearLayoutManager(this@ServicesActivity, LinearLayoutManager.VERTICAL, false)
+        rv_services.layoutManager = LinearLayoutManager(this@ServicesActivity)
         rv_services.adapter = ServicesAdapter(this@ServicesActivity, groupId)
     }
 

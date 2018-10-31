@@ -91,7 +91,7 @@ dependencies {
     implementation 'com.github.lguipeng:BubbleView:1.0.1'
     implementation 'com.facebook.shimmer:shimmer:0.3.0'
     implementation 'androidx.multidex:multidex:2.0.0'
-    implementation 'com.sloydev:collapsingavatartoolbar:1.0.0'
+    //implementation 'com.sloydev:collapsingavatartoolbar:1.0.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -38,7 +38,6 @@ public class DateConverter {
             buf1[5] = 151;
             buf1[6] = 181;
             buf1[7] = 212;
-            buf1[7] = 212;
             buf1[8] = 243;
             buf1[9] = 273;
             buf1[10] = 304;
@@ -59,7 +58,7 @@ public class DateConverter {
         return currentDate;
     }
 
-    public int calculateOffset(int y, int m, int d) {
+    private int calculateOffset(int y, int m, int d) {
         if ((y % 4) != 0) {
             return buf1[m - 1] + d;
         } else {
