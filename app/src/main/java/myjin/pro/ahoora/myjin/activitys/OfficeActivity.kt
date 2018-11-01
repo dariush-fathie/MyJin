@@ -306,12 +306,21 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                bottomSheetExpanded = when (newState) {
+
+                /*bottomSheetExpanded = when (newState) {
                     BottomSheetBehavior.STATE_EXPANDED -> true
                     BottomSheetBehavior.STATE_COLLAPSED -> false
                     else -> {
                         true
                     }
+                }*/
+
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    bottomSheetExpanded = true
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    bottomSheetExpanded = false
+                } else {
+                    bottomSheetExpanded = false
                 }
 
                 controlFabVisibility()
@@ -605,8 +614,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rb1.setOnClickListener(listener)
         rb2.setOnClickListener(listener)
     }
-
-
 
 
     @Subscribe(threadMode = ThreadMode.MAIN)

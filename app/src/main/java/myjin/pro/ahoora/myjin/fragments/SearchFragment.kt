@@ -161,9 +161,9 @@ class SearchFragment : Fragment(), View.OnClickListener {
                 val i = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
                 Log.e("sfdskfls", "flkdsjflkf")
                 if (i > 8) {
-                    fabGoUp?.visibility = View.VISIBLE
+                    (fabGoUp as View ).visibility = View.VISIBLE
                 } else {
-                    fabGoUp?.visibility = View.GONE
+                    (fabGoUp as View ).visibility = View.GONE
                 }
             }
         })

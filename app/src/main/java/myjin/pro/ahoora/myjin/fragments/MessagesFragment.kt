@@ -1,5 +1,6 @@
 package myjin.pro.ahoora.myjin.fragments
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.realm.Case
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -24,6 +26,7 @@ import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
+import myjin.pro.ahoora.myjin.models.events.SearchMEvent
 import myjin.pro.ahoora.myjin.models.events.TestEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
@@ -223,6 +226,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     private fun openTypeDialog() {
         val dialog = MsgSpinnerDialog(activity as MainActivity2, typesArray, getString(R.string.dbmnrek))
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
+            @SuppressLint("SetTextI18n")
             override fun onClick(name: String, position: Int) {
                 posT = idT.get(position)
                 spinner_types.text = "دسته بندی : $name"
@@ -377,6 +381,61 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
     private fun hideCPV() {
         rl_messages.visibility = View.GONE
+    }
+
+    @Subscribe
+    fun searchInToMessages(v: SearchMEvent) {
+
+        val value = v.value
+
+        if (value != "") {
+            realm.beginTransaction()
+            val res = realm.where(KotlinMessagesModel::class.java)
+                    ?.contains("groupName", value, Case.INSENSITIVE)?.or()?.contains("title", value, Case.INSENSITIVE)?.or()?.contains("content", value, Case.INSENSITIVE)?.or()?.contains("type", value, Case.INSENSITIVE)?.findAll()
+            res?.sort("regDate", Sort.DESCENDING)
+            realm.commitTransaction()
+
+            sourceArray.clear()
+            typesArray.clear()
+            idS.clear()
+            idT.clear()
+
+            sourceArray.add("همه")
+            typesArray.add("همه")
+
+            idT.add(0)
+            idS.add(0)
+
+            val list = ArrayList<KotlinMessagesModel>()
+
+            res?.forEach { item: KotlinMessagesModel ->
+                list.add(item)
+                if (!sourceArray.contains(item.groupName)) {
+                    sourceArray.add(item.groupName)
+                    idS.add(item.groupId)
+                }
+                if (!typesArray.contains(item.type)) {
+                    typesArray.add(item.type)
+                    idT.add(item.typeId)
+                }
+            }
+
+
+            loadTabsAndSpinner()
+            loadAdapter(list)
+
+            loadFlag = true
+
+            hideCPV()
+            hideErrLayout()
+            lock = false
+
+        }else{
+            lock = false
+            tryAgain()
+        }
+
+
     }
 
 

@@ -6,6 +6,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
@@ -18,6 +20,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -28,10 +31,7 @@ import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
-import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
-import myjin.pro.ahoora.myjin.models.events.TestEvent
-import myjin.pro.ahoora.myjin.models.events.TryAgainEvent
-import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
+import myjin.pro.ahoora.myjin.models.events.*
 import myjin.pro.ahoora.myjin.utils.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -62,12 +62,12 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onClick(v: View?) {
         when (v?.id) {
-           /* R.id.fab_search -> search()*/
-            R.id.iv_search->search()
+            /* R.id.fab_search -> search()*/
+            R.id.iv_search -> search()
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> {
-               /*Toast.makeText(this@MainActivity2,
-                        getString(R.string.early), Toast.LENGTH_SHORT).show()*/
+                /*Toast.makeText(this@MainActivity2,
+                         getString(R.string.early), Toast.LENGTH_SHORT).show()*/
                 startActivity(Intent(this, ProfileActivity::class.java))
             }
             R.id.rl_exit -> showExitDialog()
@@ -85,7 +85,7 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_drawer4 -> startActivity(Intent(this, ContactUs::class.java))
             R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
-            R.id.rl_notifi->startActivity(Intent(this, NotificationActivity::class.java))
+            R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
         }
     }
 
@@ -105,7 +105,7 @@ class MainActivity2 : AppCompatActivity(),
         rl_notifi.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         iv_jinDrawer.setOnLongClickListener(this)
-       // fab_search.setOnClickListener(this)
+        // fab_search.setOnClickListener(this)
         iv_search.setOnClickListener(this)
         tv_location.setOnClickListener(this)
         rl_myjin_services.setOnClickListener(this)
@@ -221,15 +221,40 @@ class MainActivity2 : AppCompatActivity(),
 
         tbl_main.addOnTabSelectedListener(this)
 
-        vp_mainContainer.adapter = PagerAdapter(supportFragmentManager,this)
+        vp_mainContainer.adapter = PagerAdapter(supportFragmentManager, this)
         vp_mainContainer.addOnPageChangeListener(this)
         vp_mainContainer.offscreenPageLimit = 2
         tbl_main.setupWithViewPager(vp_mainContainer)
 
 
+        et_search.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    search()
+                    Utils.closeKeyBoard(et_search.windowToken, this@MainActivity2)
+            }
+            false
+        }
+
+
+        et_search!!.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+
+            }
+
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+
+            }
+
+            override fun afterTextChanged(editable: Editable) {
+               if (editable.toString() == ""){
+                   search()
+               }
+            }
+        })
+
         Handler().postDelayed({
             1
-           // ipi_main.attachToViewPager(vp_mainContainer)
+            // ipi_main.attachToViewPager(vp_mainContainer)
             if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
                 vp_mainContainer.currentItem = 1
                 Log.e("XXX", "ZZZ")
@@ -307,11 +332,11 @@ class MainActivity2 : AppCompatActivity(),
         if (position != bankPosition) {
             view_gradient.visibility = View.GONE
             hideLocation()
-          //  hideSearchFab()
+            //  hideSearchFab()
         } else {
             setVisibleShadow(abp_main, appBarOffset)
             showLocation()
-          //  showSearchFab()
+            //  showSearchFab()
         }
 
         EventBus.getDefault().post(VisibilityEvent(position))
@@ -366,37 +391,53 @@ class MainActivity2 : AppCompatActivity(),
     }
 
 
-   /* fun showSearchFab() {
-        if (currentPage == bankPosition) {
-            if (fab_search.translationY != 0f) {
-                isSearchVisible = true
-                val animSet = AnimatorSet()
-                val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 0f, 1f)
-                val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", fabH, 0f)
-                animSet.playTogether(alphaAnimator, transitionAnimator)
-                animSet.start()
-            }
-        }
-    }
+    /* fun showSearchFab() {
+         if (currentPage == bankPosition) {
+             if (fab_search.translationY != 0f) {
+                 isSearchVisible = true
+                 val animSet = AnimatorSet()
+                 val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 0f, 1f)
+                 val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", fabH, 0f)
+                 animSet.playTogether(alphaAnimator, transitionAnimator)
+                 animSet.start()
+             }
+         }
+     }
 
-    fun hideSearchFab() {
-        if (fab_search.translationY != fabH) {
-            isSearchVisible = false
-            val animSet = AnimatorSet()
-            val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 1f, 0f)
-            val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", 0f, fabH)
-            animSet.playTogether(alphaAnimator, transitionAnimator)
-            animSet.start()
-        }
-    }*/
+     fun hideSearchFab() {
+         if (fab_search.translationY != fabH) {
+             isSearchVisible = false
+             val animSet = AnimatorSet()
+             val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 1f, 0f)
+             val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", 0f, fabH)
+             animSet.playTogether(alphaAnimator, transitionAnimator)
+             animSet.start()
+         }
+     }*/
 
     private fun search() {
-        val intentS=Intent(this, SearchActivity::class.java)
 
-        val mBundle = Bundle()
-        mBundle.putString("sVal", et_search.text.toString())
-        intentS.putExtras(mBundle)
-        startActivity(intentS)
+        val value = et_search.text.toString()
+
+        try {
+            Utils.closeKeyBoard(et_search.windowToken, this@MainActivity2)
+        } catch (e: IllegalStateException) {
+
+        }
+
+        if (currentPage == 1) {
+            et_search.setText("")
+            if (value != "") {
+                val intentS = Intent(this, SearchActivity::class.java)
+
+                val mBundle = Bundle()
+                mBundle.putString("sVal", value)
+                intentS.putExtras(mBundle)
+                startActivity(intentS)
+            }
+        } else if (currentPage == 0) {
+            EventBus.getDefault().post(SearchMEvent(value))
+        }
 
     }
 
