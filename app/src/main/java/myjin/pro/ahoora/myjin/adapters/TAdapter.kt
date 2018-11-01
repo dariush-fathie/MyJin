@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import io.realm.Realm
+import io.realm.Sort
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
 
@@ -42,9 +43,12 @@ class TAdapter(ctx: Context, filterList: ArrayList<Int>) : RecyclerView.Adapter<
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         val result = realm.where(KotlinSpecialityModel::class.java).equalTo("saved", true).distinct("specialtyId").findAll()
+
+        result?.sort("name", Sort.ASCENDING)
         realm.commitTransaction()
         result.forEach { item: KotlinSpecialityModel ->
             tArr.add(item.name!!)
+
             tIds.add(item.specialtyId)
         }
     }

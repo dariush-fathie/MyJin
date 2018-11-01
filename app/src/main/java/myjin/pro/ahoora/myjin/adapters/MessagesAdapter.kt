@@ -134,7 +134,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
                     .load(list[position].imageUrl)
                     .apply(RequestOptions()
                             .fitCenter()
-                            .placeholder(R.color.colorAccent))
+                            .placeholder(R.color.white))
                     .into(holder.image)
         } catch (e: Exception) {
             Log.e("glideErr", e.message + " ")

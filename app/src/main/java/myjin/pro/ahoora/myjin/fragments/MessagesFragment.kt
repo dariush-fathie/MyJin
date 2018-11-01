@@ -391,7 +391,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         if (value != "") {
             realm.beginTransaction()
             val res = realm.where(KotlinMessagesModel::class.java)
-                    ?.contains("groupName", value, Case.INSENSITIVE)?.or()?.contains("title", value, Case.INSENSITIVE)?.or()?.contains("content", value, Case.INSENSITIVE)?.or()?.contains("type", value, Case.INSENSITIVE)?.findAll()
+                   ?.contains("title", value, Case.INSENSITIVE)?.or()?.contains("content", value, Case.INSENSITIVE)?.findAll()
             res?.sort("regDate", Sort.DESCENDING)
             realm.commitTransaction()
 

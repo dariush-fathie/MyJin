@@ -426,7 +426,10 @@ class MainActivity2 : AppCompatActivity(),
         }
 
         if (currentPage == 1) {
+
+            if (value!="")
             et_search.setText("")
+
             if (value != "") {
                 val intentS = Intent(this, SearchActivity::class.java)
 
