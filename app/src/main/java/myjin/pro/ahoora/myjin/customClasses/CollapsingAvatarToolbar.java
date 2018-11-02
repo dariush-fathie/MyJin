@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import myjin.pro.ahoora.myjin.R;
+import myjin.pro.ahoora.myjin.utils.Converter;
 
 public class CollapsingAvatarToolbar extends LinearLayout implements AppBarLayout.OnOffsetChangedListener {
 
@@ -39,6 +41,8 @@ public class CollapsingAvatarToolbar extends LinearLayout implements AppBarLayou
     private float expandedHeight;
     private float maxOffset;
 
+    private Context mContext;
+
     public CollapsingAvatarToolbar(Context context) {
         this(context, null);
         init();
@@ -48,6 +52,7 @@ public class CollapsingAvatarToolbar extends LinearLayout implements AppBarLayou
         super(context, attrs);
         init();
 
+        mContext=context;
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.CollapsingAvatarToolbar, 0, 0);
 
         try {
@@ -133,7 +138,7 @@ public class CollapsingAvatarToolbar extends LinearLayout implements AppBarLayou
 
     @NonNull
     private TextView findTitle() {
-        TextView title = (TextView) this.findViewById(R.id.avatar_title);
+        TextView title = this.findViewById(R.id.avatar_title);
         if (title == null) {
             throw new IllegalStateException("TextView with id ta_title not found");
         }
@@ -172,6 +177,9 @@ public class CollapsingAvatarToolbar extends LinearLayout implements AppBarLayou
         float inversePercentage = 1 - expandedPercentage;
         float translation = -currentOffset + ((float) toolbar.getHeight() * expandedPercentage);
 
+
+
+
         float currHeight = collapsedHeight + (expandedHeight - collapsedHeight) * expandedPercentage;
         float currentPadding = expandedPadding + (collapsedPadding - expandedPadding) * inversePercentage;
         float currentImageSize = collapsedImageSize + (expandedImageSize - collapsedImageSize) * expandedPercentage;
@@ -182,6 +190,10 @@ public class CollapsingAvatarToolbar extends LinearLayout implements AppBarLayou
         setPadding((int) currentPadding);
         setAvatarSize((int) currentImageSize);
         setTextSize(currentTextSize);
+
+
+
+
     }
 
     private void setContainerOffset(float translation) {

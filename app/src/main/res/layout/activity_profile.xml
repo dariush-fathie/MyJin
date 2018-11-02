@@ -40,23 +40,24 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_share"
-                    android:layout_width="44dp"
-                    android:layout_height="44dp"
-                    android:layout_alignParentTop="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:foreground="?selectableItemBackgroundBorderless"
-                    android:padding="8dp"
+                    android:padding="5dp"
                     android:src="@drawable/ic_share"
                     app:tint="@color/white" />
 
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_goback"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
                     android:foreground="?selectableItemBackgroundBorderless"
-                    android:padding="7dp"
+                    android:padding="4dp"
                     android:src="@drawable/ic_back_test"
                     app:tint="@color/white" />
 
@@ -67,19 +68,17 @@
                 android:id="@+id/stuff_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/colorAccent">
+                android:layout_marginTop="-10dp">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/cat_avatar"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_gravity="center_vertical"
                     android:src="@drawable/doctor" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="16dp"
                     android:orientation="vertical">
 
