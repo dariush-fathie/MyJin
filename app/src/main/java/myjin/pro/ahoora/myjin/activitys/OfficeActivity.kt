@@ -17,15 +17,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.*
 import android.util.AttributeSet
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
@@ -554,9 +553,9 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         val dialog: AlertDialog
         val view = View.inflate(this@OfficeActivity, R.layout.filter, null)
 
-        val tvAction: AppCompatTextView = view.findViewById(R.id.tv_action)
-        val tvClose: AppCompatTextView = view.findViewById(R.id.tv_close)
-        val tvClearSlecteds: AppCompatTextView = view.findViewById(R.id.tv_clearSlecteds)
+        val tvAction: MaterialButton = view.findViewById(R.id.mbtn_action)
+        val tvClose: MaterialButton = view.findViewById(R.id.mbtn_close)
+        val tvClearSlecteds: MaterialButton = view.findViewById(R.id.mbtn_clearSlecteds)
         val tList: RecyclerView = view.findViewById(R.id.rv_tList)
 
         val adapter = TAdapter(this@OfficeActivity, filterArray)
@@ -570,7 +569,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
         val listener = View.OnClickListener { v ->
             when (v.id) {
-                R.id.tv_action -> {
+                R.id.mbtn_action -> {
                     dialog.dismiss()
                     if (adapter.idsArray.size > 0) {
                         filterArray = adapter.idsArray
@@ -580,10 +579,10 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                         clearFilter()
                     }
                 }
-                R.id.tv_close -> {
+                R.id.mbtn_close -> {
                     dialog.dismiss()
                 }
-                R.id.tv_clearSlecteds -> {
+                R.id.mbtn_clearSlecteds -> {
                     clearFilter()
                     adapter.clearSelections()
                 }
@@ -599,8 +598,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         val dialog: AlertDialog
         val view = View.inflate(this@OfficeActivity, R.layout.sort, null)
 
-        val tvAction: AppCompatTextView = view.findViewById(R.id.tv_action)
-        val tvClose: AppCompatTextView = view.findViewById(R.id.tv_close)
+        val tvAction: MaterialButton = view.findViewById(R.id.mbtn_action)
+        val tvClose: MaterialButton = view.findViewById(R.id.mbtn_close)
         val rb1: AppCompatRadioButton = view.findViewById(R.id.rb1)
         val rb2: AppCompatRadioButton = view.findViewById(R.id.rb2)
 
@@ -620,7 +619,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
         val listener = View.OnClickListener { v ->
             when (v.id) {
-                R.id.tv_action -> {
+                R.id.mbtn_action -> {
                     dialog.dismiss()
                     if (rb1.isChecked) {
                         sort(Sort.ASCENDING)
@@ -630,7 +629,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                         ascSort = false
                     }
                 }
-                R.id.tv_close -> {
+                R.id.mbtn_close -> {
                     dialog.dismiss()
                 }
                 R.id.rb1 -> {

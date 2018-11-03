@@ -7,7 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.widget.TextViewCompat
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.content_scrolling_layout.*
@@ -16,9 +18,7 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.models.KotlinSignInModel
 import myjin.pro.ahoora.myjin.models.TempModel
-import myjin.pro.ahoora.myjin.utils.ApiInterface
-import myjin.pro.ahoora.myjin.utils.KotlinApiClient
-import myjin.pro.ahoora.myjin.utils.NetworkUtil
+import myjin.pro.ahoora.myjin.utils.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -164,8 +164,10 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
         showMainProgressLayout()
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        Utils.setYekta()
+        val yekta = VarableValues.yekta
 
-        apiInterface.signIn(number, "f", "l", "pr", "0", "0").enqueue(object : Callback<TempModel> {
+        apiInterface.signIn(number, "f", "l", "pr", "0", "0",yekta).enqueue(object : Callback<TempModel> {
             override fun onResponse(call: Call<TempModel>, response: Response<TempModel>) {
 
                 hideMainProgressLayout()
@@ -211,6 +213,37 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
 
     }
+
+
+
+   /* private fun showExitDialog() {
+
+        val builder = AlertDialog.Builder(this@ProfileActivity)
+        val dialog: AlertDialog
+        val view = View.inflate(this@ProfileActivity, R.layout.yourname_layout, null)
+        val tv_continue: TextViewCompat = view.findViewById(R.id.btn_ok)
+        val btnNo: AppCompatButton = view.findViewById(R.id.btn_no)
+        builder.setView(view)
+        dialog = builder.create()
+        dialog.show()
+        val listener = View.OnClickListener { v ->
+            when (v.id) {
+                R.id.btn_ok -> {
+                    dialog.dismiss()
+                    val intent = Intent(applicationContext, MainActivity2::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    intent.putExtra("EXIT", true)
+                    startActivity(intent)
+                    finish()
+                }
+                R.id.btn_no -> {
+                    dialog.dismiss()
+                }
+            }
+        }
+        btnOk.setOnClickListener(listener)
+        btnNo.setOnClickListener(listener)
+    }*/
 
     override fun onClick(v: View?) {
         when (v?.id) {

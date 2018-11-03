@@ -84,7 +84,8 @@
             android:textColor="@color/green"
             android:textDirection="rtl"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
 
 
     </RelativeLayout>

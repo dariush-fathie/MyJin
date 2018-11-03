@@ -23,7 +23,6 @@ class TabLayoutInterface(ctx: Context, fm: FragmentManager, behavior: BottomShee
 
 
     override fun onTabSelected(tab: TabLayout.Tab) {
-        Log.e(TAG, "${tab.position}")
         openBottomLayout(tab.position)
     }
 

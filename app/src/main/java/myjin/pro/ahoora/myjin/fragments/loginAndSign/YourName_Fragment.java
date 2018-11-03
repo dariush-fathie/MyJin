@@ -24,6 +24,8 @@ import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.utils.ApiInterface;
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient;
 import myjin.pro.ahoora.myjin.utils.NetworkUtil;
+import myjin.pro.ahoora.myjin.utils.Utils;
+import myjin.pro.ahoora.myjin.utils.VarableValues;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -149,8 +151,10 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
     private void signIn(final FragmentActivity activity) {
         showCPV();
         ApiInterface apiInterface = KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class);
+        Utils.INSTANCE.setYekta();
+        String yekta = VarableValues.INSTANCE.getYekta();
 
-        apiInterface.signIn(number, fn, ln, "pr","1","1").enqueue(new Callback<TempModel>() {
+        apiInterface.signIn(number, fn, ln, "pr","1","1",yekta).enqueue(new Callback<TempModel>() {
             @Override
             public void onResponse(@NonNull Call<TempModel> call, @NonNull Response<TempModel> response) {
                 hideCPV();

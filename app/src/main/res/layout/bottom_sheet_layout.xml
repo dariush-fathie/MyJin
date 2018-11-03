@@ -44,6 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabIndicatorHeight="0dp"
+        app:tabIconTint="@color/green"
         app:tabSelectedTextColor="@color/title">
 
         <!--     <android.support.design.widget.TabItem

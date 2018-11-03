@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +26,7 @@ import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.utils.ApiInterface;
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient;
 import myjin.pro.ahoora.myjin.utils.Utils;
+import myjin.pro.ahoora.myjin.utils.VarableValues;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -144,9 +147,15 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
     }
 
     private void signIn(final String number, final FragmentActivity activity) {
+
         ApiInterface apiInterface = KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class);
 
-        apiInterface.signIn(number, "f", "l", "pr","0","1").enqueue(new Callback<TempModel>() {
+        Utils.INSTANCE.setYekta();
+        String yekta = VarableValues.INSTANCE.getYekta();
+
+        Log.e("yekta",yekta);
+
+        apiInterface.signIn(number, "f", "l", "pr","0","1",yekta).enqueue(new Callback<TempModel>() {
             @Override
             public void onResponse(@NonNull Call<TempModel> call, @NonNull Response<TempModel> response) {
                 if (response.isSuccessful()) {

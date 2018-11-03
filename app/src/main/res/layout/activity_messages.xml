@@ -82,7 +82,7 @@
                     tools:targetApi="lollipop" />
             </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.codesgood.views.JustifiedTextView
                 android:id="@+id/tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -97,7 +97,6 @@
                 android:paddingTop="8dp"
                 android:text="@string/lorem"
                 android:textColor="#222"
-                android:textSize="15sp"
                 android:textStyle="bold"
                 app:fontFamily="@font/samim"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +148,7 @@
 
 
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.codesgood.views.JustifiedTextView
                 android:id="@+id/tv_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -162,7 +161,6 @@
                 android:paddingStart="16dp"
                 android:text="@string/lorem"
                 android:textColor="@color/title"
-                android:textSize="14sp"
                 app:fontFamily="@font/samim"
                 android:autoLink="web"
                 app:layout_constraintEnd_toEndOf="parent"

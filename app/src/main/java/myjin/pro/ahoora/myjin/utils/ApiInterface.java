@@ -69,7 +69,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("service/signin/")
     Call<TempModel>signIn(@Field("p") String number,@Field("f") String fn,@Field("l") String ln,@Field("pr") String pr,@Field("du") String du
-            ,@Field("logOut") String logOut);
+            ,@Field("logOut") String logOut,@Field("yekta") String yekta);
 
 
 
