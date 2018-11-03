@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,19 +7,82 @@
     android:orientation="vertical"
     tools:showIn="@layout/activity_profile">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-    <FrameLayout android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:elevation="2sp"
-        android:padding="16dp"
-        tools:targetApi="lollipop">
-
-        <TextView android:layout_width="match_parent"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="8dp"
-            android:text="@string/lorem"
-            android:textSize="15sp" />
-    </FrameLayout>
-</LinearLayout>
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:foreground="?selectableItemBackgroundBorderless">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:paddingTop="60dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+
+                        android:id="@+id/rl_tel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/iv_tel_pf"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerVertical="true"
+                            android:padding="5dp"
+                            android:layout_marginStart="5dp"
+                            android:tint="@color/title"
+                            android:src="@drawable/ic_back" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_tel_val"
+                            android:fontFamily="@font/samim"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toStartOf="@+id/tv_tel_title"
+                            android:layout_toEndOf="@+id/iv_tel_pf"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:text="0918***3382"
+                            android:textColor="@color/title" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_tel_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:padding="10dp"
+                            android:fontFamily="@font/samim"
+                            android:text="@string/shomarehtelephone"
+                            android:textColor="@color/title"
+                            android:textSize="15sp" />
+
+                    </RelativeLayout>
+                    <View
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/back"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

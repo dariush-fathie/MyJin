@@ -40,6 +40,7 @@ import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.customClasses.TabLayoutInterface
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
+import myjin.pro.ahoora.myjin.models.KotlinSignInModel
 import myjin.pro.ahoora.myjin.models.events.NearestEvent
 import myjin.pro.ahoora.myjin.models.events.NearestEvent2
 import myjin.pro.ahoora.myjin.utils.*
@@ -85,6 +86,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             tabLayoutInterface = TabLayoutInterface(this, supportFragmentManager, bottomSheetBehavior, ll_progress)
             ctbl.addOnTabSelectedListener(tabLayoutInterface)
 
+            isLogin()
+
             if (NetworkUtil().isNetworkAvailable(this)) {
                 getItems()
             } else {
@@ -92,6 +95,11 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             }
         }, 50)
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isLogin()
     }
 
     private fun showSomeViews() {
@@ -141,6 +149,30 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         g_url = realm.where(KotlinGroupModel::class.java).equalTo("groupId", groupId).findFirst()?.g_url!!
         realm.commitTransaction()
         return name!!
+    }
+
+
+    private var signIn=false
+
+    private  fun isLogin(){
+        val realm = Realm.getDefaultInstance()
+        realm.beginTransaction()
+        val u=realm.where(KotlinSignInModel::class.java).findFirst()
+
+        if (u!=null){
+            signIn=true
+            tv_login_outsign.text="خوش آمدید "+u.firstName+" عزیز "
+            SharedPer(this@OfficeActivity).setBoolean("signIn",signIn)
+
+        }else{
+            signIn = false
+            tv_login_outsign.text = getString(R.string.vrodvozviat)
+            SharedPer(this@OfficeActivity).setBoolean("signIn", signIn)
+        }
+        realm.commitTransaction()
+
+
+
     }
 
     private fun initListener() {

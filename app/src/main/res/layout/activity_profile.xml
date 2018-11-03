@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/cl_parent"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -39,14 +40,14 @@
                 app:layout_collapseMode="pin">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_share"
+                    android:id="@+id/iv_menu"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:foreground="?selectableItemBackgroundBorderless"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_share"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_menu_chat"
                     app:tint="@color/white" />
 
 
@@ -57,7 +58,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:foreground="?selectableItemBackgroundBorderless"
-                    android:padding="4dp"
+                    android:padding="6dp"
                     android:src="@drawable/ic_back_test"
                     app:tint="@color/white" />
 
@@ -78,8 +79,9 @@
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -91,13 +93,13 @@
                         android:textColor="@android:color/white"
                         android:textSize="18sp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/subtitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Subtitle"
-                        android:textColor="#80ffffff"
-                        android:textSize="15sp" />
+                    <!--  <androidx.appcompat.widget.AppCompatTextView
+                          android:id="@+id/subtitle"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="Subtitle"
+                          android:textColor="#80ffffff"
+                          android:textSize="15sp" />-->
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </myjin.pro.ahoora.myjin.customClasses.CollapsingAvatarToolbar>
@@ -115,6 +117,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -122,8 +125,67 @@
         android:focusable="true"
         android:src="@drawable/ic_action_name"
         android:tint="@color/white"
+        android:visibility="gone"
         app:fabSize="normal"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|end" />
+
+    <RelativeLayout
+        android:id="@+id/rl_progressMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/back"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_t">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerInParent="true"
+            android:padding="5dp"
+            android:src="@drawable/ic_jin_pro" />
+
+        <com.github.rahatarmanahmed.cpv.CircularProgressView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            app:cpv_animAutostart="true"
+            app:cpv_color="@color/green"
+            app:cpv_indeterminate="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_netErrText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/back"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_netErrText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:drawableTop="@drawable/ic_wifi_not_connected"
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/checkConnectionAndTryAgain"
+            android:textColor="@color/title"
+            app:fontFamily="@font/samim" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_tryAgain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_netErrText"
+            android:layout_centerInParent="true"
+            android:drawableEnd="@drawable/ic_refresh_test"
+            android:text="@string/tryAgain"
+            app:fontFamily="@font/samim" />
+    </RelativeLayout>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -16,7 +16,7 @@ class ChatAdapter(private val context: Context, dataSet: ArrayList<ChatModel>) :
     private val mDataSet = dataSet
     override fun getItemViewType(position: Int): Int {
         var type = 0
-        if (!mDataSet[position].modeMsg) {
+        if (!mDataSet[position].modeMsg!!) {
             type = 1
         }
         return type

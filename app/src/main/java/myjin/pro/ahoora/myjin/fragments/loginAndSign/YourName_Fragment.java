@@ -36,7 +36,7 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
     private static AppCompatEditText etFn, etLn;
     private AppCompatTextView tv_continue;
     private RelativeLayout rl_hbf;
-    protected IActivityEnabledListener aeListener;
+    private IActivityEnabledListener aeListener;
     private String number, fn, ln;
 
     @Override
@@ -60,7 +60,7 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
         void onActivityEnabled(FragmentActivity activity);
     }
 
-    protected void getAvailableActivity(IActivityEnabledListener listener) {
+    private void getAvailableActivity(IActivityEnabledListener listener) {
         if (getActivity() == null) {
             aeListener = listener;
 
@@ -150,7 +150,7 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
         showCPV();
         ApiInterface apiInterface = KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class);
 
-        apiInterface.signIn(number, fn, ln, "pr").enqueue(new Callback<TempModel>() {
+        apiInterface.signIn(number, fn, ln, "pr","1","1").enqueue(new Callback<TempModel>() {
             @Override
             public void onResponse(@NonNull Call<TempModel> call, @NonNull Response<TempModel> response) {
                 hideCPV();
@@ -163,9 +163,14 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
                     switch (val) {
 
                         case "U": {
-                            // TODO: 10/26/2018 goto profile
-                            //Toast.makeText(activity, "go to profile", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(activity,ProfileActivity.class));
+
+                            Intent intent=new Intent(activity,ProfileActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("number", number);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            activity.finish();
+
                             break;
                         }
                         case "no": {

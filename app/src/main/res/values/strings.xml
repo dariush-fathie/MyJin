@@ -175,6 +175,9 @@
     <string name="ebdhhtokpm">این برنامه در حال حاضر تنها استان کردستان را پوشش می دهد ..</string>
     <string name="mmnrek">منبع مورد نظر را انتخاب کنید</string>
     <string name="dbmnrek">دسته بندی مورد نظر را انتخاب کنید</string>
+    <string name="virayshnam">ویرایش نام</string>
+    <string name="logout">خروج از حساب</string>
+    <string name="shomarehtelephone">شماره تلفن</string>
 
 </resources>
 

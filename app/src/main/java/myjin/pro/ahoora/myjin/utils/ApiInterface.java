@@ -8,6 +8,7 @@ import myjin.pro.ahoora.myjin.models.KotlinItemModel;
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel;
 import myjin.pro.ahoora.myjin.models.KotlinProvCityModel;
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel;
+import myjin.pro.ahoora.myjin.models.KotlinSignInModel;
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel;
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel;
 import myjin.pro.ahoora.myjin.models.SimpleResponseModel;
@@ -67,7 +68,13 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("service/signin/")
-    Call<TempModel>signIn(@Field("p") String number,@Field("f") String fn,@Field("l") String ln,@Field("pr") String pr);
+    Call<TempModel>signIn(@Field("p") String number,@Field("f") String fn,@Field("l") String ln,@Field("pr") String pr,@Field("du") String du
+            ,@Field("logOut") String logOut);
 
 
+
+
+
+    @GET("service/getUserInfo/{number}")
+    Call<List<KotlinSignInModel>> getUserInfo(@Path("number") String number);
 }

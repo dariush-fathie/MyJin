@@ -146,7 +146,7 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
     private void signIn(final String number, final FragmentActivity activity) {
         ApiInterface apiInterface = KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class);
 
-        apiInterface.signIn(number, "f", "l", "pr").enqueue(new Callback<TempModel>() {
+        apiInterface.signIn(number, "f", "l", "pr","0","1").enqueue(new Callback<TempModel>() {
             @Override
             public void onResponse(@NonNull Call<TempModel> call, @NonNull Response<TempModel> response) {
                 if (response.isSuccessful()) {
@@ -171,10 +171,13 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
                             break;
                         }
                         case "U": {
-                            //Toast.makeText(activity, "go to profile", Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(activity,ProfileActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("number", number);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                            activity.finish();
 
-                            startActivity(new Intent(activity,ProfileActivity.class));
-                            // TODO: 10/26/2018 goto profile
                             break;
                         }
                         case "no": {

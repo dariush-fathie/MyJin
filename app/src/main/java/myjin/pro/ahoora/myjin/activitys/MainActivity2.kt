@@ -1,7 +1,5 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +8,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.tabs.TabLayout
 import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AlertDialog
@@ -21,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -29,6 +26,7 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
+import myjin.pro.ahoora.myjin.models.KotlinSignInModel
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
 import myjin.pro.ahoora.myjin.models.events.*
@@ -40,10 +38,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity2 : AppCompatActivity(),
-        TabLayout.OnTabSelectedListener,
         ViewPager.OnPageChangeListener,
         AppBarLayout.OnOffsetChangedListener,
         View.OnClickListener, View.OnLongClickListener {
+
+
+    private var signIn = false
 
     companion object {
         const val settingRequest = 1564
@@ -68,7 +68,13 @@ class MainActivity2 : AppCompatActivity(),
             R.id.tv_login_outsign -> {
                 /*Toast.makeText(this@MainActivity2,
                          getString(R.string.early), Toast.LENGTH_SHORT).show()*/
-                startActivity(Intent(this, ProfileActivity::class.java))
+
+
+                if (signIn) {
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                } else {
+                    startActivity(Intent(this, Login2Activity::class.java))
+                }
             }
             R.id.rl_exit -> showExitDialog()
             R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khj), 1)
@@ -99,6 +105,27 @@ class MainActivity2 : AppCompatActivity(),
         intentM.putExtra("ServiceTitle", title)
         intentM.putExtra("groupId", i)
         startActivity(intentM)
+    }
+
+    private fun isLogin() {
+        val realm = Realm.getDefaultInstance()
+        realm.beginTransaction()
+        val u = realm.where(KotlinSignInModel::class.java).findFirst()
+
+        if (u != null) {
+            signIn = true
+            tv_login_outsign.text = "خوش آمدید " + u.firstName + " عزیز "
+            SharedPer(this@MainActivity2).setBoolean("signIn", signIn)
+
+
+        }else{
+            signIn = false
+            tv_login_outsign.text = getString(R.string.vrodvozviat)
+            SharedPer(this@MainActivity2).setBoolean("signIn", signIn)
+        }
+        realm.commitTransaction()
+
+
     }
 
     private fun setListener() {
@@ -144,6 +171,7 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onResume() {
         super.onResume()
+        isLogin()
         EventBus.getDefault().post(VisibilityEvent(currentPage))
     }
 
@@ -212,14 +240,7 @@ class MainActivity2 : AppCompatActivity(),
         tvLocation = tv_location
         fabH = Converter.pxFromDp(this, 16f + 50f + 20)
 
-/*        tbl_main?.addTab(tbl_main.newTab()
-                .setText(getString(R.string.etlaeieh)), false)
-        tbl_main?.addTab(tbl_main.newTab()
-                .setText(getString(R.string.healthCenters)), false)
-        tbl_main?.addTab(tbl_main.newTab()
-                .setText("نشان شده ها"), false)*/
 
-        tbl_main.addOnTabSelectedListener(this)
 
         vp_mainContainer.adapter = PagerAdapter(supportFragmentManager, this)
         vp_mainContainer.addOnPageChangeListener(this)
@@ -229,8 +250,8 @@ class MainActivity2 : AppCompatActivity(),
 
         et_search.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    search()
-                    Utils.closeKeyBoard(et_search.windowToken, this@MainActivity2)
+                search()
+                Utils.closeKeyBoard(et_search.windowToken, this@MainActivity2)
             }
             false
         }
@@ -246,9 +267,9 @@ class MainActivity2 : AppCompatActivity(),
             }
 
             override fun afterTextChanged(editable: Editable) {
-               if (editable.toString() == ""){
-                   search()
-               }
+                if (editable.toString() == "") {
+                    search()
+                }
             }
         })
 
@@ -265,10 +286,13 @@ class MainActivity2 : AppCompatActivity(),
 
         setListener()
         checkNetState()
+        isLogin()
 
         val tf = SharedPer(this@MainActivity2).getIntro(getString(R.string.introductionFlag2))
         SharedPer(this).setBoolean(getString(R.string.introductionFlag), tf)
     }
+
+
 
     private var netAvailability = false
 
@@ -342,20 +366,6 @@ class MainActivity2 : AppCompatActivity(),
         EventBus.getDefault().post(VisibilityEvent(position))
     }
 
-    override fun onTabReselected(tab: TabLayout.Tab?) {
-        Log.e("tabSelected", "${tab?.position}")
-    }
-
-    override fun onTabUnselected(tab: TabLayout.Tab?) {
-        //addOrRemoveColorFilter(tab!!, false)
-
-    }
-
-    override fun onTabSelected(tab: TabLayout.Tab?) {
-        //addOrRemoveColorFilter(tab!!, true)
-        //newGenerSelected(tab.position)
-
-    }
 
     /*private fun addOrRemoveColorFilter(tab: TabLayout.Tab, addFilter: Boolean) {
         val view = tab.customView
@@ -427,8 +437,8 @@ class MainActivity2 : AppCompatActivity(),
 
         if (currentPage == 1) {
 
-            if (value!="")
-            et_search.setText("")
+            if (value != "")
+                et_search.setText("")
 
             if (value != "") {
                 val intentS = Intent(this, SearchActivity::class.java)
