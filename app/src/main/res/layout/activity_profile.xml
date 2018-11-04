@@ -81,7 +81,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -90,16 +89,15 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/samim"
                         android:text="Title"
-                        android:textColor="@android:color/white"
-                        android:textSize="18sp" />
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white" />
 
-                    <!--  <androidx.appcompat.widget.AppCompatTextView
-                          android:id="@+id/subtitle"
+                      <androidx.appcompat.widget.AppCompatTextView
+                          android:id="@+id/tv_tel_val"
                           android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
-                          android:text="Subtitle"
-                          android:textColor="#80ffffff"
-                          android:textSize="15sp" />-->
+                          android:text="tele"
+                          android:fontFamily="@font/samim" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </myjin.pro.ahoora.myjin.customClasses.CollapsingAvatarToolbar>

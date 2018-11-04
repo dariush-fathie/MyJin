@@ -66,9 +66,6 @@ class MainActivity2 : AppCompatActivity(),
             R.id.iv_search -> search()
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> {
-                /*Toast.makeText(this@MainActivity2,
-                         getString(R.string.early), Toast.LENGTH_SHORT).show()*/
-
 
                 if (signIn) {
                     startActivity(Intent(this, ProfileActivity::class.java))

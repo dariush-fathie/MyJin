@@ -1,15 +1,16 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.widget.TextViewCompat
+import com.google.android.material.button.MaterialButton
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.content_scrolling_layout.*
@@ -27,6 +28,9 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
 
 
     private var number = ""
+    private var fn = ""
+    private var ln = ""
+
     val realm = Realm.getDefaultInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,7 +135,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     private fun setValues(u: KotlinSignInModel?) {
         tv_tel_val.text = u?.phoneNumber
         number = u?.phoneNumber.toString()
-        avatar_title.text = "${u?.firstName} ${u?.lastName}"
+        avatar_title.text = u?.firstName.toString() + " " + u?.lastName
     }
 
 
@@ -140,7 +144,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         popupMenu.menuInflater.inflate(R.menu.menu3, popupMenu.getMenu())
         popupMenu.setOnMenuItemClickListener { i ->
             when (i.itemId) {
-                R.id.etName -> startActivity(Intent(this, Login2Activity::class.java))
+                R.id.etName -> showEditNameDialog()
                 R.id.logNut -> {
 
                     if (NetworkUtil().isNetworkAvailable(this)) {
@@ -167,7 +171,7 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         Utils.setYekta()
         val yekta = VarableValues.yekta
 
-        apiInterface.signIn(number, "f", "l", "pr", "0", "0",yekta).enqueue(object : Callback<TempModel> {
+        apiInterface.signIn(number, "f", "l", "pr", "0", "0", yekta).enqueue(object : Callback<TempModel> {
             override fun onResponse(call: Call<TempModel>, response: Response<TempModel>) {
 
                 hideMainProgressLayout()
@@ -215,42 +219,109 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-
-   /* private fun showExitDialog() {
+    private fun showEditNameDialog() {
 
         val builder = AlertDialog.Builder(this@ProfileActivity)
         val dialog: AlertDialog
-        val view = View.inflate(this@ProfileActivity, R.layout.yourname_layout, null)
-        val tv_continue: TextViewCompat = view.findViewById(R.id.btn_ok)
-        val btnNo: AppCompatButton = view.findViewById(R.id.btn_no)
+        val view = View.inflate(this@ProfileActivity, R.layout.yourname_dialog_layout, null)
+        val tvContinue: MaterialButton = view.findViewById(R.id.tv_continue)
+        val etFn: AppCompatEditText = view.findViewById(R.id.et_fn)
+        val etLn: AppCompatEditText = view.findViewById(R.id.et_ln)
+
         builder.setView(view)
         dialog = builder.create()
         dialog.show()
         val listener = View.OnClickListener { v ->
             when (v.id) {
-                R.id.btn_ok -> {
+                R.id.tv_continue -> {
                     dialog.dismiss()
-                    val intent = Intent(applicationContext, MainActivity2::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    intent.putExtra("EXIT", true)
-                    startActivity(intent)
-                    finish()
+
+                    if (etFn.text != null && etLn.text != null) {
+                        if (etFn.text!!.toString().trim { it <= ' ' } != "" && etLn.text!!.toString().trim { it <= ' ' } != "") {
+                            fn = etFn.text!!.toString().trim { it <= ' ' }
+                            ln = etLn.text!!.toString().trim { it <= ' ' }
+
+                            if (NetworkUtil().isNetworkAvailable(this@ProfileActivity)) {
+                                updateEditName()
+                            } else {
+                                CustomToast().Show_Toast(this@ProfileActivity, cl_parent,
+                                        getString(R.string.checkYourConnection))
+                            }
+
+                        } else {
+                            CustomToast().Show_Toast(this@ProfileActivity, cl_parent,
+                                    getString(R.string.tmpsh))
+                        }
+                    }
                 }
-                R.id.btn_no -> {
-                    dialog.dismiss()
-                }
+
             }
         }
-        btnOk.setOnClickListener(listener)
-        btnNo.setOnClickListener(listener)
-    }*/
+        tvContinue.setOnClickListener(listener)
+    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.btn_tryAgain -> tryAgain()
             R.id.iv_menu -> openPopupMenu()
             R.id.iv_goback -> onBackPressed()
+            R.id.fab_camera-> getPhotoForAvatar()
         }
+    }
+
+    private fun getPhotoForAvatar() {
+
+    }
+
+    private fun updateEditName() {
+        showMainProgressLayout()
+
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        Utils.setYekta()
+        val yekta = VarableValues.yekta
+
+        apiInterface.signIn(number, fn, ln, "pr", "1", "1", yekta).enqueue(object : Callback<TempModel> {
+            override fun onResponse(call: Call<TempModel>, response: Response<TempModel>) {
+                hideMainProgressLayout()
+                if (response.isSuccessful) {
+                    val `val`: String
+                    val tempModel = response.body()!!
+                    `val` = tempModel.getVal()
+
+                    when (`val`) {
+
+                        "U" -> {
+                            realm.beginTransaction()
+                            val kmdm = realm.where(KotlinSignInModel::class.java).findFirst()
+
+                            kmdm?.firstName = fn
+                            kmdm?.lastName = ln
+
+                            setValues(kmdm)
+                            realm.commitTransaction()
+
+
+                        }
+                        "no" -> {
+                            CustomToast().Show_Toast(this@ProfileActivity, cl_parent,
+                                    getString(R.string.vbkhmsh))
+                        }
+                        "empty" -> {
+                            CustomToast().Show_Toast(this@ProfileActivity, cl_parent,
+                                    getString(R.string.ltmkhshesh))
+                        }
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<TempModel>, t: Throwable) {
+
+                hideMainProgressLayout()
+                Toast.makeText(this@ProfileActivity, R.string.khrda, Toast.LENGTH_SHORT).show()
+
+            }
+        })
     }
 
 }

@@ -58,6 +58,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     var provId = 19
     var cityId = 1
     var g_url = ""
+    private var signIn=false
+
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var bottomSheetCallback: BottomSheetBehavior.BottomSheetCallback
     private lateinit var tabLayoutInterface: TabLayoutInterface
@@ -151,7 +153,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
 
-    private var signIn=false
 
     private  fun isLogin(){
         val realm = Realm.getDefaultInstance()
@@ -444,9 +445,13 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         when (v?.id) {
             R.id.btn_tryAgain -> tryAgain()
             R.id.tv_login_outsign -> {
-                Toast.makeText(this@OfficeActivity,
-                        getString(R.string.early), Toast.LENGTH_SHORT).show()
-                //startActivity(Intent(this, Login2Activity::class.java))
+                /*Toast.makeText(this@OfficeActivity,
+                        getString(R.string.early), Toast.LENGTH_SHORT).show()*/
+                if (signIn) {
+                    startActivity(Intent(this, ProfileActivity::class.java))
+                } else {
+                    startActivity(Intent(this, Login2Activity::class.java))
+                }
             }
             R.id.rl_filter -> onFilterClick()
             R.id.rl_sort -> onSortClick()
