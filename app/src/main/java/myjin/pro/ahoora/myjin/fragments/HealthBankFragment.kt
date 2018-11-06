@@ -24,9 +24,10 @@ import kotlinx.android.synthetic.main.fragment_health_bank.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
+import myjin.pro.ahoora.myjin.activitys.SpecActivity
 import myjin.pro.ahoora.myjin.customClasses.OnSpinerItemClick
 import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
-import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
+import myjin.pro.ahoora.myjin.customClasses.ThreeColGridDecorationCatagory
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.utils.*
@@ -145,7 +146,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
             lock = true
             showCPV()
             hideErrLayout()
-           // (activity as MainActivity2).hideSearchFab()
+            // (activity as MainActivity2).hideSearchFab()
 
             val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
             val response = apiInterface.getGroupCount(provId, cityId)
@@ -178,7 +179,6 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     lock = false
 
 
-
                 }
 
                 override fun onFailure(call: Call<List<KotlinGroupModel>>?, t: Throwable?) {
@@ -207,7 +207,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                 mainList.removeItemDecorationAt(0)
             }
 
-            val itemDecoration = TwoColGridDecoration(activity, 8)
+            val itemDecoration = ThreeColGridDecorationCatagory(activity as Context, 8)
             mainList.addItemDecoration(itemDecoration)
 
 
@@ -306,7 +306,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                 a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", -300f, 0f)
             }
             val r = Random()
-            val i1 = r.nextInt(200)+250
+            val i1 = r.nextInt(200) + 250
             a.duration = i1.toLong()
             a.start()
 
@@ -316,7 +316,14 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
             override fun onClick(v: View?) {
                 if (groupsList[adapterPosition].counter > 0) {
-                    val i = Intent(activity, OfficeActivity::class.java)
+
+                    val i: Intent
+                    if (groupsList[adapterPosition].groupId > 1) {
+                        i = Intent(activity, OfficeActivity::class.java)
+                    } else {
+                        i = Intent(activity, SpecActivity::class.java)
+                    }
+
                     i.putExtra(StaticValues.CATEGORY, groupsList.get(adapterPosition).groupId)
                     i.putExtra(StaticValues.PROVID, provId)
                     i.putExtra(StaticValues.CITYID, cityId)

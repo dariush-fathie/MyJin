@@ -34,7 +34,6 @@
         android:name=".App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
@@ -136,7 +135,7 @@
         </service>
 
         <activity android:name=".activitys.ProfileActivity" />
-
+        <activity android:name=".activitys.SpecActivity"></activity>
     </application>
 
 </manifest>

@@ -16,5 +16,10 @@ open class KotlinSpecialityModel : RealmObject() {
     @Expose
     open var name: String? = ""
 
+
+    @SerializedName("spec_img")
+    @Expose
+    open var specImg: String? = ""
+
     open var saved: Boolean = false
 }

@@ -78,6 +78,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                 groupId = intent.getIntExtra(StaticValues.CATEGORY, 0)
                 provId = intent.getIntExtra(StaticValues.PROVID, 19)
                 cityId = intent.getIntExtra(StaticValues.CITYID, 1)
+
+
             }
             if (groupId != 1) {
                 hideFilter()
@@ -141,7 +143,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rl_filter.visibility = View.GONE
     }
 
-    //`center_id` IN(682,681,680,679,678,677,676,675,674)
     private fun getTitleFromDb(): String {
         Log.e("gid", "$groupId")
         val realm = Realm.getDefaultInstance()

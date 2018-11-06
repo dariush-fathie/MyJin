@@ -178,6 +178,8 @@
     <string name="virayshnam">ویرایش نام</string>
     <string name="logout">خروج از حساب</string>
     <string name="shomarehtelephone">شماره تلفن</string>
+    <string name="takhsosha">تخصص ها</string>
+    <string name="takhasos">تخصص</string>
 
 </resources>
 

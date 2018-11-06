@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="120dp"
     app:cardCornerRadius="5dp"
-
     android:foreground="?selectableItemBackgroundBorderless"
     app:cardBackgroundColor="@color/blackTransparent">
 
@@ -57,13 +56,11 @@
             android:text="15 مورد"
             android:lines="1"
             android:textColor="@color/mc_icon_color"
-            android:textSize="10sp"
-            android:textStyle="bold"
+            android:textSize="12sp"
             app:fontFamily="@font/samim"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="SmallSp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

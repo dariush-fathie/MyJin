@@ -52,13 +52,16 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onLongClick(v: View?): Boolean {
         when (v?.id) {
+
             R.id.iv_jinDrawer -> {
                 startActivity(Intent(this, LoginActivity::class.java))
                 return true
             }
+
         }
         return false
     }
+
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -113,7 +116,6 @@ class MainActivity2 : AppCompatActivity(),
             signIn = true
             tv_login_outsign.text = "خوش آمدید " + u.firstName + " عزیز "
             SharedPer(this@MainActivity2).setBoolean("signIn", signIn)
-
 
         }else{
             signIn = false
