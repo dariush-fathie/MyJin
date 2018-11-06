@@ -180,6 +180,7 @@
     <string name="shomarehtelephone">شماره تلفن</string>
     <string name="takhsosha">تخصص ها</string>
     <string name="takhasos">تخصص</string>
+    <string name="nmnkhb">نام مرکز نباید خالی باشد</string>
 
 </resources>
 

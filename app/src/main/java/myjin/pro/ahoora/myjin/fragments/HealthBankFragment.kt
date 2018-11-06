@@ -317,6 +317,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
             override fun onClick(v: View?) {
                 if (groupsList[adapterPosition].counter > 0) {
 
+                    val array = ArrayList<Int>()
                     val i: Intent
                     if (groupsList[adapterPosition].groupId > 1) {
                         i = Intent(activity, OfficeActivity::class.java)
@@ -327,6 +328,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     i.putExtra(StaticValues.CATEGORY, groupsList.get(adapterPosition).groupId)
                     i.putExtra(StaticValues.PROVID, provId)
                     i.putExtra(StaticValues.CITYID, cityId)
+                    i.putIntegerArrayListExtra("spArray",array)
                     startActivity(i)
                 } else {
                     popupToast()

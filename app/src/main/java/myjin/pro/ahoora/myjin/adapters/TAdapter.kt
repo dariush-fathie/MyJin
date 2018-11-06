@@ -18,9 +18,8 @@ class TAdapter(ctx: Context, filterList: ArrayList<Int>) : RecyclerView.Adapter<
 
     val idsArray = ArrayList<Int>()
     val context = ctx
-    val tArr = ArrayList<String>()
+    private val tArr = ArrayList<String>()
     val tIds = ArrayList<Int>()
-    var filters = filterList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.t_list_item, parent, false)
@@ -48,7 +47,6 @@ class TAdapter(ctx: Context, filterList: ArrayList<Int>) : RecyclerView.Adapter<
         realm.commitTransaction()
         result.forEach { item: KotlinSpecialityModel ->
             tArr.add(item.name!!)
-
             tIds.add(item.specialtyId)
         }
     }
@@ -63,8 +61,6 @@ class TAdapter(ctx: Context, filterList: ArrayList<Int>) : RecyclerView.Adapter<
         val x = tIds[position]
         holder.cb.isChecked = idsArray.contains(x)
     }
-
-
     inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         override fun onClick(v: View?) {
             var f = false
@@ -82,9 +78,7 @@ class TAdapter(ctx: Context, filterList: ArrayList<Int>) : RecyclerView.Adapter<
                 cb.isChecked = false
                 idsArray.remove(tIds[adapterPosition])
             }
-            idsArray.forEach { i: Int ->
-                Log.e("I", "$i")
-            }
+
         }
 
         val tTitle: AppCompatTextView = itemView.findViewById(R.id.tv_t_title)

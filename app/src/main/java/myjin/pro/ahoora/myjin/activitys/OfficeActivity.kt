@@ -58,14 +58,14 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     var provId = 19
     var cityId = 1
     var g_url = ""
-    private var signIn=false
+    private var signIn = false
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var bottomSheetCallback: BottomSheetBehavior.BottomSheetCallback
     private lateinit var tabLayoutInterface: TabLayoutInterface
     private lateinit var adapter: GroupItemAdapter
     var idArray = ArrayList<Int>()
-    var filterArray = ArrayList<Int>()
+    var specId = ArrayList<Int>()
     private val requestLocationSetting = 1055
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,12 +78,10 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                 groupId = intent.getIntExtra(StaticValues.CATEGORY, 0)
                 provId = intent.getIntExtra(StaticValues.PROVID, 19)
                 cityId = intent.getIntExtra(StaticValues.CITYID, 1)
-
+                specId = intent.getIntegerArrayListExtra("spArray")
 
             }
-            if (groupId != 1) {
-                hideFilter()
-            }
+
             tv_officeTitle.text = getTitleFromDb()
             initBottomSheet()
             tabLayoutInterface = TabLayoutInterface(this, supportFragmentManager, bottomSheetBehavior, ll_progress)
@@ -138,10 +136,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         }
     }
 
-    private fun hideFilter() {
-        view_divider.visibility = View.GONE
-        rl_filter.visibility = View.GONE
-    }
 
     private fun getTitleFromDb(): String {
         Log.e("gid", "$groupId")
@@ -154,18 +148,17 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
 
-
-    private  fun isLogin(){
+    private fun isLogin() {
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
-        val u=realm.where(KotlinSignInModel::class.java).findFirst()
+        val u = realm.where(KotlinSignInModel::class.java).findFirst()
 
-        if (u!=null){
-            signIn=true
-            tv_login_outsign.text="خوش آمدید "+u.firstName+" عزیز "
-            SharedPer(this@OfficeActivity).setBoolean("signIn",signIn)
+        if (u != null) {
+            signIn = true
+            tv_login_outsign.text = "خوش آمدید " + u.firstName + " عزیز "
+            SharedPer(this@OfficeActivity).setBoolean("signIn", signIn)
 
-        }else{
+        } else {
             signIn = false
             tv_login_outsign.text = getString(R.string.vrodvozviat)
             SharedPer(this@OfficeActivity).setBoolean("signIn", signIn)
@@ -173,12 +166,10 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         realm.commitTransaction()
 
 
-
     }
 
     private fun initListener() {
         btn_tryAgain.setOnClickListener(this)
-        rl_filter.setOnClickListener(this)
         rl_sort.setOnClickListener(this)
         iv_goback.setOnClickListener(this)
         fab_goUp.setOnClickListener(this)
@@ -223,7 +214,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rv_items.addItemDecoration(decor)
         adapter = GroupItemAdapter(this, list, g_url, getTitleFromDb())
         rv_items.adapter = adapter
-        Log.e("itemSize", "${list.size}")
+
         hideMainProgressLayout()
     }
 
@@ -243,7 +234,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         ll_progressMain.visibility = View.GONE
     }
 
-    fun showMainProgressLayout() {
+    private fun showMainProgressLayout() {
         ll_progressMain.visibility = View.VISIBLE
     }
 
@@ -298,7 +289,11 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                             idArray.add(itemModel?.centerId!!)
                         }
                         runOnUiThread {
-                            initList(idArray)
+                            if (specId.size > 0) {
+                                filter1(specId)
+                            } else {
+                                initList(idArray)
+                            }
                             hideErrLayout()
                             hideMainProgressLayout()
                             showSomeViews()
@@ -380,7 +375,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         if (filterFlag) {
             result = realm.where(KotlinItemModel::class.java)
                     .equalTo("groupId", groupId)
-                    .`in`("specialityList.specialtyId", filterArray.toTypedArray()).findAll()
+                    .`in`("specialityList.specialtyId", specId.toTypedArray()).findAll()
             result = result.sort("firstName", sort)
         } else {
             result = realm.where(KotlinItemModel::class.java)
@@ -401,7 +396,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     private fun filter1(array: ArrayList<Int>) {
         filterFlag = true
-        tv_filter.setTextColor(ContextCompat.getColor(this, R.color.colorAccent))
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         val result = realm.where(KotlinItemModel::class.java)
@@ -422,25 +416,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     private var filterFlag = false
     private var ascSort = true
 
-    private fun clearFilter() {
-        filterFlag = false
-        filterArray.clear()
-        tv_filter.setTextColor(ContextCompat.getColor(this, R.color.androidTextColor))
-        val realm = Realm.getDefaultInstance()
-        realm.beginTransaction()
-        val result: RealmResults<KotlinItemModel>
-        result = realm.where(KotlinItemModel::class.java)
-                .equalTo("groupId", groupId)
-                .sort("firstName", Sort.ASCENDING)
-                .findAll()
-        realm.commitTransaction()
-        idArray.clear()
-        result.forEach { item: KotlinItemModel ->
-            idArray.add(item.centerId)
-        }
 
-        initList(idArray)
-    }
 
     override fun onClick(v: View?) {
         when (v?.id) {
@@ -454,7 +430,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
                     startActivity(Intent(this, Login2Activity::class.java))
                 }
             }
-            R.id.rl_filter -> onFilterClick()
             R.id.rl_sort -> onSortClick()
             R.id.iv_goback -> onBackPressed()
             R.id.iv_menu -> openDrawerLayout()
@@ -521,7 +496,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     }
 
-
     private fun openDrawerLayout() {
         drawerLayout.openDrawer(GravityCompat.END)
     }
@@ -539,64 +513,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         anim.duration = 500
         anim.interpolator = AccelerateInterpolator()
         anim.start()
-    }
-
-    inner class RtlGridLayoutManager : GridLayoutManager {
-
-        constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {}
-
-        constructor(context: Context, spanCount: Int) : super(context, spanCount) {}
-
-        constructor(context: Context, spanCount: Int, orientation: Int, reverseLayout: Boolean) : super(context, spanCount, orientation, reverseLayout) {}
-
-        override fun isLayoutRTL(): Boolean {
-            return true
-        }
-    }
-
-    private fun onFilterClick() {
-        val builder = AlertDialog.Builder(this@OfficeActivity)
-        val dialog: AlertDialog
-        val view = View.inflate(this@OfficeActivity, R.layout.filter, null)
-
-        val tvAction: MaterialButton = view.findViewById(R.id.mbtn_action)
-        val tvClose: MaterialButton = view.findViewById(R.id.mbtn_close)
-        val tvClearSlecteds: MaterialButton = view.findViewById(R.id.mbtn_clearSlecteds)
-        val tList: RecyclerView = view.findViewById(R.id.rv_tList)
-
-        val adapter = TAdapter(this@OfficeActivity, filterArray)
-        tList.layoutManager = RtlGridLayoutManager(this@OfficeActivity, 3)
-        tList.adapter = adapter
-
-
-        builder.setView(view)
-        dialog = builder.create()
-        dialog.show()
-
-        val listener = View.OnClickListener { v ->
-            when (v.id) {
-                R.id.mbtn_action -> {
-                    dialog.dismiss()
-                    if (adapter.idsArray.size > 0) {
-                        filterArray = adapter.idsArray
-                        Log.e("size", "${filterArray.size}")
-                        filter1(filterArray)
-                    } else {
-                        clearFilter()
-                    }
-                }
-                R.id.mbtn_close -> {
-                    dialog.dismiss()
-                }
-                R.id.mbtn_clearSlecteds -> {
-                    clearFilter()
-                    adapter.clearSelections()
-                }
-            }
-        }
-        tvAction.setOnClickListener(listener)
-        tvClose.setOnClickListener(listener)
-        tvClearSlecteds.setOnClickListener(listener)
     }
 
     private fun onSortClick() {
@@ -656,7 +572,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageEvent(e: String) {
         tabLayoutInterface.hideProgress()
-        Log.e("dfs ", e)
     }
 
     override fun onBackPressed() {
@@ -670,7 +585,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.e("Office", "onResult")
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == StaticValues.requestCodeOfficeDetail) {
                 val id = data?.getIntExtra("centerId", -1)
@@ -716,7 +630,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         }
         query?.equalTo("addressList.provId", provId)
         if (filterFlag) {
-            query.`in`("specialityList.specialtyId", filterArray.toTypedArray())
+            query.`in`("specialityList.specialtyId", specId.toTypedArray())
         }
         if (ascSort) {
             query.sort("firstName", Sort.ASCENDING)

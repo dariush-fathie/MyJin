@@ -47,15 +47,15 @@ class ThreeColGridDecorationSpec
 
         if (itemCount % 3 == 0) {
             if (itemPosition == itemCount - 1 || itemPosition == itemCount - 2 || itemPosition == itemCount - 3) {
-                outRect.bottom = Utils.pxFromDp(context, (20 + mSizeGridSpacingPx).toFloat()).toInt()
+                outRect.bottom = Utils.pxFromDp(context, (72 + mSizeGridSpacingPx).toFloat()).toInt()
             }
         } else if (itemCount % 3 == 2) {
             if (itemPosition == itemCount - 1 || itemPosition == itemCount - 2) {
-                outRect.bottom = Utils.pxFromDp(context, (20 + mSizeGridSpacingPx).toFloat()).toInt()
+                outRect.bottom = Utils.pxFromDp(context, (72 + mSizeGridSpacingPx).toFloat()).toInt()
             }
         } else if (itemCount % 3 == 1) {
             if (itemPosition == itemCount - 1) {
-                outRect.bottom = Utils.pxFromDp(context, (20 + mSizeGridSpacingPx).toFloat()).toInt()
+                outRect.bottom = Utils.pxFromDp(context, (72 + mSizeGridSpacingPx).toFloat()).toInt()
             }
         }
 

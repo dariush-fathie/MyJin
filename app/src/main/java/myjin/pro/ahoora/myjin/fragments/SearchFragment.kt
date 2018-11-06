@@ -88,12 +88,12 @@ class SearchFragment : Fragment(), View.OnClickListener {
         if (etSearch!!.text.toString() != "") {
             dataBaseSearch(etSearch!!.text.toString().trim { it <= ' ' })
         } else {
-            Toast.makeText(activity, "نام دکتر نباید خالی باشد", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, getString(R.string.nmnkhb), Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun dataBaseSearch(searchedText: String) {
-        var addres = ""
+        val addres = ""
         progressView!!.visibility = View.VISIBLE
         realm = Realm.getDefaultInstance()
         realm.beginTransaction()
@@ -159,7 +159,7 @@ class SearchFragment : Fragment(), View.OnClickListener {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val i = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-                Log.e("sfdskfls", "flkdsjflkf")
+
                 if (i > 8) {
                     (fabGoUp as View ).visibility = View.VISIBLE
                 } else {

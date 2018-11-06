@@ -277,7 +277,7 @@ class MainActivity2 : AppCompatActivity(),
             // ipi_main.attachToViewPager(vp_mainContainer)
             if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
                 vp_mainContainer.currentItem = 1
-                Log.e("XXX", "ZZZ")
+
             } else {
                 onPageSelected(0)
             }
@@ -350,7 +350,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     override fun onPageSelected(position: Int) {
-        Log.e("pageSelected", position.toString())
+
         currentPage = position
         if (position != bankPosition) {
             view_gradient.visibility = View.GONE
@@ -457,7 +457,7 @@ class MainActivity2 : AppCompatActivity(),
     private var spLoadFlag = false
 
     private fun initSlider(list: ArrayList<String>) {
-        Log.e("sdfdsfds", "sdfsfsfsf")
+
         Handler().postDelayed({
             rv_mainSlider.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             rv_mainSlider.addItemDecoration(SliderDecoration(this, 8))

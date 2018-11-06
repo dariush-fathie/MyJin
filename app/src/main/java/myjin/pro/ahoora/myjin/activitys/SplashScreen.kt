@@ -64,9 +64,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
             }
         }
         clearServices()
-
-
-
     }
 
 
@@ -79,7 +76,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
             0 -> {
                 btn_splashFav.visibility = View.GONE
                 btn_splashTryAgain.visibility = View.VISIBLE
-                tv_splashContent.text = "به اینترنت متصل نیستید؟ دوباره تلاش کنید"
+                tv_splashContent.text = getString(R.string.checkConnectionAndTryAgain)
             }
             1 -> {
                 btn_splashFav.visibility = View.VISIBLE
