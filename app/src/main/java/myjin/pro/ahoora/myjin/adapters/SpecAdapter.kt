@@ -1,7 +1,9 @@
 package myjin.pro.ahoora.myjin.adapters
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -19,6 +21,7 @@ import myjin.pro.ahoora.myjin.activitys.SpecActivity
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
 import myjin.pro.ahoora.myjin.utils.Converter
 import myjin.pro.ahoora.myjin.utils.StaticValues
+import java.util.*
 
 class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -59,15 +62,28 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
     val height = Converter.pxFromDp(context, 80f).toInt()
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ItemHolder).tvSpec.text = tArr[position].name
+     Log.e("heart",tArr[position].specImg)
+
+        setAnimation(holder.cvSpec)
 
         Glide.with(context)
                 .load(tArr[position].specImg)
-                .apply(RequestOptions()
-                        .override(width, height)
-                        .centerInside())
+                .apply {
+                    RequestOptions()
+                            .placeholder(R.color.white)
+                }
                 .into(holder.ivSpec)
     }
+    private fun setAnimation(viewToAnimate: View) {
 
+        val r = Random()
+        val i1 = r.nextInt(200) + 250
+
+        val a = ObjectAnimator.ofFloat(viewToAnimate, "translationX", -300f, 0f)
+        a.duration = i1.toLong()
+        a.start()
+
+    }
 
     inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
 
@@ -87,7 +103,7 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
 
          val ivSpec: AppCompatImageView = itemView.findViewById(R.id.iv_spec)
          val tvSpec: AppCompatTextView = itemView.findViewById(R.id.tv_spec)
-         private val cvSpec: MaterialCardView = itemView.findViewById(R.id.cv_spec)
+         val cvSpec: MaterialCardView = itemView.findViewById(R.id.cv_spec)
 
 
         init {
