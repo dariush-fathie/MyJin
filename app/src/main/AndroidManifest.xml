@@ -37,7 +37,8 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
-        tools:replace="android:supportsRtl">
+        tools:replace="android:supportsRtl"
+        android:allowBackup="true">
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_jin" />
@@ -135,7 +136,7 @@
         </service>
 
         <activity android:name=".activitys.ProfileActivity" />
-        <activity android:name=".activitys.SpecActivity"></activity>
+        <activity android:name=".activitys.SpecActivity" />
     </application>
 
 </manifest>
