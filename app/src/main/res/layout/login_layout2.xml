@@ -75,8 +75,7 @@
             android:padding="8dp"
             android:text="+98"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:drawableTint="@color/c1"/>
+            android:textStyle="bold"/>
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_phonebox"
@@ -85,6 +84,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:hint="9180003382"
+            android:inputType="number"
+            android:imeOptions="actionDone"
             android:fontFamily="@font/samim"
             android:maxLines="1"
             android:gravity="center|start"

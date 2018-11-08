@@ -19,18 +19,22 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@color/back">
+            android:background="@color/white">
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Icon"
                 android:layout_centerInParent="true"
+                app:icon="@drawable/ic_filter_test"
                 android:id="@+id/tv_title_filter"
-                android:layout_marginEnd="17dp"
                 android:text="فیلتر کردن"
-                android:textColor="@color/title"
                 android:textStyle="bold"
-                app:fontFamily="@font/samim" />
+                app:iconSize="24dp"
+                app:iconTint="@color/title"
+                android:textColor="@color/title"
+                app:fontFamily="@font/samim"
+                />
 
         </RelativeLayout>
 

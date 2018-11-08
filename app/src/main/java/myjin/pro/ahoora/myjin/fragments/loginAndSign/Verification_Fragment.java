@@ -19,9 +19,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.android.material.button.MaterialButton;
+
 import myjin.pro.ahoora.myjin.R;
 import myjin.pro.ahoora.myjin.activitys.Login2Activity;
 import myjin.pro.ahoora.myjin.activitys.ProfileActivity;
+import myjin.pro.ahoora.myjin.customClasses.CustomToast;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.utils.ApiInterface;
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient;
@@ -38,10 +41,11 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
     @SuppressLint("StaticFieldLeak")
     private static AppCompatEditText etVeriftybox;
     @SuppressLint("StaticFieldLeak")
-    private static AppCompatTextView tv_edit_phone_number, tv_signUp, tv_phone_number;
-    protected IActivityEnabledListener aeListener;
+    private static AppCompatTextView tv_edit_phone_number, tv_phone_number;
+    private  MaterialButton tv_signUp;
+    private IActivityEnabledListener aeListener;
     private static FragmentManager fragmentManager;
-    String vc = "", number = "";
+    private  String vc = "", number = "";
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +68,7 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
         void onActivityEnabled(FragmentActivity activity);
     }
 
-    protected void getAvailableActivity(IActivityEnabledListener listener) {
+    private void getAvailableActivity(IActivityEnabledListener listener) {
         if (getActivity() == null) {
             aeListener = listener;
 
@@ -137,6 +141,9 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
 
                     if (etVeriftybox.getText().toString().trim().equals(vc)) {
                         signIn(number,activity);
+                    }else {
+                        new CustomToast().Show_Toast(getActivity(), view,
+                                getString(R.string.cvshea));
                     }
 
                 }

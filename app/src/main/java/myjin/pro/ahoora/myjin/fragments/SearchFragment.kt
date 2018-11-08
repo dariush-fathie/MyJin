@@ -97,15 +97,11 @@ class SearchFragment : Fragment(), View.OnClickListener {
         progressView!!.visibility = View.VISIBLE
         realm = Realm.getDefaultInstance()
         realm.beginTransaction()
-
-
         val result = realm.where(KotlinItemModel::class.java).equalTo("groupId", groupId).findAll()
         g_name = realm.where(KotlinGroupModel::class.java).equalTo("groupId", groupId).findFirst()?.name!!
         g_url = realm.where(KotlinGroupModel::class.java).equalTo("groupId", groupId).findFirst()?.g_url!!
 
         realm.commitTransaction()
-        Log.e("SRS", "${result.size}+  edfsdfs")
-
 
 
         if (result.size > 0) {

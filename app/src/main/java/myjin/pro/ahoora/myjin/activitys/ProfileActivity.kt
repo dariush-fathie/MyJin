@@ -8,12 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.PopupMenu
 import com.google.android.material.button.MaterialButton
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.content_scrolling_layout.*
 
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.customClasses.CustomToast
@@ -40,14 +38,15 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
         try {
 
             number = intent.getStringExtra("number")
-            rl_netErrText.visibility = View.VISIBLE
+            cv_netErrText.visibility = View.VISIBLE
+
             tryAgain()
 
         } catch (e: IllegalStateException) {
             realm.executeTransactionAsync { db ->
                 val u = db.where(KotlinSignInModel::class.java).findFirst()
                 setValues(u)
-                (fab_camera as View).visibility = View.VISIBLE
+
             }
         }
 
@@ -61,23 +60,19 @@ class ProfileActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun hideMainProgressLayout() {
-        rl_progressMain.visibility = View.GONE
-        (fab_camera as View).visibility = View.VISIBLE
+        cv_progressMain.visibility = View.GONE
     }
 
     fun showMainProgressLayout() {
-        rl_progressMain.visibility = View.VISIBLE
-        (fab_camera as View).visibility = View.GONE
+        cv_progressMain.visibility = View.VISIBLE
     }
 
     private fun showErrLayout() {
-        rl_netErrText.visibility = View.VISIBLE
-        (fab_camera as View).visibility = View.GONE
+        cv_netErrText.visibility = View.VISIBLE
     }
 
     private fun hideErrLayout() {
-        rl_netErrText.visibility = View.GONE
-        (fab_camera as View).visibility = View.VISIBLE
+        cv_netErrText.visibility = View.GONE
     }
 
     private fun tryAgain() {

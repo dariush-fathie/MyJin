@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="myjin.pro.ahoora.myjin">
 
-    <uses-sdk tools:overrideLibrary="co.ronash.pushe" />
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -13,7 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.VIBRATE"/>
     <permission
         android:name="myjin.pro.ahoora.myjin.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />

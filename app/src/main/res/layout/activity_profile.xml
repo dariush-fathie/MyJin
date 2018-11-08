@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/cl_parent"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -89,15 +89,15 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/samim"
                         android:text="Title"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@android:color/white"
+                        android:textStyle="bold" />
 
-                      <androidx.appcompat.widget.AppCompatTextView
-                          android:id="@+id/tv_tel_val"
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:text="tele"
-                          android:fontFamily="@font/samim" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_tel_val"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/samim"
+                        android:text="tele" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </myjin.pro.ahoora.myjin.customClasses.CollapsingAvatarToolbar>
@@ -122,68 +122,79 @@
         android:clickable="true"
         android:focusable="true"
         android:src="@drawable/ic_action_name"
-        android:tint="@color/white"
-        android:visibility="gone"
+        app:backgroundTint="@color/white"
         app:fabSize="normal"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|end" />
 
-    <RelativeLayout
-        android:id="@+id/rl_progressMain"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_progressMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/back"
         android:visibility="gone"
+        app:cardBackgroundColor="@color/back"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_t">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_centerInParent="true"
-            android:padding="5dp"
-            android:src="@drawable/ic_jin_pro" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <com.github.rahatarmanahmed.cpv.CircularProgressView
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_centerInParent="true"
-            app:cpv_animAutostart="true"
-            app:cpv_color="@color/green"
-            app:cpv_indeterminate="true" />
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerInParent="true"
+                android:padding="5dp"
+                android:src="@drawable/ic_jin_pro" />
 
-    <RelativeLayout
-        android:id="@+id/rl_netErrText"
+            <com.github.rahatarmanahmed.cpv.CircularProgressView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerInParent="true"
+                app:cpv_animAutostart="true"
+                app:cpv_color="@color/green"
+                app:cpv_indeterminate="true" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_netErrText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/back"
-        android:gravity="center"
-        android:visibility="gone">
+        app:cardElevation="10dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/back">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_netErrText"
+        <RelativeLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:drawableTop="@drawable/ic_wifi_not_connected"
-            android:gravity="center"
-            android:padding="16dp"
-            android:text="@string/checkConnectionAndTryAgain"
-            android:textColor="@color/title"
-            app:fontFamily="@font/samim" />
+            android:layout_height="match_parent"
+            android:gravity="center">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_tryAgain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_netErrText"
-            android:layout_centerInParent="true"
-            android:drawableEnd="@drawable/ic_refresh_test"
-            android:text="@string/tryAgain"
-            app:fontFamily="@font/samim" />
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_netErrText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:drawableTop="@drawable/ic_wifi_not_connected"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/checkConnectionAndTryAgain"
+                android:textColor="@color/title"
+                app:fontFamily="@font/samim" />
 
-
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_tryAgain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_netErrText"
+                android:layout_centerInParent="true"
+                android:drawableEnd="@drawable/ic_refresh_test"
+                android:text="@string/tryAgain"
+                app:fontFamily="@font/samim" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

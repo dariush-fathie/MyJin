@@ -81,7 +81,7 @@ class TAdapter(ctx: Context, filterList: ArrayList<Int>) : RecyclerView.Adapter<
         }
 
         val tTitle: AppCompatTextView = itemView.findViewById(R.id.tv_t_title)
-        val cvTItem: MaterialCardView = itemView.findViewById(R.id.cv_t_item)
+        private val cvTItem: MaterialCardView = itemView.findViewById(R.id.cv_t_item)
         val cb: AppCompatCheckBox = itemView.findViewById(R.id.cb_tItem)
 
         init {

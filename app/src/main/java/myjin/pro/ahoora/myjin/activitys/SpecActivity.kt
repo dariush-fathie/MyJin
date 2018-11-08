@@ -102,6 +102,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         mbtn_close.setOnClickListener(this)
         mbtn_clearSlecteds.setOnClickListener(this)
         toolbar.setOnClickListener(this)
+        tv_title_filter.setOnClickListener(this)
         iv_goback.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         rl_drawer3.setOnClickListener(this)
@@ -167,7 +168,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             R.id.mbtn_clearSlecteds -> {
                 adapter.clearSelections()
             }
-                R.id.tv_login_outsign-> {
+            R.id.tv_login_outsign -> {
                 /*Toast.makeText(this@OfficeActivity,
                         getString(R.string.early), Toast.LENGTH_SHORT).show()*/
                 if (signIn) {
@@ -176,7 +177,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
                     startActivity(Intent(this, Login2Activity::class.java))
                 }
             }
-
+            R.id.tv_title_filter -> openFilterSheet()
             R.id.toolbar -> openFilterSheet()
             R.id.iv_goback -> onBackPressed()
             R.id.iv_menu -> openDrawerLayout()
@@ -240,41 +241,41 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         if (bottomSheetBehavior is CustomBottomSheetBehavior) {
             (bottomSheetBehavior as CustomBottomSheetBehavior).setAllowUserDragging(false)
         }
-        bottomSheetBehavior.setBottomSheetCallback(getBottomSheetCallback())
+       // bottomSheetBehavior.setBottomSheetCallback(getBottomSheetCallback())
 
-        Handler().postDelayed({
-            while (rv_tList.itemDecorationCount > 0) {
-                rv_tList.removeItemDecorationAt(0)
+
+        Thread {
+            try {
+                while (rv_tList.itemDecorationCount > 0) {
+                    rv_tList.removeItemDecorationAt(0)
+                }
+                adapter = TAdapter(this@SpecActivity, filterArray)
+                rv_tList.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
+                rv_tList.adapter = adapter
+                val itemDecoration = ThreeColGridDecorationSpec(this@SpecActivity, 8)
+                rv_tList.addItemDecoration(itemDecoration)
+            } finally {
+
             }
-            adapter = TAdapter(this@SpecActivity, filterArray)
-            rv_tList.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
-            rv_tList.adapter = adapter
-            val itemDecoration = ThreeColGridDecorationSpec(this@SpecActivity, 8)
-            rv_tList.addItemDecoration(itemDecoration)
-        },50)
+        }.start()
+
 
     }
 
     private lateinit var adapter: TAdapter
 
-    private fun getBottomSheetCallback(): BottomSheetBehavior.BottomSheetCallback {
+/*    private fun getBottomSheetCallback(): BottomSheetBehavior.BottomSheetCallback {
         bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
             }
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                    toolbar.setBackgroundColor(ContextCompat.getColor(this@SpecActivity,R.color.green))
-                    tv_title_filter.setTextColor(ContextCompat.getColor(this@SpecActivity,R.color.white))
-                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    toolbar.setBackgroundColor(ContextCompat.getColor(this@SpecActivity,R.color.back))
-                    tv_title_filter.setTextColor(ContextCompat.getColor(this@SpecActivity,R.color.title))
-                }
+
             }
         }
         return bottomSheetCallback
-    }
+    }*/
 
     private fun closeFilterSheet() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -282,45 +283,6 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     private fun openFilterSheet() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-    }
-
-    private fun onFilterClick() {
-
-        val builder = AlertDialog.Builder(this@SpecActivity)
-        val dialog: AlertDialog
-        val view = View.inflate(this@SpecActivity, R.layout.filter, null)
-
-        val tvAction: MaterialButton = view.findViewById(R.id.mbtn_action)
-        val tvClose: MaterialButton = view.findViewById(R.id.mbtn_close)
-        val tvClearSlecteds: MaterialButton = view.findViewById(R.id.mbtn_clearSlecteds)
-        val tList: RecyclerView = view.findViewById(R.id.rv_tList)
-
-
-        builder.setView(view)
-        dialog = builder.create()
-        dialog.show()
-        val adapter = TAdapter(this@SpecActivity, filterArray)
-        val listener = View.OnClickListener { v ->
-            when (v.id) {
-                R.id.mbtn_action -> {
-                    dialog.dismiss()
-                    filterArray = adapter.idsArray
-                    filter1(filterArray)
-                }
-                R.id.mbtn_close -> {
-                    dialog.dismiss()
-                }
-                R.id.mbtn_clearSlecteds -> {
-                    adapter.clearSelections()
-                }
-            }
-        }
-
-        tList.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
-        tList.adapter = adapter
-        tvAction.setOnClickListener(listener)
-        tvClose.setOnClickListener(listener)
-        tvClearSlecteds.setOnClickListener(listener)
     }
 
 
@@ -362,6 +324,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         btnOk.setOnClickListener(listener)
         btnNo.setOnClickListener(listener)
     }
+
     override fun onBackPressed() {
         if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
