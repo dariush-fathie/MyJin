@@ -3,6 +3,7 @@ package myjin.pro.ahoora.myjin.fragments.loginAndSign;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -124,12 +128,15 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
                         if ((new NetworkUtil()).isNetworkAvailable(activity)) {
                             signIn(activity);
                         } else {
-                            Toast.makeText(activity, "noConnect", Toast.LENGTH_SHORT).show();
+                            new CustomToast().Show_Toast(activity, view,
+                                    getString(R.string.checkYourConnection));
+                            makeVibrate();
                         }
 
                     } else {
                         new CustomToast().Show_Toast(activity, view,
                                 getString(R.string.tmpsh));
+                        makeVibrate();
                     }
                 }
             }
@@ -148,6 +155,23 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
         tv_continue.setEnabled(true);
     }
 
+    private void makeVibrate(){
+
+        getAvailableActivity(new IActivityEnabledListener() {
+            @Override
+            public void onActivityEnabled(FragmentActivity activity) {
+                Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    //deprecated in API 26
+                    v.vibrate(500);
+                }
+            }
+        });
+
+    }
     private void signIn(final FragmentActivity activity) {
         showCPV();
         ApiInterface apiInterface = KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class);
@@ -180,11 +204,13 @@ public class YourName_Fragment extends Fragment implements OnClickListener {
                         case "no": {
                             new CustomToast().Show_Toast(getActivity(), view,
                                     getString(R.string.vbkhmsh));
+                            makeVibrate();
                             break;
                         }
                         case "empty": {
                             new CustomToast().Show_Toast(getActivity(), view,
                                     getString(R.string.ltmkhshesh));
+                            makeVibrate();
                             break;
                         }
                     }

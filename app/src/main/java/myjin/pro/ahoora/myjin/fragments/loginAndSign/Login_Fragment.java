@@ -2,6 +2,7 @@ package myjin.pro.ahoora.myjin.fragments.loginAndSign;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -111,13 +115,16 @@ public class Login_Fragment extends Fragment implements OnClickListener {
 
             new CustomToast().Show_Toast(getActivity(), view,
                     getString(R.string.shhkhrvk));
+            makeVibrate();
 
         } else if (getPhoneNumber.length()!= 11) {
             new CustomToast().Show_Toast(getActivity(), view,
                     getString(R.string.shhen));
+            makeVibrate();
         } else if (getPhoneNumber.charAt(1) == '0') {
             new CustomToast().Show_Toast(getActivity(), view,
                     getString(R.string.shhtovsh));
+            makeVibrate();
         } else {
 
             getAvailableActivity(new IActivityEnabledListener() {
@@ -126,7 +133,9 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     if ((new NetworkUtil()).isNetworkAvailable(activity)) {
                         sendSms(getPhoneNumber);
                     } else {
-                        Toast.makeText(activity, "noConnect", Toast.LENGTH_SHORT).show();
+                        new CustomToast().Show_Toast(getActivity(), view,
+                                getString(R.string.checkYourConnection));
+                        makeVibrate();
                     }
                 }
             });
@@ -190,6 +199,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
                     @Override
                     public void onActivityEnabled(FragmentActivity activity) {
                         hideCPV();
+                        makeVibrate();
                         Toast.makeText(activity, R.string.khrda, Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -197,5 +207,22 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         });
     }
 
+    private void makeVibrate(){
+
+        getAvailableActivity(new IActivityEnabledListener() {
+            @Override
+            public void onActivityEnabled(FragmentActivity activity) {
+                Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    //deprecated in API 26
+                    v.vibrate(500);
+                }
+            }
+        });
+
+    }
 
 }

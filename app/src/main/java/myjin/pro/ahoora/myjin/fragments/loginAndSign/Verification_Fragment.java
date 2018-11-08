@@ -3,6 +3,7 @@ package myjin.pro.ahoora.myjin.fragments.loginAndSign;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -144,6 +147,7 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
                     }else {
                         new CustomToast().Show_Toast(getActivity(), view,
                                 getString(R.string.cvshea));
+                        makeVibrate();
                     }
 
                 }
@@ -153,6 +157,23 @@ public class Verification_Fragment extends Fragment implements OnClickListener {
 
     }
 
+    private void makeVibrate(){
+
+        getAvailableActivity(new IActivityEnabledListener() {
+            @Override
+            public void onActivityEnabled(FragmentActivity activity) {
+                Vibrator v = (Vibrator) activity.getSystemService(Context.VIBRATOR_SERVICE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                } else {
+                    //deprecated in API 26
+                    v.vibrate(500);
+                }
+            }
+        });
+
+    }
     private void signIn(final String number, final FragmentActivity activity) {
 
         ApiInterface apiInterface = KotlinApiClient.INSTANCE.getClient().create(ApiInterface.class);

@@ -64,7 +64,7 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
         (holder as ItemHolder).tvSpec.text = tArr[position].name
      Log.e("heart",tArr[position].specImg)
 
-       // setAnimation(holder.cvSpec)
+        setAnimation(holder.cvSpec)
 
         Glide.with(context)
                 .load(tArr[position].specImg)
