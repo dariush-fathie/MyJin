@@ -4,11 +4,10 @@ import android.content.Context
 import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
+import com.google.android.material.card.MaterialCardView
 import io.realm.Realm
 import io.realm.Sort
 import myjin.pro.ahoora.myjin.R
@@ -82,11 +81,11 @@ class TAdapter(ctx: Context, filterList: ArrayList<Int>) : RecyclerView.Adapter<
         }
 
         val tTitle: AppCompatTextView = itemView.findViewById(R.id.tv_t_title)
-        val rl: RelativeLayout = itemView.findViewById(R.id.rl_t_item)
+        val cvTItem: MaterialCardView = itemView.findViewById(R.id.cv_t_item)
         val cb: AppCompatCheckBox = itemView.findViewById(R.id.cb_tItem)
 
         init {
-            rl.setOnClickListener(this)
+            cvTItem.setOnClickListener(this)
             cb.isClickable = false
         }
     }

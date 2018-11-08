@@ -22,18 +22,18 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_jinDrawer"
                 android:layout_width="match_parent"
-               android:scaleType="fitEnd"
                 android:layout_height="110dp"
                 android:background="@drawable/bg_green"
-                android:src="@drawable/menu_title"/>
+                android:scaleType="fitEnd"
+                android:src="@drawable/menu_title" />
 
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_login_outsign"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
 
 
                 <View
@@ -71,19 +71,19 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1.8dp"
-                android:layout_marginBottom="7dp"
-                android:layout_marginEnd="20dp"
+                android:layout_height="1.5dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/title" />
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="7dp"
+                android:background="@color/back1" />
 
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_myjin_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
 
 
                 <View
@@ -120,19 +120,19 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="7dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="7dp"
                 android:background="@color/split" />
 
 
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_takapoo_services"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="7dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
 
                 <View
                     android:id="@+id/vs3"
@@ -168,271 +168,266 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="7dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
-                android:background="@color/split"
-                android:visibility="gone" />
-
-            <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:id="@+id/rl_university_services"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector"
-                android:visibility="gone">
-
-                <View
-
-                    android:id="@+id/vs4"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivs4"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vs4"
-                    android:padding="7dp"
-                    android:src="@drawable/ic_opk"
-                    android:tint="@color/title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_university_services_Title1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@+id/ivs4"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="17dp"
-                    android:text="@string/khdop"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/samim"
-                    tools:ignore="RtlSymmetry" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:id="@+id/rl_salamat"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector"
-                android:visibility="gone">
-
-
-                <View
-                    android:id="@+id/vs"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivs"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vs"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_salamat"
-                    android:tint="@color/title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_drawerTitlesalamat"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@+id/ivs"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="17dp"
-                    android:text="@string/khbs"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/samim"
-                    tools:ignore="RtlSymmetry" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:id="@+id/rl_tamin_services"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector"
-                android:visibility="gone">
-
-
-                <View
-                    android:id="@+id/vs5"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivs5"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vs5"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_kste"
-                    android:tint="@color/title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_tamin_services"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@+id/ivs5"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="17dp"
-                    android:text="@string/khste"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/samim"
-                    tools:ignore="RtlSymmetry" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:visibility="gone"
-                android:id="@+id/rl_ict_services"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
-
-
-                <View
-                    android:id="@+id/vs7"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-
-                    android:id="@+id/ivs7"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vs7"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_ict"
-                    android:tint="@color/title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_ict_services"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@+id/ivs7"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="17dp"
-                    android:text="@string/khdict"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/samim"
-                    tools:ignore="RtlSymmetry" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:id="@+id/rl_pishkhan_services"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector"
-                android:visibility="gone">
-
-
-                <View
-                    android:id="@+id/vs8"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivs8"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vs8"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_dp_"
-                    android:tint="@color/title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_pishkhan_services"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@+id/ivs8"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="17dp"
-                    android:text="خدمات دفاتر پیشخوان"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/samim" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
-                android:visibility="gone"
-                android:id="@+id/rl_post_services"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
-
-
-                <View
-                    android:id="@+id/vs9"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivs9"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vs9"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_post"
-                    android:tint="@color/title" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_post_services"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toStartOf="@+id/ivs9"
-                    android:gravity="center_vertical"
-                    android:paddingEnd="17dp"
-                    android:text="@string/khnp"
-                    android:textSize="16sp"
-                    app:fontFamily="@font/samim" />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="7dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginStart="5dp"
+                android:layout_marginBottom="7dp"
                 android:background="@color/split" />
 
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/ll_services"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_university_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/item_selector"
+                    android:foreground="?selectableItemBackgroundBorderless">
+
+                    <View
+
+                        android:id="@+id/vs4"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/title"
+                        android:visibility="invisible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivs4"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/vs4"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_opk" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_university_services_Title1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/ivs4"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="17dp"
+                        android:text="@string/khdop"
+                        android:textColor="@color/title"
+                        app:fontFamily="@font/samim"
+                        tools:ignore="RtlSymmetry" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_salamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/item_selector"
+                    android:foreground="?selectableItemBackgroundBorderless">
+
+
+                    <View
+                        android:id="@+id/vs"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/title"
+                        android:visibility="invisible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivs"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/vs"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_salamat" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_drawerTitlesalamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/ivs"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="17dp"
+                        android:text="@string/khbs"
+                        android:textColor="@color/title"
+                        app:fontFamily="@font/samim"
+                        tools:ignore="RtlSymmetry" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_tamin_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/item_selector"
+                    android:foreground="?selectableItemBackgroundBorderless">
+
+
+                    <View
+                        android:id="@+id/vs5"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/title"
+                        android:visibility="invisible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivs5"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/vs5"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_kste" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_tamin_services"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/ivs5"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="17dp"
+                        android:textColor="@color/title"
+                        android:text="@string/khste"
+                        app:fontFamily="@font/samim"
+                        tools:ignore="RtlSymmetry" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_ict_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/item_selector"
+                    android:foreground="?selectableItemBackgroundBorderless">
+
+
+                    <View
+                        android:id="@+id/vs7"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/title"
+                        android:visibility="invisible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+
+                        android:id="@+id/ivs7"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/vs7"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_ict" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_ict_services"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/ivs7"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="17dp"
+                        android:textColor="@color/title"
+                        android:text="@string/khdict"
+                        app:fontFamily="@font/samim"
+                        tools:ignore="RtlSymmetry" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_pishkhan_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/item_selector"
+                    android:foreground="?selectableItemBackgroundBorderless">
+
+
+                    <View
+                        android:id="@+id/vs8"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/title"
+                        android:visibility="invisible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivs8"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/vs8"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_dp_" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_pishkhan_services"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/ivs8"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="17dp"
+                        android:textColor="@color/title"
+                        android:text="خدمات دفاتر پیشخوان"
+                        app:fontFamily="@font/samim" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_post_services"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/item_selector"
+                    android:foreground="?selectableItemBackgroundBorderless">
+
+
+                    <View
+                        android:id="@+id/vs9"
+                        android:layout_width="4dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentEnd="true"
+                        android:background="@color/title"
+                        android:visibility="invisible" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivs9"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="8dp"
+                        android:layout_toStartOf="@+id/vs9"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_post" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_post_services"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_toStartOf="@+id/ivs9"
+                        android:gravity="center_vertical"
+                        android:paddingEnd="17dp"
+                        android:textColor="@color/title"
+                        android:text="@string/khnp"
+                        app:fontFamily="@font/samim" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="7dp"
+                    android:background="@color/split" />
+            </LinearLayout>
             <!-- <RelativeLayout
                  android:id="@+id/rl_drawer2"
                  android:layout_width="match_parent"
@@ -441,10 +436,10 @@
 
 
             <com.github.florent37.expansionpanel.ExpansionHeader
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless"
                 app:expansion_headerIndicator="@id/headerIndicator"
                 app:expansion_layout="@id/expansionLayout"
                 app:expansion_toggleOnClick="true">
@@ -467,8 +462,8 @@
                         android:layout_height="35dp"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="8dp"
-                        android:padding="4dp"
                         android:layout_toStartOf="@+id/vs_fav"
+                        android:padding="4dp"
                         android:src="@drawable/ic_bookmarkm" />
 
 
@@ -517,10 +512,10 @@
                         android:layout_marginEnd="27dp"
                         android:background="@drawable/item_selector"
                         android:gravity="start"
-                        android:paddingBottom="8dp"
-                        android:paddingEnd="8dp"
                         android:paddingStart="8dp"
                         android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp"
                         android:text="@string/healthCenters"
                         android:textColor="@color/title"
                         app:fontFamily="@font/samim" />
@@ -532,10 +527,10 @@
                         android:layout_marginEnd="27dp"
                         android:background="@drawable/item_selector"
                         android:gravity="right"
-                        android:paddingBottom="8dp"
-                        android:paddingEnd="8dp"
                         android:paddingStart="8dp"
                         android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="8dp"
                         android:text="@string/etlaeieh"
                         android:textColor="@color/title"
                         app:fontFamily="@font/samim" />
@@ -544,14 +539,13 @@
             </com.github.florent37.expansionpanel.ExpansionLayout>
 
 
-
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_drawer3"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
 
                 <View
                     android:id="@+id/v3"
@@ -584,12 +578,12 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_drawer4"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
 
                 <View
                     android:id="@+id/v4"
@@ -622,12 +616,12 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_rules"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless"
                 android:visibility="gone">
 
 
@@ -667,18 +661,18 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
                 android:background="@color/split" />
 
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_notifi"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
 
 
                 <View
@@ -715,18 +709,18 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
                 android:background="@color/split" />
 
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_setting"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
 
 
                 <View
@@ -741,11 +735,11 @@
                     android:id="@+id/ivsetting"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:padding="3dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vset"
-                    android:src="@drawable/ic_setting"/>
+                    android:padding="3dp"
+                    android:src="@drawable/ic_setting" />
 
                 <androidx.appcompat.widget.AppCompatTextView
 
@@ -764,18 +758,18 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginStart="5dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="4dp"
                 android:background="@color/split" />
 
             <RelativeLayout
-                android:foreground="?selectableItemBackgroundBorderless"
                 android:id="@+id/rl_version"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/item_selector">
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_version_Title1"
@@ -800,18 +794,20 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:foreground="?selectableItemBackgroundBorderless"
         android:background="#afeeeeee"
+        android:foreground="?selectableItemBackgroundBorderless"
         tools:ignore="TooManyViews">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivexit"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
-            android:padding="3dp"
             android:layout_toStartOf="@+id/vexit"
+            android:padding="3dp"
             android:src="@drawable/ic_exit" />
+
         <View
             android:id="@+id/vexit"
             android:layout_width="4dp"
@@ -819,14 +815,15 @@
             android:layout_alignParentEnd="true"
             android:background="@color/title"
             android:visibility="invisible" />
+
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_marginEnd="16dp"
+            android:id="@+id/btn_exit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/btn_exit"
-            android:gravity="start|center"
-
+            android:layout_marginEnd="16dp"
             android:layout_toStartOf="@+id/ivexit"
+
+            android:gravity="start|center"
             android:text="خروج"
             android:textColor="@color/title"
             app:fontFamily="@font/samim"

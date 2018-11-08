@@ -74,12 +74,13 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
                 }
                 .into(holder.ivSpec)
     }
+
+
     private fun setAnimation(viewToAnimate: View) {
+        val a = ObjectAnimator.ofFloat(viewToAnimate, "translationY", 300f, 0f)
 
         val r = Random()
         val i1 = r.nextInt(200) + 250
-
-        val a = ObjectAnimator.ofFloat(viewToAnimate, "translationX", -300f, 0f)
         a.duration = i1.toLong()
         a.start()
 

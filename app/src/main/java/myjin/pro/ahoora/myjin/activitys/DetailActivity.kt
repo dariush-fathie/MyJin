@@ -59,11 +59,9 @@ import myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior
 import myjin.pro.ahoora.myjin.interfaces.ServerStatusResponse
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
+import myjin.pro.ahoora.myjin.models.KotlinSignInModel
 import myjin.pro.ahoora.myjin.models.SimpleResponseModel
-import myjin.pro.ahoora.myjin.utils.ApiInterface
-import myjin.pro.ahoora.myjin.utils.KotlinApiClient
-import myjin.pro.ahoora.myjin.utils.LoginClass
-import myjin.pro.ahoora.myjin.utils.StaticValues
+import myjin.pro.ahoora.myjin.utils.*
 import retrofit2.Call
 import retrofit2.Response
 import java.util.*
@@ -87,6 +85,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
     private var forward = true
     private var sendImage = false
 
+    private var signIn = false
     private lateinit var polyline: Polyline
 
     private var theBitmap: Bitmap? = null
@@ -164,6 +163,37 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             R.id.tv_website -> goToWebSite()
             R.id.tv_telephone -> call()
         }
+    }
+
+    private fun isLogin() {
+        val realm = Realm.getDefaultInstance()
+        realm.beginTransaction()
+        val u = realm.where(KotlinSignInModel::class.java).findFirst()
+
+        if (u != null) {
+            signIn = true
+            SharedPer(this).setBoolean("signIn", signIn)
+            if (u.allow=="1"){
+                showViews()
+            }else{
+                hideViews()
+            }
+
+        }else{
+            signIn = false
+            SharedPer(this).setBoolean("signIn", signIn)
+            hideViews()
+        }
+        realm.commitTransaction()
+    }
+
+    private fun showViews(){
+        iv_channel.visibility=View.VISIBLE
+        iv_chat.visibility=View.VISIBLE
+    }
+    private fun hideViews(){
+        iv_channel.visibility=View.GONE
+        iv_chat.visibility=View.GONE
     }
 
     private fun gotoChannel() {
@@ -252,6 +282,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
             setListener()
             initBottomSheet()
             initLists()
+            isLogin()
         }, 200)
 
     }

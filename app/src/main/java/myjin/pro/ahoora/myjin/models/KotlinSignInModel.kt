@@ -34,4 +34,8 @@ open class KotlinSignInModel : RealmObject() {
     @SerializedName("active")
     @Expose
     open var active: String = "1"
+
+    @SerializedName("allow")
+    @Expose
+    open var allow: String = "0"
 }

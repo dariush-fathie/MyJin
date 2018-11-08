@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.view.LayoutInflater
@@ -16,10 +17,7 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_splash.*
 import myjin.pro.ahoora.myjin.BuildConfig
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
-import myjin.pro.ahoora.myjin.models.KotlinItemModel
-import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
-import myjin.pro.ahoora.myjin.models.KotlinServicesModel
+import myjin.pro.ahoora.myjin.models.*
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
 import myjin.pro.ahoora.myjin.utils.NetworkUtil

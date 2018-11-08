@@ -38,7 +38,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:supportsRtl"
-        android:allowBackup="true">
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor">
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_jin" />

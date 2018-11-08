@@ -1,37 +1,43 @@
 package myjin.pro.ahoora.myjin.activitys
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_spec.*
 import kotlinx.android.synthetic.main.drawer_layout.*
+import kotlinx.android.synthetic.main.filter.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.SpecAdapter
 import myjin.pro.ahoora.myjin.adapters.TAdapter
+import myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior
 import myjin.pro.ahoora.myjin.customClasses.ThreeColGridDecorationSpec
 import myjin.pro.ahoora.myjin.models.KotlinSignInModel
 import myjin.pro.ahoora.myjin.utils.SharedPer
 import myjin.pro.ahoora.myjin.utils.StaticValues
 
-class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickListener{
+class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClickListener {
     private var signIn = false
     private var provId = 19
     private var cityId = 0
     var filterArray = ArrayList<Int>()
-    private val requestLocationSetting = 1050
-
-
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
+    private lateinit var bottomSheetCallback: BottomSheetBehavior.BottomSheetCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spec)
@@ -41,12 +47,17 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
             cityId = intent.getIntExtra(StaticValues.CITYID, 1)
 
         }
+
         isLogin()
         initi()
     }
+
     override fun onResume() {
         super.onResume()
         isLogin()
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
     }
 
     private fun isLogin() {
@@ -57,22 +68,40 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
         if (u != null) {
             signIn = true
             tv_login_outsign.text = "خوش آمدید " + u.firstName + " عزیز "
-            SharedPer(this@SpecActivity).setBoolean("signIn", signIn)
+            SharedPer(this).setBoolean("signIn", signIn)
+            if (u.allow == "1") {
+                showViews()
+            } else {
+                hideViews()
+            }
 
         } else {
             signIn = false
             tv_login_outsign.text = getString(R.string.vrodvozviat)
-            SharedPer(this@SpecActivity).setBoolean("signIn", signIn)
+            SharedPer(this).setBoolean("signIn", signIn)
+
+            hideViews()
         }
         realm.commitTransaction()
-
     }
+
+    private fun showViews() {
+        ll_services.visibility = View.VISIBLE
+    }
+
+    private fun hideViews() {
+        ll_services.visibility = View.GONE
+    }
+
     private fun openDrawerLayout() {
         drawerLayout.openDrawer(GravityCompat.END)
     }
 
     private fun initListener() {
-        fab_filter.setOnClickListener(this)
+        mbtn_action.setOnClickListener(this)
+        mbtn_close.setOnClickListener(this)
+        mbtn_clearSlecteds.setOnClickListener(this)
+        toolbar.setOnClickListener(this)
         iv_goback.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         rl_drawer3.setOnClickListener(this)
@@ -96,6 +125,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
         rl_exit.setOnClickListener(this)
         rl_notifi.setOnClickListener(this)
     }
+
     private fun drawerClick(position: Int) {
 
         when (position) {
@@ -117,6 +147,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
 
 
     }
+
     private fun goToServicesActivity(title: String, i: Int) {
         val intentO = Intent(this@SpecActivity, ServicesActivity::class.java)
         intentO.putExtra("ServiceTitle", title)
@@ -126,8 +157,17 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
 
     override fun onClick(v: View?) {
         when (v?.id) {
-
-            R.id.tv_login_outsign -> {
+            R.id.mbtn_action -> {
+                filterArray = adapter.idsArray
+                filter1(filterArray)
+            }
+            R.id.mbtn_close -> {
+                closeFilterSheet()
+            }
+            R.id.mbtn_clearSlecteds -> {
+                adapter.clearSelections()
+            }
+                R.id.tv_login_outsign-> {
                 /*Toast.makeText(this@OfficeActivity,
                         getString(R.string.early), Toast.LENGTH_SHORT).show()*/
                 if (signIn) {
@@ -137,7 +177,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
                 }
             }
 
-            R.id.fab_filter-> onFilterClick()
+            R.id.toolbar -> openFilterSheet()
             R.id.iv_goback -> onBackPressed()
             R.id.iv_menu -> openDrawerLayout()
             R.id.rl_exit -> showExitDialog()
@@ -160,6 +200,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
 
         }
     }
+
     override fun onLongClick(v: View?): Boolean {
         when (v?.id) {
             R.id.iv_jinDrawer -> {
@@ -171,9 +212,11 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
         }
         return false
     }
+
     private fun closeDrawerLayout() {
         drawerLayout.closeDrawers()
     }
+
     private fun initi() {
         val adapter = SpecAdapter(this@SpecActivity, provId, cityId)
         rv_spec.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
@@ -187,10 +230,62 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
         rv_spec.addItemDecoration(itemDecoration)
 
         initListener()
+        initBottomSheet()
     }
 
+    private fun initBottomSheet() {
+
+
+        bottomSheetBehavior = BottomSheetBehavior.from(cv_filter)
+        if (bottomSheetBehavior is CustomBottomSheetBehavior) {
+            (bottomSheetBehavior as CustomBottomSheetBehavior).setAllowUserDragging(false)
+        }
+        bottomSheetBehavior.setBottomSheetCallback(getBottomSheetCallback())
+
+        Handler().postDelayed({
+            while (rv_tList.itemDecorationCount > 0) {
+                rv_tList.removeItemDecorationAt(0)
+            }
+            adapter = TAdapter(this@SpecActivity, filterArray)
+            rv_tList.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
+            rv_tList.adapter = adapter
+            val itemDecoration = ThreeColGridDecorationSpec(this@SpecActivity, 8)
+            rv_tList.addItemDecoration(itemDecoration)
+        },50)
+
+    }
+
+    private lateinit var adapter: TAdapter
+
+    private fun getBottomSheetCallback(): BottomSheetBehavior.BottomSheetCallback {
+        bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                    toolbar.setBackgroundColor(ContextCompat.getColor(this@SpecActivity,R.color.green))
+                    tv_title_filter.setTextColor(ContextCompat.getColor(this@SpecActivity,R.color.white))
+                } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    toolbar.setBackgroundColor(ContextCompat.getColor(this@SpecActivity,R.color.back))
+                    tv_title_filter.setTextColor(ContextCompat.getColor(this@SpecActivity,R.color.title))
+                }
+            }
+        }
+        return bottomSheetCallback
+    }
+
+    private fun closeFilterSheet() {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    private fun openFilterSheet() {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
 
     private fun onFilterClick() {
+
         val builder = AlertDialog.Builder(this@SpecActivity)
         val dialog: AlertDialog
         val view = View.inflate(this@SpecActivity, R.layout.filter, null)
@@ -200,15 +295,11 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
         val tvClearSlecteds: MaterialButton = view.findViewById(R.id.mbtn_clearSlecteds)
         val tList: RecyclerView = view.findViewById(R.id.rv_tList)
 
-        val adapter = TAdapter(this@SpecActivity, filterArray)
-        tList.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
-        tList.adapter = adapter
-
 
         builder.setView(view)
         dialog = builder.create()
         dialog.show()
-
+        val adapter = TAdapter(this@SpecActivity, filterArray)
         val listener = View.OnClickListener { v ->
             when (v.id) {
                 R.id.mbtn_action -> {
@@ -224,6 +315,9 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
                 }
             }
         }
+
+        tList.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
+        tList.adapter = adapter
         tvAction.setOnClickListener(listener)
         tvClose.setOnClickListener(listener)
         tvClearSlecteds.setOnClickListener(listener)
@@ -236,9 +330,10 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
         k.putExtra(StaticValues.CATEGORY, 1)
         k.putExtra(StaticValues.PROVID, provId)
         k.putExtra(StaticValues.CITYID, cityId)
-        k.putIntegerArrayListExtra("spArray",array)
+        k.putIntegerArrayListExtra("spArray", array)
         startActivity(k)
     }
+
     private fun showExitDialog() {
 
         val builder = AlertDialog.Builder(this@SpecActivity)
@@ -267,7 +362,14 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener,View.OnLongClickL
         btnOk.setOnClickListener(listener)
         btnNo.setOnClickListener(listener)
     }
+    override fun onBackPressed() {
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        } else {
 
+            super.onBackPressed()
+        }
+    }
 
     inner class RtlGridLayoutManager : GridLayoutManager {
 

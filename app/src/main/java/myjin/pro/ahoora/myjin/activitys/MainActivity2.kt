@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -43,7 +44,9 @@ class MainActivity2 : AppCompatActivity(),
         View.OnClickListener, View.OnLongClickListener {
 
 
+    val realm = Realm.getDefaultInstance()
     private var signIn = false
+    private var number = ""
 
     companion object {
         const val settingRequest = 1564
@@ -65,7 +68,6 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            /* R.id.fab_search -> search()*/
             R.id.iv_search -> search()
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> {
@@ -107,24 +109,70 @@ class MainActivity2 : AppCompatActivity(),
         startActivity(intentM)
     }
 
+    private fun getUserInfos() {
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        apiInterface.getUserInfo(number).enqueue(object : Callback<List<KotlinSignInModel>> {
+
+            override fun onResponse(call: Call<List<KotlinSignInModel>>?, response: Response<List<KotlinSignInModel>>?) {
+                val list = response?.body()
+                val u = list?.get(0)
+                if (u?.allow == "1") {
+                    showViews()
+                } else {
+                    hideViews()
+                }
+                realm.executeTransactionAsync { realm: Realm? ->
+
+                    realm?.where(KotlinSignInModel::class.java)?.findAll()?.deleteAllFromRealm()
+                    realm?.copyToRealm(list!!)
+                }
+            }
+
+            override fun onFailure(call: Call<List<KotlinSignInModel>>?, t: Throwable?) {
+                Log.e("ERR", t?.message + "  ")
+            }
+        })
+
+    }
+
     private fun isLogin() {
-        val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         val u = realm.where(KotlinSignInModel::class.java).findFirst()
 
         if (u != null) {
-            signIn = true
-            tv_login_outsign.text = "خوش آمدید " + u.firstName + " عزیز "
-            SharedPer(this@MainActivity2).setBoolean("signIn", signIn)
+            try {
+                signIn = true
+                tv_login_outsign.text = "خوش آمدید " + u.firstName + " عزیز "
+                number = u.phoneNumber!!
+                SharedPer(this).setBoolean("signIn", signIn)
+                if (u.allow == "1") {
+                    showViews()
+                } else {
+                    hideViews()
+                }
 
-        }else{
+                if (number != "") {
+                    getUserInfos()
+                }
+            } catch (e: Exception) {
+
+            }
+        } else {
             signIn = false
             tv_login_outsign.text = getString(R.string.vrodvozviat)
-            SharedPer(this@MainActivity2).setBoolean("signIn", signIn)
+            SharedPer(this).setBoolean("signIn", signIn)
+
+            hideViews()
         }
         realm.commitTransaction()
+    }
 
+    private fun showViews() {
+        ll_services.visibility = View.VISIBLE
+    }
 
+    private fun hideViews() {
+        ll_services.visibility = View.GONE
     }
 
     private fun setListener() {
@@ -227,6 +275,7 @@ class MainActivity2 : AppCompatActivity(),
         }
     }
 
+    @Suppress("UNUSED_EXPRESSION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (intent.getBooleanExtra("EXIT", false)) {
@@ -284,13 +333,13 @@ class MainActivity2 : AppCompatActivity(),
         }, 50)
 
         setListener()
-        checkNetState()
+
         isLogin()
+        checkNetState()
 
         val tf = SharedPer(this@MainActivity2).getIntro(getString(R.string.introductionFlag2))
         SharedPer(this).setBoolean(getString(R.string.introductionFlag), tf)
     }
-
 
 
     private var netAvailability = false
@@ -302,6 +351,7 @@ class MainActivity2 : AppCompatActivity(),
 
     private fun checkNetState() {
         if (netAvailability) {
+
             getSlides()
             getSpList()
         } else {
@@ -311,6 +361,7 @@ class MainActivity2 : AppCompatActivity(),
 
     @Subscribe
     fun tryAgainEvent(e: TryAgainEvent) {
+
         if (!sliderLoadFlag) {
             getSlides()
         }
@@ -504,8 +555,8 @@ class MainActivity2 : AppCompatActivity(),
                 list?.forEach { sp: KotlinSpecialityModel ->
                     sp.saved = true
                 }
-                val realmDatabase = Realm.getDefaultInstance()
-                realmDatabase.executeTransactionAsync { realm: Realm? ->
+
+                realm.executeTransactionAsync { realm: Realm? ->
                     realm?.copyToRealmOrUpdate(list!!)
                     /*val savedSps = realm?.where(KotlinSpecialityModel::class.java)?.findAll()
                     realm?.where(KotlinSpecialityModel::class.java)?.findAll()?.deleteAllFromRealm()

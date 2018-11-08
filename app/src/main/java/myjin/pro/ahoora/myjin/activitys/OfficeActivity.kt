@@ -156,16 +156,28 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         if (u != null) {
             signIn = true
             tv_login_outsign.text = "خوش آمدید " + u.firstName + " عزیز "
-            SharedPer(this@OfficeActivity).setBoolean("signIn", signIn)
+            SharedPer(this).setBoolean("signIn", signIn)
+            if (u.allow=="1"){
+                showViews()
+            }else{
+                hideViews()
+            }
 
-        } else {
+        }else{
             signIn = false
             tv_login_outsign.text = getString(R.string.vrodvozviat)
-            SharedPer(this@OfficeActivity).setBoolean("signIn", signIn)
+            SharedPer(this).setBoolean("signIn", signIn)
+
+            hideViews()
         }
         realm.commitTransaction()
+    }
 
-
+    private fun showViews(){
+        ll_services.visibility=View.VISIBLE
+    }
+    private fun hideViews(){
+        ll_services.visibility=View.GONE
     }
 
     private fun initListener() {
