@@ -1,14 +1,12 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.AttributeSet
 import android.view.View
-import android.widget.RelativeLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
@@ -36,8 +34,6 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     private var provId = 19
     private var cityId = 0
     var filterArray = ArrayList<Int>()
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>
-    private lateinit var bottomSheetCallback: BottomSheetBehavior.BottomSheetCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spec)
@@ -55,9 +51,17 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     override fun onResume() {
         super.onResume()
         isLogin()
-        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+     setFilterColor()
+    }
+
+    fun setFilterColor(){
+        val draw = ContextCompat.getDrawable(this@SpecActivity, R.drawable.ic_filter_test)
+        draw?.setColorFilter(ContextCompat.getColor(this@SpecActivity, R.color.green), PorterDuff.Mode.SRC_IN)
+        if(filterArray.size>0){
+            draw?.setColorFilter(ContextCompat.getColor(this@SpecActivity, R.color.colorAccent), PorterDuff.Mode.SRC_IN)
         }
+        iv_filter.setImageDrawable(draw)
     }
 
     private fun isLogin() {
@@ -98,11 +102,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
 
     private fun initListener() {
-        mbtn_action.setOnClickListener(this)
-        mbtn_close.setOnClickListener(this)
-        mbtn_clearSlecteds.setOnClickListener(this)
-        toolbar.setOnClickListener(this)
-        tv_title_filter.setOnClickListener(this)
+        rl_filter.setOnClickListener(this)
         iv_goback.setOnClickListener(this)
         iv_menu.setOnClickListener(this)
         rl_drawer3.setOnClickListener(this)
@@ -158,18 +158,8 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            R.id.mbtn_action -> {
-                filterArray = adapter.idsArray
-                filter1(filterArray)
-            }
-            R.id.mbtn_close -> {
-                closeFilterSheet()
-            }
-            R.id.mbtn_clearSlecteds -> {
-                adapter.clearSelections()
-            }
             R.id.tv_login_outsign -> {
-                /*Toast.makeText(this@OfficeActivity,
+                /*Toast.makeText(this@SpecActivity,
                         getString(R.string.early), Toast.LENGTH_SHORT).show()*/
                 if (signIn) {
                     startActivity(Intent(this, ProfileActivity::class.java))
@@ -177,8 +167,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
                     startActivity(Intent(this, Login2Activity::class.java))
                 }
             }
-            R.id.tv_title_filter -> openFilterSheet()
-            R.id.toolbar -> openFilterSheet()
+            R.id.rl_filter -> onFilterClick()
             R.id.iv_goback -> onBackPressed()
             R.id.iv_menu -> openDrawerLayout()
             R.id.rl_exit -> showExitDialog()
@@ -202,6 +191,48 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         }
     }
 
+    
+    private fun onFilterClick() {
+        val builder = AlertDialog.Builder(this@SpecActivity)
+        val dialog: AlertDialog
+        val view = View.inflate(this@SpecActivity, R.layout.filter, null)
+
+        val tvAction: MaterialButton = view.findViewById(R.id.mbtn_action)
+        val tvClose: MaterialButton = view.findViewById(R.id.mbtn_close)
+        val tvClearSlecteds: MaterialButton = view.findViewById(R.id.mbtn_clearSlecteds)
+        val tList: RecyclerView = view.findViewById(R.id.rv_tList)
+
+        val adapter = TAdapter(this@SpecActivity, filterArray)
+        tList.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
+        tList.adapter = adapter
+
+
+        builder.setView(view)
+        dialog = builder.create()
+        dialog.show()
+
+        val listener = View.OnClickListener { v ->
+            when (v.id) {
+                R.id.mbtn_action -> {
+                    dialog.dismiss()
+                    filterArray = adapter.idsArray
+                    filter1(filterArray)
+                }
+                R.id.mbtn_close -> {
+                    dialog.dismiss()
+                }
+                R.id.mbtn_clearSlecteds -> {
+                    adapter.clearSelections()
+                    filterArray.clear()
+                    setFilterColor()
+                }
+            }
+        }
+        tvAction.setOnClickListener(listener)
+        tvClose.setOnClickListener(listener)
+        tvClearSlecteds.setOnClickListener(listener)
+    }
+    
     override fun onLongClick(v: View?): Boolean {
         when (v?.id) {
             R.id.iv_jinDrawer -> {
@@ -231,59 +262,11 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         rv_spec.addItemDecoration(itemDecoration)
 
         initListener()
-        initBottomSheet()
     }
 
-    private fun initBottomSheet() {
 
-
-        bottomSheetBehavior = BottomSheetBehavior.from(cv_filter)
-        if (bottomSheetBehavior is CustomBottomSheetBehavior) {
-            (bottomSheetBehavior as CustomBottomSheetBehavior).setAllowUserDragging(false)
-        }
-       // bottomSheetBehavior.setBottomSheetCallback(getBottomSheetCallback())
-
-
-        Thread {
-            try {
-                while (rv_tList.itemDecorationCount > 0) {
-                    rv_tList.removeItemDecorationAt(0)
-                }
-                adapter = TAdapter(this@SpecActivity, filterArray)
-                rv_tList.layoutManager = RtlGridLayoutManager(this@SpecActivity, 3)
-                rv_tList.adapter = adapter
-                val itemDecoration = ThreeColGridDecorationSpec(this@SpecActivity, 8)
-                rv_tList.addItemDecoration(itemDecoration)
-            } finally {
-
-            }
-        }.start()
-
-
-    }
 
     private lateinit var adapter: TAdapter
-
-/*    private fun getBottomSheetCallback(): BottomSheetBehavior.BottomSheetCallback {
-        bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-
-            }
-        }
-        return bottomSheetCallback
-    }*/
-
-    private fun closeFilterSheet() {
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-    }
-
-    private fun openFilterSheet() {
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-    }
 
 
     private fun filter1(array: ArrayList<Int>) {
@@ -326,12 +309,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
 
     override fun onBackPressed() {
-        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        } else {
-
             super.onBackPressed()
-        }
     }
 
     inner class RtlGridLayoutManager : GridLayoutManager {

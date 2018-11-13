@@ -12,6 +12,9 @@
     <color name="back">#f7f8f9</color>
     <color name="back0">#B72D7F</color>
 
+    <color name="grey_10">#e6e6e6</color>
+    <color name="grey_20">#cccccc</color>
+
     <color name="title">#424b55</color>
     <color name="logoColor">#7a02aeef</color>
     <color name="subTitle">#02aeef</color>
@@ -46,6 +49,7 @@
     <color name="senderTT">#6cc164</color>
     <color name="manba">#939393</color>
     <color name="mc_icon_color">#95a5a6</color>
+    <color name="spec_icon_color">#b0bec5</color>
     <color name="mc_title_color">#c78500</color>
     <color name="gray5">#ebedef</color>
     <color name="dynamicAndTitleTextColor">#3c4758</color>

@@ -27,7 +27,8 @@
 
     <style name="CustomTabTextFont" parent="TextAppearance.Design.Tab">
         <item name="fontFamily">@font/samim</item>
-
+        <item name="android:textColor">@color/grey_10</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="button" parent="@android:style/Widget.Button">
@@ -47,6 +48,7 @@
 
     <style name="MyJinTheme" parent="android:style/Theme.NoTitleBar">
         <item name="android:buttonStyle">@style/button</item>
+
     </style>
 
     <style name="RadioButtonStyle" parent="Theme.Design.Light">

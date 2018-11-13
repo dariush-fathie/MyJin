@@ -80,9 +80,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv1"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="42dp"
         android:layout_margin="4dp"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cv2"
         app:layout_constraintTop_toTopOf="parent">
@@ -90,13 +89,14 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/spinner_sources"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:background="@color/transparent"
             android:fontFamily="@font/samim"
             android:gravity="center_vertical"
             android:paddingEnd="8dp"
+
             android:paddingStart="8dp"
-            android:text="منبع : همه"
+            android:text="گروه : همه"
             android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -112,12 +112,12 @@
 
     </androidx.cardview.widget.CardView>
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cv2"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="42dp"
         android:layout_margin="4dp"
-        android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@id/cv1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -125,13 +125,14 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/spinner_types"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:background="@color/transparent"
             android:fontFamily="@font/samim"
             android:gravity="center_vertical"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:text="دسته بندی : همه"
+
+            android:text="زیر گروه : همه"
             android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatImageView

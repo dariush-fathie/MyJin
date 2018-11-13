@@ -25,6 +25,7 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.activitys.SpecActivity
+import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.customClasses.OnSpinerItemClick
 import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
 import myjin.pro.ahoora.myjin.customClasses.ThreeColGridDecorationCatagory
@@ -347,12 +348,15 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
         private fun popupToast() {
 
-            val builder = AlertDialog.Builder(context)
+          /*  val builder = AlertDialog.Builder(context)
             val dialog: AlertDialog
             val view = View.inflate(context, R.layout.pop_win_for_g, null)
             builder.setView(view)
             dialog = builder.create()
-            dialog.show()
+            dialog.show()*/
+
+            CustomToast().Show_Toast(context, cl_health,
+                    getString(R.string.pdjdhtshea))
         }
 
     }

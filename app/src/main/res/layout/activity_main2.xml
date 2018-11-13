@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/back">
+    android:layout_height="match_parent">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/cl_homeContainer"
@@ -15,8 +14,8 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abp_main"
             android:layout_width="match_parent"
-            android:background="@color/transparent"
             android:layout_height="wrap_content"
+            android:background="@color/transparent"
             app:elevation="0dp"
             app:layout_behavior="myjin.pro.ahoora.myjin.customClasses.FixedAppBarLayoutBehavior">
 
@@ -59,7 +58,7 @@
                     app:cpv_indeterminate="true" />
 
                 <RelativeLayout
-                    android:id="@+id/toolbar"
+                    android:id="@+id/rl_filter"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:background="@color/colorPrimaryDark"
@@ -81,26 +80,27 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toStartOf="@+id/iv_menu"
-                        android:paddingEnd="10dp"
                         android:paddingStart="8dp"
+                        android:paddingEnd="10dp"
                         android:text="@string/myJin"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:fontFamily="@font/samim"
                         tools:ignore="RelativeOverlap" />
+
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:padding="2dp"
                         android:id="@+id/tv_test"
-                        android:layout_toStartOf="@+id/tv_mainTitle"
-                        android:layout_centerVertical="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="beta"
-                        android:textSize="12sp"
+                        android:layout_centerVertical="true"
+                        android:layout_toStartOf="@+id/tv_mainTitle"
+                        android:fontFamily="@font/samim"
                         android:gravity="center"
+                        android:padding="2dp"
+                        android:text="beta"
                         android:textColor="#95fcb6"
-                        android:fontFamily="@font/samim" />
+                        android:textSize="12sp" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_locationArrrow"
@@ -117,12 +117,12 @@
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
                         android:layout_toEndOf="@+id/iv_locationArrrow"
+                        android:foreground="?selectableItemBackgroundBorderless"
                         android:gravity="center"
                         android:padding="4dp"
                         android:text="در تهران"
-                        android:foreground="?selectableItemBackgroundBorderless"
-                        android:textSize="14sp"
                         android:textColor="@color/white"
+                        android:textSize="14sp"
                         app:fontFamily="@font/samim"
                         tools:ignore="RelativeOverlap" />
 
@@ -146,9 +146,9 @@
                     android:id="@+id/cv_se"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:layout_marginEnd="10dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="194dp"
+                    android:layout_marginEnd="10dp"
                     android:layout_marginBottom="3dp"
                     app:cardCornerRadius="10dp"
                     app:cardPreventCornerOverlap="false"
@@ -157,26 +157,26 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <RelativeLayout
-                        android:layout_gravity="center"
                         android:id="@+id/rl_search"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/et_search"
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:layout_centerVertical="true"
-                            android:layout_marginEnd="20dp"
                             android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
                             android:background="@null"
                             android:focusable="true"
                             android:gravity="start|center"
                             android:hint="جستجو کنید"
                             android:imeOptions="actionSearch"
                             android:inputType="text"
-                            android:paddingEnd="0dp"
                             android:paddingStart="20dp"
+                            android:paddingEnd="0dp"
                             android:textColorHint="@color/tabTextDef"
                             app:fontFamily="@font/samim" />
 
@@ -200,50 +200,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-       <!-- <com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator
-            android:id="@+id/ipi_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="55dp"
-            android:layout_marginStart="8dp"
-            app:dotColor="@color/title"
-            app:dotCount="3"
-            app:dotRadius="3dp"
-            app:dotSeparation="5dp"
-            app:selectedDotColor="@color/colorPrimaryDark"
-            app:selectedDotRadius="4dp" />-->
+
         <View
             android:id="@+id/view_gradient"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/back1"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="44dp"/>
+            android:layout_marginBottom="65dp"
+            android:background="@color/back1" />
+
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tbl_main"
             android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:background="@color/white"
-            app:tabBackground="@drawable/tab_selector"
-            app:tabIndicatorColor="@color/colorAccent"
-            app:tabMode="fixed"
+            android:layout_height="65dp"
             android:layout_gravity="bottom|center"
-            app:tabSelectedTextColor="@color/white"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/green"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="scrollable"
+            app:tabIconTint="@color/grey_20"
+            app:tabSelectedTextColor="@color/green"
             app:tabTextAppearance="@style/CustomTabTextFont"
-            app:tabTextColor="@color/androidTextColor" />
+            app:tabTextColor="@color/grey_20" />
 
-<!--
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_margin="16dp"
-            android:src="@drawable/icon_search_white"
-            android:translationY="86dp"
-            app:backgroundTint="@color/green"
-            app:fabSize="normal" />-->
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

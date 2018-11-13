@@ -32,7 +32,11 @@
     <string name="provId">provId</string>
     <string name="cityId">cityId</string>
     <string name="healthCenters">مراکز سلامت</string>
-    <string name="etlaeieh">پیام سلامت</string>
+    <string name="etlaeieh">پیام و توصیه</string>
+    <string name="filmoanimation">فیلم و انیمیشن</string>
+    <string name="pishnahadvizheh">پیشنهاد ویژه</string>
+    <string name="abzarmofid">ابزار مفید</string>
+    <string name="moshaverhoporsesh">پرسش و پاسخ</string>
     <string name="provCityPair">provCityPair</string>
     <string name="permission">اجازه دستیابی به حافظه خارجی را صادر کرده و دوباره سعی کنید</string>
     <string name="skip">ورود</string>
@@ -117,7 +121,7 @@
     <string name="gmdepakmbzemrbkhk">گویا مشکلی در ارتباط پیش آمده،کارشناسان ما به زودی این مورد را بررسی خواهند کرد!</string>
     <string name="khj">خدمات ژین</string>
     <string name="nemayesh">نمایش</string>
-    <string name="mher">مسیرهای ارتباطی</string>
+    <string name="ett">اطلاعات تماس</string>
     <string name="email">ایمیل</string>
     <string name="website">وبسایت</string>
     <string name="rnnb">روی نقشه نشان بده</string>
@@ -129,7 +133,7 @@
     <string name="bhtghd">بیمه های طرف قرارداد</string>
     <string name="khadamat">خدمات</string>
     <string name="moarefi">معرفی</string>
-    <string name="rozhayekari">روزهای کاری</string>
+    <string name="rozhayekari">روز و ساعت کار</string>
     <string name="telephone">تلفن</string>
     <string name="address">آدرس</string>
     <string name="motakhases">متخصص</string>
@@ -173,8 +177,8 @@
     <string name="nemikham">نمیخوام</string>
     <string name="jmdssh">ژین من در سایر شهرها</string>
     <string name="ebdhhtokpm">این برنامه در حال حاضر تنها استان کردستان را پوشش می دهد ..</string>
-    <string name="mmnrek">منبع مورد نظر را انتخاب کنید</string>
-    <string name="dbmnrek">دسته بندی مورد نظر را انتخاب کنید</string>
+    <string name="mmnrek">گروه مورد نظر را انتخاب کنید</string>
+    <string name="dbmnrek">زیرگروه مورد نظر را انتخاب کنید</string>
     <string name="virayshnam">ویرایش نام</string>
     <string name="logout">خروج از حساب</string>
     <string name="shomarehtelephone">شماره تلفن</string>

@@ -2,6 +2,9 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
@@ -18,8 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
+import com.google.android.material.tabs.TabLayout
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.drawer_layout.*
@@ -42,6 +45,7 @@ class MainActivity2 : AppCompatActivity(),
         ViewPager.OnPageChangeListener,
         AppBarLayout.OnOffsetChangedListener,
         View.OnClickListener, View.OnLongClickListener {
+
 
 
     val realm = Realm.getDefaultInstance()
@@ -201,6 +205,20 @@ class MainActivity2 : AppCompatActivity(),
         rl_exit.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
         rl_notifi.setOnClickListener(this)
+        tbl_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                tab.icon?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.green), PorterDuff.Mode.SRC_IN)
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+                tab.icon?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.grey_20), PorterDuff.Mode.SRC_IN)
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+
+        })
     }
 
 
@@ -208,11 +226,11 @@ class MainActivity2 : AppCompatActivity(),
         drawerLayout.openDrawer(GravityCompat.END)
     }
 
-    private val bankPosition = 1
+    private val bankPosition = 5
     private var fabH = 0f
     var isSearchVisible = true
     private var appBarOffset = 0
-    private var currentPage = 0
+    private var currentPage = 5
 
     lateinit var tvLocation: AppCompatTextView
 
@@ -248,15 +266,28 @@ class MainActivity2 : AppCompatActivity(),
         appBarOffset = verticalOffset
         if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
             when (currentPage) {
-                0 -> {
+                5 -> {
+                    tv_mainTitle.text = getString(R.string.healthCenters)
+
+                }
+                4 -> {
                     tv_mainTitle.text = getString(R.string.etlaeieh)
                 }
-                1 -> {
-                    tv_mainTitle.text = getString(R.string.healthCenters)
+                3 -> {
+                    tv_mainTitle.text = getString(R.string.filmoanimation)
                 }
-                /* 2 -> {
-                     tv_mainTitle.text = "نشان شده ها"
-                 }*/
+                2 -> {
+                    tv_mainTitle.text = getString(R.string.pishnahadvizheh)
+                }
+                1 -> {
+                    tv_mainTitle.text = getString(R.string.abzarmofid)
+                }
+
+                0 -> {
+                    tv_mainTitle.text = getString(R.string.moshaverhoporsesh)
+                }
+
+
             }
             tv_test.visibility = View.GONE
         } else {
@@ -266,7 +297,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private fun setVisibleShadow(appBarLayout: AppBarLayout?, verticalOffset: Int) {
-        if (currentPage == 1) {
+        if (currentPage == tbl_main.tabCount-1) {
             if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
                 view_gradient.visibility = View.VISIBLE
             } else {
@@ -292,8 +323,10 @@ class MainActivity2 : AppCompatActivity(),
 
         vp_mainContainer.adapter = PagerAdapter(supportFragmentManager, this)
         vp_mainContainer.addOnPageChangeListener(this)
-        vp_mainContainer.offscreenPageLimit = 2
+        vp_mainContainer.offscreenPageLimit = 6
         tbl_main.setupWithViewPager(vp_mainContainer)
+        setIcon()
+
 
 
         et_search.setOnEditorActionListener { _, actionId, _ ->
@@ -325,10 +358,10 @@ class MainActivity2 : AppCompatActivity(),
             1
             // ipi_main.attachToViewPager(vp_mainContainer)
             if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
-                vp_mainContainer.currentItem = 1
+                vp_mainContainer.currentItem = 5
 
             } else {
-                onPageSelected(0)
+                onPageSelected(4)
             }
         }, 50)
 
@@ -379,7 +412,54 @@ class MainActivity2 : AppCompatActivity(),
                     }, 1000)
                 }.show()
     }
+    private fun setIcon() {
+        val drawable = ArrayList<Drawable>()
+        drawable.add(
+                ContextCompat.getDrawable(
+                        this@MainActivity2,
+                        R.drawable.ic_advice
+                )!!
+        )
 
+        drawable.add(
+                ContextCompat.getDrawable(
+                        this@MainActivity2,
+                        R.drawable.ic_usefull_tool
+                )!!
+        )
+
+        drawable.add(
+                ContextCompat.getDrawable(
+                        this@MainActivity2,
+                        R.drawable.ic_spe_offer
+                )!!
+        )
+
+        drawable.add(
+                ContextCompat.getDrawable(
+                        this@MainActivity2,
+                        R.drawable.ic_film_animation
+                )!!
+        )
+
+        drawable.add(
+                ContextCompat.getDrawable(
+                        this@MainActivity2,
+                        R.drawable.ic_messages
+                )!!
+        )
+
+        drawable.add(
+                ContextCompat.getDrawable(
+                        this@MainActivity2,
+                        R.drawable.ic_centers
+                )!!
+        )
+
+        for (i in 0 until drawable.size) {
+            tbl_main.getTabAt(i)?.icon = drawable[i]
+        }
+    }
     override fun onPageScrollStateChanged(state: Int) {
 
     }
@@ -417,28 +497,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
 
-    /*private fun addOrRemoveColorFilter(tab: TabLayout.Tab, addFilter: Boolean) {
-        val view = tab.customView
-        val text = view?.findViewById<AppCompatTextView>(R.id.tv_customTabTitle)
-        val cardView = view?.findViewById<CardView>(R.id.cv_customTabContainer)
-        val colors = Colors(this)
 
-        if (addFilter) {
-            view?.scaleY = 1f
-            view?.scaleX = 1f
-            text?.setTextColor(colors.colorPrimaryDark)
-            text?.setBackgroundResource(R.drawable.empty)
-            cardView?.cardElevation = 3f
-            cardView?.setCardBackgroundColor(colors.white)
-        } else {
-            view?.scaleY = 0.85f
-            view?.scaleX = 0.85f
-            text?.setTextColor(colors.title)
-            text?.setBackgroundResource(R.drawable.dot_rect_back)
-            cardView?.cardElevation = 0f
-            cardView?.setCardBackgroundColor(colors.transparent)
-        }
-    }*/
 
     private fun showLocation() {
         iv_locationArrrow.visibility = View.VISIBLE
@@ -451,29 +510,6 @@ class MainActivity2 : AppCompatActivity(),
     }
 
 
-    /* fun showSearchFab() {
-         if (currentPage == bankPosition) {
-             if (fab_search.translationY != 0f) {
-                 isSearchVisible = true
-                 val animSet = AnimatorSet()
-                 val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 0f, 1f)
-                 val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", fabH, 0f)
-                 animSet.playTogether(alphaAnimator, transitionAnimator)
-                 animSet.start()
-             }
-         }
-     }
-
-     fun hideSearchFab() {
-         if (fab_search.translationY != fabH) {
-             isSearchVisible = false
-             val animSet = AnimatorSet()
-             val alphaAnimator = ObjectAnimator.ofFloat(fab_search, "alpha", 1f, 0f)
-             val transitionAnimator = ObjectAnimator.ofFloat(fab_search, "translationY", 0f, fabH)
-             animSet.playTogether(alphaAnimator, transitionAnimator)
-             animSet.start()
-         }
-     }*/
 
     private fun search() {
 
@@ -485,7 +521,7 @@ class MainActivity2 : AppCompatActivity(),
 
         }
 
-        if (currentPage == 1) {
+        if (currentPage == tbl_main.tabCount-1) {
 
             if (value != "")
                 et_search.setText("")
@@ -498,7 +534,7 @@ class MainActivity2 : AppCompatActivity(),
                 intentS.putExtras(mBundle)
                 startActivity(intentS)
             }
-        } else if (currentPage == 0) {
+        } else if (currentPage == tbl_main.tabCount-2) {
             EventBus.getDefault().post(SearchMEvent(value))
         }
 
@@ -558,17 +594,7 @@ class MainActivity2 : AppCompatActivity(),
 
                 realm.executeTransactionAsync { realm: Realm? ->
                     realm?.copyToRealmOrUpdate(list!!)
-                    /*val savedSps = realm?.where(KotlinSpecialityModel::class.java)?.findAll()
-                    realm?.where(KotlinSpecialityModel::class.java)?.findAll()?.deleteAllFromRealm()
-                    list?.forEach { spl: KotlinSpecialityModel ->
-                        spl.saved = true
-                        realm?.copyToRealm(spl)
-                    }*/
-                    /*val r = realm?.where(KotlinSpecialityModel::class.java)?.findAll()
-                    r!!.forEach { model: KotlinSpecialityModel? ->
-                        Log.e("SP", "${model?.name}:${model?.specialtyId}:${model?.saved}")
-                    }
-                    */
+
                 }
                 spLoadFlag = true
             }
@@ -623,11 +649,11 @@ class MainActivity2 : AppCompatActivity(),
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.e("mainActivity2", "onresult")
+
         if (resultCode == Activity.RESULT_OK) {
-            Log.e("mainActivity2", "onresult")
+
             if (requestCode == settingRequest) {
-                Log.e("mainActivity2", "onresult")
+
                 if (data?.getBooleanExtra(getString(R.string.messagesClean), false)!!) {
                     Handler().postDelayed({
                         EventBus.getDefault().post(TestEvent())

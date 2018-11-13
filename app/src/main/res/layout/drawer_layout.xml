@@ -52,7 +52,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginEnd="15dp"
-                    android:padding="3dp"
+                    android:padding="1dp"
                     android:src="@drawable/ic_password" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -64,7 +64,6 @@
                     android:paddingEnd="17dp"
                     android:text="@string/vrodvozviat"
                     android:textColor="@color/title"
-                    android:textStyle="bold"
                     app:fontFamily="@font/samim"
                     tools:ignore="RtlSymmetry" />
             </RelativeLayout>
@@ -437,7 +436,8 @@
 
             <com.github.florent37.expansionpanel.ExpansionHeader
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+               android:layout_marginBottom="4dp"
                 android:background="@drawable/item_selector"
                 android:foreground="?selectableItemBackgroundBorderless"
                 app:expansion_headerIndicator="@id/headerIndicator"
@@ -475,6 +475,7 @@
                         android:layout_marginEnd="17dp"
                         android:layout_toStartOf="@+id/iv2"
                         android:text="@string/nshanshodehha"
+                        android:gravity="center_vertical"
                         android:textColor="@color/title"
                         app:fontFamily="@font/samim"
                         tools:ignore="RelativeOverlap" />
@@ -580,7 +581,7 @@
             <RelativeLayout
                 android:id="@+id/rl_drawer4"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/item_selector"
                 android:foreground="?selectableItemBackgroundBorderless">
@@ -599,7 +600,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="6dp"
                     android:layout_toStartOf="@+id/v4"
-                    android:padding="1dp"
                     android:src="@drawable/ic_contact" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -777,6 +777,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:lineSpacingExtra="5dp"
+                    android:textColor="#bfbebe"
                     android:paddingEnd="17dp"
                     android:text="@string/version"
                     android:textSize="12sp"

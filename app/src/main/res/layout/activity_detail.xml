@@ -147,7 +147,7 @@
                             android:paddingTop="4dp"
                             android:text="@string/name"
                             android:textColor="@color/title"
-                            android:textSize="14sp"
+                            android:textSize="16sp"
                             android:textStyle="bold"
                             app:fontFamily="@font/samim"
                             app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg"
@@ -249,7 +249,7 @@
                             android:layout_height="30dp"
                             android:layout_marginEnd="16dp"
                             android:gravity="center_vertical"
-                            android:text="@string/mher"
+                            android:text="@string/ett"
                             android:textColor="@color/title"
                             android:textSize="13sp"
                             android:textStyle="bold"
@@ -315,7 +315,8 @@
                                 android:gravity="center"
                                 android:foreground="?selectableItemBackgroundBorderless"
                                 android:fontFamily="@font/samim"
-                                android:textSize="12sp"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
                                 android:textColor="@color/title"
                                 app:fontFamily="@font/samim" />
                         </androidx.cardview.widget.CardView>
@@ -480,6 +481,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <View
+                            android:visibility="invisible"
                             android:id="@+id/v_days"
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
@@ -542,6 +544,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <View
+                            android:visibility="invisible"
                             android:id="@+id/v_cv"
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
@@ -605,6 +608,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <View
+                            android:visibility="invisible"
                             android:id="@+id/v_service"
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
@@ -668,6 +672,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <View
+                            android:visibility="invisible"
                             android:id="@+id/v_inc"
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"

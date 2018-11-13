@@ -186,7 +186,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
             override fun onClick(name: String, position: Int) {
                 posS = idS[position]
-                spinner_sources.text = "منبع : $name"
+                spinner_sources.text =name
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()

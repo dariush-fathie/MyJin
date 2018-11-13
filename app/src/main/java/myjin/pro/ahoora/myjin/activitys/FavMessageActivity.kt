@@ -182,10 +182,10 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
             sourcesName.add(pair.first)
         }
 
-        val dialog = MsgSpinnerDialog(this@FavMessageActivity, sourcesName, "منبع مورد نظر را انتخاب کنید")
+        val dialog = MsgSpinnerDialog(this@FavMessageActivity, sourcesName, "گروه مورد نظر را انتخاب کنید")
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
             override fun onClick(name: String, position: Int) {
-                tv_sources.text = "منبع : $name"
+                tv_sources.text = "گروه : $name"
                 groupId = sources[position].second
                 // typeId = -1 - select all types
                 resetDefaultType()
@@ -201,10 +201,10 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
         types.forEach { pair ->
             typesName.add(pair.first)
         }
-        val dialog = MsgSpinnerDialog(this@FavMessageActivity, typesName, "دسته بندی مورد نظر را انتخاب کنید")
+        val dialog = MsgSpinnerDialog(this@FavMessageActivity, typesName, "زیر گروه مورد نظر را انتخاب کنید")
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
             override fun onClick(name: String, position: Int) {
-                tv_types.text = "دسته بندی : $name"
+                tv_types.text = "زیر گروه : $name"
                 typeId = types[position].second
                 querying(groupId, typeId)
             }
@@ -214,7 +214,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun resetDefaultType() {
         typeId = -1
-        tv_types.text = "دسته بندی : همه"
+        tv_types.text = "زیر گروه : همه"
     }
 
     private fun getDistinctType(groupId: Int) {

@@ -82,7 +82,7 @@
                     tools:targetApi="lollipop" />
             </androidx.cardview.widget.CardView>
 
-            <com.codesgood.views.JustifiedTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -126,6 +126,8 @@
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:maxLines="1"
+                        android:padding="2dp"
+                        android:background="@drawable/t_selector"
                         android:text="دانشگاه علوم پزشکی کردستان ، خبری"
                         android:textColor="@color/manba"
                         android:textSize="12sp"
@@ -138,6 +140,8 @@
                         android:layout_marginTop="5dp"
                         android:gravity="end"
                         android:maxLines="1"
+                        android:background="@drawable/t_selector"
+                        android:padding="2dp"
                         android:text="یک روز پیش"
                         android:textAlignment="textEnd"
                         android:textColor="@color/manba"
@@ -148,7 +152,7 @@
 
 
 
-            <com.codesgood.views.JustifiedTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
