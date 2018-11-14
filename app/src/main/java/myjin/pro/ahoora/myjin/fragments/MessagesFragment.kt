@@ -41,16 +41,6 @@ import retrofit2.Response
 class MessagesFragment : Fragment(), View.OnClickListener {
 
 
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btn_messagesTryAgain -> {
-                tryAgain()
-            }
-            R.id.cv1 -> openSourceDialog()
-            R.id.cv2 -> openTypeDialog()
-        }
-    }
-
     private lateinit var res: RealmResults<KotlinMessagesModel>
     private var updated = false
     private var loadFlag = false
@@ -63,6 +53,16 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     var posS = 0
     var posT = 0
 
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.btn_messagesTryAgain -> {
+                tryAgain()
+            }
+            R.id.cv1 -> openSourceDialog()
+            R.id.cv2 -> openTypeDialog()
+        }
+    }
 
     @Subscribe
     fun netEvent(e: NetChangeEvent) {
@@ -453,7 +453,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         }
 
         rv_messages.addItemDecoration(VerticalLinearLayoutDecoration(activity as Context
-                , 8, 8, 8, 8).apply { lastItemPadding(48) })
+                , 8, 8, 8, 8).apply { lastItemPadding(72) })
         rv_messages.adapter = MessagesAdapter(activity as Context, list, object : SendIntentForResult {
             override fun send(i: Intent, bundle: Bundle?, requestCode: Int) {
                 if (bundle != null) {

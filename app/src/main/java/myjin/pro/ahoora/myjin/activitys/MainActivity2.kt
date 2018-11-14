@@ -20,7 +20,9 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import io.realm.Realm
@@ -46,7 +48,13 @@ class MainActivity2 : AppCompatActivity(),
         AppBarLayout.OnOffsetChangedListener,
         View.OnClickListener, View.OnLongClickListener {
 
+    private val bankPosition = 5
+    private var fabH = 0f
+    var isSearchVisible = true
+    private var appBarOffset = 0
+    private var currentPage = 5
 
+    lateinit var tvLocation: AppCompatTextView
 
     val realm = Realm.getDefaultInstance()
     private var signIn = false
@@ -207,11 +215,13 @@ class MainActivity2 : AppCompatActivity(),
         rl_notifi.setOnClickListener(this)
         tbl_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                tab.icon?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.green), PorterDuff.Mode.SRC_IN)
+                tab.customView?.findViewById<AppCompatImageView>(R.id.icon)?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.green), PorterDuff.Mode.SRC_IN)
+                tab.customView?.findViewById<AppCompatTextView>(R.id.text1)?.setTextColor(ContextCompat.getColor(this@MainActivity2,R.color.green))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                tab.icon?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.grey_20), PorterDuff.Mode.SRC_IN)
+                tab.customView?.findViewById<AppCompatImageView>(R.id.icon)?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.tabTextDef), PorterDuff.Mode.SRC_IN)
+                tab.customView?.findViewById<AppCompatTextView>(R.id.text1)?.setTextColor(ContextCompat.getColor(this@MainActivity2,R.color.tabTextDef))
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
@@ -226,13 +236,7 @@ class MainActivity2 : AppCompatActivity(),
         drawerLayout.openDrawer(GravityCompat.END)
     }
 
-    private val bankPosition = 5
-    private var fabH = 0f
-    var isSearchVisible = true
-    private var appBarOffset = 0
-    private var currentPage = 5
 
-    lateinit var tvLocation: AppCompatTextView
 
     override fun onResume() {
         super.onResume()
@@ -457,7 +461,9 @@ class MainActivity2 : AppCompatActivity(),
         )
 
         for (i in 0 until drawable.size) {
-            tbl_main.getTabAt(i)?.icon = drawable[i]
+            val tab = tbl_main.getTabAt(i)?.customView
+            val icon = tab?.findViewById<AppCompatImageView>(R.id.icon)
+            icon?.setImageDrawable(drawable[i])
         }
     }
     override fun onPageScrollStateChanged(state: Int) {

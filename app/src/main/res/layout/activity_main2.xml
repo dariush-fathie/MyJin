@@ -204,25 +204,19 @@
         <View
             android:id="@+id/view_gradient"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="65dp"
-            android:background="@color/back1" />
+            android:layout_marginBottom="46dp"
+            android:background="@color/gray58" />
 
-        <com.google.android.material.tabs.TabLayout
+        <myjin.pro.ahoora.myjin.customClasses.CustomTabLayoutForHome
             android:id="@+id/tbl_main"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
-            android:layout_gravity="bottom|center"
+            android:layout_height="46dp"
+            android:layout_gravity="bottom"
             android:background="@color/white"
-            app:tabIndicatorColor="@color/green"
-            app:tabIndicatorHeight="3dp"
             app:tabMode="scrollable"
-            app:tabIconTint="@color/grey_20"
-            app:tabSelectedTextColor="@color/green"
-            app:tabTextAppearance="@style/CustomTabTextFont"
-            app:tabTextColor="@color/grey_20" />
-
+            app:tabIndicatorHeight="0dp"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

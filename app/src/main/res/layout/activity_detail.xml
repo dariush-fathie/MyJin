@@ -237,57 +237,54 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:paddingBottom="8dp"
-                        android:paddingEnd="8dp"
-                        android:paddingStart="16dp"
-                        android:paddingTop="8dp">
+                       >
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/aiv_logoImg_et"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:padding="4dp"
+                            android:src="@drawable/ic_etelaattamas"
+                            android:tint="@color/mc_icon_color"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/appCompatTextView1"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_marginEnd="16dp"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_marginEnd="8dp"
                             android:gravity="center_vertical"
                             android:text="@string/ett"
                             android:textColor="@color/title"
                             android:textSize="13sp"
                             android:textStyle="bold"
                             app:fontFamily="@font/samim"
+                            app:layout_constraintEnd_toStartOf="@+id/aiv_logoImg_et"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <View
+                            android:visibility="gone"
                             android:id="@+id/v_tel"
                             android:layout_width="match_parent"
                             android:layout_height="1.5dp"
                             android:background="@color/back1"
                             app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView1" />
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/aiv_logoImg_tel"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:layout_marginTop="8dp"
-                            android:padding="6dp"
-                            android:src="@drawable/ic_tele"
-                            android:tint="@color/mc_icon_color"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/v_tel" />
-
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv1"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
                             android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
                             android:gravity="center_vertical"
                             android:padding="4dp"
                             android:text="@string/telephone"
+                            android:textSize="12sp"
                             android:tint="@color/blue"
                             app:fontFamily="@font/samim"
-                            android:textSize="12sp"
                             app:layout_constraintBottom_toBottomOf="@+id/cv_telephone"
-                            app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_tel"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView1"
                             app:layout_constraintWidth_min="40dp" />
 
@@ -322,33 +319,20 @@
                         </androidx.cardview.widget.CardView>
 
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/aiv_logoImg_web"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:padding="6dp"
-                            android:src="@drawable/ic_website"
-                            android:tint="@color/mc_icon_color"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/tv2" />
-
-
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv2"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
                             android:gravity="center_vertical"
                             android:padding="4dp"
                             android:text="@string/website"
-                            android:tint="@color/subTitle"
                             android:textSize="12sp"
+                            android:tint="@color/subTitle"
                             app:fontFamily="@font/samim"
                             app:layout_constraintBottom_toBottomOf="@+id/cv_website"
-                            app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_web"
-                            app:layout_constraintTop_toTopOf="@+id/cv_website"
-                            app:layout_constraintWidth_max="60dp"
-                            app:layout_constraintWidth_min="40dp" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/cv_website" />
 
                         <androidx.cardview.widget.CardView
 
@@ -383,28 +367,19 @@
                         </androidx.cardview.widget.CardView>
 
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/aiv_logoImg_mail"
-                            android:layout_width="36dp"
-                            android:layout_height="36dp"
-                            android:padding="6dp"
-                            android:src="@drawable/ic_mail"
-                            android:tint="@color/mc_icon_color"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/tv3" />
-
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv3"
                             android:layout_width="60dp"
                             android:layout_height="36dp"
+                            android:layout_marginEnd="8dp"
                             android:gravity="center_vertical"
                             android:padding="4dp"
                             android:text="@string/email"
-                            android:tint="@color/blue"
                             android:textSize="12sp"
+                            android:tint="@color/blue"
                             app:fontFamily="@font/samim"
                             app:layout_constraintBottom_toBottomOf="@+id/cv_mail"
-                            app:layout_constraintEnd_toStartOf="@id/aiv_logoImg_web"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/cv_mail"
                             app:layout_constraintWidth_max="60dp"
                             app:layout_constraintWidth_min="40dp" />

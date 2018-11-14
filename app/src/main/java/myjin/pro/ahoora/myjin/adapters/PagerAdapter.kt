@@ -35,4 +35,5 @@ class PagerAdapter(fm: FragmentManager, context:Context) : FragmentStatePagerAda
             else -> mContext.getString(R.string.moshaverhoporsesh)
         }
     }
+
 }
