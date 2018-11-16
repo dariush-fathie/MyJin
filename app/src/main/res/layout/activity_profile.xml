@@ -7,7 +7,6 @@
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
-
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/expanded_toolbar_height"
@@ -21,22 +20,26 @@
             android:background="@color/green"
             android:fitsSystemWindows="true"
             app:contentScrim="@color/colorPrimary"
+            app:titleEnabled="false"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/rl_filter"
+                app:title=" "
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
+
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <RelativeLayout
-
                 android:id="@+id/rl_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:clickable="true"
                 android:focusable="true"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 app:layout_collapseMode="pin">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -100,17 +103,19 @@
                         android:text="tele" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
+
             </myjin.pro.ahoora.myjin.customClasses.CollapsingAvatarToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:paddingTop="24dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/content_scrolling_layout" />
+        <include layout="@layout/profile_content"/>
 
     </androidx.core.widget.NestedScrollView>
 
@@ -127,6 +132,7 @@
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|end" />
 
+    <!-- progress overlay layout -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_progressMain"
         android:layout_width="match_parent"
@@ -159,16 +165,16 @@
 
     </androidx.cardview.widget.CardView>
 
+    <!-- net error overlay layout -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_netErrText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:cardElevation="10dp"
         android:visibility="gone"
-        app:cardBackgroundColor="@color/back">
+        app:cardBackgroundColor="@color/back"
+        app:cardElevation="10dp">
 
         <RelativeLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center">
@@ -197,4 +203,5 @@
                 app:fontFamily="@font/samim" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

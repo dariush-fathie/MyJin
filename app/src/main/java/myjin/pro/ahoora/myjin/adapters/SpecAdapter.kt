@@ -28,9 +28,9 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
     val context = ctx
     private var mProvId = provId
     private var mCityId = cityId
-
-
+    private val specCountPair = ArrayList<Pair<String, Int>>()
     private val tArr = ArrayList<KotlinSpecialityModel>()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(context).inflate(R.layout.item_specility_layout, parent, false)
@@ -47,10 +47,12 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
 
     private fun fillBuffer() {
         tArr.clear()
+
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
         val result = realm.where(KotlinSpecialityModel::class.java).equalTo("saved", true).distinct("specialtyId").findAll()
         result?.sort("name", Sort.ASCENDING)
+
         realm.commitTransaction()
 
         result.forEach { item: KotlinSpecialityModel ->
@@ -62,8 +64,6 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
     val height = Converter.pxFromDp(context, 80f).toInt()
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ItemHolder).tvSpec.text = tArr[position].name
-     Log.e("heart",tArr[position].specImg)
-
         setAnimation(holder.cvSpec)
 
         Glide.with(context)
@@ -97,14 +97,15 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
             k.putExtra(StaticValues.CATEGORY, 1)
             k.putExtra(StaticValues.PROVID, mProvId)
             k.putExtra(StaticValues.CITYID, mCityId)
-            k.putIntegerArrayListExtra("spArray",array)
+            k.putIntegerArrayListExtra("spArray", array)
             (context as SpecActivity).filterArray.clear()
             context.startActivity(k)
         }
 
-         val ivSpec: AppCompatImageView = itemView.findViewById(R.id.iv_spec)
-         val tvSpec: AppCompatTextView = itemView.findViewById(R.id.tv_spec)
-         val cvSpec: MaterialCardView = itemView.findViewById(R.id.cv_spec)
+        val ivSpec: AppCompatImageView = itemView.findViewById(R.id.iv_spec)
+        val tvSpec: AppCompatTextView = itemView.findViewById(R.id.tv_spec)
+        val tvSpecNumber: AppCompatTextView = itemView.findViewById(R.id.tvSpecNumber)
+        val cvSpec: MaterialCardView = itemView.findViewById(R.id.cv_spec)
 
 
         init {

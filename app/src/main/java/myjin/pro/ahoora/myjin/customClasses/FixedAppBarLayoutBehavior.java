@@ -47,6 +47,8 @@ public class FixedAppBarLayoutBehavior extends AppBarLayout.Behavior {
             if ((dy < 0 && currOffset == 0)
                     || (dy > 0 && currOffset == -child.getTotalScrollRange())) {
                 ViewCompat.stopNestedScroll(target, ViewCompat.TYPE_NON_TOUCH);
+
+
             }
         }
     }
