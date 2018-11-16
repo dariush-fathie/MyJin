@@ -327,7 +327,6 @@ class MainActivity2 : AppCompatActivity(),
 
         vp_mainContainer.adapter = PagerAdapter(supportFragmentManager, this)
         vp_mainContainer.addOnPageChangeListener(this)
-        vp_mainContainer.offscreenPageLimit = 6
         tbl_main.setupWithViewPager(vp_mainContainer)
         setIcon()
 
@@ -362,10 +361,11 @@ class MainActivity2 : AppCompatActivity(),
             1
             // ipi_main.attachToViewPager(vp_mainContainer)
             if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
-                vp_mainContainer.currentItem = 5
+                vp_mainContainer.currentItem = tbl_main.tabCount-1
 
             } else {
-                onPageSelected(4)
+                vp_mainContainer.currentItem = tbl_main.tabCount-2
+              //  onPageSelected(tbl_main.tabCount-2)
             }
         }, 50)
 

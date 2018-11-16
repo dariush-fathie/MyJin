@@ -71,7 +71,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
     @Subscribe
     fun onBecomeVisible(e: VisibilityEvent) {
-        if (e.position == 0) {
+        if (e.position == 4) {
             Log.e(MessagesFragment::class.java.simpleName, "${e.position}")
             if (!loadFlag) {
                 if (NetworkUtil().isNetworkAvailable(activity as Context)) {
@@ -120,7 +120,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == (rv_messages.adapter as MessagesAdapter).requestCode) {
                 data ?: return
-                val p = data.getIntExtra("position", 0)
+                val p = data.getIntExtra("position", 4)
                 val mark = data.getBooleanExtra("save", false)
                 (rv_messages.adapter as MessagesAdapter).mark(p, mark)
             }
@@ -229,7 +229,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
             @SuppressLint("SetTextI18n")
             override fun onClick(name: String, position: Int) {
                 posT = idT.get(position)
-                spinner_types.text = "دسته بندی : $name"
+                spinner_types.text = "زیرگروه : $name"
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()

@@ -8,11 +8,11 @@
     <color name="green">#00a851</color>
     <color name="green2">#31fc92</color>
     <color name="dark">#2e4765</color>
-    <color name="tabTextDef">#BDC2C5</color>
+    <color name="tabTextDef">#666666</color>
     <color name="back">#f7f8f9</color>
     <color name="back0">#B72D7F</color>
 
-    <color name="grey_20">#cccccc</color>
+
 
     <color name="title">#424b55</color>
     <color name="logoColor">#7a02aeef</color>
