@@ -84,7 +84,7 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="180dp">
+                        android:layout_height="175dp">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_imageListBig"
@@ -110,7 +110,7 @@
                     android:id="@+id/cv_row1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp">
+                    android:layout_margin="4dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/rl_item"
@@ -236,7 +236,7 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="175dp"
                        >
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/aiv_logoImg_et"
@@ -549,7 +549,7 @@
                     android:id="@+id/cv_row5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_margin="4dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"

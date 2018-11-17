@@ -56,13 +56,13 @@ class TabLayoutInterface(ctx: Context, fm: FragmentManager, behavior: BottomShee
     }
 
     private fun loadFragment(i: Int) {
-       /* if (i == 0) {
+        if (i == 0) {
             fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, MapFragment()).commit()
-        } else  if (i == 2){*/
+        } else  if (i == 1){
             fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, SearchFragment()).commit()
-        /*}else{
+        }else{
             fragmentManager.beginTransaction().replace(R.id.fl_sheetContainer, NearestFragment()).commit()
-        }*/
+        }
     }
 
     private fun showProgress() {

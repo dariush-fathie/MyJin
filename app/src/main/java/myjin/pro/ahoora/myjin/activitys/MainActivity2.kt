@@ -106,6 +106,8 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
             R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
+            R.id.rl_onlineContact -> startActivity(Intent(this, ScripeChat::class.java))
+
         }
     }
 
@@ -213,6 +215,7 @@ class MainActivity2 : AppCompatActivity(),
         rl_exit.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
         rl_notifi.setOnClickListener(this)
+        rl_onlineContact.setOnClickListener(this)
         tbl_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tab.customView?.findViewById<AppCompatImageView>(R.id.icon)?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.green), PorterDuff.Mode.SRC_IN)

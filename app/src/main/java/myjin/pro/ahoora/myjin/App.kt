@@ -4,6 +4,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager.CONNECTIVITY_ACTION
 import androidx.multidex.MultiDexApplication
 import com.google.firebase.analytics.FirebaseAnalytics
+import im.crisp.sdk.Crisp
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import myjin.pro.ahoora.myjin.utils.NetworkStateReceiver
@@ -37,6 +38,10 @@ class App : MultiDexApplication() {
         Realm.setDefaultConfiguration(config)
 
         registerForNetworkChangeEvents()
+
+
+        Crisp.initialize(this)
+        Crisp.getInstance().websiteId = "8c52ac5b-a56a-4728-bf99-134386471d62"
 
     }
 

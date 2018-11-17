@@ -202,6 +202,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rl_rules.setOnClickListener(this)
         rl_exit.setOnClickListener(this)
         rl_notifi.setOnClickListener(this)
+        rl_onlineContact.setOnClickListener(this)
     }
 
     private fun initList(list: ArrayList<Int>) {
@@ -459,6 +460,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
             R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
+            R.id.rl_notifi -> startActivity(Intent(this, rl_onlineContact::class.java))
+            R.id.rl_onlineContact -> startActivity(Intent(this, ScripeChat::class.java))
 
         }
     }

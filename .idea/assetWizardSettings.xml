@@ -33,8 +33,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="C:\Users\Royal\Desktop\04-centers-detail-icons\bime.png" />
-                                      <entry key="outputName" value="ic_edit" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="C:\Users\Royal\Desktop\support-2.png" />
+                                      <entry key="outputName" value="ic_oncontact" />
                                     </map>
                                   </option>
                                 </PersistentState>

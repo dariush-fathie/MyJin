@@ -17,7 +17,6 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-
             android:layout_margin="2dp"
             android:src="@drawable/ic_jin"
             android:tint="@color/mc_icon_color" />
@@ -29,7 +28,7 @@
             android:layout_below="@+id/iv_spec"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="2dp"
-            android:textColor="@color/title"
+            android:textColor="@color/mc_icon_color"
             android:layout_marginBottom="2dp"
             android:fontFamily="@font/samim"
             android:textSize="12sp"

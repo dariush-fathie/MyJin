@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:foreground="?selectableItemBackgroundBorderless"
     android:layout_height="wrap_content"
-    android:background="@color/back"
+    app:cardBackgroundColor="@color/blackTransparent"
     android:orientation="vertical">
 
     <com.github.florent37.expansionpanel.ExpansionHeader
@@ -33,7 +33,7 @@
                 android:fontFamily="@font/samim"
                 android:text="عنوان"
                 android:textStyle="bold"
-                android:textColor="@color/title" />
+                android:textColor="#666666" />
         </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -43,7 +43,7 @@
             android:layout_gravity="center_vertical|start"
             android:layout_marginStart="16dp"
             android:adjustViewBounds="true"
-            android:tint="@color/title"
+            android:tint="#666666"
             app:srcCompat="@drawable/ic_expansion_header_indicator_grey_24dp" />
 
 
@@ -81,7 +81,7 @@
     </com.github.florent37.expansionpanel.ExpansionLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height=".5dp"
         android:background="@color/c1"/>
 </LinearLayout>
 

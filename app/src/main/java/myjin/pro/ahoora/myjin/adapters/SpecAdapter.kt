@@ -18,6 +18,7 @@ import io.realm.Sort
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.activitys.SpecActivity
+import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
 import myjin.pro.ahoora.myjin.utils.Converter
 import myjin.pro.ahoora.myjin.utils.StaticValues
@@ -57,13 +58,17 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
 
         result.forEach { item: KotlinSpecialityModel ->
             tArr.add(item)
+            val c=realm.where(KotlinItemModel::class.java).equalTo("specialityList.specialtyId",item.specialtyId).count()
+            specCountPair.add(Pair(item.name.toString(),c.toInt()))
         }
     }
 
     val width = Converter.getScreenWidthPx(context) / 2
     val height = Converter.pxFromDp(context, 80f).toInt()
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ItemHolder).tvSpec.text = tArr[position].name
+        (holder as ItemHolder).tvSpec.text = specCountPair[position].first
+        holder.tvSpecNumber.text= specCountPair[position].second.toString()
+
         setAnimation(holder.cvSpec)
 
         Glide.with(context)

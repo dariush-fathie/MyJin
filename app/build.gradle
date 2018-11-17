@@ -23,7 +23,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "myjin.pro.ahoora.myjin"
-        minSdkVersion 17
+        minSdkVersion 18
         targetSdkVersion 28
         versionCode 1
         versionName "1.0.7"
@@ -97,6 +97,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    implementation 'im.crisp:crisp-sdk:0.1.10'
 }
 
 apply plugin: 'com.google.gms.google-services'
