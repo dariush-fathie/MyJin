@@ -42,8 +42,9 @@
             android:layout_centerVertical="true"
             android:layout_toStartOf="@+id/iv_spec"
             android:fontFamily="@font/samim"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:maxLines="2"
+            android:layout_marginEnd="3dp"
             android:text="@string/takhasos"
             android:textColor="@color/green"
             android:textSize="12sp" />

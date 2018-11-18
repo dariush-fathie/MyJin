@@ -10,7 +10,7 @@ import myjin.pro.ahoora.myjin.models.KotlinProvCityModel;
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel;
 import myjin.pro.ahoora.myjin.models.KotlinSignInModel;
 import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel;
-import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel;
+import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel2;
 import myjin.pro.ahoora.myjin.models.SimpleResponseModel;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import okhttp3.Response;
@@ -31,7 +31,7 @@ public interface ApiInterface {
     Call<List<KotlinItemModel>> getItems(@Path("gId") int groupId, @Path("provId") int provId, @Path("cityId") int cityId);
 
     @GET("service/getSpList/")
-    Call<List<KotlinSpecialityModel>> getSpList();
+    Call<List<KotlinSpecialityModel2>> getSpList();
 
     @GET("service/search2/{someThing}/{provId}/{cityId}")
     Call<List<KotlinItemModel>> search(@Path("someThing") String searchedText, @Path("provId") int provId, @Path("cityId") int cityId);

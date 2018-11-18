@@ -3,7 +3,6 @@ package myjin.pro.ahoora.myjin.adapters
 import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -14,12 +13,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.card.MaterialCardView
 import io.realm.Realm
-import io.realm.Sort
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
 import myjin.pro.ahoora.myjin.activitys.SpecActivity
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
-import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
+import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel2
 import myjin.pro.ahoora.myjin.utils.Converter
 import myjin.pro.ahoora.myjin.utils.StaticValues
 import java.util.*
@@ -30,7 +28,7 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
     private var mProvId = provId
     private var mCityId = cityId
     private val specCountPair = ArrayList<Pair<String, Int>>()
-    private val tArr = ArrayList<KotlinSpecialityModel>()
+    private val tArr = ArrayList<KotlinSpecialityModel2>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -51,16 +49,17 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
 
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()
-        val result = realm.where(KotlinSpecialityModel::class.java).equalTo("saved", true).distinct("specialtyId").findAll()
-        result?.sort("name", Sort.ASCENDING)
+        val result = realm.where(KotlinSpecialityModel2::class.java).equalTo("saved", true).distinct("specialtyId").findAll()
 
         realm.commitTransaction()
 
-        result.forEach { item: KotlinSpecialityModel ->
+
+        result.forEach { item: KotlinSpecialityModel2 ->
             tArr.add(item)
             val c=realm.where(KotlinItemModel::class.java).equalTo("specialityList.specialtyId",item.specialtyId).count()
             specCountPair.add(Pair(item.name.toString(),c.toInt()))
         }
+
     }
 
     val width = Converter.getScreenWidthPx(context) / 2

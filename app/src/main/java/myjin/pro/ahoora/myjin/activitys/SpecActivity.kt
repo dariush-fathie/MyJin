@@ -13,17 +13,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_spec.*
 import kotlinx.android.synthetic.main.drawer_layout.*
-import kotlinx.android.synthetic.main.filter.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.SpecAdapter
 import myjin.pro.ahoora.myjin.adapters.TAdapter
-import myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior
 import myjin.pro.ahoora.myjin.customClasses.ThreeColGridDecorationSpec
 import myjin.pro.ahoora.myjin.models.KotlinSignInModel
 import myjin.pro.ahoora.myjin.utils.SharedPer

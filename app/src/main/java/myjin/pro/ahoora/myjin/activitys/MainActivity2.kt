@@ -32,9 +32,7 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
-import myjin.pro.ahoora.myjin.models.KotlinSignInModel
-import myjin.pro.ahoora.myjin.models.KotlinSlideMainModel
-import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel
+import myjin.pro.ahoora.myjin.models.*
 import myjin.pro.ahoora.myjin.models.events.*
 import myjin.pro.ahoora.myjin.utils.*
 import org.greenrobot.eventbus.EventBus
@@ -218,13 +216,13 @@ class MainActivity2 : AppCompatActivity(),
         rl_onlineContact.setOnClickListener(this)
         tbl_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                tab.customView?.findViewById<AppCompatImageView>(R.id.icon)?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.green), PorterDuff.Mode.SRC_IN)
-                tab.customView?.findViewById<AppCompatTextView>(R.id.text1)?.setTextColor(ContextCompat.getColor(this@MainActivity2,R.color.green))
+                tab.customView?.findViewById<AppCompatImageView>(R.id.icon)?.setColorFilter(ContextCompat.getColor(this@MainActivity2, R.color.green), PorterDuff.Mode.SRC_IN)
+                tab.customView?.findViewById<AppCompatTextView>(R.id.text1)?.setTextColor(ContextCompat.getColor(this@MainActivity2, R.color.green))
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                tab.customView?.findViewById<AppCompatImageView>(R.id.icon)?.setColorFilter(ContextCompat.getColor(this@MainActivity2,R.color.tabTextDef), PorterDuff.Mode.SRC_IN)
-                tab.customView?.findViewById<AppCompatTextView>(R.id.text1)?.setTextColor(ContextCompat.getColor(this@MainActivity2,R.color.tabTextDef))
+                tab.customView?.findViewById<AppCompatImageView>(R.id.icon)?.setColorFilter(ContextCompat.getColor(this@MainActivity2, R.color.tabTextDef), PorterDuff.Mode.SRC_IN)
+                tab.customView?.findViewById<AppCompatTextView>(R.id.text1)?.setTextColor(ContextCompat.getColor(this@MainActivity2, R.color.tabTextDef))
             }
 
             override fun onTabReselected(tab: TabLayout.Tab) {
@@ -238,7 +236,6 @@ class MainActivity2 : AppCompatActivity(),
     private fun openDrawerLayout() {
         drawerLayout.openDrawer(GravityCompat.END)
     }
-
 
 
     override fun onResume() {
@@ -304,7 +301,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private fun setVisibleShadow(appBarLayout: AppBarLayout?, verticalOffset: Int) {
-        if (currentPage == tbl_main.tabCount-1) {
+        if (currentPage == tbl_main.tabCount - 1) {
             if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
                 view_gradient.visibility = View.VISIBLE
             } else {
@@ -364,11 +361,11 @@ class MainActivity2 : AppCompatActivity(),
             1
             // ipi_main.attachToViewPager(vp_mainContainer)
             if (SharedPer(this@MainActivity2).getDefTab(getString(R.string.defTab))) {
-                vp_mainContainer.currentItem = tbl_main.tabCount-1
+                vp_mainContainer.currentItem = tbl_main.tabCount - 1
 
             } else {
-                vp_mainContainer.currentItem = tbl_main.tabCount-2
-              //  onPageSelected(tbl_main.tabCount-2)
+                vp_mainContainer.currentItem = tbl_main.tabCount - 2
+                //  onPageSelected(tbl_main.tabCount-2)
             }
         }, 50)
 
@@ -391,7 +388,7 @@ class MainActivity2 : AppCompatActivity(),
 
     private fun checkNetState() {
         if (netAvailability) {
-
+            getItems()
             getSlides()
             getSpList()
         } else {
@@ -408,6 +405,9 @@ class MainActivity2 : AppCompatActivity(),
         if (!spLoadFlag) {
             getSpList()
         }
+        if (!itemLoadFlag) {
+            getItems()
+        }
     }
 
     fun showNetErrSnack() {
@@ -419,6 +419,7 @@ class MainActivity2 : AppCompatActivity(),
                     }, 1000)
                 }.show()
     }
+
     private fun setIcon() {
         val drawable = ArrayList<Drawable>()
         drawable.add(
@@ -469,6 +470,7 @@ class MainActivity2 : AppCompatActivity(),
             icon?.setImageDrawable(drawable[i])
         }
     }
+
     override fun onPageScrollStateChanged(state: Int) {
 
     }
@@ -506,8 +508,6 @@ class MainActivity2 : AppCompatActivity(),
     }
 
 
-
-
     private fun showLocation() {
         iv_locationArrrow.visibility = View.VISIBLE
         tv_location.visibility = View.VISIBLE
@@ -517,7 +517,6 @@ class MainActivity2 : AppCompatActivity(),
         iv_locationArrrow.visibility = View.GONE
         tv_location.visibility = View.GONE
     }
-
 
 
     private fun search() {
@@ -530,7 +529,7 @@ class MainActivity2 : AppCompatActivity(),
 
         }
 
-        if (currentPage == tbl_main.tabCount-1) {
+        if (currentPage == tbl_main.tabCount - 1) {
 
             if (value != "")
                 et_search.setText("")
@@ -543,7 +542,7 @@ class MainActivity2 : AppCompatActivity(),
                 intentS.putExtras(mBundle)
                 startActivity(intentS)
             }
-        } else if (currentPage == tbl_main.tabCount-2) {
+        } else if (currentPage == tbl_main.tabCount - 2) {
             EventBus.getDefault().post(SearchMEvent(value))
         }
 
@@ -551,6 +550,7 @@ class MainActivity2 : AppCompatActivity(),
 
     private var sliderLoadFlag = false
     private var spLoadFlag = false
+    private var itemLoadFlag = false
 
     private fun initSlider(list: ArrayList<String>) {
 
@@ -591,13 +591,67 @@ class MainActivity2 : AppCompatActivity(),
         })
     }
 
+
+    private fun getItems() {
+
+        val groupId = 1
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        apiInterface.getItems(groupId, 19, 0).enqueue(object : Callback<List<KotlinItemModel>> {
+            override fun onResponse(call: Call<List<KotlinItemModel>>?, response: Response<List<KotlinItemModel>>?) {
+                val list = response?.body()
+
+                val realmDatabase = Realm.getDefaultInstance()
+                realmDatabase.executeTransactionAsync { realm: Realm? ->
+
+                    val savedItem = realm?.where(KotlinItemModel::class.java)
+                            ?.equalTo("saved", true)
+                            ?.equalTo("groupId", groupId)
+                            ?.findAll()
+                    val savedItemIds = ArrayList<Int>()
+                    savedItem?.forEach { model: KotlinItemModel? ->
+                        savedItemIds.add(model?.centerId!!)
+                    }
+
+                    realm?.where(KotlinItemModel::class.java)
+                            ?.equalTo("saved", false)
+                            ?.equalTo("groupId", groupId)
+                            ?.findAll()
+                            ?.deleteAllFromRealm()
+
+                    list?.forEach { kotlinItemModel: KotlinItemModel ->
+                        if (savedItemIds.contains(kotlinItemModel.centerId)) {
+                            kotlinItemModel.saved = true
+
+                        }
+                        if (kotlinItemModel.groupId == 1) {
+                            kotlinItemModel.specialityList?.forEach { sp ->
+                                sp.saved = true
+                            }
+                        }
+                        realm?.copyToRealmOrUpdate(kotlinItemModel)
+                    }
+
+
+
+                    itemLoadFlag = true
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<KotlinItemModel>>?, t: Throwable?) {
+                itemLoadFlag = false
+
+            }
+        })
+    }
+
     private fun getSpList() {
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
         val response = apiInterface.spList
-        response.enqueue(object : Callback<List<KotlinSpecialityModel>> {
-            override fun onResponse(call: Call<List<KotlinSpecialityModel>>?, response: Response<List<KotlinSpecialityModel>>?) {
-                val list: List<KotlinSpecialityModel>? = response?.body()
-                list?.forEach { sp: KotlinSpecialityModel ->
+        response.enqueue(object : Callback<List<KotlinSpecialityModel2>> {
+            override fun onResponse(call: Call<List<KotlinSpecialityModel2>>?, response: Response<List<KotlinSpecialityModel2>>?) {
+                val list: List<KotlinSpecialityModel2>? = response?.body()
+                list?.forEach { sp: KotlinSpecialityModel2 ->
                     sp.saved = true
                 }
 
@@ -608,12 +662,12 @@ class MainActivity2 : AppCompatActivity(),
                 spLoadFlag = true
             }
 
-            override fun onFailure(call: Call<List<KotlinSpecialityModel>>?, t: Throwable?) {
-                Log.e("ERR", t?.message + "  ")
+            override fun onFailure(call: Call<List<KotlinSpecialityModel2>>?, t: Throwable?) {
                 spLoadFlag = false
             }
         })
     }
+
 
     private fun showSliderCPV() {
         cpv_slideLoad.visibility = View.VISIBLE

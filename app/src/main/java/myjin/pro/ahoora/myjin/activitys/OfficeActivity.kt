@@ -85,11 +85,17 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
             isLogin()
 
-            if (NetworkUtil().isNetworkAvailable(this)) {
-                getItems()
+            if (groupId == 1) {
+                getItemsOnlyFromOneGroupId()
             } else {
-                showErrLayout()
+                if (NetworkUtil().isNetworkAvailable(this)) {
+                    getItems()
+                } else {
+                    showErrLayout()
+                }
             }
+
+
         }, 50)
 
     }
@@ -124,12 +130,12 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
     private fun tryAgain() {
-        hideErrLayout()
-        if (NetworkUtil().isNetworkAvailable(this)) {
-            getItems()
-        } else {
-            showErrLayout()
-        }
+            hideErrLayout()
+            if (NetworkUtil().isNetworkAvailable(this)) {
+                getItems()
+            } else {
+                showErrLayout()
+            }
     }
 
 
@@ -153,13 +159,13 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             signIn = true
             tv_login_outsign.text = "خوش آمدید " + u.firstName + " عزیز "
             SharedPer(this).setBoolean("signIn", signIn)
-            if (u.allow=="1"){
+            if (u.allow == "1") {
                 showViews()
-            }else{
+            } else {
                 hideViews()
             }
 
-        }else{
+        } else {
             signIn = false
             tv_login_outsign.text = getString(R.string.vrodvozviat)
             SharedPer(this).setBoolean("signIn", signIn)
@@ -169,11 +175,12 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         realm.commitTransaction()
     }
 
-    private fun showViews(){
-        ll_services.visibility=View.VISIBLE
+    private fun showViews() {
+        ll_services.visibility = View.VISIBLE
     }
-    private fun hideViews(){
-        ll_services.visibility=View.GONE
+
+    private fun hideViews() {
+        ll_services.visibility = View.GONE
     }
 
     private fun initListener() {
@@ -245,6 +252,38 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     private fun showMainProgressLayout() {
         ll_progressMain.visibility = View.VISIBLE
+    }
+
+    private fun getItemsOnlyFromOneGroupId() {
+        val realmDatabase = Realm.getDefaultInstance()
+        realmDatabase.executeTransactionAsync { realm: Realm? ->
+            val query = realm?.where(KotlinItemModel::class.java)
+                    ?.equalTo("groupId", groupId)
+
+            if (cityId != 0) {
+                query?.equalTo("addressList.cityId", cityId)
+            }
+            query?.equalTo("addressList.provId", provId)
+            query?.sort("firstName", Sort.ASCENDING)
+
+            val result1 = query?.findAll()
+
+            idArray.clear()
+            result1?.forEach { itemModel: KotlinItemModel? ->
+                idArray.add(itemModel?.centerId!!)
+            }
+            runOnUiThread {
+                if (specId.size > 0) {
+                    filter1(specId)
+                } else {
+                    initList(idArray)
+                }
+                hideErrLayout()
+                hideMainProgressLayout()
+                showSomeViews()
+            }
+        }
+
     }
 
     private fun getItems() {
@@ -424,7 +463,6 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     private var filterFlag = false
     private var ascSort = true
-
 
 
     override fun onClick(v: View?) {
