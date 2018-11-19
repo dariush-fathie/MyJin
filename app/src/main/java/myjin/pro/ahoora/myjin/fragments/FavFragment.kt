@@ -22,9 +22,7 @@ import myjin.pro.ahoora.myjin.adapters.GroupItemSaveAdapter
 import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
-import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 
 class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
 
@@ -35,12 +33,7 @@ class FavFragment : Fragment(), TabLayout.OnTabSelectedListener {
     private var firstLoad = false
     private var updated = false
 
-    @Subscribe
-    fun onBecomeVisible(e: VisibilityEvent) {
-        if (e.position == 2) {
-            Log.e(MessagesFragment::class.java.simpleName, "${e.position}")
-        }
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_fav, container, false)

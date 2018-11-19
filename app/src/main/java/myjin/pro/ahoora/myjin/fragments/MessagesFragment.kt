@@ -72,7 +72,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     @Subscribe
     fun onBecomeVisible(e: VisibilityEvent) {
         if (e.position == 4) {
-            Log.e(MessagesFragment::class.java.simpleName, "${e.position}")
+
             if (!loadFlag) {
                 if (NetworkUtil().isNetworkAvailable(activity as Context)) {
                     getMessages()
@@ -90,20 +90,17 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
     override fun onStart() {
         super.onStart()
-        Log.e("messages", "onstart")
+
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
-        Log.e("messages", "onstop")
+
         EventBus.getDefault().unregister(this)
         super.onStop()
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.e("Messages", "onResume")
-    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_messages, container, false)
@@ -116,7 +113,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.e("messages", "onResult")
+
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == (rv_messages.adapter as MessagesAdapter).requestCode) {
                 data ?: return

@@ -7,7 +7,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.*
 import android.view.LayoutInflater
 import android.view.View
@@ -19,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
-import myjin.pro.ahoora.myjin.utils.Converter
 import kotlinx.android.synthetic.main.fragment_health_bank.*
+import myjin.pro.ahoora.myjin.utils.Converter
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.MainActivity2
 import myjin.pro.ahoora.myjin.activitys.OfficeActivity
@@ -30,6 +29,7 @@ import myjin.pro.ahoora.myjin.customClasses.OnSpinerItemClick
 import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
 import myjin.pro.ahoora.myjin.customClasses.ThreeColGridDecorationCatagory
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
+import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.utils.*
 import org.greenrobot.eventbus.EventBus
@@ -100,7 +100,56 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         checkNetState()
     }
 
+    private fun getItems() {
 
+
+        val groupId = 1
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        apiInterface.getItems(groupId, provId, cityId).enqueue(object : Callback<List<KotlinItemModel>> {
+            override fun onResponse(call: Call<List<KotlinItemModel>>?, response: Response<List<KotlinItemModel>>?) {
+                val list = response?.body()
+
+                val realmDatabase = Realm.getDefaultInstance()
+                realmDatabase.executeTransactionAsync { realm: Realm? ->
+
+                    val savedItem = realm?.where(KotlinItemModel::class.java)
+                            ?.equalTo("saved", true)
+                            ?.equalTo("groupId", groupId)
+                            ?.findAll()
+                    val savedItemIds = ArrayList<Int>()
+                    savedItem?.forEach { model: KotlinItemModel? ->
+                        savedItemIds.add(model?.centerId!!)
+                    }
+
+                    realm?.where(KotlinItemModel::class.java)
+                            ?.equalTo("saved", false)
+                            ?.equalTo("groupId", groupId)
+                            ?.findAll()
+                            ?.deleteAllFromRealm()
+
+                    list?.forEach { kotlinItemModel: KotlinItemModel ->
+                        if (savedItemIds.contains(kotlinItemModel.centerId)) {
+                            kotlinItemModel.saved = true
+
+                        }
+                        if (kotlinItemModel.groupId == 1) {
+                            kotlinItemModel.specialityList?.forEach { sp ->
+                                sp.saved = true
+                            }
+                        }
+                        realm?.copyToRealmOrUpdate(kotlinItemModel)
+                    }
+
+
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<KotlinItemModel>>?, t: Throwable?) {
+
+            }
+        })
+    }
     private fun getCityAndProvFromSp() {
         val sp = SharedPer(activity as Context)
         provId = sp.getInteger(getString(R.string.provId))
@@ -118,6 +167,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         if (netAvailability) {
             hideErrLayout()
             getGroupCount()
+            getItems()
         } else {
             // error
             showErrLayout()
@@ -224,11 +274,19 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showCPV() {
-        rl_hbf.visibility = View.VISIBLE
+        try {
+            rl_hbf.visibility = View.VISIBLE
+        }catch (e:Exception){
+
+        }
     }
 
     private fun hideCPV() {
-        rl_hbf.visibility = View.GONE
+        try {
+            rl_hbf.visibility = View.GONE
+        }catch (e:Exception){
+
+        }
     }
 
     private fun openProvAndCityDialog() {
