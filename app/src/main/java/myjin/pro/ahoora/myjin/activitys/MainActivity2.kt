@@ -326,6 +326,7 @@ class MainActivity2 : AppCompatActivity(),
 
 
         vp_mainContainer.adapter = PagerAdapter(supportFragmentManager, this)
+        vp_mainContainer.offscreenPageLimit=6
         vp_mainContainer.addOnPageChangeListener(this)
         tbl_main.setupWithViewPager(vp_mainContainer)
         setIcon()
