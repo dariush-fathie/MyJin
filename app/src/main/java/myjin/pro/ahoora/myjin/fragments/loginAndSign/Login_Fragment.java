@@ -42,7 +42,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
     private static FragmentManager fragmentManager;
     private AppCompatTextView tv_continue;
     private RelativeLayout rl_hbf;
-    protected IActivityEnabledListener aeListener;
+    private IActivityEnabledListener aeListener;
 
 
     public Login_Fragment() {
@@ -63,7 +63,7 @@ public class Login_Fragment extends Fragment implements OnClickListener {
         void onActivityEnabled(FragmentActivity activity);
     }
 
-    protected void getAvailableActivity(IActivityEnabledListener listener) {
+    private void getAvailableActivity(IActivityEnabledListener listener) {
         if (getActivity() == null) {
             aeListener = listener;
 

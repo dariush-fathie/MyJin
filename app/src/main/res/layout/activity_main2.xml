@@ -212,7 +212,7 @@
         <myjin.pro.ahoora.myjin.customClasses.CustomTabLayoutForHome
             android:id="@+id/tbl_main"
             android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@color/white"
             app:tabMode="scrollable"

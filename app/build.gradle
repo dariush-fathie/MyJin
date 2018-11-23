@@ -3,8 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
-
-
+apply plugin: 'io.fabric'
 
 buildscript {
 
@@ -80,7 +79,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.1.1'
     implementation 'com.google.maps:google-maps-services:0.2.7'
     implementation 'org.slf4j:slf4j-nop:1.7.25'
-    //implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.10'

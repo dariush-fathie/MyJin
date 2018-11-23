@@ -64,6 +64,12 @@ open class KotlinMessagesModel : RealmObject() {
     @Expose
     open var regDate: String = ""
 
+
+    @SerializedName("usercat")
+    @Expose
+    open var usercat: Int = 0
+
+
     override fun toString(): String {
         return "messageId: $messageId " +
                 "- groupId: $groupId " +
@@ -75,7 +81,8 @@ open class KotlinMessagesModel : RealmObject() {
                 "- priority: $priority" +
                 "- bgColor: $bgColor" +
                 "- imageUrl: $imageUrl" +
-                "- regDate: $regDate"
+                "- regDate: $regDate"+
+                "- isVideo: $usercat"
     }
 
 }

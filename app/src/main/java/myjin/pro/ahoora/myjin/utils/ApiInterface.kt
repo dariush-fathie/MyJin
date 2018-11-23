@@ -24,9 +24,6 @@ interface ApiInterface {
     @get:GET("service/getMessagesList/")
     val messages: Call<List<KotlinMessagesModel>>
 
-    @get:GET("service/getVideoList/")
-    val videoList: Call<List<KotlinVideoModel>>
-
     @GET("service/getMainGroupList/{provId}/{cityId}")
     fun getGroupCount(@Path("provId") provId: Int, @Path("cityId") cityId: Int): Call<List<KotlinGroupModel>>
 

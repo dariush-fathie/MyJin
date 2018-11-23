@@ -493,11 +493,11 @@ class MainActivity2 : AppCompatActivity(),
 
         currentPage = position
         if (position != bankPosition) {
-            view_gradient.visibility = View.GONE
+           // view_gradient.visibility = View.GONE
             hideLocation()
             //  hideSearchFab()
         } else {
-            setVisibleShadow(abp_main, appBarOffset)
+           // setVisibleShadow(abp_main, appBarOffset)
             showLocation()
             //  showSearchFab()
         }
