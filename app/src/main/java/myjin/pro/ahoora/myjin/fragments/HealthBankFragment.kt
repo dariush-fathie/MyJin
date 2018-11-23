@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -58,34 +57,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
     private var loadFlag = false
 
-    private var aeListener: IActivityEnabledListener? = null
     private var scrollToBottom = true
-
-
-    protected interface IActivityEnabledListener {
-        fun onActivityEnabled(activity: FragmentActivity?)
-    }
-
-    protected fun getAvailableActivity(listener: IActivityEnabledListener) {
-        if (activity == null) {
-            aeListener = listener
-
-        } else {
-            listener.onActivityEnabled(activity)
-        }
-    }
-
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-        if (aeListener != null) {
-            aeListener!!.onActivityEnabled(context as FragmentActivity?)
-            aeListener = null
-        }
-    }
-
-
     private var scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             scrollToBottom = dy > 0
@@ -120,17 +92,12 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as MainActivity2).tvLocation.setOnClickListener(this)
+        netAvailability = NetworkUtil().isNetworkAvailable(activity as Context)
 
-        getAvailableActivity(object : IActivityEnabledListener {
-            override fun onActivityEnabled(activity: FragmentActivity?) {
-                netAvailability = NetworkUtil().isNetworkAvailable(activity!!)
-                getCityAndProvFromSp()
-                checkNetState()
-            }
-        })
         btn_healthBankTryAgain.setOnClickListener(this)
 
-
+        getCityAndProvFromSp()
+        checkNetState()
     }
 
     private fun getItems() {
@@ -174,6 +141,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     }
 
 
+
                 }
             }
 
@@ -182,23 +150,17 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
             }
         })
     }
-
     private fun getCityAndProvFromSp() {
-        getAvailableActivity(object : IActivityEnabledListener {
-            override fun onActivityEnabled(activity: FragmentActivity?) {
-                val sp = SharedPer(activity!!)
-                provId = sp.getInteger(getString(R.string.provId))
-                cityId = sp.getInteger(getString(R.string.cityId))
-                var n = sp.getString(getString(R.string.provCityPair))
-                if (n == "") {
-                    n = "کردستان"
-                    provId = 19
-                    cityId = 0
-                }
-                (activity as MainActivity2).tvLocation.text = n
-            }
-        })
-
+        val sp = SharedPer(activity as Context)
+        provId = sp.getInteger(getString(R.string.provId))
+        cityId = sp.getInteger(getString(R.string.cityId))
+        var n = sp.getString(getString(R.string.provCityPair))
+        if (n == "") {
+            n = "کردستان"
+            provId = 19
+            cityId = 0
+        }
+        (activity as MainActivity2).tvLocation.text = n
     }
 
     private fun checkNetState() {
@@ -286,40 +248,35 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
     private fun loadAdapter(list: List<KotlinGroupModel>) {
         // one second delay to see animation
+        Handler().postDelayed({
 
-        getAvailableActivity(object : IActivityEnabledListener {
-            override fun onActivityEnabled(activity: FragmentActivity?) {
-                Handler().postDelayed({
-                    adapter = CategoryAdapter(activity!!, list)
-                    mainList.layoutManager = GridLayoutManager(activity, 3)
+            activity as Context
+            adapter = CategoryAdapter(activity!!, list)
+            mainList.layoutManager = GridLayoutManager(activity, 3)
 
-                    while (mainList.itemDecorationCount > 0) {
-                        mainList.removeItemDecorationAt(0)
-                    }
-
-                    val itemDecoration = ThreeColGridDecorationCatagory(activity, 8)
-                    mainList.addItemDecoration(itemDecoration)
-
-
-                    Handler().postDelayed({
-                        hideCPV()
-                        //(activity as MainActivity2).showSearchFab()
-                        mainList.adapter = adapter
-                    }, 400)
-
-                }, 500)
-
-                loadFlag = true
+            while (mainList.itemDecorationCount > 0) {
+                mainList.removeItemDecorationAt(0)
             }
-        })
+
+            val itemDecoration = ThreeColGridDecorationCatagory(activity as Context, 8)
+            mainList.addItemDecoration(itemDecoration)
 
 
+            Handler().postDelayed({
+                hideCPV()
+                //(activity as MainActivity2).showSearchFab()
+                mainList.adapter = adapter
+            }, 400)
+
+        }, 500)
+
+        loadFlag = true
     }
 
     private fun showCPV() {
         try {
             rl_hbf.visibility = View.VISIBLE
-        } catch (e: Exception) {
+        }catch (e:Exception){
 
         }
     }
@@ -327,37 +284,31 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     private fun hideCPV() {
         try {
             rl_hbf.visibility = View.GONE
-        } catch (e: Exception) {
+        }catch (e:Exception){
 
         }
     }
 
     private fun openProvAndCityDialog() {
-
-        getAvailableActivity(object : IActivityEnabledListener {
-            override fun onActivityEnabled(activity: FragmentActivity?) {
-                val dialog = SpinnerDialog(activity, getString(R.string.jmdssh), getString(R.string.nemikham))
-                dialog.bindOnSpinerListener(object : OnSpinerItemClick {
-                    override fun onClick(var1: String, var2: Int, var3: Int) {
-                        //initList()
-                        if (var2 != 19) {
-                            Toast.makeText(activity, getString(R.string.ebdhhtokpm), Toast.LENGTH_LONG).show()
-                        } else {
-                            (activity as MainActivity2).tvLocation.text = var1
-                            this@HealthBankFragment.provId = var2
-                            this@HealthBankFragment.cityId = var3
-                            saveProv(var1)
-                            loadFlag = false
-                            clearAdapter()
-                            // todo : check net connection first please
-                            getGroupCount()
-                        }
-                    }
-                })
-                dialog.showSpinerDialog()
+        val dialog = SpinnerDialog(activity, getString(R.string.jmdssh), getString(R.string.nemikham))
+        dialog.bindOnSpinerListener(object : OnSpinerItemClick {
+            override fun onClick(var1: String, var2: Int, var3: Int) {
+                //initList()
+                if (var2 != 19) {
+                    Toast.makeText(activity, getString(R.string.ebdhhtokpm), Toast.LENGTH_LONG).show()
+                } else {
+                    (activity as MainActivity2).tvLocation.text = var1
+                    this@HealthBankFragment.provId = var2
+                    this@HealthBankFragment.cityId = var3
+                    saveProv(var1)
+                    loadFlag = false
+                    clearAdapter()
+                    // todo : check net connection first please
+                    getGroupCount()
+                }
             }
         })
-
+        dialog.showSpinerDialog()
     }
 
     private fun clearAdapter() {
@@ -365,16 +316,10 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     }
 
     private fun saveProv(name: String) {
-
-        getAvailableActivity(object : IActivityEnabledListener {
-            override fun onActivityEnabled(activity: FragmentActivity?) {
-                val sp = SharedPer(activity!!)
-                sp.setInteger(getString(R.string.provId), provId)
-                sp.setInteger(getString(R.string.cityId), cityId)
-                sp.setString(getString(R.string.provCityPair), name)
-            }
-        })
-
+        val sp = SharedPer(activity as Context)
+        sp.setInteger(getString(R.string.provId), provId)
+        sp.setInteger(getString(R.string.cityId), cityId)
+        sp.setString(getString(R.string.provCityPair), name)
     }
 
     inner class CategoryAdapter(private val context: Context, gList: List<KotlinGroupModel>)
@@ -442,7 +387,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     i.putExtra(StaticValues.CATEGORY, groupsList.get(adapterPosition).groupId)
                     i.putExtra(StaticValues.PROVID, provId)
                     i.putExtra(StaticValues.CITYID, cityId)
-                    i.putIntegerArrayListExtra("spArray", array)
+                    i.putIntegerArrayListExtra("spArray",array)
                     startActivity(i)
                 } else {
                     popupToast()
@@ -461,19 +406,15 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
         private fun popupToast() {
 
-            /*  val builder = AlertDialog.Builder(context)
-              val dialog: AlertDialog
-              val view = View.inflate(context, R.layout.pop_win_for_g, null)
-              builder.setView(view)
-              dialog = builder.create()
-              dialog.show()*/
-            getAvailableActivity(object : IActivityEnabledListener {
-                override fun onActivityEnabled(activity: FragmentActivity?) {
-                    CustomToast().Show_Toast(activity, cl_health,
-                            getString(R.string.pdjdhtshea))
-                }
-            })
+          /*  val builder = AlertDialog.Builder(context)
+            val dialog: AlertDialog
+            val view = View.inflate(context, R.layout.pop_win_for_g, null)
+            builder.setView(view)
+            dialog = builder.create()
+            dialog.show()*/
 
+            CustomToast().Show_Toast(context, cl_health,
+                    getString(R.string.pdjdhtshea))
         }
 
     }
