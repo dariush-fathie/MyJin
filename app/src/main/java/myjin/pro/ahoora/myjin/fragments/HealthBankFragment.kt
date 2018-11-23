@@ -124,16 +124,13 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         getAvailableActivity(object : IActivityEnabledListener {
             override fun onActivityEnabled(activity: FragmentActivity?) {
                 netAvailability = NetworkUtil().isNetworkAvailable(activity!!)
+                getCityAndProvFromSp()
+                checkNetState()
             }
         })
-
-
-
-
         btn_healthBankTryAgain.setOnClickListener(this)
 
-        getCityAndProvFromSp()
-        checkNetState()
+
     }
 
     private fun getItems() {
@@ -293,7 +290,6 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         getAvailableActivity(object : IActivityEnabledListener {
             override fun onActivityEnabled(activity: FragmentActivity?) {
                 Handler().postDelayed({
-
                     adapter = CategoryAdapter(activity!!, list)
                     mainList.layoutManager = GridLayoutManager(activity, 3)
 
