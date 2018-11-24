@@ -775,8 +775,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vshare"
-                    android:padding="2dp"
-                    android:src="@drawable/ic_notification" />
+                    android:padding="3dp"
+                    android:src="@drawable/ic_share" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -784,7 +784,46 @@
                     android:layout_toStartOf="@+id/ivshare"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="معرفی ژین من به دوستان"
+                    android:text="@string/shareMyJin"
+                    android:textColor="@color/title"
+                    app:fontFamily="@font/samim" />
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_rate"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/item_selector"
+                android:foreground="?selectableItemBackgroundBorderless">
+
+
+                <View
+                    android:id="@+id/vrate"
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/title"
+                    android:visibility="invisible" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivrate"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/vrate"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_rate" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/ivrate"
+                    android:gravity="center_vertical"
+                    android:paddingEnd="17dp"
+                    android:text="امتیاز دادن به ژین من"
                     android:textColor="@color/title"
                     app:fontFamily="@font/samim" />
 

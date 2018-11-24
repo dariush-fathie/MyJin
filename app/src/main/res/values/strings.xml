@@ -187,6 +187,9 @@
     <string name="nmnkhb">نام مرکز نباید خالی باشد</string>
     <string name="cvshea">کد وارد شده اشتباه است</string>
     <string name="tamasonline">ارتباط آنلاین</string>
+    <string name="shareMyJin">اشتراک گذاری ژین من</string>
+    <string name="appbrnk">اپلیکیشن بازار را نصب کنید</string>
+    <string name="phdzhm">پیام های داخلی ژین من</string>
 
 </resources>
 

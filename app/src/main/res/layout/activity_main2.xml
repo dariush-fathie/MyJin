@@ -10,6 +10,18 @@
         android:id="@+id/cl_homeContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_gotoInMA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/green"
+            android:layout_gravity="top"
+            android:layout_marginStart="8dp"
+            android:padding="5dp"
+            android:layout_marginTop="55dp"
+            android:src="@drawable/not1"
+            app:elevation="2dp"
+            app:fabSize="mini" />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abp_main"
@@ -206,13 +218,13 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_gravity="bottom|center"
-            android:layout_marginBottom="46dp"
+            android:layout_marginBottom="?attr/actionBarSize"
             android:background="@color/gray58" />
 
         <myjin.pro.ahoora.myjin.customClasses.CustomTabLayoutForHome
             android:id="@+id/tbl_main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:layout_gravity="bottom"
             android:background="@color/white"
             app:tabMode="scrollable"

@@ -4,9 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.provider.ContactsContract
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -19,6 +21,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -31,8 +34,10 @@ import kotlinx.android.synthetic.main.drawer_layout.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.GroupItemAdapter
 import myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior
+import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.customClasses.TabLayoutInterface
+import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.KotlinSignInModel
@@ -209,6 +214,8 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         rl_rules.setOnClickListener(this)
         rl_exit.setOnClickListener(this)
         rl_notifi.setOnClickListener(this)
+        rl_rate.setOnClickListener(this)
+        rl_share.setOnClickListener(this)
         rl_onlineContact.setOnClickListener(this)
     }
 
@@ -233,7 +240,50 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
         hideMainProgressLayout()
     }
+    private fun share() {
+        var str = "لینک دانلود اپ ژین من : "
+        str += "\n\n"
+        val realm = Realm.getDefaultInstance()
+        realm.beginTransaction()
+        val res = realm.where(KotlinAboutContactModel::class.java).findFirst()
+        realm.commitTransaction()
 
+        str+=res?.tKafeh!!
+        val shareIntent = Intent()
+        shareIntent.action = Intent.ACTION_SEND
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
+
+        startActivity(Intent.createChooser(shareIntent, "Share via"))
+
+
+    }
+
+    private fun rate() {
+
+        val isInstalled = isPackageInstalled(applicationContext, "com.farsitel.bazaar")
+
+        if (isInstalled){
+            val intent = Intent(Intent.ACTION_EDIT)
+            intent.data = Uri.parse("bazaar://details?id=${ContactsContract.Directory.PACKAGE_NAME}")
+            intent.setPackage("com.farsitel.bazaar")
+            startActivity(intent)
+        }else{
+            CustomToast().Show_Toast(this, drawerLayout,
+                    getString(R.string.appbrnk))
+        }
+
+    }
+
+    fun isPackageInstalled(context: Context, packageName: String): Boolean {
+        try {
+            context.getPackageManager().getPackageInfo(packageName, 0)
+            return true
+        } catch (e: PackageManager.NameNotFoundException) {
+            return false
+        }
+
+    }
     private fun controlFabVisibility() {
         if (bottomSheetExpanded) {
             (fab_goUp as View).visibility = View.GONE
@@ -498,8 +548,9 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
             R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
-            R.id.rl_notifi -> startActivity(Intent(this, rl_onlineContact::class.java))
             R.id.rl_onlineContact -> startActivity(Intent(this, ScripeChat::class.java))
+            R.id.rl_share -> share()
+            R.id.rl_rate -> rate()
 
         }
     }

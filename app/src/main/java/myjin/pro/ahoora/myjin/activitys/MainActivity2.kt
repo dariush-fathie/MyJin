@@ -1,12 +1,17 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
+import android.provider.ContactsContract.Directory.PACKAGE_NAME
 import android.text.Editable
 import android.text.TextWatcher
 import com.google.android.material.appbar.AppBarLayout
@@ -22,15 +27,18 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.drawer_layout.*
+import kotlinx.android.synthetic.main.item_custom_tab.view.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
+import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.customClasses.SliderDecoration
 import myjin.pro.ahoora.myjin.models.*
 import myjin.pro.ahoora.myjin.models.events.*
@@ -46,11 +54,11 @@ class MainActivity2 : AppCompatActivity(),
         AppBarLayout.OnOffsetChangedListener,
         View.OnClickListener, View.OnLongClickListener {
 
-    private val bankPosition = 5
+    private val bankPosition = 4
     private var fabH = 0f
     var isSearchVisible = true
     private var appBarOffset = 0
-    private var currentPage = 5
+    private var currentPage = 4
 
     lateinit var tvLocation: AppCompatTextView
 
@@ -88,6 +96,12 @@ class MainActivity2 : AppCompatActivity(),
                     startActivity(Intent(this, Login2Activity::class.java))
                 }
             }
+
+            R.id.fab_gotoInMA -> {
+                val myFabSrc = ContextCompat.getDrawable(this@MainActivity2,R.drawable.not1)
+                fab_gotoInMA.setImageDrawable(myFabSrc)
+                startActivity(Intent(this, InternalMessageActivity::class.java))
+            }
             R.id.rl_exit -> showExitDialog()
             R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khj), 1)
             R.id.rl_takapoo_services -> goToServicesActivity(getString(R.string.mnvfs), 2)
@@ -105,10 +119,37 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
             R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
             R.id.rl_onlineContact -> startActivity(Intent(this, ScripeChat::class.java))
+            R.id.rl_share -> share()
+            R.id.rl_rate -> rate()
 
         }
     }
 
+    private fun rate() {
+
+        val isInstalled = isPackageInstalled(applicationContext, "com.farsitel.bazaar")
+
+        if (isInstalled) {
+            val intent = Intent(Intent.ACTION_EDIT)
+            intent.data = Uri.parse("bazaar://details?id=$PACKAGE_NAME")
+            intent.setPackage("com.farsitel.bazaar")
+            startActivity(intent)
+        } else {
+            CustomToast().Show_Toast(this, drawerLayout,
+                    getString(R.string.appbrnk))
+        }
+
+    }
+
+    fun isPackageInstalled(context: Context, packageName: String): Boolean {
+        try {
+            context.getPackageManager().getPackageInfo(packageName, 0)
+            return true
+        } catch (e: PackageManager.NameNotFoundException) {
+            return false
+        }
+
+    }
 
     private fun closeDrawerLayout() {
         drawerLayout.closeDrawers()
@@ -213,7 +254,12 @@ class MainActivity2 : AppCompatActivity(),
         rl_exit.setOnClickListener(this)
         rl_rules.setOnClickListener(this)
         rl_notifi.setOnClickListener(this)
+        rl_rate.setOnClickListener(this)
+        rl_share.setOnClickListener(this)
+        fab_gotoInMA.setOnClickListener(this)
         rl_onlineContact.setOnClickListener(this)
+
+
         tbl_main.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tab.customView?.findViewById<AppCompatImageView>(R.id.icon)?.setColorFilter(ContextCompat.getColor(this@MainActivity2, R.color.green), PorterDuff.Mode.SRC_IN)
@@ -230,6 +276,25 @@ class MainActivity2 : AppCompatActivity(),
             }
 
         })
+    }
+
+    private fun share() {
+        var str = "لینک دانلود اپ ژین من : "
+        str += "\n\n"
+
+        realm.beginTransaction()
+        val res = realm.where(KotlinAboutContactModel::class.java).findFirst()
+        realm.commitTransaction()
+
+        str += res?.tKafeh!!
+        val shareIntent = Intent()
+        shareIntent.action = Intent.ACTION_SEND
+        shareIntent.type = "text/plain"
+        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
+
+        startActivity(Intent.createChooser(shareIntent, "Share via"))
+
+
     }
 
 
@@ -270,16 +335,14 @@ class MainActivity2 : AppCompatActivity(),
         appBarOffset = verticalOffset
         if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
             when (currentPage) {
-                5 -> {
+                4 -> {
                     tv_mainTitle.text = getString(R.string.healthCenters)
 
                 }
-                4 -> {
+                3 -> {
                     tv_mainTitle.text = getString(R.string.etlaeieh)
                 }
-                3 -> {
-                    tv_mainTitle.text = getString(R.string.filmoanimation)
-                }
+
                 2 -> {
                     tv_mainTitle.text = getString(R.string.pishnahadvizheh)
                 }
@@ -301,14 +364,15 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     private fun setVisibleShadow(appBarLayout: AppBarLayout?, verticalOffset: Int) {
-        if (currentPage == tbl_main.tabCount - 1) {
+        /*if (currentPage == tbl_main.tabCount - 1) {
             if (appBarLayout?.totalScrollRange == Math.abs(verticalOffset)) {
                 view_gradient.visibility = View.VISIBLE
             } else {
                 view_gradient.visibility = View.GONE
             }
-        }
+        }*/
     }
+
 
     @Suppress("UNUSED_EXPRESSION")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -323,10 +387,8 @@ class MainActivity2 : AppCompatActivity(),
         tvLocation = tv_location
         fabH = Converter.pxFromDp(this, 16f + 50f + 20)
 
-
-
         vp_mainContainer.adapter = PagerAdapter(supportFragmentManager, this)
-        vp_mainContainer.offscreenPageLimit=6
+        vp_mainContainer.offscreenPageLimit = 4
         vp_mainContainer.addOnPageChangeListener(this)
         tbl_main.setupWithViewPager(vp_mainContainer)
         setIcon()
@@ -392,6 +454,7 @@ class MainActivity2 : AppCompatActivity(),
 
             getSlides()
             getSpList()
+            getInternalMesseges()
         } else {
             showNetErrSnack()
         }
@@ -442,12 +505,7 @@ class MainActivity2 : AppCompatActivity(),
                 )!!
         )
 
-        drawable.add(
-                ContextCompat.getDrawable(
-                        this@MainActivity2,
-                        R.drawable.ic_film_animation
-                )!!
-        )
+
 
         drawable.add(
                 ContextCompat.getDrawable(
@@ -494,11 +552,11 @@ class MainActivity2 : AppCompatActivity(),
 
         currentPage = position
         if (position != bankPosition) {
-           // view_gradient.visibility = View.GONE
+            // view_gradient.visibility = View.GONE
             hideLocation()
             //  hideSearchFab()
         } else {
-           // setVisibleShadow(abp_main, appBarOffset)
+            // setVisibleShadow(abp_main, appBarOffset)
             showLocation()
             //  showSearchFab()
         }
@@ -590,9 +648,43 @@ class MainActivity2 : AppCompatActivity(),
         })
     }
 
+    private fun getInternalMesseges() {
 
+        realm.beginTransaction()
+        var maxId = realm.where(KotlinInternalMessegeModel::class.java).max("id")
+        realm.commitTransaction()
 
+        if (maxId == null) {
+            maxId = 0
+        }
 
+        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
+        val response = apiInterface.getInternalMessageList(maxId.toString())
+        response.enqueue(object : Callback<List<KotlinInternalMessegeModel>> {
+            override fun onResponse(call: Call<List<KotlinInternalMessegeModel>>?, response: Response<List<KotlinInternalMessegeModel>>?) {
+                val list: List<KotlinInternalMessegeModel>? = response?.body()
+
+                realm.executeTransactionAsync { realm: Realm? ->
+
+                    realm?.where(KotlinInternalMessegeModel::class.java)?.findAll()?.deleteAllFromRealm()
+                    realm?.copyToRealmOrUpdate(list!!)
+
+                }
+
+                if (list!![0].newRecord == "ok") {
+                    val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not2)
+                    fab_gotoInMA.setImageDrawable(myFabSrc)
+                } else {
+                    val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not1)
+                    fab_gotoInMA.setImageDrawable(myFabSrc)
+                }
+            }
+
+            override fun onFailure(call: Call<List<KotlinInternalMessegeModel>>?, t: Throwable?) {
+                Log.e("errorInt", t.toString())
+            }
+        })
+    }
 
     private fun getSpList() {
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
