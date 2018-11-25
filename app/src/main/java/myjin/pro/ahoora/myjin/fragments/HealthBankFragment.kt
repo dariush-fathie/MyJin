@@ -290,12 +290,14 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openProvAndCityDialog() {
-        val dialog = SpinnerDialog(activity, getString(R.string.jmdssh), getString(R.string.nemikham))
+        val dialog = SpinnerDialog((activity as MainActivity2), getString(R.string.jmdssh), getString(R.string.close))
         dialog.bindOnSpinerListener(object : OnSpinerItemClick {
             override fun onClick(var1: String, var2: Int, var3: Int) {
                 //initList()
                 if (var2 != 19) {
-                    Toast.makeText(activity, getString(R.string.ebdhhtokpm), Toast.LENGTH_LONG).show()
+
+                    CustomToast().Show_Toast(context, cl_health,
+                            getString(R.string.ebdhhtokpm))
                 } else {
                     (activity as MainActivity2).tvLocation.text = var1
                     this@HealthBankFragment.provId = var2

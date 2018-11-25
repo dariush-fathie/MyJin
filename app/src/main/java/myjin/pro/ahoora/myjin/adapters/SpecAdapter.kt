@@ -32,7 +32,7 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val v = LayoutInflater.from(context).inflate(R.layout.item_specility_layout, parent, false)
+        val v = LayoutInflater.from(context).inflate(R.layout.item_specility_layout2, parent, false)
         return ItemHolder(v)
     }
 

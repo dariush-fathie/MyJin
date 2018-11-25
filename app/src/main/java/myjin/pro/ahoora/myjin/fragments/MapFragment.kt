@@ -64,6 +64,8 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v = inflater.inflate(R.layout.fragment_map, container, false)
         idArray = (activity as OfficeActivity).idArray
+
+
         initViews(v)
         initMap()
         return v
@@ -138,7 +140,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
 
 
 
-        realm.executeTransaction({ db: Realm? ->
+        realm.executeTransaction { db: Realm? ->
             val item = db?.where(KotlinItemModel::class.java)?.equalTo("centerId", idArray[i])?.findFirst()
             name = item?.firstName + " " + item?.lastName
             val lat = item?.addressList!![0]?.latitude
@@ -146,7 +148,7 @@ class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
             latlng = LatLng(lat?.toDouble()!!, lng?.toDouble()!!)
             Log.e("LatLng", "${latlng}")
             Log.e("name", name)
-        })
+        }
         if (this::mMarker.isInitialized) {
             mMarker.position = latlng
             mMarker.title = name

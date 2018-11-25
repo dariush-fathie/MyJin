@@ -51,7 +51,7 @@ class SharedPer(mContext: Context) {
     }
 
     fun getInteger(name: String): Int {
-        return sharedPreference.getInt(name, 0)
+        return sharedPreference.getInt(name, 19)
     }
     fun setDefTab(name: String, value: Boolean) {
         editor1.putBoolean(name, value).apply()

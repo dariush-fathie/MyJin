@@ -3,6 +3,7 @@ package myjin.pro.ahoora.myjin.activitys
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
@@ -50,6 +51,7 @@ import org.greenrobot.eventbus.ThreadMode
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 
 
 class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClickListener {
@@ -240,6 +242,41 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
         hideMainProgressLayout()
     }
+
+    @Throws(IOException::class)
+    fun sendAppItself(paramActivity: Activity) {
+
+        var str = "لینک دانلود اپ ژین من : "
+        str += "\n\n"
+
+        val realm=Realm.getDefaultInstance()
+        realm.beginTransaction()
+        val res = realm.where(KotlinAboutContactModel::class.java).findFirst()
+        realm.commitTransaction()
+
+        str += res?.tKafeh!!
+
+        val pm = paramActivity.packageManager
+        val appInfo: ApplicationInfo
+        try {
+            appInfo = pm.getApplicationInfo(paramActivity.packageName,
+                    PackageManager.GET_META_DATA)
+            val sendBt = Intent(Intent.ACTION_SEND)
+
+            sendBt.type = "*/*"
+            sendBt.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
+
+
+            sendBt.putExtra(Intent.EXTRA_STREAM,
+                    Uri.parse("file://" + appInfo.publicSourceDir))
+
+            paramActivity.startActivity(Intent.createChooser(sendBt, "Share it using"))
+        } catch (e1: PackageManager.NameNotFoundException) {
+            e1.printStackTrace()
+        }
+
+    }
+
     private fun share() {
         var str = "لینک دانلود اپ ژین من : "
         str += "\n\n"
@@ -519,13 +556,14 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
         when (v?.id) {
             R.id.btn_tryAgain -> tryAgain()
             R.id.tv_login_outsign -> {
-                /*Toast.makeText(this@OfficeActivity,
-                        getString(R.string.early), Toast.LENGTH_SHORT).show()*/
-                if (signIn) {
-                    startActivity(Intent(this, ProfileActivity::class.java))
-                } else {
-                    startActivity(Intent(this, Login2Activity::class.java))
-                }
+                /* if (signIn) {
+                       startActivity(Intent(this, ProfileActivity::class.java))
+                   } else {
+                       startActivity(Intent(this, Login2Activity::class.java))
+                   }*/
+
+                CustomToast().Show_Toast(this, drawerLayout,
+                        getString(R.string.early))
             }
             R.id.rl_sort -> onSortClick()
             R.id.iv_goback -> onBackPressed()
@@ -549,7 +587,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
             R.id.rl_onlineContact -> startActivity(Intent(this, ScripeChat::class.java))
-            R.id.rl_share -> share()
+            R.id.rl_share -> sendAppItself(this)
             R.id.rl_rate -> rate()
 
         }

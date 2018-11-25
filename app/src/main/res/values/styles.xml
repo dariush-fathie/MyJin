@@ -54,6 +54,8 @@
         <item name="colorAccent">@color/green</item>
         <item name="android:textColorSecondary">@color/mc_icon_color</item>
     </style>
-
+    <style name="spinner_style">
+        <item name="android:background">@drawable/arrow_left</item>
+    </style>
 
 </resources>

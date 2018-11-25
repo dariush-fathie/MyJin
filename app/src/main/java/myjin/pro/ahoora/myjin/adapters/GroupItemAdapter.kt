@@ -96,7 +96,12 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, gUrl: String, title
             var str = ""
             str = if (!item.gen.equals("0")) {
                 if (item.groupId == 1) {
-                    item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
+
+                    if (item.levelList!![0]?.levelId!! > 0) {
+                        item.levelList!![0]?.name + " _ " + item.specialityList!![0]?.name
+                    } else {
+                        item.specialityList!![0]?.name!!
+                    }
                 } else {
                     title
                 }
@@ -104,6 +109,8 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, gUrl: String, title
             } else {
                 title
             }
+
+
 
             holder.subTitle.text = str
             holder.tv_addr.text = item.addressList!![0]?.locTitle
@@ -267,6 +274,7 @@ class GroupItemAdapter(ctx: Context, idList: ArrayList<Int>, gUrl: String, title
             }
 
         }
+
         val cvGi: CardView = itemView.findViewById(R.id.cv_gi)
         val title: AppCompatTextView = itemView.findViewById(R.id.tv_title)
         val subTitle: AppCompatTextView = itemView.findViewById(R.id.tv_subTitle)

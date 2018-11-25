@@ -48,9 +48,6 @@ class HListAdapter(ctx: Context, array: ArrayList<Int>) : RecyclerView.Adapter<R
         g_url = realm.where(KotlinGroupModel::class.java).equalTo("groupId", item?.groupId).findFirst()?.g_url!!
         realm.commitTransaction()
         (holder as ItemHolder).title.text = item?.firstName + " " + item?.lastName
-
-
-
         var str = ""
         if (!item!!.gen.equals("0")) {
             if (item.groupId == 1) {
@@ -65,7 +62,7 @@ class HListAdapter(ctx: Context, array: ArrayList<Int>) : RecyclerView.Adapter<R
 
         holder.subTitle.text = str
 
-        var drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
+        val drawable = ContextCompat.getDrawable(context, R.drawable.ic_jin)
         var url = ""
         holder.image.colorFilter = null
 

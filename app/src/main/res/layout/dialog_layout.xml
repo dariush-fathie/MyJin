@@ -4,27 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/spinerTitle"
+    <RelativeLayout
+        android:id="@+id/rl_spinerTitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/samim"
-        android:gravity="center_vertical|start"
-        android:paddingBottom="8dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:text="شهر خود را انتخاب کنید"
-        android:textColor="@color/title"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:layout_height="48dp"
+        android:background="@color/green">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/spinerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="17dp"
+            android:text="ژین من در سایر شهرها"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/samim" />
+
+    </RelativeLayout>
+
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/cv_se"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/spinerTitle"
+        android:layout_below="@+id/rl_spinerTitle"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -67,30 +74,62 @@
                 android:tint="@color/green" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_prov"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/rl_spinerTitle"
+        app:cardCornerRadius="20dp">
+        <Spinner
 
+            android:layout_gravity="center_vertical"
+            style="@style/spinner_style"
+            android:scrollbars="none"
+            android:spinnerMode="dropdown"
+            android:id="@+id/spinner_prov"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </Spinner>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_arrowDown1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:rotation="90"
+            android:src="@drawable/ic_expansion_header_indicator_grey_24dp"
+            app:layout_constraintStart_toStartOf="@+id/spinner_sources"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.cardview.widget.CardView>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/cv_se"
+        android:layout_below="@id/cv_prov"
         android:paddingEnd="8dp"
         android:paddingStart="8dp"
         android:paddingTop="8dp"
         android:scrollbars="vertical"
         android:verticalScrollbarPosition="left" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/close"
         android:layout_width="wrap_content"
         android:foreground="?selectableItemBackgroundBorderless"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_height="wrap_content"
         android:layout_below="@+id/list"
-        android:layout_margin="16dp"
-        android:padding="8dp"
         android:text="بستن"
+
         android:textColor="@color/title"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:backgroundTint="@color/gray"
         app:fontFamily="@font/samim" />
 
 </RelativeLayout>

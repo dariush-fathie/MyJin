@@ -1,7 +1,9 @@
 package myjin.pro.ahoora.myjin.activitys
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import android.net.Uri
@@ -30,6 +32,7 @@ import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 import myjin.pro.ahoora.myjin.models.KotlinSignInModel
 import myjin.pro.ahoora.myjin.utils.SharedPer
 import myjin.pro.ahoora.myjin.utils.StaticValues
+import java.io.IOException
 
 class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClickListener {
     private var signIn = false
@@ -131,6 +134,40 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
         rl_rate.setOnClickListener(this)
         rl_share.setOnClickListener(this)
     }
+
+    @Throws(IOException::class)
+    fun sendAppItself(paramActivity: Activity) {
+
+        var str = "لینک دانلود اپ ژین من : "
+        str += "\n\n"
+
+        val realm=Realm.getDefaultInstance()
+        realm.beginTransaction()
+        val res = realm.where(KotlinAboutContactModel::class.java).findFirst()
+        realm.commitTransaction()
+
+        str += res?.tKafeh!!
+
+        val pm = paramActivity.packageManager
+        val appInfo: ApplicationInfo
+        try {
+            appInfo = pm.getApplicationInfo(paramActivity.packageName,
+                    PackageManager.GET_META_DATA)
+            val sendBt = Intent(Intent.ACTION_SEND)
+
+            sendBt.type = "*/*"
+            sendBt.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
+
+
+            sendBt.putExtra(Intent.EXTRA_STREAM,
+                    Uri.parse("file://" + appInfo.publicSourceDir))
+
+            paramActivity.startActivity(Intent.createChooser(sendBt, "Share it using"))
+        } catch (e1: PackageManager.NameNotFoundException) {
+            e1.printStackTrace()
+        }
+
+    }
     private fun share() {
         var str = "لینک دانلود اپ ژین من : "
         str += "\n\n"
@@ -181,13 +218,14 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.tv_login_outsign -> {
-                /*Toast.makeText(this@SpecActivity,
-                        getString(R.string.early), Toast.LENGTH_SHORT).show()*/
-                if (signIn) {
-                    startActivity(Intent(this, ProfileActivity::class.java))
-                } else {
-                    startActivity(Intent(this, Login2Activity::class.java))
-                }
+                /* if (signIn) {
+                     startActivity(Intent(this, ProfileActivity::class.java))
+                 } else {
+                     startActivity(Intent(this, Login2Activity::class.java))
+                 }*/
+
+                CustomToast().Show_Toast(this, drawerLayout,
+                        getString(R.string.early))
             }
             R.id.rl_filter -> onFilterClick()
             R.id.iv_goback -> onBackPressed()
@@ -210,7 +248,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
             R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
             R.id.rl_onlineContact -> startActivity(Intent(this, ScripeChat::class.java))
-            R.id.rl_share -> share()
+            R.id.rl_share -> sendAppItself(this)
             R.id.rl_rate -> rate()
 
         }

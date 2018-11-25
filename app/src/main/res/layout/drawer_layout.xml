@@ -814,7 +814,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:layout_toStartOf="@+id/vrate"
-                    android:padding="2dp"
+                    android:padding="4dp"
                     android:src="@drawable/ic_rate" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -823,7 +823,7 @@
                     android:layout_toStartOf="@+id/ivrate"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="امتیاز دادن به ژین من"
+                    android:text="@string/emtiazdadan"
                     android:textColor="@color/title"
                     app:fontFamily="@font/samim" />
 
