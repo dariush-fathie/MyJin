@@ -41,15 +41,14 @@ class IntroAdapter(private val context: Context, private val list: Array<KotlinS
             Glide.with(context)
                     .load(list[position].fileUrl)
                     .apply(RequestOptions()
-                            .placeholder(R.color.green))
-                    .into((holder as ImageHolder)
-                            .ivImage)
+                            .placeholder(R.color.transparent))
+                    .into(holder.ivImage)
 
 
            // requestBuilder.load(list[position].fileUrl).into(holder.ivImage)
             holder.tvDescription.text = list[position].description
             val bg="#ff"+list[position].arrange
-            holder.rootLayout.setBackgroundColor(Color.parseColor(bg))
+           // holder.rootLayout.setBackgroundColor(Color.parseColor(bg))
 
         } catch (e: Exception) {
             Log.e("glideErrIntro", e.message + " ")

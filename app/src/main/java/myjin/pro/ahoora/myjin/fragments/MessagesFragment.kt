@@ -71,7 +71,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
     @Subscribe
     fun onBecomeVisible(e: VisibilityEvent) {
-        if (e.position == 3) {
+        if (e.position == 1) {
 
             if (!loadFlag) {
                 if (NetworkUtil().isNetworkAvailable(activity as Context)) {
@@ -117,7 +117,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == (rv_messages.adapter as MessagesAdapter).requestCode) {
                 data ?: return
-                val p = data.getIntExtra("position", 3)
+                val p = data.getIntExtra("position", 1)
                 val mark = data.getBooleanExtra("save", false)
                 (rv_messages.adapter as MessagesAdapter).mark(p, mark)
             }

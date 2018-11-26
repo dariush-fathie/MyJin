@@ -379,14 +379,15 @@ class MainActivity2 : AppCompatActivity(),
 
                 }
                 3 -> {
-                    tv_mainTitle.text = getString(R.string.etlaeieh)
+                    tv_mainTitle.text = getString(R.string.pishnahadvizheh)
                 }
 
                 2 -> {
-                    tv_mainTitle.text = getString(R.string.pishnahadvizheh)
+
+                    tv_mainTitle.text = getString(R.string.abzarmofid)
                 }
                 1 -> {
-                    tv_mainTitle.text = getString(R.string.abzarmofid)
+                     tv_mainTitle.text = getString(R.string.etlaeieh)
                 }
 
                 0 -> {
@@ -465,7 +466,7 @@ class MainActivity2 : AppCompatActivity(),
                 vp_mainContainer.currentItem = tbl_main.tabCount - 1
 
             } else {
-                vp_mainContainer.currentItem = tbl_main.tabCount - 2
+                vp_mainContainer.currentItem = tbl_main.tabCount - 4
                 //  onPageSelected(tbl_main.tabCount-2)
             }
         }, 50)
@@ -528,7 +529,12 @@ class MainActivity2 : AppCompatActivity(),
                         R.drawable.ic_advice
                 )!!
         )
-
+        drawable.add(
+                ContextCompat.getDrawable(
+                        this@MainActivity2,
+                        R.drawable.ic_messages
+                )!!
+        )
         drawable.add(
                 ContextCompat.getDrawable(
                         this@MainActivity2,
@@ -540,15 +546,6 @@ class MainActivity2 : AppCompatActivity(),
                 ContextCompat.getDrawable(
                         this@MainActivity2,
                         R.drawable.ic_spe_offer
-                )!!
-        )
-
-
-
-        drawable.add(
-                ContextCompat.getDrawable(
-                        this@MainActivity2,
-                        R.drawable.ic_messages
                 )!!
         )
 
@@ -637,7 +634,7 @@ class MainActivity2 : AppCompatActivity(),
                 intentS.putExtras(mBundle)
                 startActivity(intentS)
             }
-        } else if (currentPage == tbl_main.tabCount - 2) {
+        } else if (currentPage == tbl_main.tabCount - 4) {
             EventBus.getDefault().post(SearchMEvent(value))
         }
 

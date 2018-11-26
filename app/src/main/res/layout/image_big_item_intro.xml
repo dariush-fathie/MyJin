@@ -4,7 +4,7 @@
     android:id="@+id/cl_slidesRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/niceBlue"
+    android:background="@drawable/bg_intro"
     android:paddingBottom="72dp">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -29,7 +29,7 @@
         android:paddingEnd="24dp"
         android:paddingStart="24dp"
         android:text="@string/lorem"
-        android:textColor="@color/white"
+        android:textColor="@color/mc_icon_color"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

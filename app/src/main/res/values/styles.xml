@@ -58,4 +58,8 @@
         <item name="android:background">@drawable/arrow_left</item>
     </style>
 
+    <style name="IntroTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/introplace</item>
+    </style>
+
 </resources>

@@ -39,7 +39,7 @@
         android:layout_gravity="center_horizontal"
         android:text="خانه"
         android:textColor="@color/tabTextDef"
-        android:textSize="13sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         app:fontFamily="@font/roya" />
 

@@ -13,9 +13,9 @@ class PagerAdapter(fm: FragmentManager, context:Context) : FragmentStatePagerAda
     override fun getItem(position: Int): Fragment? {
         return when (position) {
             4 -> HealthBankFragment()
-            3 -> MessagesFragment()
-            2 -> SpeOfferFragment()
-            1 -> UsefullToolFragment()
+            3 -> SpeOfferFragment()
+            2 -> UsefullToolFragment()
+            1 -> MessagesFragment()
             else -> AdviceFragment()
         }
     }
@@ -27,9 +27,9 @@ class PagerAdapter(fm: FragmentManager, context:Context) : FragmentStatePagerAda
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
             4 -> mContext.getString(R.string.healthCenters)
-            3 -> mContext.getString(R.string.etlaeieh)
-            2 -> mContext.getString(R.string.pishnahadvizheh)
-            1 -> mContext.getString(R.string.abzarmofid)
+            3 -> mContext.getString(R.string.pishnahadvizheh)
+            2 -> mContext.getString(R.string.abzarmofid)
+            1 -> mContext.getString(R.string.etlaeieh)
             else -> mContext.getString(R.string.moshaverhoporsesh)
         }
     }

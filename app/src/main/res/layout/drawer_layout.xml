@@ -36,13 +36,6 @@
                 android:foreground="?selectableItemBackgroundBorderless">
 
 
-                <View
-                    android:id="@+id/vs2"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs2"
@@ -51,7 +44,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="8dp"
                     android:padding="1dp"
                     android:src="@drawable/ic_password" />
 
@@ -85,21 +78,14 @@
                 android:foreground="?selectableItemBackgroundBorderless">
 
 
-                <View
-                    android:id="@+id/v1"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv1"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/v1"
                     android:padding="4dp"
                     android:src="@drawable/ic_jind" />
 
@@ -133,21 +119,14 @@
                 android:background="@drawable/item_selector"
                 android:foreground="?selectableItemBackgroundBorderless">
 
-                <View
-                    android:id="@+id/vs3"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivs3"
                     android:layout_width="35dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vs3"
                     android:padding="5dp"
                     android:src="@drawable/ic_takapo" />
 
@@ -448,13 +427,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <View
-                        android:id="@+id/vs_fav"
-                        android:layout_width="4dp"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentEnd="true"
-                        android:background="@color/title"
-                        android:visibility="invisible" />
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv2"
@@ -462,7 +434,8 @@
                         android:layout_height="35dp"
                         android:layout_centerVertical="true"
                         android:layout_marginEnd="8dp"
-                        android:layout_toStartOf="@+id/vs_fav"
+
+                        android:layout_alignParentEnd="true"
                         android:padding="4dp"
                         android:src="@drawable/ic_bookmarkm" />
 
@@ -548,12 +521,7 @@
                 android:background="@drawable/item_selector"
                 android:foreground="?selectableItemBackgroundBorderless">
 
-                <View
-                    android:id="@+id/v3"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/white" />
+
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv3"
@@ -561,7 +529,7 @@
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/v3"
+                    android:layout_alignParentEnd="true"
                     android:padding="6dp"
                     android:src="@drawable/ic_about" />
 
@@ -586,21 +554,15 @@
                 android:background="@drawable/item_selector"
                 android:foreground="?selectableItemBackgroundBorderless">
 
-                <View
-                    android:id="@+id/v4"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv4"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:padding="3dp"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="6dp"
-                    android:layout_toStartOf="@+id/v4"
                     android:src="@drawable/ic_contact" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -623,12 +585,6 @@
                 android:background="@drawable/item_selector"
                 android:foreground="?selectableItemBackgroundBorderless">
 
-                <View
-                    android:id="@+id/v_onlineContact"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_onlineContact"
@@ -637,7 +593,7 @@
                     android:padding="2dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="6dp"
-                    android:layout_toStartOf="@+id/v_onlineContact"
+                    android:layout_alignParentEnd="true"
                     android:src="@drawable/ic_oncontact" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -687,7 +643,7 @@
                     android:layout_toStartOf="@+id/ivs1"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="قوانین و مقررات"
+                    android:text="@string/qavaninomoqarrat"
                     android:textColor="@color/title"
                     android:textSize="16sp"
                     app:fontFamily="@font/samim" />
@@ -712,13 +668,6 @@
                 android:foreground="?selectableItemBackgroundBorderless">
 
 
-                <View
-                    android:id="@+id/vnotifi"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivnotifi"
@@ -726,7 +675,7 @@
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vnotifi"
+                    android:layout_alignParentEnd="true"
                     android:padding="2dp"
                     android:src="@drawable/ic_notification" />
 
@@ -760,21 +709,13 @@
                 android:foreground="?selectableItemBackgroundBorderless">
 
 
-                <View
-                    android:id="@+id/vshare"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
-
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivshare"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vshare"
+                    android:layout_alignParentEnd="true"
                     android:padding="3dp"
                     android:src="@drawable/ic_share" />
 
@@ -799,13 +740,6 @@
                 android:foreground="?selectableItemBackgroundBorderless">
 
 
-                <View
-                    android:id="@+id/vrate"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivrate"
@@ -813,7 +747,7 @@
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vrate"
+                    android:layout_alignParentEnd="true"
                     android:padding="4dp"
                     android:src="@drawable/ic_rate" />
 
@@ -845,13 +779,6 @@
                 android:foreground="?selectableItemBackgroundBorderless">
 
 
-                <View
-                    android:id="@+id/vset"
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="true"
-                    android:background="@color/title"
-                    android:visibility="invisible" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivsetting"
@@ -859,7 +786,7 @@
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
-                    android:layout_toStartOf="@+id/vset"
+                    android:layout_alignParentEnd="true"
                     android:padding="3dp"
                     android:src="@drawable/ic_setting" />
 
@@ -870,7 +797,7 @@
                     android:layout_toStartOf="@+id/ivsetting"
                     android:gravity="center_vertical"
                     android:paddingEnd="17dp"
-                    android:text="تنظیمات"
+                    android:text="@string/setting"
                     android:textColor="@color/title"
                     app:fontFamily="@font/samim" />
 
