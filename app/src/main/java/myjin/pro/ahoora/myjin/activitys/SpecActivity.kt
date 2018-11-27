@@ -169,7 +169,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
 
     }
     private fun share() {
-        var str = "لینک دانلود اپ ژین من : "
+        var str = getString(R.string.miejmrakbdk)
         str += "\n\n"
         val realm = Realm.getDefaultInstance()
         realm.beginTransaction()

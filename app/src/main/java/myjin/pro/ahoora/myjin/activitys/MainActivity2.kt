@@ -286,7 +286,7 @@ class MainActivity2 : AppCompatActivity(),
     @Throws(IOException::class)
     fun sendAppItself(paramActivity: Activity) {
 
-        var str = "لینک دانلود اپ ژین من : "
+        var str = getString(R.string.miejmrakbdk)
         str += "\n\n"
 
         realm.beginTransaction()
