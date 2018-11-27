@@ -1,47 +1,21 @@
 package myjin.pro.ahoora.myjin.fragments
 
-import android.animation.ObjectAnimator
-import android.annotation.SuppressLint
+
 import android.content.Context
-import android.content.Intent
+
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.*
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import io.realm.Realm
-import myjin.pro.ahoora.myjin.utils.Converter
-import kotlinx.android.synthetic.main.fragment_health_bank.*
+import kotlinx.android.synthetic.main.fragment_usefull_tool.*
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.MainActivity2
-import myjin.pro.ahoora.myjin.activitys.OfficeActivity
-import myjin.pro.ahoora.myjin.activitys.SpecActivity
+import myjin.pro.ahoora.myjin.adapters.UseFoolAdapter
 import myjin.pro.ahoora.myjin.customClasses.CustomToast
-import myjin.pro.ahoora.myjin.customClasses.OnSpinerItemClick
-import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
-import myjin.pro.ahoora.myjin.customClasses.ThreeColGridDecorationCatagory
-import myjin.pro.ahoora.myjin.models.KotlinGroupModel
-import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
-import myjin.pro.ahoora.myjin.utils.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
+import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
 
 class UsefullToolFragment : Fragment() {
-
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_usefull_tool, container, false)
@@ -50,6 +24,27 @@ class UsefullToolFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setAdapter()
+    }
+
+    private fun setAdapter(){
+        activity as Context
+       val adapter = UseFoolAdapter(activity!!)
+        mainList.layoutManager = GridLayoutManager(activity, 2)
+        mainList.adapter=adapter
+
+        while (mainList.itemDecorationCount > 0) {
+            mainList.removeItemDecorationAt(0)
+        }
+
+        val itemDecoration = TwoColGridDecoration(activity as Context, 8)
+        mainList.addItemDecoration(itemDecoration)
+    }
+
+    private fun customToast() {
+        CustomToast().Show_Toast(context, cl_usefultool,
+                getString(R.string.early))
     }
 
 }

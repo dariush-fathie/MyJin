@@ -167,7 +167,6 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         if (netAvailability) {
             hideErrLayout()
             getGroupCount()
-            getItems()
         } else {
             // error
             showErrLayout()
@@ -217,14 +216,8 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                     realm.executeTransactionAsync { db: Realm? ->
                         db?.where(KotlinGroupModel::class.java)?.findAll()?.deleteAllFromRealm()
                         db?.copyToRealm(list)
-                        /*val r = db?.where(KotlinGroupModel::class.java)?.findAll()
-                        r?.forEach { model: KotlinGroupModel? ->
-                            Log.e("GM", "${model?.name}:${model?.groupId}")
-                        }*/
+                        getItems()
                     }
-                    //val c = list!!.size
-                    // todo : control
-                    //AllCentars.text = "$c مرکز "
 
                     loadAdapter(list)
                     lock = false
@@ -293,21 +286,14 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         val dialog = SpinnerDialog((activity as MainActivity2), getString(R.string.jmdssh), getString(R.string.close))
         dialog.bindOnSpinerListener(object : OnSpinerItemClick {
             override fun onClick(var1: String, var2: Int, var3: Int) {
-                //initList()
-                if (var2 != 19) {
-
-                    CustomToast().Show_Toast(context, cl_health,
-                            getString(R.string.ebdhhtokpm))
-                } else {
-                    (activity as MainActivity2).tvLocation.text = var1
-                    this@HealthBankFragment.provId = var2
-                    this@HealthBankFragment.cityId = var3
-                    saveProv(var1)
-                    loadFlag = false
-                    clearAdapter()
-                    // todo : check net connection first please
-                    getGroupCount()
-                }
+                (activity as MainActivity2).tvLocation.text = var1
+                this@HealthBankFragment.provId = var2
+                this@HealthBankFragment.cityId = var3
+                saveProv(var1)
+                loadFlag = false
+                clearAdapter()
+                // todo : check net connection first please
+                getGroupCount()
             }
         })
         dialog.showSpinerDialog()

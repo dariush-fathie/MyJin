@@ -168,11 +168,12 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
     private fun downloadItem() {
 
         val sp = SharedPer(this@SearchActivity)
-        var provId = sp.getInteger(getString(R.string.provId))
-        val cityId = sp.getInteger(getString(R.string.cityId))
+        val provId = sp.getInteger(getString(R.string.provId))
+        var cityId = sp.getInteger(getString(R.string.cityId))
 
-        if (provId == 0) {
-            provId = 19
+        if (provId == 19) {
+            if (cityId==19)
+            cityId = 0
         }
 
         cpv_progress.visibility = View.VISIBLE
