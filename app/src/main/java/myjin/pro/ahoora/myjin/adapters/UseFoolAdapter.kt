@@ -26,8 +26,6 @@ class UseFoolAdapter(private val context: Context )
         return ItemHolder(view)
     }
     init {
-
-
         groupsListPair.add(Pair("بانک دارو",R.drawable.ic_daro))
         groupsListPair.add(Pair("نمودار رشد",R.drawable.ic_roshd))
         groupsListPair.add(Pair("یادآوری دارو",R.drawable.ic_yadavari))
@@ -36,8 +34,6 @@ class UseFoolAdapter(private val context: Context )
     override fun getItemCount(): Int {
         return groupsListPair.size
     }
-
-
     val width = Converter.getScreenWidthPx(context) / 2
     val height = Converter.pxFromDp(context, 80f).toInt()
 
