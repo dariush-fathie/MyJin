@@ -3,15 +3,18 @@ package myjin.pro.ahoora.myjin.adapters
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import myjin.pro.ahoora.myjin.R
+import myjin.pro.ahoora.myjin.activitys.tools.BMIChartActivity
 import myjin.pro.ahoora.myjin.utils.Converter
 import java.util.*
 import kotlin.collections.ArrayList
@@ -26,6 +29,7 @@ class UseFoolAdapter(private val context: Context )
         return ItemHolder(view)
     }
     init {
+        groupsListPair.add(Pair("شاخص توده بدنی",R.drawable.ic_bmi))
         groupsListPair.add(Pair("بانک دارو",R.drawable.ic_daro))
         groupsListPair.add(Pair("نمودار رشد",R.drawable.ic_roshd))
         groupsListPair.add(Pair("یادآوری دارو",R.drawable.ic_yadavari))
@@ -78,6 +82,12 @@ class UseFoolAdapter(private val context: Context )
             } else {
                 popupToast()
             }*/
+
+            if (adapterPosition == 0) {
+                context.startActivity(Intent(context, BMIChartActivity::class.java))
+            }else{
+                Toast.makeText(context,context.getString(R.string.early),Toast.LENGTH_LONG).show()
+            }
         }
 
         val imageView: AppCompatImageView = itemView.findViewById(R.id.iv_mainUseFulImage)

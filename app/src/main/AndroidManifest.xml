@@ -86,6 +86,10 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activitys.tools.BMIChartActivity" />
+        <activity
+            android:name=".activitys.tools.BmiResultActivity"/>
+        <activity
             android:name=".activitys.ContactUs"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />

@@ -92,14 +92,14 @@ class MainActivity2 : AppCompatActivity(),
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> {
 
-               /* if (signIn) {
+                if (signIn) {
                     startActivity(Intent(this, ProfileActivity::class.java))
                 } else {
                     startActivity(Intent(this, Login2Activity::class.java))
-                }*/
+                }
 
-                CustomToast().Show_Toast(this, drawerLayout,
-                        getString(R.string.early))
+              /*  CustomToast().Show_Toast(this, drawerLayout,
+                        getString(R.string.early))*/
             }
 
             R.id.fab_gotoInMA -> {

@@ -1,0 +1,84 @@
+package myjin.pro.ahoora.myjin.activitys.tools
+
+import android.content.Intent
+import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import com.kevalpatel2106.rulerpicker.RulerValuePickerListener
+import kotlinx.android.synthetic.main.activity_bmichart.*
+import myjin.pro.ahoora.myjin.R
+
+class BMIChartActivity : AppCompatActivity() {
+
+
+    private var weight = 0
+    private var height = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_bmichart)
+
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+
+        weight = ruler_picker_weight.currentValue
+        height = ruler_picker_height.currentValue
+
+        tv_height.text = "$height cm"
+        tv_weight.text = "$weight kg"
+
+
+        ruler_picker_height.setValuePickerListener(object : RulerValuePickerListener {
+            override fun onIntermediateValueChange(selectedValue: Int) {
+                height = selectedValue
+                tv_height.text = "$selectedValue cm"
+            }
+
+            override fun onValueChange(selectedValue: Int) {
+                tv_height.text = "$selectedValue cm"
+            }
+        })
+
+        ruler_picker_weight.setValuePickerListener(object : RulerValuePickerListener {
+            override fun onIntermediateValueChange(selectedValue: Int) {
+                tv_weight.text = "$selectedValue kg"
+            }
+
+            override fun onValueChange(selectedValue: Int) {
+                weight = selectedValue
+                tv_weight.text = "$selectedValue kg"
+            }
+        })
+
+
+        btn_evaluate.setOnClickListener {
+            var fHeight = height.toFloat() / 100f // convert height from cm to m
+            fHeight *= fHeight
+
+            val result = weight.toFloat() / fHeight
+            Log.e("result", result.toString())
+
+            startActivity(Intent(this, BmiResultActivity::class.java).apply {
+                putExtra("result", result)
+            })
+
+        }
+
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+}

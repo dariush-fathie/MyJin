@@ -9,11 +9,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_usefull_tool.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.UseFoolAdapter
 import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
+import myjin.pro.ahoora.myjin.models.KotlinAdviceModel
 
 class UsefullToolFragment : Fragment() {
 
@@ -27,6 +29,8 @@ class UsefullToolFragment : Fragment() {
 
         setAdapter()
     }
+
+
 
     private fun setAdapter(){
         activity as Context

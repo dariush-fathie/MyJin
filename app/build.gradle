@@ -97,6 +97,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     implementation 'im.crisp:crisp-sdk:0.1.10'
+    implementation 'com.github.antonKozyriatskyi:CircularProgressIndicator:1.2.2'
+    implementation 'com.kevalpatel2106:ruler-picker:1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'
