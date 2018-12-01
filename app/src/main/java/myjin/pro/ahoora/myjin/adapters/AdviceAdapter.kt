@@ -20,6 +20,10 @@ import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.models.KotlinAdviceModel
+import android.text.method.ScrollingMovementMethod
+import android.view.MotionEvent
+
+
 
 
 
@@ -95,7 +99,11 @@ class AdviceAdapter(private val context: Activity ,private val buffer : ArrayLis
     }
 
 
-    private inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    private inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnTouchListener {
+        override fun onTouch(v: View?, p1: MotionEvent?): Boolean {
+            v!!.parent.requestDisallowInterceptTouchEvent(true)
+             return false
+        }
 
         internal var tv_advice_title: AppCompatTextView = itemView.findViewById(R.id.tv_advice_title)
         internal var tv_advice_context: AppCompatTextView = itemView.findViewById(R.id.tv_advice_context)
@@ -108,6 +116,10 @@ class AdviceAdapter(private val context: Activity ,private val buffer : ArrayLis
             iv_copy.setOnClickListener(this)
             iv_share.setOnClickListener(this)
             iv_bookmark.setOnClickListener(this)
+             tv_advice_context.setOnTouchListener(this)
+
+
+            tv_advice_context.movementMethod = ScrollingMovementMethod()
         }
 
         override fun onClick(view: View) {

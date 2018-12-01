@@ -16,7 +16,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private AppCompatEditText et_user, et_pass;
     private ImageView iv_goback;
     AppCompatTextView tv_login;
-    private LoginClass loginClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login:
-                loginClass = new LoginClass(et_user.getText().toString(), et_pass.getText().toString(), LoginActivity.this);
+                LoginClass loginClass = new LoginClass(et_user.getText().toString(), et_pass.getText().toString(), LoginActivity.this);
                 loginClass.goToLogin();
                 break;
             case R.id.iv_goback:

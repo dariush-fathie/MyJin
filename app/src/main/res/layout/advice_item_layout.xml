@@ -73,6 +73,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:alpha=".85"
                 android:id="@+id/rl_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="40dp">
@@ -113,26 +114,26 @@
 
             </RelativeLayout>
 
-            <myjin.pro.ahoora.myjin.customClasses.CustomNestedScrollView
+            <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:scrollbars="vertical"
                     android:id="@+id/tv_advice_context"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="web"
                     android:fontFamily="@font/samim"
-                    android:gravity="start"
-                    android:lineSpacingExtra="5sp"
-                    android:maxHeight="250dp"
+                    android:maxLines="10"
+                    android:lineSpacingExtra="1.3sp"
                     android:padding="8dp"
                     android:text="@string/lorem"
                     android:textColorLink="@color/subTitle"
                     android:textDirection="anyRtl"
                     android:textSize="15sp" />
-            </myjin.pro.ahoora.myjin.customClasses.CustomNestedScrollView>
+            </androidx.core.widget.NestedScrollView>
 
 
         </LinearLayout>
