@@ -42,9 +42,9 @@ class MessagesFragment : Fragment(), View.OnClickListener {
 
 
     private lateinit var res: RealmResults<KotlinMessagesModel>
-    private var updated = false
+
     private var loadFlag = false
-    private var netAvailability = false
+
     private var realm: Realm = Realm.getDefaultInstance()
     val typesArray = ArrayList<String>()
     val sourceArray = ArrayList<String>()
@@ -64,10 +64,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    @Subscribe
-    fun netEvent(e: NetChangeEvent) {
-        netAvailability = e.isCon
-    }
+
 
     @Subscribe
     fun onBecomeVisible(e: VisibilityEvent) {
@@ -78,10 +75,6 @@ class MessagesFragment : Fragment(), View.OnClickListener {
                     getMessages()
                 } else {
                     showErrLayout()
-                }
-            } else {
-                if (updated) {
-                    tryAgain()
                 }
             }
         }
@@ -365,6 +358,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     private fun showErrLayout() {
         tv_MessagesText.visibility = View.VISIBLE
         btn_messagesTryAgain.visibility = View.VISIBLE
+        hideCPV()
     }
 
     private fun hideErrLayout() {

@@ -116,7 +116,6 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
 
             ctb.addTab(ctb.newTab().setText(getTitleFromDb(groupId)))
 
-
         }
     }
 
@@ -146,8 +145,8 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTa
             }
             false
         }
-        fab_goUp.setOnClickListener(this)
         iv_search.setOnClickListener(this)
+        fab_goUp.setOnClickListener(this)
         ctb.addOnTabSelectedListener(this)
 
         et_search.setText(value)

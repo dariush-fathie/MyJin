@@ -26,11 +26,11 @@ class PagerAdapter(fm: FragmentManager, context:Context) : FragmentStatePagerAda
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            4 -> mContext.getString(R.string.healthCenters)
-            3 -> mContext.getString(R.string.pishnahadvizheh)
-            2 -> mContext.getString(R.string.abzarmofid)
-            1 -> mContext.getString(R.string.etlaeieh)
-            else -> mContext.getString(R.string.moshaverhoporsesh)
+            4 ->mContext.getString(R.string.healthCenters)
+            3 ->mContext.getString(R.string.pishnahadvizheh)
+            2 ->mContext.getString(R.string.abzarmofid)
+            1 ->mContext.getString(R.string.etlaeieh)
+            else ->mContext.getString(R.string.moshaverhoporsesh)
         }
     }
 

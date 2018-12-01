@@ -1,12 +1,10 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -26,16 +24,13 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import com.google.android.material.tabs.TabLayout
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.drawer_layout.*
-import kotlinx.android.synthetic.main.item_custom_tab.view.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.PagerAdapter
 import myjin.pro.ahoora.myjin.adapters.SliderAdapter
@@ -316,24 +311,7 @@ class MainActivity2 : AppCompatActivity(),
 
     }
 
-    private fun share() {
-        var str = getString(R.string.miejmrakbdk)
-        str += "\n\n"
 
-        realm.beginTransaction()
-        val res = realm.where(KotlinAboutContactModel::class.java).findFirst()
-        realm.commitTransaction()
-
-        str += res?.tKafeh!!
-        val shareIntent = Intent()
-        shareIntent.action = Intent.ACTION_SEND
-        shareIntent.type = "text/plain"
-        shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, str)
-
-        startActivity(Intent.createChooser(shareIntent, "Share via"))
-
-
-    }
 
 
     private fun openDrawerLayout() {
@@ -642,7 +620,6 @@ class MainActivity2 : AppCompatActivity(),
 
     private var sliderLoadFlag = false
     private var spLoadFlag = false
-    private var itemLoadFlag = false
 
     private fun initSlider(list: ArrayList<String>) {
 
@@ -726,16 +703,24 @@ class MainActivity2 : AppCompatActivity(),
         val response = apiInterface.spList
         response.enqueue(object : Callback<List<KotlinSpecialityModel2>> {
             override fun onResponse(call: Call<List<KotlinSpecialityModel2>>?, response: Response<List<KotlinSpecialityModel2>>?) {
-                val list: List<KotlinSpecialityModel2>? = response?.body()
+
+
+                response?.body() ?: onFailure(call, Throwable("null body"))
+                response?.body() ?: return
+
+                val result = response.body()
+
+                result ?: onFailure(call, Throwable("null list"))
+                result ?: return
+
+                val list: List<KotlinSpecialityModel2>? = response.body()
                 list?.forEach { sp: KotlinSpecialityModel2 ->
                     sp.saved = true
                 }
 
                 realm.executeTransactionAsync { realm: Realm? ->
-
                     realm?.where(KotlinSpecialityModel2::class.java)?.findAll()?.deleteAllFromRealm()
                     realm?.copyToRealmOrUpdate(list!!)
-
                 }
                 spLoadFlag = true
             }

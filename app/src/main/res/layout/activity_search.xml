@@ -60,6 +60,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cv_se"
         app:tabGravity="fill"
         app:tabMode="scrollable"
+        app:tabIndicatorColor="@color/colorAccent"
         app:tabSelectedTextColor="@color/colorAccent" />
 
 

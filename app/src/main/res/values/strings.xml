@@ -31,12 +31,12 @@
     <string name="defTab">defTab</string>
     <string name="provId">provId</string>
     <string name="cityId">cityId</string>
-    <string name="healthCenters">مراکز سلامت</string>
-    <string name="etlaeieh">توصیه و آموزش</string>
+    <string name="healthCenters">مراکز</string>
+    <string name="etlaeieh">آموزش</string>
     <string name="filmoanimation">فیلم و انیمیشن</string>
-    <string name="pishnahadvizheh">پیشنهاد ویژه</string>
-    <string name="abzarmofid">امکانات مفید</string>
-    <string name="moshaverhoporsesh">پرسش و پاسخ</string>
+    <string name="pishnahadvizheh">پیشنهاد</string>
+    <string name="abzarmofid">امکانات</string>
+    <string name="moshaverhoporsesh">پرس و جو</string>
     <string name="provCityPair">provCityPair</string>
     <string name="permission">اجازه دستیابی به حافظه خارجی را صادر کرده و دوباره سعی کنید</string>
     <string name="skip">ورود</string>

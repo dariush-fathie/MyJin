@@ -24,6 +24,9 @@ interface ApiInterface {
     @get:GET("service/getQuesAndAnswerList/")
     val quesAndAnswer: Call<List<KotlinAdviceModel>>
 
+    @get:GET("service/getSpecialOffersList/")
+    val SpecialOffers: Call<List<KotlinSpecialOffersModel>>
+
     @GET("service/getInternalMessageList/{maxId}")
     fun getInternalMessageList(@Path("maxId") maxId: String): Call<List<KotlinInternalMessegeModel>>
 
