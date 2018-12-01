@@ -8,9 +8,7 @@
         android:layout_margin="8dp"
         android:id="@+id/rv_advice"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"/>
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/rl_ubf"
