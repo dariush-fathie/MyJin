@@ -64,23 +64,6 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         }
     }
 
-
-
-    @Subscribe
-    fun onBecomeVisible(e: VisibilityEvent) {
-        if (e.position == 1) {
-
-            if (!loadFlag) {
-                if (NetworkUtil().isNetworkAvailable(activity as Context)) {
-                    getMessages()
-                } else {
-                    showErrLayout()
-                }
-            }
-        }
-    }
-
-
     override fun onStart() {
         super.onStart()
 
@@ -92,7 +75,6 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         EventBus.getDefault().unregister(this)
         super.onStop()
     }
-
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -176,7 +158,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
         dialog.setOnSpinnerItemSelectedListener(object : OnSpinnerItemSelected {
             override fun onClick(name: String, position: Int) {
                 posS = idS[position]
-                spinner_sources.text =name
+                spinner_sources.text = name
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()
@@ -375,57 +357,72 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     }
 
     @Subscribe
+    fun onBecomeVisible(e: VisibilityEvent) {
+        if (e.position == 1) {
+
+            if (!loadFlag) {
+                if (NetworkUtil().isNetworkAvailable(activity as Context)) {
+                    getMessages()
+                } else {
+                    showErrLayout()
+                }
+            }
+        }
+    }
+
+    @Subscribe
     fun searchInToMessages(v: SearchMEvent) {
 
         val value = v.value
+        val pos = v.pos
+        if (pos == 1) {
+            if (value != "") {
+                realm.beginTransaction()
+                val res = realm.where(KotlinMessagesModel::class.java)
+                        ?.contains("title", value, Case.INSENSITIVE)?.or()?.contains("content", value, Case.INSENSITIVE)?.findAll()
+                res?.sort("regDate", Sort.DESCENDING)
+                realm.commitTransaction()
 
-        if (value != "") {
-            realm.beginTransaction()
-            val res = realm.where(KotlinMessagesModel::class.java)
-                   ?.contains("title", value, Case.INSENSITIVE)?.or()?.contains("content", value, Case.INSENSITIVE)?.findAll()
-            res?.sort("regDate", Sort.DESCENDING)
-            realm.commitTransaction()
+                sourceArray.clear()
+                typesArray.clear()
+                idS.clear()
+                idT.clear()
 
-            sourceArray.clear()
-            typesArray.clear()
-            idS.clear()
-            idT.clear()
+                sourceArray.add("همه")
+                typesArray.add("همه")
 
-            sourceArray.add("همه")
-            typesArray.add("همه")
+                idT.add(0)
+                idS.add(0)
 
-            idT.add(0)
-            idS.add(0)
+                val list = ArrayList<KotlinMessagesModel>()
 
-            val list = ArrayList<KotlinMessagesModel>()
-
-            res?.forEach { item: KotlinMessagesModel ->
-                list.add(item)
-                if (!sourceArray.contains(item.groupName)) {
-                    sourceArray.add(item.groupName)
-                    idS.add(item.groupId)
+                res?.forEach { item: KotlinMessagesModel ->
+                    list.add(item)
+                    if (!sourceArray.contains(item.groupName)) {
+                        sourceArray.add(item.groupName)
+                        idS.add(item.groupId)
+                    }
+                    if (!typesArray.contains(item.type)) {
+                        typesArray.add(item.type)
+                        idT.add(item.typeId)
+                    }
                 }
-                if (!typesArray.contains(item.type)) {
-                    typesArray.add(item.type)
-                    idT.add(item.typeId)
-                }
+
+
+                loadTabsAndSpinner()
+                loadAdapter(list)
+
+                loadFlag = true
+
+                hideCPV()
+                hideErrLayout()
+                lock = false
+
+            } else {
+                lock = false
+                tryAgain()
             }
-
-
-            loadTabsAndSpinner()
-            loadAdapter(list)
-
-            loadFlag = true
-
-            hideCPV()
-            hideErrLayout()
-            lock = false
-
-        }else{
-            lock = false
-            tryAgain()
         }
-
 
     }
 

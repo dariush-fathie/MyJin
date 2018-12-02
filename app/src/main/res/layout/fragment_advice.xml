@@ -1,23 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="8dp"
-        android:id="@+id/rv_advice"
+    <myjin.pro.ahoora.myjin.customClasses.CustomTabLayout
+        android:id="@+id/ctb_advice"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <RelativeLayout
+        android:layout_height="48dp"
+        app:tabGravity="fill"
+        app:tabMode="scrollable"
+        app:tabIndicatorColor="@color/green"
+        app:tabSelectedTextColor="@color/green" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_MessagesText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:drawableTop="@drawable/ic_wifi_not_connected"
+        android:gravity="center"
+        android:padding="16dp"
         android:visibility="gone"
-        android:id="@+id/rl_ubf"
+        android:text="@string/checkConnectionAndTryAgain"
+        android:textColor="@color/title"
+        app:fontFamily="@font/samim"
+        app:layout_constraintTop_toBottomOf="@+id/ctb_advice" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_adviceTryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_refresh_test"
+        android:text="@string/tryAgain"
+        android:visibility="gone"
+        app:fontFamily="@font/samim"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_MessagesText"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <RelativeLayout
+        android:id="@+id/rl_speOffer"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +62,7 @@
             android:src="@drawable/ic_jin_pro" />
 
         <com.github.rahatarmanahmed.cpv.CircularProgressView
-            android:id="@+id/cpv_ubf"
+            android:id="@+id/cpv_speOffer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -40,4 +70,28 @@
             app:cpv_color="@color/green"
             app:cpv_indeterminate="true" />
     </RelativeLayout>
-</RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_advice"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ctb_advice" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_goUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_up_arrow"
+        android:visibility="gone"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

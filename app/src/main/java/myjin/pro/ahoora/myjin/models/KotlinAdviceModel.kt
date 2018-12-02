@@ -31,4 +31,8 @@ open class KotlinAdviceModel : RealmObject() {
     @Expose
     open var context: String? = ""
 
+    @SerializedName("regDate")
+    @Expose
+    open var regDate: String? = ""
+
 }

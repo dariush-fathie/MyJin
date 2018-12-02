@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:tint="#666666"
                 android:src="@drawable/ic_question" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -114,11 +115,6 @@
 
             </RelativeLayout>
 
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
                 <androidx.appcompat.widget.AppCompatTextView
                     android:scrollbars="vertical"
                     android:id="@+id/tv_advice_context"
@@ -133,7 +129,6 @@
                     android:textColorLink="@color/subTitle"
                     android:textDirection="anyRtl"
                     android:textSize="15sp" />
-            </androidx.core.widget.NestedScrollView>
 
 
         </LinearLayout>

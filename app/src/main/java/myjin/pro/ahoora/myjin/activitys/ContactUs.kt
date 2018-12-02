@@ -25,7 +25,7 @@ class ContactUs : AppCompatActivity() {
         realm.commitTransaction()
 
         wv_contactus.settings.javaScriptEnabled = true
-        wv_contactus.settings.builtInZoomControls = true
+
         wv_contactus.loadData(html, "text/html; charset=utf-8", "UTF-8")
 
         iv_goback.setOnClickListener({

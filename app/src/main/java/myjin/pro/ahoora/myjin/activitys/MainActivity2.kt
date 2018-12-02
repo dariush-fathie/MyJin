@@ -51,7 +51,7 @@ class MainActivity2 : AppCompatActivity(),
         AppBarLayout.OnOffsetChangedListener,
         View.OnClickListener, View.OnLongClickListener {
 
-    private val bankPosition = 4
+
     private var fabH = 0f
     var isSearchVisible = true
     private var appBarOffset = 0
@@ -93,12 +93,12 @@ class MainActivity2 : AppCompatActivity(),
                     startActivity(Intent(this, Login2Activity::class.java))
                 }
 
-              /*  CustomToast().Show_Toast(this, drawerLayout,
-                        getString(R.string.early))*/
+                /*  CustomToast().Show_Toast(this, drawerLayout,
+                          getString(R.string.early))*/
             }
 
             R.id.fab_gotoInMA -> {
-                val myFabSrc = ContextCompat.getDrawable(this@MainActivity2,R.drawable.not1)
+                val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not1)
                 fab_gotoInMA.setImageDrawable(myFabSrc)
                 startActivity(Intent(this, InternalMessageActivity::class.java))
             }
@@ -118,7 +118,7 @@ class MainActivity2 : AppCompatActivity(),
             R.id.rl_setting -> startActivityForResult(Intent(this, SettingActivity::class.java), settingRequest)
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
             R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
-            R.id.rl_onlineContact -> startActivity(Intent(this, ScripeChat::class.java))
+            R.id.rl_onlineContact -> startActivity(Intent(this, PreRunScripe::class.java))
             R.id.rl_share -> sendAppItself(this)
             R.id.rl_rate -> rate()
 
@@ -312,8 +312,6 @@ class MainActivity2 : AppCompatActivity(),
     }
 
 
-
-
     private fun openDrawerLayout() {
         drawerLayout.openDrawer(GravityCompat.END)
     }
@@ -365,7 +363,7 @@ class MainActivity2 : AppCompatActivity(),
                     tv_mainTitle.text = getString(R.string.abzarmofid)
                 }
                 1 -> {
-                     tv_mainTitle.text = getString(R.string.etlaeieh)
+                    tv_mainTitle.text = getString(R.string.etlaeieh)
                 }
 
                 0 -> {
@@ -564,14 +562,21 @@ class MainActivity2 : AppCompatActivity(),
     override fun onPageSelected(position: Int) {
 
         currentPage = position
-        if (position != bankPosition) {
-            // view_gradient.visibility = View.GONE
-            hideLocation()
-            //  hideSearchFab()
-        } else {
-            // setVisibleShadow(abp_main, appBarOffset)
-            showLocation()
-            //  showSearchFab()
+        hideLocation()
+        showShearch()
+
+        when (position) {
+
+            2 -> {
+                hideShearch()
+            }
+            3 -> {
+                hideShearch()
+            }
+            4 -> {
+                showLocation()
+            }
+
         }
 
         EventBus.getDefault().post(VisibilityEvent(position))
@@ -588,6 +593,13 @@ class MainActivity2 : AppCompatActivity(),
         tv_location.visibility = View.GONE
     }
 
+    private fun showShearch() {
+        cv_se.visibility = View.VISIBLE
+    }
+
+    private fun hideShearch() {
+        cv_se.visibility = View.INVISIBLE
+    }
 
     private fun search() {
 
@@ -599,22 +611,31 @@ class MainActivity2 : AppCompatActivity(),
 
         }
 
-        if (currentPage == tbl_main.tabCount - 1) {
+        when (currentPage) {
 
-            if (value != "")
-                et_search.setText("")
-
-            if (value != "") {
-                val intentS = Intent(this, SearchActivity::class.java)
-
-                val mBundle = Bundle()
-                mBundle.putString("sVal", value)
-                intentS.putExtras(mBundle)
-                startActivity(intentS)
+            0 -> {
+                EventBus.getDefault().post(SearchMEvent(value,currentPage))
             }
-        } else if (currentPage == tbl_main.tabCount - 4) {
-            EventBus.getDefault().post(SearchMEvent(value))
+            1 -> {
+                EventBus.getDefault().post(SearchMEvent(value,currentPage))
+            }
+            4 -> {
+                if (value != "")
+                    et_search.setText("")
+
+                if (value != "") {
+                    val intentS = Intent(this, SearchActivity::class.java)
+
+                    val mBundle = Bundle()
+                    mBundle.putString("sVal", value)
+                    intentS.putExtras(mBundle)
+                    startActivity(intentS)
+                }
+            }
+
         }
+
+
 
     }
 

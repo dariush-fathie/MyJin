@@ -180,9 +180,7 @@ class SpeOfferFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelect
         if (tabNames.size > 0) {
             ctb_spe_offer.addTab(ctb_spe_offer.newTab().setText("همه"))
             tabNames.forEach { name: String ->
-
                 ctb_spe_offer.addTab(ctb_spe_offer.newTab().setText(name))
-
             }
         }
     }
@@ -209,6 +207,8 @@ class SpeOfferFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelect
 
 
     }
+
+
 
 
     override fun onClick(v: View?) {

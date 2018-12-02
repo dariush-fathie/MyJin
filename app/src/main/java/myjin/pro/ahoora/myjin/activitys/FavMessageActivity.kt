@@ -240,7 +240,6 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
     override fun onBackPressed() {
         if (messagesCleanFlag) {
             val resIntent = Intent()
-
             resIntent.putExtra(getString(R.string.messagesClean), messagesCleanFlag)
             setResult(Activity.RESULT_OK, resIntent)
         }

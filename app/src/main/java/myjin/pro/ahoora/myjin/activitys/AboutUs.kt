@@ -27,7 +27,7 @@ class AboutUs : AppCompatActivity() {
         realm.commitTransaction()
 
         wv_about_us.settings.javaScriptEnabled = true
-        wv_about_us.settings.builtInZoomControls = true
+
         wv_about_us.loadData(html, "text/html; charset=utf-8", "UTF-8")
 
         iv_goback.setOnClickListener({

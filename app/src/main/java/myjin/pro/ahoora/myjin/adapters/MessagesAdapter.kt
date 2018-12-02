@@ -37,7 +37,7 @@ import java.util.*
 
 
 class MessagesAdapter(private val context: Context, private val list: List<KotlinMessagesModel>, private val iSend: SendIntentForResult) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    val realm = Realm.getDefaultInstance()
     private var onlyForFirstTime = true
     lateinit var markedItem: BooleanArray
     val width = Converter.getScreenWidthPx(context)
@@ -49,7 +49,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     val requestCode = 1025
 
     init {
-        val realm = Realm.getDefaultInstance()
+
         realm.executeTransaction { db ->
             val savedItems = db.where(KotlinMessagesModel::class.java).equalTo("saved", true).findAll()
             markedItem = BooleanArray(list.size)
@@ -74,7 +74,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     }
 
     fun saveItem(Id: Int) {
-        val realm = Realm.getDefaultInstance()
+
         realm.executeTransaction { db ->
             val item = db.where(KotlinMessagesModel::class.java)
                     .equalTo("messageId", Id)
@@ -93,7 +93,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     }
 
     fun deleteItem(id: Int) {
-        val realm = Realm.getDefaultInstance()
+
         realm.executeTransaction { db ->
             val item = db.where(KotlinMessagesModel::class.java)
                     .equalTo("messageId", id)
@@ -103,7 +103,7 @@ class MessagesAdapter(private val context: Context, private val list: List<Kotli
     }
 
     fun getModelByCenterId(id: Int): KotlinMessagesModel {
-        val realm = Realm.getDefaultInstance()
+
         var item = KotlinMessagesModel()
         realm.executeTransaction { db ->
             item = db.where(KotlinMessagesModel::class.java)

@@ -10,8 +10,8 @@
         android:layout_height="48dp"
         app:tabGravity="fill"
         app:tabMode="scrollable"
-        app:tabIndicatorColor="@color/colorAccent"
-        app:tabSelectedTextColor="@color/colorAccent" />
+        app:tabIndicatorColor="@color/green"
+        app:tabSelectedTextColor="@color/green" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_MessagesText"

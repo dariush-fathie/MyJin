@@ -53,7 +53,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
         clearGlideCache()
 
         if (netAvailability) {
-            getQuesAnsewer()
             getConfig()
         } else {
             if (isThereAnyFav() && isThereAnyCity()) {
@@ -169,27 +168,7 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private fun getQuesAnsewer(){
-        val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
-       val response = apiInterface.quesAndAnswer
-        response.enqueue(object : Callback<List<KotlinAdviceModel>> {
-            override fun onResponse(call: Call<List<KotlinAdviceModel>>?, response: Response<List<KotlinAdviceModel>>?) {
-                val list: List<KotlinAdviceModel>? = response?.body()
 
-                realm.executeTransactionAsync { db: Realm? ->
-                    db?.where(KotlinAdviceModel::class.java)?.findAll()?.deleteAllFromRealm()
-                    db?.copyToRealm(list!!)
-
-
-                }
-            }
-
-            override fun onFailure(call: Call<List<KotlinAdviceModel>>?, t: Throwable?) {
-                Toast.makeText(this@SplashScreen, "خطا در اتصال به سرور", Toast.LENGTH_SHORT).show()
-
-            }
-        })
-    }
 
 
     private var lock = false
@@ -256,7 +235,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
             hideNetErrLayout()
             showCpv()
             getConfig()
-            getQuesAnsewer()
         } else {
             hideCpv()
             if (isThereAnyFav() && isThereAnyCity()) {

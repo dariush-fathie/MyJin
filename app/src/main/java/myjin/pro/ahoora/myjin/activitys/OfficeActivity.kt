@@ -586,7 +586,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
             R.id.tv_messages -> startActivity(Intent(this, FavMessageActivity::class.java))
             R.id.rl_notifi -> startActivity(Intent(this, NotificationActivity::class.java))
             R.id.rl_rules -> startActivity(Intent(this, RulesActivity::class.java))
-            R.id.rl_onlineContact -> startActivity(Intent(this, ScripeChat::class.java))
+            R.id.rl_onlineContact ->startActivity(Intent(this, PreRunScripe::class.java))
             R.id.rl_share -> sendAppItself(this)
             R.id.rl_rate -> rate()
 

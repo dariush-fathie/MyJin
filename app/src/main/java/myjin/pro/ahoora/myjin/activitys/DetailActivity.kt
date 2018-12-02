@@ -359,7 +359,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
 
         val shareIntent = Intent()
 
-        var str = "ژین من (www.MyJin.ir):"
+        var str = "ژین من (www.MyJin.ir) :"
         str += "\n\n"
         str += "مشخصات مرکز : " + "${tv_title.text}  "
         str += "${tv_subTitle.text}\n"

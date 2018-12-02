@@ -3,8 +3,10 @@ package myjin.pro.ahoora.myjin.adapters
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Path
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,23 +24,18 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.models.KotlinAdviceModel
 import android.text.method.ScrollingMovementMethod
 import android.view.MotionEvent
+import com.facebook.shimmer.Shimmer
 
 
-
-
-
-class AdviceAdapter(private val context: Activity ,private val buffer : ArrayList<KotlinAdviceModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdviceAdapter(private val context: Activity, data: List<KotlinAdviceModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var filedStarDrawable: Drawable? = null
     private val expansionsCollection = ExpansionLayoutCollection()
-
+    private val buffer = data
     private val realm = Realm.getDefaultInstance()
 
     init {
         expansionsCollection.openOnlyOne(true)
-
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View = LayoutInflater.from(context).inflate(R.layout.advice_item_layout, parent, false)
@@ -46,12 +43,9 @@ class AdviceAdapter(private val context: Activity ,private val buffer : ArrayLis
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
         (holder as ViewHolder).tv_advice_title.text = buffer[position].title
         holder.tv_advice_context.text = buffer[position].context
-
         bookmark(holder.iv_bookmark, position)
-
         expansionsCollection.add(holder.expansionLayout)
     }
 
@@ -73,10 +67,13 @@ class AdviceAdapter(private val context: Activity ,private val buffer : ArrayLis
     }
 
     private fun share(pos: Int) {
-        var str = buffer[pos].title
-        str += "\n"
+
+        var str ="سوال : "+buffer[pos].title
+        str += "\n\n"
         str += buffer[pos].context
         str += "\n\n"
+        str += "ژین من (www.MyJin.ir) :"
+
         val shareIntent = Intent()
 
         shareIntent.action = Intent.ACTION_SEND
@@ -88,10 +85,12 @@ class AdviceAdapter(private val context: Activity ,private val buffer : ArrayLis
     }
 
     private fun copy(pos: Int) {
-        var str = buffer[pos].title
-        str += "\n"
+
+       var str ="سوال : "+buffer[pos].title
+        str += "\n\n"
         str += buffer[pos].context
         str += "\n\n"
+        str += "ژین من (www.MyJin.ir) :"
 
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
         val clip = android.content.ClipData.newPlainText("متن کپی شد", str)
@@ -102,7 +101,7 @@ class AdviceAdapter(private val context: Activity ,private val buffer : ArrayLis
     private inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnTouchListener {
         override fun onTouch(v: View?, p1: MotionEvent?): Boolean {
             v!!.parent.requestDisallowInterceptTouchEvent(true)
-             return false
+            return false
         }
 
         internal var tv_advice_title: AppCompatTextView = itemView.findViewById(R.id.tv_advice_title)
@@ -116,9 +115,9 @@ class AdviceAdapter(private val context: Activity ,private val buffer : ArrayLis
             iv_copy.setOnClickListener(this)
             iv_share.setOnClickListener(this)
             iv_bookmark.setOnClickListener(this)
-             tv_advice_context.setOnTouchListener(this)
+            tv_advice_context.setOnTouchListener(this)
 
-
+             //tv_advice_context.canScrollVertically(Path.Direction.)
             tv_advice_context.movementMethod = ScrollingMovementMethod()
         }
 
@@ -134,11 +133,11 @@ class AdviceAdapter(private val context: Activity ,private val buffer : ArrayLis
                     realm.beginTransaction()
                     val res = realm.where(KotlinAdviceModel::class.java).equalTo("Id", buffer[adapterPosition].Id).findFirst()
                     realm.commitTransaction()
-                    val b=buffer[adapterPosition].saved
-                    res?.saved=!b
-                    buffer[adapterPosition].saved=!b
+                    val b = buffer[adapterPosition].saved
+                    res?.saved = !b
+                    buffer[adapterPosition].saved = !b
 
-                    bookmark(iv_bookmark,adapterPosition)
+                    bookmark(iv_bookmark, adapterPosition)
 
                 }
             }
