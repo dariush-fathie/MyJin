@@ -1,7 +1,7 @@
 package myjin.pro.ahoora.myjin.fragments
 
 import android.annotation.SuppressLint
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -25,7 +25,6 @@ import myjin.pro.ahoora.myjin.customClasses.VerticalLinearLayoutDecoration
 import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
-import myjin.pro.ahoora.myjin.models.events.NetChangeEvent
 import myjin.pro.ahoora.myjin.models.events.SearchMEvent
 import myjin.pro.ahoora.myjin.models.events.TestEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
@@ -89,7 +88,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == AppCompatActivity.RESULT_OK) {
             if (requestCode == (rv_messages.adapter as MessagesAdapter).requestCode) {
                 data ?: return
                 val p = data.getIntExtra("position", 1)
@@ -407,7 +406,6 @@ class MessagesFragment : Fragment(), View.OnClickListener {
                         idT.add(item.typeId)
                     }
                 }
-
 
                 loadTabsAndSpinner()
                 loadAdapter(list)

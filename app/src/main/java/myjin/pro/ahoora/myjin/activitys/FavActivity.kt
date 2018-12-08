@@ -1,6 +1,6 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,7 +10,6 @@ import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
@@ -110,7 +109,7 @@ class FavActivity : AppCompatActivity(), View.OnClickListener, TabLayout.OnTabSe
             val resIntent = Intent()
 
             resIntent.putExtra(getString(R.string.centersClean), centersCleanFlag)
-            setResult(Activity.RESULT_OK, resIntent)
+            setResult(AppCompatActivity.RESULT_OK, resIntent)
         }
         super.onBackPressed()
     }

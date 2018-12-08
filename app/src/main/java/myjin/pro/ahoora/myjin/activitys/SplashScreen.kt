@@ -64,8 +64,6 @@ class SplashScreen : AppCompatActivity(), View.OnClickListener {
         clearServices()
     }
 
-
-
     private fun showNetErrLayout(i: Int) {
         hideCpv()
         iv_splashImage.setImageResource(R.drawable.ic_wifi_not_connected)

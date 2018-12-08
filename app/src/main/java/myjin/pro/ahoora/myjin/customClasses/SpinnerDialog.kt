@@ -1,13 +1,11 @@
 package myjin.pro.ahoora.myjin.customClasses
 
 
-import android.app.Activity
-import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Handler
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
@@ -30,7 +28,7 @@ import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.models.KotlinProvCityModel
 import myjin.pro.ahoora.myjin.utils.SharedPer
 
-class SpinnerDialog(private val context: Activity, private val dTitle: String, private val closeTitle: String) {
+class SpinnerDialog(private val context: AppCompatActivity, private val dTitle: String, private val closeTitle: String) {
     private val items: ArrayList<KotlinProvCityModel> = ArrayList()
     private var onSpinerItemClick: OnSpinerItemClick? = null
     private var alertDialog: AlertDialog? = null
@@ -93,6 +91,11 @@ class SpinnerDialog(private val context: Activity, private val dTitle: String, p
         val title = v.findViewById<AppCompatTextView>(R.id.spinerTitle)
         val spinnerProv = v.findViewById<Spinner>(R.id.spinner_prov)
 
+        val n = sp.getString(context.getString(R.string.provCityPair))
+        if (n == "") {
+            rippleViewClose.visibility=View.INVISIBLE
+        }
+
         provId = sp.getInteger(context.getString(R.string.provId))
         getNameP()
         Handler().postDelayed({
@@ -118,7 +121,7 @@ class SpinnerDialog(private val context: Activity, private val dTitle: String, p
         adb.setView(v)
         this.alertDialog = adb.create()
         this.alertDialog!!.window!!.attributes.windowAnimations = this.style
-        this.alertDialog!!.setCancelable(true)
+        this.alertDialog!!.setCancelable(false)
 
 
 

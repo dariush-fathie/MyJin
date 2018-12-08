@@ -29,4 +29,5 @@ open class KotlinSpecialOffersModel : RealmObject() {
     @Expose
     open var photoUrl: String? = ""
 
+
 }

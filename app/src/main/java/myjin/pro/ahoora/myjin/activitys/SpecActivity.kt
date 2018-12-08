@@ -1,18 +1,16 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.PorterDuff
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.util.AttributeSet
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
@@ -136,7 +134,7 @@ class SpecActivity : AppCompatActivity(), View.OnClickListener, View.OnLongClick
     }
 
     @Throws(IOException::class)
-    fun sendAppItself(paramActivity: Activity) {
+    fun sendAppItself(paramActivity: AppCompatActivity) {
 
         var str = getString(R.string.miejmrakbdk)
         str += "\n\n"

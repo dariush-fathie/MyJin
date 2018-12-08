@@ -1,33 +1,31 @@
 package myjin.pro.ahoora.myjin.adapters;
 
-import android.app.Activity;
 import android.graphics.Color;
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.github.florent37.expansionpanel.viewgroup.ExpansionLayoutCollection;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import myjin.pro.ahoora.myjin.R;
 import myjin.pro.ahoora.myjin.models.KotlinServicesModel;
 
 public class ServicesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Activity context;
+    private AppCompatActivity context;
     private int groupId = 1;
     private final ExpansionLayoutCollection expansionsCollection = new ExpansionLayoutCollection();
     private ArrayList<KotlinServicesModel> buffer = new ArrayList<>();
 
-    public ServicesAdapter(Activity context, int groupId) {
+    public ServicesAdapter(AppCompatActivity context, int groupId) {
         expansionsCollection.openOnlyOne(true);
         this.context = context;
         this.groupId = groupId;

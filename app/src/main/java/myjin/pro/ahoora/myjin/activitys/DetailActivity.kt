@@ -2,7 +2,7 @@ package myjin.pro.ahoora.myjin.activitys
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
@@ -19,7 +19,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.*
 import android.util.Log
 import android.view.Gravity
@@ -905,7 +904,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 val resultPayload = Intent(this@DetailActivity, OfficeActivity::class.java)
                 resultPayload.putExtra("save", isSaved)
                 resultPayload.putExtra("centerId", id)
-                setResult(Activity.RESULT_OK, resultPayload)
+                setResult(AppCompatActivity.RESULT_OK, resultPayload)
             }
             super.onBackPressed()
         }
@@ -928,7 +927,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener, OnMapReadyCall
                 Glide.with(this@DetailActivity)
                         .load(item.slideList!![position]?.fileUrl)
                         .apply(RequestOptions()
-                                .placeholder(R.color.colorAccent))
+                                .placeholder(R.color.white))
                         .into((holder as ImageHolder)
                                 .ivImage)
             } catch (e: Exception) {

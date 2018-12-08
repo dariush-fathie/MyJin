@@ -1,91 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activitys.PreRunScripe">
-    <RelativeLayout
-        android:id="@+id/rl_pre"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/green"
-        app:layout_collapseMode="pin">
+    android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/tamasonline"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/samim" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".activitys.PreRunScripe">
+
+        <RelativeLayout
+            android:id="@+id/rl_pre"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/green"
+            app:layout_collapseMode="pin">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/tamasonline"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/samim" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_goback"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:foreground="?selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/white" />
+        </RelativeLayout>
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_goback"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:foreground="?selectableItemBackgroundBorderless"
-            android:layout_alignParentStart="true"
-            android:padding="12dp"
-            android:src="@drawable/ic_back"
-            app:tint="@color/white" />
-    </RelativeLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_description"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/samim"
-        android:lineSpacingExtra="1.3sp"
-        android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/view3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rl_pre" />
-    <View
-        android:id="@+id/view3"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="#dfdfdf"
-        android:focusable="true"
-        app:layout_constraintBottom_toTopOf="@+id/rl_continue" />
-
-    <RelativeLayout
-
-        android:id="@+id/rl_continue"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:background="@color/back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/circle_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rl_pre" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_continue"
-            android:layout_width="90dp"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
+            android:id="@+id/tv_description1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
             android:fontFamily="@font/samim"
-            android:gravity="center|end"
-            android:text="@string/continue_"
-            android:drawableEnd="@drawable/ic_next"
-            android:textColor="@color/green"
-            android:textDirection="rtl"
-            android:textSize="16sp"
-            android:paddingEnd="16dp"
-            android:textStyle="bold"
-            android:drawableTint="@color/green"
-            android:inputType="number"
+            android:lineSpacingExtra="1.3sp"
+            android:padding="5dp"
+            android:text="@string/crisp1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rl_pre" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/circle_green"
+            app:layout_constraintEnd_toEndOf="@+id/rl_pre"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description1" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_description2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/samim"
+            android:lineSpacingExtra="1.3sp"
+            android:padding="5dp"
+            android:text="@string/crisp2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description1" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/circle_green"
+            app:layout_constraintEnd_toEndOf="@+id/rl_pre"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description2" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_description3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/samim"
+            android:lineSpacingExtra="1.3sp"
+            android:padding="5dp"
+            android:text="@string/crisp3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description2" />
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tv_continue"
+            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            tools:targetApi="m" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="8dp"
+            android:text="گفت و گو آنلاین"
+            android:textSize="16sp"
+            app:backgroundTint="@color/green"
+            app:fontFamily="@font/samim"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description3" />
 
-
-    </RelativeLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

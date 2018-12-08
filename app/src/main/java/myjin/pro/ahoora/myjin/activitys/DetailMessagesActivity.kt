@@ -1,32 +1,26 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.Manifest
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.PorterDuff
-import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationSet
 import android.view.animation.ScaleAnimation
 import android.widget.ImageView
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_messages.*
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.utils.DateConverter
 
@@ -122,7 +116,7 @@ class DetailMessagesActivity : AppCompatActivity(), View.OnClickListener {
             resultPayload.putExtra("save", isSaved)
             resultPayload.putExtra("messageId", messageId)
             resultPayload.putExtra("position", position)
-            setResult(Activity.RESULT_OK, resultPayload)
+            setResult(AppCompatActivity.RESULT_OK, resultPayload)
             finish()
         } else {
             super.onBackPressed()

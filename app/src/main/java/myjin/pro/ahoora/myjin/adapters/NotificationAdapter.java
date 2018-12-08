@@ -1,10 +1,5 @@
 package myjin.pro.ahoora.myjin.adapters;
 
-import android.app.Activity;
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +8,11 @@ import android.view.ViewGroup;
 import com.github.florent37.expansionpanel.ExpansionLayout;
 import com.github.florent37.expansionpanel.viewgroup.ExpansionLayoutCollection;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.recyclerview.widget.RecyclerView;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import myjin.pro.ahoora.myjin.R;
@@ -20,13 +20,13 @@ import myjin.pro.ahoora.myjin.models.KotlinNotificationModel;
 import myjin.pro.ahoora.myjin.utils.DateConverter;
 
 public class NotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private Activity context;
+    private AppCompatActivity context;
     private final ExpansionLayoutCollection expansionsCollection = new ExpansionLayoutCollection();
     private RealmResults<KotlinNotificationModel> buffer;
     private DateConverter converter;
     private Realm realm;
 
-    public NotificationAdapter(Activity context, RealmResults<KotlinNotificationModel> buffer, Realm realm) {
+    public NotificationAdapter(AppCompatActivity context, RealmResults<KotlinNotificationModel> buffer, Realm realm) {
         expansionsCollection.openOnlyOne(true);
         this.context = context;
         this.buffer = buffer;

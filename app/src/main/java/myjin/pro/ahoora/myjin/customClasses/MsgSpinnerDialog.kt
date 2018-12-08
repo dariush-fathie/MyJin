@@ -1,7 +1,7 @@
 package myjin.pro.ahoora.myjin.customClasses
 
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatEditText
@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.TextView
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
 import java.util.*
@@ -22,7 +21,7 @@ import java.util.*
 class MsgSpinnerDialog {
 
     var items: ArrayList<String>
-    var context: Activity
+    var context: AppCompatActivity
     var dTitle: String
     var closeTitle = "بستن"
     private lateinit var onSpinnerItemSelected: OnSpinnerItemSelected
@@ -30,27 +29,27 @@ class MsgSpinnerDialog {
     var pos: Int = 0
     var style: Int = 0
 
-    constructor(activity: Activity, items: ArrayList<String>, dialogTitle: String) {
+    constructor(activity: AppCompatActivity, items: ArrayList<String>, dialogTitle: String) {
         this.items = items
         this.context = activity
         this.dTitle = dialogTitle
     }
 
-    constructor(activity: Activity, items: ArrayList<String>, dialogTitle: String, closeTitle: String) {
+    constructor(activity: AppCompatActivity, items: ArrayList<String>, dialogTitle: String, closeTitle: String) {
         this.items = items
         this.context = activity
         this.dTitle = dialogTitle
         this.closeTitle = closeTitle
     }
 
-    constructor(activity: Activity, items: ArrayList<String>, dialogTitle: String, style: Int) {
+    constructor(activity: AppCompatActivity, items: ArrayList<String>, dialogTitle: String, style: Int) {
         this.items = items
         this.context = activity
         this.dTitle = dialogTitle
         this.style = style
     }
 
-    constructor(activity: Activity, items: ArrayList<String>, dialogTitle: String, style: Int, closeTitle: String) {
+    constructor(activity: AppCompatActivity, items: ArrayList<String>, dialogTitle: String, style: Int, closeTitle: String) {
         this.items = items
         this.context = activity
         this.dTitle = dialogTitle

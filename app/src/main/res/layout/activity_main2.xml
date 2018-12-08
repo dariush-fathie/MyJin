@@ -132,7 +132,7 @@
                         android:foreground="?selectableItemBackgroundBorderless"
                         android:gravity="center"
                         android:padding="4dp"
-                        android:text="در تهران"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         app:fontFamily="@font/samim"

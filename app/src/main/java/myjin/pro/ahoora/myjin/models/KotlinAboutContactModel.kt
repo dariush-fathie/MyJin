@@ -35,8 +35,8 @@ open class KotlinAboutContactModel : RealmObject() {
     @Expose
     open var serverStatus: String = "somethig like not ok"
 
-    @SerializedName("bmiDescription")
+    /*@SerializedName("bmiDescription")
     @Expose
-    open var bmiDescription: String = ""
+    open var bmiDescription: String = ""*/
 }
 

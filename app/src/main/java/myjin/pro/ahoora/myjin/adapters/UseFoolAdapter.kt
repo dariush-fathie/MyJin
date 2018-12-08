@@ -15,7 +15,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.activitys.tools.BMIChartActivity
+import myjin.pro.ahoora.myjin.models.events.customToastEvent
 import myjin.pro.ahoora.myjin.utils.Converter
+import org.greenrobot.eventbus.EventBus
 import java.util.*
 import kotlin.collections.ArrayList
 class UseFoolAdapter(private val context: Context )
@@ -86,7 +88,7 @@ class UseFoolAdapter(private val context: Context )
             if (adapterPosition == 0) {
                 context.startActivity(Intent(context, BMIChartActivity::class.java))
             }else{
-                Toast.makeText(context,context.getString(R.string.early),Toast.LENGTH_LONG).show()
+                EventBus.getDefault().post(customToastEvent())
             }
         }
 

@@ -1,6 +1,7 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -8,6 +9,11 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_pre_run_scripe.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.models.KotlinAboutContactModel
+import android.text.Html
+import android.text.Spanned
+import android.widget.TextView
+
+
 
 class PreRunScripe : AppCompatActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
@@ -25,17 +31,7 @@ class PreRunScripe : AppCompatActivity(), View.OnClickListener {
         tv_continue.setOnClickListener(this)
         iv_goback.setOnClickListener(this)
 
-        val dec: String
-        val id = 1
-
-        val realm = Realm.getDefaultInstance()
-        realm.beginTransaction()
-        val res = realm.where(KotlinAboutContactModel::class.java)
-                .equalTo("id", id)
-                .findFirst()!!
-        dec = res.bmiDescription
-        realm.commitTransaction()
-
-        tv_description.text = dec
     }
+
+
 }

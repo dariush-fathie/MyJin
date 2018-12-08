@@ -1,22 +1,14 @@
 package myjin.pro.ahoora.myjin.customClasses
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.media.ThumbnailUtils
-import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatImageView
-import android.transition.Transition
 import android.util.DisplayMetrics
 import android.view.View
 import android.widget.LinearLayout
-import com.bumptech.glide.Glide
-import com.bumptech.glide.Priority
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.SimpleTarget
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
 import myjin.pro.ahoora.myjin.R
@@ -57,7 +49,7 @@ class Clusters : ClusterItem {
 
     private fun createDrawableFromView(view: View): Bitmap {
         val displayMetrics = DisplayMetrics()
-        (mContext as Activity).windowManager.defaultDisplay
+        (mContext as AppCompatActivity).windowManager.defaultDisplay
                 .getMetrics(displayMetrics)
         view.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT)

@@ -17,6 +17,7 @@
         app:titleTextColor="@color/white" />
 
     <ScrollView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -27,12 +28,15 @@
             <antonkozyriatskyi.circularprogressindicator.CircularProgressIndicator
                 android:id="@+id/circular_progress"
                 android:layout_width="192dp"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
+                android:layout_height="192dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:padding="8dp"
                 app:direction="clockwise"
                 app:enableProgressAnimation="true"
                 app:fillBackground="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent=".5"
                 app:progressBackgroundColor="@color/title"
                 app:progressBackgroundStrokeWidth="14dp"
@@ -41,9 +45,7 @@
                 app:progressStrokeWidth="18dp"
                 app:startAngle="270"
                 app:textColor="@color/title"
-                app:textSize="20sp"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp" />
+                app:textSize="20sp" />
 
 
             <View
@@ -283,35 +285,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16sp"
                 android:orientation="vertical"
+                android:layout_marginTop="16dp"
                 app:layout_constraintTop_toBottomOf="@id/view5">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="12dp"
-                    android:paddingStart="16dp"
                     android:paddingEnd="16dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="پایین"
-                        android:textColor="@color/title"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:fontFamily="@font/samim" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/bmi1"
+                        android:src="@drawable/icbmi1"
+                        android:layout_height="30dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text=" &lt; 18.5"
-                        android:textColor="@color/white"
-                        android:textSize="16sp"
+                        android:text="18.5  به پایین
+\n این مقدار بیانگر کمبود وزن است! به فکر افزایش وزن باشید"
+                        android:layout_toStartOf="@+id/bmi1"
+                        android:textColor="@color/title"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:gravity="start"
+                        android:textStyle="bold"
                         app:fontFamily="@font/samim" />
 
                 </RelativeLayout>
@@ -319,86 +321,87 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="12dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="سالم"
-                        android:textColor="@color/title"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:fontFamily="@font/samim" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/bmi2"
+                        android:src="@drawable/icbmi2"
+                        android:layout_height="30dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="18.5 تا 25.0"
+                        android:text="18.5  تا 25
+\nدر این محدوده وزن شما ایده آل و طبیعی است ."
+                        android:layout_toStartOf="@+id/bmi2"
                         android:textColor="@color/title"
-                        android:textSize="15sp"
+                        android:gravity="start"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
                         app:fontFamily="@font/samim" />
 
                 </RelativeLayout>
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="12dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="بالا"
-                        android:textColor="@color/title"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:fontFamily="@font/samim" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/bmi3"
+                        android:src="@drawable/icbmi3"
+                        android:layout_height="30dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="25.0 تا 30.0"
+                        android:text=" 25 تا 30
+\n این محدوده بیانگر چاقی کم تا متوسط است ، ورزش کنید."
+                        android:layout_toStartOf="@+id/bmi3"
                         android:textColor="@color/title"
-                        android:textSize="15sp"
+                        android:textSize="12sp"
+                        android:gravity="start"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
                         app:fontFamily="@font/samim" />
 
                 </RelativeLayout>
-
                 <RelativeLayout
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="12dp"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="خیلی بالا"
-                        android:textColor="@color/title"
-                        android:textSize="15sp"
-                        android:textStyle="bold"
-                        app:fontFamily="@font/samim" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:id="@+id/bmi4"
+                        android:src="@drawable/icbmi4"
+                        android:layout_height="30dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:text="x > 30"
+                        android:text="30 به بالا
+\nچاقی مفرط ، اگر وزنتان را کم نکنید ، سلامتی تان در خطر خواهد بود"
+                        android:layout_toStartOf="@+id/bmi4"
                         android:textColor="@color/title"
-                        android:textSize="15sp"
+                        android:textSize="12sp"
+                        android:layout_marginTop="5dp"
+                        android:textStyle="bold"
                         app:fontFamily="@font/samim" />
 
                 </RelativeLayout>

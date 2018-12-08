@@ -1,6 +1,6 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -13,16 +13,13 @@ import android.provider.ContactsContract
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.*
 import android.util.Log
 import android.view.View
 import android.view.ViewAnimationUtils
 import android.view.animation.AccelerateInterpolator
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
@@ -244,7 +241,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
     }
 
     @Throws(IOException::class)
-    fun sendAppItself(paramActivity: Activity) {
+    fun sendAppItself(paramActivity: AppCompatActivity) {
 
         var str = getString(R.string.miejmrakbdk)
         str += "\n\n"
@@ -723,7 +720,7 @@ class OfficeActivity : AppCompatActivity(), View.OnClickListener, View.OnLongCli
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == AppCompatActivity.RESULT_OK) {
             if (requestCode == StaticValues.requestCodeOfficeDetail) {
                 val id = data?.getIntExtra("centerId", -1)
                 val savedOrDelete = data?.getBooleanExtra("save", false)

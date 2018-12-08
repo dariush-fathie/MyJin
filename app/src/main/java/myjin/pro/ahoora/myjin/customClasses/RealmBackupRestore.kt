@@ -1,6 +1,6 @@
 package myjin.pro.ahoora.myjin.customClasses
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Environment
 import android.util.Log
 import com.google.gson.Gson
@@ -15,7 +15,7 @@ import java.io.FileWriter
 import java.io.InputStream
 
 
-class RealmBackupRestore(activity: Activity) {
+class RealmBackupRestore(activity: AppCompatActivity) {
 
     var realm: Realm
     private val EXPORT_REALM_PATH = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)

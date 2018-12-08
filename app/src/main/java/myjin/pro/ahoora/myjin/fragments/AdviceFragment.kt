@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import io.realm.Case
@@ -85,7 +86,6 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
     }
 
     override fun onStop() {
-
         EventBus.getDefault().unregister(this)
         super.onStop()
     }
@@ -98,6 +98,7 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
             }
         }
     }
+
 
     @Subscribe
     fun searchInToMessages(v: SearchMEvent) {
@@ -113,9 +114,6 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
                 realm.commitTransaction()
 
                 setAdapter(res!!)
-
-
-
                 uniqueIds.clear()
                 tabNames.clear()
 
@@ -138,7 +136,6 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
                 tryAgain()
             }
         }
-
     }
 
     private var lock = false
@@ -162,9 +159,26 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
 
                     list = response.body()!!
 
-                    realm.executeTransactionAsync { db: Realm? ->
+
+
+                    realm.executeTransaction { db: Realm? ->
+
+                        val savedItem = db?.where(KotlinAdviceModel::class.java)
+                                ?.equalTo("saved", true)
+                                ?.findAll()
+                        val savedItemIds = ArrayList<Int>()
+                        savedItem?.forEach { model: KotlinAdviceModel? ->
+                            savedItemIds.add(model?.Id!!)
+                        }
+
                         db?.where(KotlinAdviceModel::class.java)?.findAll()?.deleteAllFromRealm()
-                        db?.copyToRealm(list)
+
+                        list.forEach { kotlinAdviceModel: KotlinAdviceModel ->
+                            if (savedItemIds.contains(kotlinAdviceModel.Id)) {
+                                kotlinAdviceModel.saved = true
+                            }
+                            db?.copyToRealmOrUpdate(kotlinAdviceModel)
+                        }
                     }
 
                     setAdapter(list)
@@ -198,7 +212,7 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
 
     private fun addTab() {
         if (tabNames.size > 0) {
-            ctb_advice.addTab(ctb_advice.newTab().setText("همه"))
+            /* ctb_advice.addTab(ctb_advice.newTab().setText("همه"))*/
             tabNames.forEach { name: String ->
                 ctb_advice.addTab(ctb_advice.newTab().setText(name))
             }
@@ -208,7 +222,7 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
     private fun setAdapter(data: List<KotlinAdviceModel>) {
 
         rv_advice.layoutManager = LinearLayoutManager(activity!!)
-        rv_advice.adapter = AdviceAdapter(activity!!, data)
+        rv_advice.adapter = AdviceAdapter((activity as AppCompatActivity?)!!, data)
     }
 
 
@@ -221,14 +235,14 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
     }
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
-        if (p0!!.position == 0) {
-            setAdapter(list)
-        } else {
-            realm.beginTransaction()
-            val res = realm.where(KotlinAdviceModel::class.java).equalTo("idType", uniqueIds[p0.position - 1]).findAll()
-            realm.commitTransaction()
-            setAdapter(res)
-        }
+        /* if (p0!!.position == 0) {
+             setAdapter(list)
+         } else {*/
+        realm.beginTransaction()
+        val res = realm.where(KotlinAdviceModel::class.java).equalTo("idType", uniqueIds[p0!!.position]).findAll()
+        realm.commitTransaction()
+        setAdapter(res)
+        //}
     }
 
     override fun onClick(v: View?) {

@@ -22,6 +22,8 @@ import myjin.pro.ahoora.myjin.utils.Converter
 import myjin.pro.ahoora.myjin.utils.StaticValues
 import java.util.*
 
+import kotlinx.android.synthetic.main.item_specility_layout2.view.*
+
 class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val context = ctx
@@ -64,6 +66,8 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
 
     val width = Converter.getScreenWidthPx(context) / 2
     val height = Converter.pxFromDp(context, 80f).toInt()
+
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ItemHolder).tvSpec.text = specCountPair[position].first
         holder.tvSpecNumber.text= specCountPair[position].second.toString()
@@ -106,11 +110,14 @@ class SpecAdapter(ctx: Context, provId: Int, cityId: Int) : RecyclerView.Adapter
             context.startActivity(k)
         }
 
-        val ivSpec: AppCompatImageView = itemView.findViewById(R.id.iv_spec)
-        val tvSpec: AppCompatTextView = itemView.findViewById(R.id.tv_spec)
-        val tvSpecNumber: AppCompatTextView = itemView.findViewById(R.id.tvSpecNumber)
-        val cvSpec: MaterialCardView = itemView.findViewById(R.id.cv_spec)
+        val ivSpec: AppCompatImageView =itemView.iv_spec
+        val tvSpec: AppCompatTextView = itemView.tv_spec
+        val tvSpecNumber: AppCompatTextView = itemView.tvSpecNumber
+        val cvSpec: MaterialCardView = itemView.cv_spec
 
+       /* fun setSpecText(str:String){
+
+        }*/
 
         init {
             cvSpec.setOnClickListener(this)

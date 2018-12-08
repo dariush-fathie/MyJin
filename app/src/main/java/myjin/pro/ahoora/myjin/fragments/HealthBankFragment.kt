@@ -96,8 +96,14 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
         btn_healthBankTryAgain.setOnClickListener(this)
 
-        getCityAndProvFromSp()
-        checkNetState()
+        val sp = SharedPer(activity as Context)
+        val n = sp.getString(getString(R.string.provCityPair))
+        if (n == "") {
+            openProvAndCityDialog()
+        }else{
+            getCityAndProvFromSp()
+            checkNetState()
+        }
     }
 
     private fun getItems() {
@@ -139,9 +145,6 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
                         }
                         realm?.copyToRealmOrUpdate(kotlinItemModel)
                     }
-
-
-
                 }
             }
 
@@ -154,12 +157,12 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
         val sp = SharedPer(activity as Context)
         provId = sp.getInteger(getString(R.string.provId))
         cityId = sp.getInteger(getString(R.string.cityId))
-        var n = sp.getString(getString(R.string.provCityPair))
-        if (n == "") {
+        val n = sp.getString(getString(R.string.provCityPair))
+      /*  if (n == "") {
             n = "کردستان"
             provId = 19
             cityId = 0
-        }
+        }*/
         (activity as MainActivity2).tvLocation.text = n
     }
 
@@ -284,6 +287,7 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
 
     private fun openProvAndCityDialog() {
         val dialog = SpinnerDialog((activity as MainActivity2), getString(R.string.jmdssh), getString(R.string.close))
+
         dialog.bindOnSpinerListener(object : OnSpinerItemClick {
             override fun onClick(var1: String, var2: Int, var3: Int) {
                 (activity as MainActivity2).tvLocation.text = var1

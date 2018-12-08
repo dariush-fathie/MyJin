@@ -1,7 +1,7 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import android.Manifest
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Environment
 import androidx.core.app.ActivityCompat
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import android.util.Log
 import android.view.View
@@ -271,7 +270,7 @@ class SettingActivity : AppCompatActivity(), CompoundButton.OnCheckedChangeListe
             val resIntent = Intent()
             resIntent.putExtra(getString(R.string.messagesClean), messagesCleanFlag)
             resIntent.putExtra(getString(R.string.centersClean), centersCleanFlag)
-            setResult(Activity.RESULT_OK, resIntent)
+            setResult(AppCompatActivity.RESULT_OK, resIntent)
         }
         super.onBackPressed()
     }

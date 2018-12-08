@@ -1,165 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/back"
-    android:orientation="vertical">
+    android:orientation="vertical"
+>
 
-    <RelativeLayout
-        android:id="@+id/rl_toolbar"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:background="@color/green"
-        android:clickable="true"
-        android:focusable="true">
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:text="تنظیمات"
-            android:textColor="@color/white"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:fontFamily="@font/samim" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_goback"
-            android:foreground="?selectableItemBackgroundBorderless"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentStart="true"
-            android:padding="12dp"
-            android:src="@drawable/ic_back"
-            app:tint="@color/white" />
-    </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:id="@+id/cl_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <RelativeLayout
+                android:id="@+id/rl_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="48dp"
+                android:background="@color/green"
+                android:clickable="true"
+                android:focusable="true">
+
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/fav_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/samim"
-                    android:padding="8dp"
-                    android:text="پاک کردن نشان شده ها"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="14sp"
+                    android:layout_centerInParent="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:text="تنظیمات"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
                     android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:fontFamily="@font/samim" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_title_c"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/samim"
-                    android:padding="8dp"
-                    android:text="@string/healthCenters"
-                    android:textColor="@color/title"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_cleanCenters"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btn_cleanCenters" />
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_cleanCenters"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/clean"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_goback"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentStart="true"
                     android:foreground="?selectableItemBackgroundBorderless"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_title_c"
-                    app:layout_constraintHorizontal_bias="0"
-                    android:fontFamily="@font/samim"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fav_title" />
+                    android:padding="12dp"
+                    android:src="@drawable/ic_back"
+                    app:tint="@color/white" />
+            </RelativeLayout>
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_title_m"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_title_c"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/samim"
-                    android:padding="8dp"
-                    android:text="@string/etlaeieh"
-                    android:textColor="@color/title"
-                    app:layout_constraintBottom_toBottomOf="@+id/btn_cleanMessages"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btn_cleanMessages" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_cleanMessages"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/clean"
-                    android:fontFamily="@font/samim"
-                    android:foreground="?selectableItemBackgroundBorderless"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_title_c" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp">
+                android:layout_margin="8dp"
+                app:cardCornerRadius="5dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tab_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/samim"
-                    android:padding="8dp"
-                    android:text="زبانه پیش فرض"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
-                <RadioGroup
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layoutDirection="rtl"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tab_title">
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fav_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/samim"
+                        android:padding="8dp"
+                        android:text="پاک کردن نشان شده ها"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.1dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/back1" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_cleanCenters"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/samim"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:text="@string/clean" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_title_c"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toEndOf="@id/btn_cleanCenters"
+                            android:fontFamily="@font/samim"
+                            android:padding="8dp"
+                            android:text="@string/healthCenters"
+                            android:textColor="@color/title" />
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/back1" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_cleanMessages"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/samim"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:text="@string/clean" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_title_m"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toEndOf="@id/btn_cleanMessages"
+                            android:fontFamily="@font/samim"
+                            android:padding="8dp"
+                            android:text="@string/etlaeieh"
+                            android:textColor="@color/title" />
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tab_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/samim"
+                        android:padding="8dp"
+                        android:text="زبانه پیش فرض"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.1dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/back1" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb_centers"
@@ -172,121 +191,160 @@
                         android:text="@string/healthCenters"
                         android:textColor="@color/title" />
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height=".8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/back1" />
+
                     <androidx.appcompat.widget.AppCompatRadioButton
                         android:id="@+id/rb_messages"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/samim"
+                        android:foreground="?selectableItemBackgroundBorderless"
                         android:layoutDirection="rtl"
                         android:padding="8dp"
-                        android:foreground="?selectableItemBackgroundBorderless"
                         android:text="@string/etlaeieh"
                         android:textColor="@color/title" />
-                </RadioGroup>
+                </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp">
+                android:layout_margin="8dp"
+                app:cardCornerRadius="5dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/fav_intro"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/samim"
-                    android:padding="8dp"
-                    android:text="صفحه معرفی"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_title_i"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/samim"
-                    android:padding="10dp"
-                    android:text="نمایش"
-                    android:textColor="@color/title"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fav_intro" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fav_intro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/samim"
+                        android:padding="8dp"
+                        android:text="صفحه معرفی"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                <androidx.appcompat.widget.SwitchCompat
-                    android:checked="true"
-                    android:id="@+id/sc_intro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_title_i"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_title_i" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.1dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/back1" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/sc_intro"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:checked="true" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_title_i"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/samim"
+                            android:padding="10dp"
+                            android:text="نمایش"
+                            android:textColor="@color/title" />
+
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp">
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="5dp"
+                android:layout_marginBottom="16dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/backup_title"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/samim"
-                    android:padding="8dp"
-                    android:text="@string/backup"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/backup_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/samim"
+                        android:padding="8dp"
+                        android:text="@string/backup"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1.1dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@color/back1" />
+
+                    <RelativeLayout
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_backup"
+                            android:layout_alignParentEnd="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:drawableEnd="@drawable/ic_backup"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:text="@string/backup" />
 
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_backup"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:foreground="?selectableItemBackgroundBorderless"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:drawableEnd="@drawable/ic_backup"
-                    android:text="@string/backup"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/backup_title" />
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_restore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toStartOf="@+id/btn_backup"
+                            android:layout_marginEnd="8dp"
+                            android:drawableEnd="@drawable/ic_restore"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:text="@string/restoreTitle" />
 
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_restore"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginTop="8dp"
-                    android:drawableEnd="@drawable/ic_restore"
-                    android:text="@string/restoreTitle"
-                    android:foreground="?selectableItemBackgroundBorderless"
+                    </RelativeLayout>
 
-                    app:layout_constraintEnd_toStartOf="@+id/btn_backup"
-                    app:layout_constraintTop_toBottomOf="@+id/backup_title" />
+                </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
-
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
-

@@ -16,6 +16,9 @@ import myjin.pro.ahoora.myjin.adapters.UseFoolAdapter
 import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.customClasses.TwoColGridDecoration
 import myjin.pro.ahoora.myjin.models.KotlinAdviceModel
+import myjin.pro.ahoora.myjin.models.events.customToastEvent
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 
 class UsefullToolFragment : Fragment() {
 
@@ -30,7 +33,18 @@ class UsefullToolFragment : Fragment() {
         setAdapter()
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
 
+    }
+
+    override fun onStop() {
+
+        EventBus.getDefault().unregister(this)
+        super.onStop()
+
+    }
 
     private fun setAdapter(){
         activity as Context
@@ -45,8 +59,8 @@ class UsefullToolFragment : Fragment() {
         val itemDecoration = TwoColGridDecoration(activity as Context, 8)
         mainList.addItemDecoration(itemDecoration)
     }
-
-    private fun customToast() {
+    @Subscribe
+    public fun customToast(t:customToastEvent) {
         CustomToast().Show_Toast(context, cl_usefultool,
                 getString(R.string.early))
     }

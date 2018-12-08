@@ -1,10 +1,10 @@
 package myjin.pro.ahoora.myjin.activitys
 
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.realm.Realm
 import kotlinx.android.synthetic.main.activity_services.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.InternalMessageAdapter
@@ -40,6 +40,12 @@ class InternalMessageActivity : AppCompatActivity(), View.OnClickListener {
         rv_services.adapter = InternalMessageAdapter(this)
     }
 
+    override fun onBackPressed() {
+        val resultPayload = Intent(this, MainActivity2::class.java)
+        resultPayload.putExtra("key", "ok")
+        setResult(AppCompatActivity.RESULT_OK, resultPayload)
 
+        super.onBackPressed()
+    }
 
 }

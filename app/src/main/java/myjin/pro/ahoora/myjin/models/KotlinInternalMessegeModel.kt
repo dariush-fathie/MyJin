@@ -28,4 +28,8 @@ open class KotlinInternalMessegeModel : RealmObject() {
     @SerializedName("color")
     @Expose
     open var color_: String? = "#cbcbcc"
+
+    @SerializedName("regDate")
+    @Expose
+    open var regDate: String? = ""
 }

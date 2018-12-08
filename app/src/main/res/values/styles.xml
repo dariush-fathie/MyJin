@@ -17,14 +17,14 @@
     </style>
     <style name="TextAppearance.Subhead.Bold" parent="@style/TextAppearance.AppCompat.Subhead">
         <item name="android:textSize">12sp</item>
-        <item name="android:fontFamily">@font/samim</item>
+        <item name="fontFamily">@font/samim</item>
     </style>
 
     <!-- Fullscreen application theme. -->
     <style name="FullscreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 
@@ -39,14 +39,14 @@
         <item name="android:shadowRadius">0.2</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:background">@drawable/button</item>
+        <item name="background">@drawable/button</item>
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
-        <item name="android:fontFamily">@font/samim</item>
+        <item name="fontFamily">@font/samim</item>
     </style>
 
     <style name="MyJinTheme" parent="android:style/Theme.NoTitleBar">
-        <item name="android:buttonStyle">@style/button</item>
+        <item name="buttonStyle">@style/button</item>
 
     </style>
 
@@ -55,7 +55,7 @@
         <item name="android:textColorSecondary">@color/mc_icon_color</item>
     </style>
     <style name="spinner_style">
-        <item name="android:background">@drawable/arrow_left</item>
+        <item name="background">@drawable/arrow_left</item>
     </style>
 
     <style name="IntroTheme" parent="Theme.MaterialComponents.Light.NoActionBar">

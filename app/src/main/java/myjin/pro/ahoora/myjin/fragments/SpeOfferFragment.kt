@@ -1,12 +1,14 @@
 package myjin.pro.ahoora.myjin.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -248,9 +250,10 @@ class SpeOfferFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelect
         }
 
         internal inner class ImageHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
             private val cvImage: CardView = itemView.findViewById<CardView>(R.id.cv_bigItem)
             val ivImage: AppCompatImageView = itemView.findViewById<AppCompatImageView>(R.id.iv_imageBig)
+
+
         }
 
     }

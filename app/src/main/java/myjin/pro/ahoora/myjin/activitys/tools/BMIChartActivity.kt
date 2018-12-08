@@ -2,14 +2,26 @@ package myjin.pro.ahoora.myjin.activitys.tools
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.kevalpatel2106.rulerpicker.RulerValuePickerListener
 import kotlinx.android.synthetic.main.activity_bmichart.*
 import myjin.pro.ahoora.myjin.R
 
-class BMIChartActivity : AppCompatActivity() {
+class BMIChartActivity : AppCompatActivity(), View.OnTouchListener, View.OnClickListener {
+    override fun onClick(p0: View?) {
+        finish()
+    }
+
+    override fun onTouch(v: View?, p1: MotionEvent?): Boolean {
+        v!!.parent.requestDisallowInterceptTouchEvent(true)
+
+        return false
+    }
 
 
     private var weight = 0
@@ -19,16 +31,17 @@ class BMIChartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmichart)
 
-
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
         weight = ruler_picker_weight.currentValue
         height = ruler_picker_height.currentValue
 
         tv_height.text = "$height cm"
         tv_weight.text = "$weight kg"
+
+
+        tv_description.setOnTouchListener(this)
+        iv_goback.setOnClickListener(this)
+
+        tv_description.movementMethod = ScrollingMovementMethod()
 
 
         ruler_picker_height.setValuePickerListener(object : RulerValuePickerListener {

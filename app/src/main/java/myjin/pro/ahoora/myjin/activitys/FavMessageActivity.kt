@@ -1,10 +1,9 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
@@ -241,7 +240,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
         if (messagesCleanFlag) {
             val resIntent = Intent()
             resIntent.putExtra(getString(R.string.messagesClean), messagesCleanFlag)
-            setResult(Activity.RESULT_OK, resIntent)
+            setResult(AppCompatActivity.RESULT_OK, resIntent)
         }
 
         super.onBackPressed()
@@ -250,7 +249,7 @@ class FavMessageActivity : AppCompatActivity(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         Log.e("messages", "onResult")
-        if (resultCode == Activity.RESULT_OK) {
+        if (resultCode == AppCompatActivity.RESULT_OK) {
             if (requestCode == (rv_favMessages.adapter as FavMessageAdapter).requestCode) {
                 data ?: return
                 val p = data.getIntExtra("position", 0)

@@ -1,6 +1,6 @@
 package myjin.pro.ahoora.myjin.activitys
 
-import android.app.Activity
+import androidx.appcompat.app.AppCompatActivity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -18,7 +18,6 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -65,6 +64,7 @@ class MainActivity2 : AppCompatActivity(),
 
     companion object {
         const val settingRequest = 1564
+        const val internalRequest = 1360
         var active = false
     }
 
@@ -87,20 +87,19 @@ class MainActivity2 : AppCompatActivity(),
             R.id.iv_menu -> openDrawerLayout()
             R.id.tv_login_outsign -> {
 
-                if (signIn) {
+              /*  if (signIn) {
                     startActivity(Intent(this, ProfileActivity::class.java))
                 } else {
                     startActivity(Intent(this, Login2Activity::class.java))
-                }
+                }*/
 
-                /*  CustomToast().Show_Toast(this, drawerLayout,
-                          getString(R.string.early))*/
+                  CustomToast().Show_Toast(this, drawerLayout,
+                          getString(R.string.early))
             }
 
             R.id.fab_gotoInMA -> {
-                val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not1)
-                fab_gotoInMA.setImageDrawable(myFabSrc)
-                startActivity(Intent(this, InternalMessageActivity::class.java))
+
+                startActivityForResult(Intent(this, InternalMessageActivity::class.java), internalRequest)
             }
             R.id.rl_exit -> showExitDialog()
             R.id.rl_myjin_services -> goToServicesActivity(getString(R.string.khj), 1)
@@ -279,7 +278,7 @@ class MainActivity2 : AppCompatActivity(),
     }
 
     @Throws(IOException::class)
-    fun sendAppItself(paramActivity: Activity) {
+    fun sendAppItself(paramActivity: AppCompatActivity) {
 
         var str = getString(R.string.miejmrakbdk)
         str += "\n\n"
@@ -614,10 +613,10 @@ class MainActivity2 : AppCompatActivity(),
         when (currentPage) {
 
             0 -> {
-                EventBus.getDefault().post(SearchMEvent(value,currentPage))
+                EventBus.getDefault().post(SearchMEvent(value, currentPage))
             }
             1 -> {
-                EventBus.getDefault().post(SearchMEvent(value,currentPage))
+                EventBus.getDefault().post(SearchMEvent(value, currentPage))
             }
             4 -> {
                 if (value != "")
@@ -634,8 +633,6 @@ class MainActivity2 : AppCompatActivity(),
             }
 
         }
-
-
 
     }
 
@@ -689,7 +686,10 @@ class MainActivity2 : AppCompatActivity(),
 
         if (maxId == null) {
             maxId = 0
+            val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not2)
+            fab_gotoInMA.setImageDrawable(myFabSrc)
         }
+
 
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)
         val response = apiInterface.getInternalMessageList(maxId.toString())
@@ -697,20 +697,41 @@ class MainActivity2 : AppCompatActivity(),
             override fun onResponse(call: Call<List<KotlinInternalMessegeModel>>?, response: Response<List<KotlinInternalMessegeModel>>?) {
                 val list: List<KotlinInternalMessegeModel>? = response?.body()
 
-                realm.executeTransactionAsync { realm: Realm? ->
+                realm.executeTransaction { realm: Realm? ->
 
+                    val savedItem = realm?.where(KotlinInternalMessegeModel::class.java)
+                            ?.equalTo("newRecord", "ok")
+                            ?.findAll()
+                    val savedItemIds = ArrayList<Int>()
+                    savedItem?.forEach { model: KotlinInternalMessegeModel? ->
+                        savedItemIds.add(model?.id!!)
+                    }
                     realm?.where(KotlinInternalMessegeModel::class.java)?.findAll()?.deleteAllFromRealm()
-                    realm?.copyToRealmOrUpdate(list!!)
+                    var tf = false
+                    list?.forEach { kotlinInternalMessegeModel: KotlinInternalMessegeModel ->
+                        if (savedItemIds.contains(kotlinInternalMessegeModel.id)) {
+                            kotlinInternalMessegeModel.newRecord = "ok"
+                            tf = true
+                        }
+                        realm?.copyToRealmOrUpdate(kotlinInternalMessegeModel)
+                    }
+
+
+
+                    if (maxId.toInt() > 0) {
+                        if (tf) {
+                            val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not2)
+                            fab_gotoInMA.setImageDrawable(myFabSrc)
+                        } else {
+                            val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not1)
+                            fab_gotoInMA.setImageDrawable(myFabSrc)
+                        }
+                    }
+
 
                 }
 
-                if (list!![0].newRecord == "ok") {
-                    val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not2)
-                    fab_gotoInMA.setImageDrawable(myFabSrc)
-                } else {
-                    val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not1)
-                    fab_gotoInMA.setImageDrawable(myFabSrc)
-                }
+
             }
 
             override fun onFailure(call: Call<List<KotlinInternalMessegeModel>>?, t: Throwable?) {
@@ -797,14 +818,22 @@ class MainActivity2 : AppCompatActivity(),
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK) {
-
+        if (resultCode == AppCompatActivity.RESULT_OK) {
+            Log.e("internalRequest", requestCode.toString())
             if (requestCode == settingRequest) {
 
                 if (data?.getBooleanExtra(getString(R.string.messagesClean), false)!!) {
                     Handler().postDelayed({
                         EventBus.getDefault().post(TestEvent())
                     }, 100)
+                }
+            } else if (requestCode == internalRequest) {
+                realm.executeTransaction { db ->
+                    val res = db.where(KotlinInternalMessegeModel::class.java)?.equalTo("newRecord", "ok")?.findAll()
+                    if (res?.size == 0) {
+                        val myFabSrc = ContextCompat.getDrawable(this@MainActivity2, R.drawable.not1)
+                        fab_gotoInMA.setImageDrawable(myFabSrc)
+                    }
                 }
             }
         }
