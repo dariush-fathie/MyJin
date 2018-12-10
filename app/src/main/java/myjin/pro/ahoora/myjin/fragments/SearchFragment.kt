@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.github.rahatarmanahmed.cpv.CircularProgressView
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.OfficeActivity
+import myjin.pro.ahoora.myjin.activities.OfficeActivity
 import myjin.pro.ahoora.myjin.adapters.SearchAdapter
 import myjin.pro.ahoora.myjin.customClasses.SimpleItemDecoration
 import myjin.pro.ahoora.myjin.models.KotlinGroupModel

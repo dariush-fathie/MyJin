@@ -14,8 +14,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.card.MaterialCardView
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.OfficeActivity
-import myjin.pro.ahoora.myjin.activitys.SpecActivity
+import myjin.pro.ahoora.myjin.activities.OfficeActivity
+import myjin.pro.ahoora.myjin.activities.SpecActivity
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.KotlinSpecialityModel2
 import myjin.pro.ahoora.myjin.utils.Converter

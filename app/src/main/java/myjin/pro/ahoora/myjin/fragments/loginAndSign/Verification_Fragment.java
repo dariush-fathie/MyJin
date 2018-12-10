@@ -25,8 +25,8 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 
 import myjin.pro.ahoora.myjin.R;
-import myjin.pro.ahoora.myjin.activitys.Login2Activity;
-import myjin.pro.ahoora.myjin.activitys.ProfileActivity;
+import myjin.pro.ahoora.myjin.activities.Login2Activity;
+import myjin.pro.ahoora.myjin.activities.ProfileActivity;
 import myjin.pro.ahoora.myjin.customClasses.CustomToast;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.utils.ApiInterface;

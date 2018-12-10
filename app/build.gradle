@@ -53,6 +53,10 @@ android {
         }
     }
 
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
+
 }
 
 repositories {
@@ -81,6 +85,8 @@ dependencies {
     implementation 'org.slf4j:slf4j-nop:1.7.25'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0-alpha1'
+    implementation 'androidx.vectordrawable:vectordrawable:1.0.0-alpha1'
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
     implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.10'
     //implementation 'com.github.chrisbanes:PhotoView:2.1.3'

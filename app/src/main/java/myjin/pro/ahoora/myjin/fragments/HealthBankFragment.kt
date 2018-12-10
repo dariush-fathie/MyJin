@@ -21,9 +21,9 @@ import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_health_bank.*
 import myjin.pro.ahoora.myjin.utils.Converter
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.MainActivity2
-import myjin.pro.ahoora.myjin.activitys.OfficeActivity
-import myjin.pro.ahoora.myjin.activitys.SpecActivity
+import myjin.pro.ahoora.myjin.activities.MainActivity2
+import myjin.pro.ahoora.myjin.activities.OfficeActivity
+import myjin.pro.ahoora.myjin.activities.SpecActivity
 import myjin.pro.ahoora.myjin.customClasses.CustomToast
 import myjin.pro.ahoora.myjin.customClasses.OnSpinerItemClick
 import myjin.pro.ahoora.myjin.customClasses.SpinnerDialog
@@ -107,7 +107,6 @@ class HealthBankFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getItems() {
-
 
         val groupId = 1
         val apiInterface = KotlinApiClient.client.create(ApiInterface::class.java)

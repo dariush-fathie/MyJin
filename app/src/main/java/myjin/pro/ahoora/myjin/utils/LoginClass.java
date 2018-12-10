@@ -5,8 +5,8 @@ import androidx.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
-import myjin.pro.ahoora.myjin.activitys.DetailActivity;
-import myjin.pro.ahoora.myjin.activitys.LoginActivity;
+import myjin.pro.ahoora.myjin.activities.DetailActivity;
+import myjin.pro.ahoora.myjin.activities.LoginActivity;
 import myjin.pro.ahoora.myjin.interfaces.ServerStatusResponse;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import retrofit2.Call;

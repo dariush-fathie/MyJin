@@ -1,6 +1,7 @@
 package myjin.pro.ahoora.myjin.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,8 +17,8 @@ import io.realm.Sort
 import kotlinx.android.synthetic.main.fragment_advice.*
 import myjin.pro.ahoora.myjin.R
 import myjin.pro.ahoora.myjin.adapters.AdviceAdapter
+import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinAdviceModel
-import myjin.pro.ahoora.myjin.models.KotlinSpecialOffersModel
 import myjin.pro.ahoora.myjin.models.events.SearchMEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
 import myjin.pro.ahoora.myjin.utils.ApiInterface
@@ -99,7 +100,18 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
+        if (resultCode == AppCompatActivity.RESULT_OK) {
+            if (requestCode == (rv_advice.adapter as AdviceAdapter).requestCode) {
+                data ?: return
+                val p = data.getIntExtra("position", 1)
+                val mark = data.getBooleanExtra("save", false)
+                (rv_advice.adapter as AdviceAdapter).mark(p, mark)
+            }
+        }
+    }
     @Subscribe
     fun searchInToMessages(v: SearchMEvent) {
 
@@ -222,7 +234,15 @@ class AdviceFragment : Fragment(), View.OnClickListener, TabLayout.OnTabSelected
     private fun setAdapter(data: List<KotlinAdviceModel>) {
 
         rv_advice.layoutManager = LinearLayoutManager(activity!!)
-        rv_advice.adapter = AdviceAdapter((activity as AppCompatActivity?)!!, data)
+        rv_advice.adapter = AdviceAdapter((activity as AppCompatActivity?)!!, data, object : SendIntentForResult {
+            override fun send(i: Intent, bundle: Bundle?, requestCode: Int) {
+                if (bundle != null) {
+                    startActivityForResult(i, requestCode, bundle)
+                } else {
+                    startActivityForResult(i, requestCode)
+                }
+            }
+        })
     }
 
 

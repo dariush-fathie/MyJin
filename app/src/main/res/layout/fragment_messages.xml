@@ -8,8 +8,8 @@
         android:id="@+id/tv_MessagesText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:drawableTop="@drawable/ic_wifi_not_connected"
         android:gravity="center"
         android:padding="16dp"
@@ -34,16 +34,14 @@
         app:layout_constraintVertical_bias="0.2" />
 
 
-
-
     <RelativeLayout
         android:id="@+id/rl_messages"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,11 +82,10 @@
             android:background="@color/transparent"
             android:fontFamily="@font/samim"
             android:gravity="center_vertical"
-            android:paddingEnd="8dp"
-
-            android:paddingStart="8dp"
+            android:paddingStart="32dp"
+            android:paddingEnd="5dp"
             android:text="گروه : همه"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_arrowDown1"
@@ -97,9 +94,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="8dp"
             android:rotation="90"
-            android:src="@drawable/ic_expansion_header_indicator_grey_24dp"
-            app:layout_constraintStart_toStartOf="@+id/spinner_sources"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/ic_expansion_header_indicator_grey_24dp" />
 
     </androidx.cardview.widget.CardView>
 
@@ -109,8 +104,9 @@
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_margin="4dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintEnd_toStartOf="@id/cv1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cv3"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -120,11 +116,10 @@
             android:background="@color/transparent"
             android:fontFamily="@font/samim"
             android:gravity="center_vertical"
+            android:paddingStart="32dp"
             android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-
             android:text="زیر گروه : همه"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_arrowDown2"
@@ -138,23 +133,44 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        android:id="@+id/cv3"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="فرمت" />
+    </androidx.cardview.widget.CardView>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_messages"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv1" />
+        app:layout_constraintTop_toBottomOf="@+id/cv1"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_noItemfound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/samim"
         android:padding="16dp"
         android:text="پیامی یافت نشد . منبع یا نوع دیگری را انتخاب کنید!"
@@ -165,16 +181,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
-
-    <!--<View
-        android:id="@+id/v1"
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@drawable/gradient"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv1" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#eeeeee"
+    android:id="@+id/ll_mainitem"
+    android:foreground="?selectableItemBackgroundBorderless"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="96dp"
+        android:paddingBottom="8dp">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_bookmark"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_toEndOf="@id/iv_copy"
+            android:src="@drawable/ic_bookmark_empty_msg"
+            app:tint="@color/green" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_margin="5dp"
+            android:id="@+id/iv_question"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_question"
+            android:tint="@color/blackTransparent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_advice_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@+id/iv_question"
+            android:fontFamily="@font/samim"
+            android:maxLines="2"
+            android:text="عنوان"
+            android:textSize="13sp"
+            android:textColor="#666666"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_dataReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_gravity="start"
+        android:textSize="12sp"
+        android:fontFamily="@font/samim"
+        android:text="97/9/12" />
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height=".5dp"
+        android:background="@color/c1" />
+</LinearLayout>
+
+
+
+

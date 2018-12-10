@@ -22,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import myjin.pro.ahoora.myjin.R;
-import myjin.pro.ahoora.myjin.activitys.ProfileActivity;
+import myjin.pro.ahoora.myjin.activities.ProfileActivity;
 import myjin.pro.ahoora.myjin.customClasses.CustomToast;
 import myjin.pro.ahoora.myjin.models.TempModel;
 import myjin.pro.ahoora.myjin.utils.ApiInterface;

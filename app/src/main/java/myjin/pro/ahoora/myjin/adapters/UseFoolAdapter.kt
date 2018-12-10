@@ -7,14 +7,13 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.tools.BMIChartActivity
+import myjin.pro.ahoora.myjin.activities.tools.BMIChartActivity
 import myjin.pro.ahoora.myjin.models.events.customToastEvent
 import myjin.pro.ahoora.myjin.utils.Converter
 import org.greenrobot.eventbus.EventBus

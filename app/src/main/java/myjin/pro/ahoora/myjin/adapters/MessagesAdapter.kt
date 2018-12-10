@@ -27,8 +27,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.DetailMessagesActivity
-import myjin.pro.ahoora.myjin.activitys.MainActivity2
+import myjin.pro.ahoora.myjin.activities.DetailMessagesActivity
+import myjin.pro.ahoora.myjin.activities.MainActivity2
 import myjin.pro.ahoora.myjin.interfaces.SendIntentForResult
 import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.utils.Converter

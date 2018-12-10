@@ -18,7 +18,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.NotificationActivity
+import myjin.pro.ahoora.myjin.activities.NotificationActivity
 import myjin.pro.ahoora.myjin.models.KotlinNotificationModel
 
 

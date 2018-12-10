@@ -27,9 +27,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterManager
 import io.realm.Realm
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.OfficeActivity
+import myjin.pro.ahoora.myjin.activities.OfficeActivity
 import myjin.pro.ahoora.myjin.customClasses.Clusters
-import myjin.pro.ahoora.myjin.customClasses.OwnIconRendered
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.models.events.NearestEvent
 import myjin.pro.ahoora.myjin.models.events.NearestEvent2

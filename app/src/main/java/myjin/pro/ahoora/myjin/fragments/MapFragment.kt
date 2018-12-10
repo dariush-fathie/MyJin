@@ -8,7 +8,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.core.content.ContextCompat
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -24,21 +23,14 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.PolylineOptions
-import com.google.maps.DirectionsApi
-import com.google.maps.DirectionsApiRequest
-import com.google.maps.GeoApiContext
-import com.google.maps.model.DirectionsResult
-import com.google.maps.model.TravelMode
 import io.realm.Realm
 import org.greenrobot.eventbus.EventBus
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.OfficeActivity
+import myjin.pro.ahoora.myjin.activities.OfficeActivity
 import myjin.pro.ahoora.myjin.adapters.HListAdapter
 import myjin.pro.ahoora.myjin.customClasses.CustomBottomSheetBehavior
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.Utils
-import java.util.concurrent.TimeUnit
 
 class MapFragment : Fragment(), OnMapReadyCallback, View.OnClickListener {
     override fun onClick(v: View?) {

@@ -47,22 +47,22 @@
             android:resource="@color/colorAccent" />
 
         <activity
-            android:name=".activitys.MainActivity2"
+            android:name=".activities.MainActivity2"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".activitys.AppIntro"
+            android:name=".activities.AppIntro"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:theme="@style/IntroTheme" />
         <activity
-            android:name=".activitys.OfficeActivity"
+            android:name=".activities.OfficeActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
-            android:name=".activitys.Login2Activity"
+            android:name=".activities.Login2Activity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <!--
@@ -78,25 +78,25 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activitys.FavActivity"
+            android:name=".activities.FavActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activitys.AboutUs"
+            android:name=".activities.AboutUs"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".activitys.tools.BMIChartActivity" />
-        <activity android:name=".activitys.tools.BmiResultActivity" />
+        <activity android:name=".activities.tools.BMIChartActivity" />
+        <activity android:name=".activities.tools.BmiResultActivity" />
         <activity
-            android:name=".activitys.ContactUs"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activitys.DetailActivity"
+            android:name=".activities.ContactUs"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activitys.SplashScreen"
+            android:name=".activities.DetailActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SplashScreen"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -106,29 +106,29 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activitys.SearchActivity"
+            android:name=".activities.SearchActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activitys.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activitys.NotificationActivity"
+            android:name=".activities.NotificationActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activitys.ServicesActivity"
+            android:name=".activities.ServicesActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
-        <activity android:name=".activitys.DetailMessagesActivity" />
-        <activity android:name=".activitys.SettingActivity" />
-        <activity android:name=".activitys.FavMessageActivity" />
-        <activity android:name=".activitys.RulesActivity" />
-        <activity android:name=".activitys.NoDetailActivity" />
-        <activity android:name=".activitys.ChatActivity" />
-        <activity android:name=".activitys.ChannelActivity" />
+        <activity android:name=".activities.DetailMessagesActivity" />
+        <activity android:name=".activities.SettingActivity" />
+        <activity android:name=".activities.FavMessageActivity" />
+        <activity android:name=".activities.RulesActivity" />
+        <activity android:name=".activities.NoDetailActivity" />
+        <activity android:name=".activities.ChatActivity" />
+        <activity android:name=".activities.ChannelActivity" />
 
         <service
             android:name=".services.MyFirebaseMessagingService"
@@ -138,11 +138,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".activitys.ProfileActivity" />
-        <activity android:name=".activitys.SpecActivity" />
-        <activity android:name=".activitys.ScripeChat" />
-        <activity android:name=".activitys.InternalMessageActivity" />
-        <activity android:name=".activitys.PreRunScripe"></activity>
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.SpecActivity" />
+        <activity android:name=".activities.ScripeChat" />
+        <activity android:name=".activities.InternalMessageActivity" />
+        <activity android:name=".activities.PreRunScripe" />
+        <activity android:name=".activities.AdviceActivity"></activity>
     </application>
 
 </manifest>

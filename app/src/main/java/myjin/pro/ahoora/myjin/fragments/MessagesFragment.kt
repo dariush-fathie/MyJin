@@ -12,14 +12,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.BaseAdapter
+import android.widget.FrameLayout
+import android.widget.Toast
+import androidx.appcompat.widget.ListPopupWindow
 import io.realm.Case
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.Sort
 import kotlinx.android.synthetic.main.fragment_messages.*
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.MainActivity2
+import myjin.pro.ahoora.myjin.activities.MainActivity2
 import myjin.pro.ahoora.myjin.adapters.MessagesAdapter
+import myjin.pro.ahoora.myjin.adapters.FormatVideoPopupAdapter
 import myjin.pro.ahoora.myjin.customClasses.MsgSpinnerDialog
 import myjin.pro.ahoora.myjin.customClasses.VerticalLinearLayoutDecoration
 import myjin.pro.ahoora.myjin.interfaces.OnSpinnerItemSelected
@@ -28,6 +33,7 @@ import myjin.pro.ahoora.myjin.models.KotlinMessagesModel
 import myjin.pro.ahoora.myjin.models.events.SearchMEvent
 import myjin.pro.ahoora.myjin.models.events.TestEvent
 import myjin.pro.ahoora.myjin.models.events.VisibilityEvent
+import myjin.pro.ahoora.myjin.models.formatVideoPopupModel
 import myjin.pro.ahoora.myjin.utils.ApiInterface
 import myjin.pro.ahoora.myjin.utils.KotlinApiClient
 import myjin.pro.ahoora.myjin.utils.NetworkUtil
@@ -60,6 +66,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
             }
             R.id.cv1 -> openSourceDialog()
             R.id.cv2 -> openTypeDialog()
+            R.id.cv3->showListPopupWindow(cv3)
         }
     }
 
@@ -83,6 +90,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btn_messagesTryAgain.setOnClickListener(this)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -147,8 +155,10 @@ class MessagesFragment : Fragment(), View.OnClickListener {
     private fun loadTabsAndSpinner() {
         cv1.visibility = View.VISIBLE
         cv2.visibility = View.VISIBLE
+       // cv3.visibility = View.VISIBLE
         cv1.setOnClickListener(this)
         cv2.setOnClickListener(this)
+        cv3.setOnClickListener(this)
     }
 
 
@@ -200,7 +210,7 @@ class MessagesFragment : Fragment(), View.OnClickListener {
             @SuppressLint("SetTextI18n")
             override fun onClick(name: String, position: Int) {
                 posT = idT.get(position)
-                spinner_types.text = "زیرگروه : $name"
+                spinner_types.text = name
 
                 if (!realm.isInTransaction) {
                     realm.beginTransaction()
@@ -235,6 +245,69 @@ class MessagesFragment : Fragment(), View.OnClickListener {
             }
         })
         dialog.show()
+    }
+
+    private fun showListPopupWindow(anchor: View) {
+        val formatVideoPopupModels = ArrayList<formatVideoPopupModel>()
+        formatVideoPopupModels.add(formatVideoPopupModel("همه", R.drawable.ic_format_all))
+        formatVideoPopupModels.add(formatVideoPopupModel("انیمیشن", R.drawable.ic_format_animation))
+        formatVideoPopupModels.add(formatVideoPopupModel("فیلم و ویدئو", R.drawable.ic_format_video))
+        formatVideoPopupModels.add(formatVideoPopupModel("اینفوگرافیک", R.drawable.ic_format_infographic))
+        formatVideoPopupModels.add(formatVideoPopupModel("عکس", R.drawable.ic_format_photo))
+        formatVideoPopupModels.add(formatVideoPopupModel("پادکست (صوتی)   ", R.drawable.ic_format_podcast))
+        formatVideoPopupModels.add(formatVideoPopupModel("متن و مقاله", R.drawable.ic_format_text))
+
+        val listPopupWindow = createListPopupWindow(anchor,   formatVideoPopupModels)
+        listPopupWindow.setOnItemClickListener { parent, view, position, id ->
+            listPopupWindow.dismiss()
+            Toast.makeText(activity as Context, "clicked at $position", Toast.LENGTH_SHORT)
+                    .show()
+        }
+        listPopupWindow.show()
+    }
+
+    private fun createListPopupWindow(anchor: View, items: List<formatVideoPopupModel>): ListPopupWindow {
+        val popup = ListPopupWindow(activity as Context)
+        val adapter = FormatVideoPopupAdapter(items)
+
+        popup.verticalOffset = resources.getDimension(R.dimen.pop_up_window_margin_top).toInt()
+        popup.anchorView = anchor
+        popup.width = measureContentWidth(adapter)
+        popup.setAdapter(adapter)
+        return popup
+    }
+
+    private fun measureContentWidth(listAdapter: BaseAdapter): Int {
+        var mMeasureParent: ViewGroup? = null
+        var maxWidth = 0
+        var itemView: View? = null
+        var itemType = 0
+
+        val widthMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        val heightMeasureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        val count = listAdapter.getCount()
+        for (i in 0 until count) {
+            val positionType = listAdapter.getItemViewType(i)
+            if (positionType != itemType) {
+                itemType = positionType
+                itemView = null
+            }
+
+            if (mMeasureParent == null) {
+                mMeasureParent = FrameLayout(activity as Context)
+            }
+
+            itemView = listAdapter.getView(i, itemView, mMeasureParent)
+            itemView!!.measure(widthMeasureSpec, heightMeasureSpec)
+
+            val itemWidth = itemView.measuredWidth
+
+            if (itemWidth > maxWidth) {
+                maxWidth = itemWidth
+            }
+        }
+
+        return Math.max(maxWidth, resources.getDimension(R.dimen.pop_up_window_min_width).toInt())
     }
 
     private var lock = false

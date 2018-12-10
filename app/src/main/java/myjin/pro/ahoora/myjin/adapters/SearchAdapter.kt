@@ -19,9 +19,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
 import myjin.pro.ahoora.myjin.R
-import myjin.pro.ahoora.myjin.activitys.DetailActivity
-import myjin.pro.ahoora.myjin.activitys.NoDetailActivity
-import myjin.pro.ahoora.myjin.activitys.OfficeActivity
+import myjin.pro.ahoora.myjin.activities.DetailActivity
+import myjin.pro.ahoora.myjin.activities.NoDetailActivity
+import myjin.pro.ahoora.myjin.activities.OfficeActivity
 import myjin.pro.ahoora.myjin.models.KotlinItemModel
 import myjin.pro.ahoora.myjin.utils.SharedPer
 import myjin.pro.ahoora.myjin.utils.StaticValues

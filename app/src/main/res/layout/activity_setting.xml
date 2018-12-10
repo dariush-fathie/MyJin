@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
->
+    android:orientation="vertical">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -51,8 +50,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="5dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -150,10 +149,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="5dp">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -180,34 +176,41 @@
                         android:layout_marginEnd="8dp"
                         android:background="@color/back1" />
 
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/rb_centers"
+                    <RadioGroup
+                        android:layout_margin="8dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/samim"
-                        android:foreground="?selectableItemBackgroundBorderless"
-                        android:layoutDirection="rtl"
-                        android:padding="8dp"
-                        android:text="@string/healthCenters"
-                        android:textColor="@color/title" />
+                        android:layout_height="wrap_content">
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height=".8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="@color/back1" />
+                        <androidx.appcompat.widget.AppCompatRadioButton
+                            android:id="@+id/rb_centers"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/samim"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:layoutDirection="rtl"
+                            android:padding="8dp"
+                            android:text="@string/healthCenters"
+                            android:textColor="@color/title" />
 
-                    <androidx.appcompat.widget.AppCompatRadioButton
-                        android:id="@+id/rb_messages"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/samim"
-                        android:foreground="?selectableItemBackgroundBorderless"
-                        android:layoutDirection="rtl"
-                        android:padding="8dp"
-                        android:text="@string/etlaeieh"
-                        android:textColor="@color/title" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height=".8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@color/back1" />
+
+                        <androidx.appcompat.widget.AppCompatRadioButton
+                            android:id="@+id/rb_messages"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/samim"
+                            android:foreground="?selectableItemBackgroundBorderless"
+                            android:layoutDirection="rtl"
+                            android:padding="8dp"
+                            android:text="@string/etlaeieh"
+                            android:textColor="@color/title" />
+
+                    </RadioGroup>
                 </LinearLayout>
 
 
@@ -216,8 +219,8 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:cardCornerRadius="5dp">
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -245,6 +248,7 @@
                         android:background="@color/back1" />
 
                     <RelativeLayout
+                        android:layout_margin="8dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -280,9 +284,6 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                app:cardCornerRadius="5dp"
                 android:layout_marginBottom="16dp">
 
                 <LinearLayout
@@ -311,16 +312,15 @@
                         android:background="@color/back1" />
 
                     <RelativeLayout
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_backup"
-                            android:layout_alignParentEnd="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
                             android:layout_marginEnd="8dp"
                             android:drawableEnd="@drawable/ic_backup"
                             android:foreground="?selectableItemBackgroundBorderless"
@@ -331,8 +331,8 @@
                             android:id="@+id/btn_restore"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toStartOf="@+id/btn_backup"
                             android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/btn_backup"
                             android:drawableEnd="@drawable/ic_restore"
                             android:foreground="?selectableItemBackgroundBorderless"
                             android:text="@string/restoreTitle" />
